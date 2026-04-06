@@ -1,0 +1,33 @@
+<think>We need to explain spatial regions influencing classification based on Grad-CAM++ data. Use only provided data. Should be clear for technical and non-technical. Use quantitative data. Provide activation patterns max, mean, coverage. Identify most important regions: middle-center primary. Also mention middle-left. Assess if focus aligns with predicted class: yes because ship likely in center of image. Provide explanation. Let's produce.</think>
+**Model Insight for Image #2**
+
+| Item | Detail |
+|------|--------|
+| **True label** | ship |
+| **Model prediction** | ship (92.4 % confidence) |
+| **Overall activation** |  |
+| • Maximum activation | 1.0 (peak at the most relevant pixel) |
+| • Mean activation | 0.447 |
+| • Coverage of activated area | 31.3 % of the image |
+
+**Key Spatial Regions**
+
+| Region | Coverage | Max activation | Mean activation |
+|--------|----------|----------------|-----------------|
+| **Middle‑Center** | 29.7 % | 1.0 | 0.726 |
+| **Middle‑Left** | 1.6 % | 0.639 | 0.639 |
+
+- The **middle‑center** zone carries almost all the model’s attention.  
+  - It covers nearly 30 % of the image, indicating a large, highly confident area.  
+  - The average activation of 0.73 is more than 1.5 times higher than the overall mean, showing strong evidence of ship‑specific features (e.g., hull shape, windows).  
+  - The single pixel with a value of 1.0 marks the exact spot that was most decisive.
+
+- The **middle‑left** zone is much smaller and less intense.  
+  - Its mean and maximum are identical (0.639), suggesting a single patch of moderate importance, possibly a side view of the ship’s bow or a mast.
+
+**Does the focus match the class?**  
+Yes. Ships in CIFAR‑10 images are typically centered in the frame. The heatmap’s dominant attention on the middle‑center area aligns perfectly with where a ship would be expected. The additional activation on the left side could correspond to side features of the vessel, reinforcing the correct classification.
+
+In short, the model looked mainly at the central part of the image—where the ship is most visible—using very strong activations, which led to a highly confident and accurate prediction.
+
+# EPR Explainer: 0.8574, Verifier: 0.4212

@@ -1,0 +1,44 @@
+<think>We need to explain how each word of top 20 token attributions influenced sentiment. Provide natural language explanations for both technical and non-technical audiences, focusing on actionable insights, concise, avoid technical language. Use given data. Summarize positive contributions and negative contributions. Need to describe each token influence and how they collectively shaped final prediction. Also mention magnitude and sign. Provide clear explanation. Provide maybe table of tokens and influence. Ensure no external assumptions. Let's do.</think>
+**How the model read this review**
+
+| Token | Attribution (signed value) | Effect on sentiment |
+|-------|-----------------------------|---------------------|
+| **if** | –0.0126 | Strongly pushes the prediction toward *negative*. The word “if” is treated as a warning or conditional that the rest of the sentence will be bad. |
+| **you** | +0.0126 | Adds a small positive push. The model senses a direct address that can be neutral‑to‑positive. |
+| **enjoy** | +0.0045 | Slightly encourages a positive tone because “enjoy” usually signals approval. |
+| **films** | +0.0022 | Minor positive cue – the model associates “films” with content that can be liked. |
+| **like** | –0.0021 | Weakly negative; the model interprets “like” as an expectation that is not met later in the sentence. |
+| **american** | +0.0051 | Positive hint; the model thinks of popular, mainstream movies. |
+| **pie** | +0.0029 | Small positive because it references a well‑known film title. |
+| **,** | –0.0004 | Negligible negative; commas often signal a pause before a negative clause. |
+| **road** | –0.0018 | Slightly negative; “road” is part of “Road Trip,” a title the model later disapproves of. |
+| **trip** | +0.0032 | Small positive, again tied to the movie title. |
+| **&** | +0.0011 | Neutral‑to‑positive, simply connecting the titles. |
+| **van** | –0.0044 | Negative influence—“Van Wilder” is another title that the model later rejects. |
+| **wilder** | +0.0030 | Small positive, part of the title. |
+| **avoid** | –0.0013 | Negative; explicitly telling readers to skip the film. |
+| **this** | –0.0055 | Strong negative—“this” refers to the movie being criticized. |
+| **cinematic** | –0.0047 | Negative; the model flags the word “cinematic” as a quality descriptor that here turns out to be bad. |
+| **refuse** | –0.0000076 | Negligible negative; “refuse” signals that the film is worthless. |
+| **at** | –0.0029 | Negative; often accompanies “all costs” in a warning. |
+| **all** | –0.0033 | Negative; amplifies the warning. |
+| **costs** | –0.0029 | Negative; completes the phrase “at all costs,” reinforcing the negative sentiment. |
+
+### What the numbers mean
+
+- **Positive attribution** (+) = word nudges the model toward a *positive* sentiment.  
+- **Negative attribution** (–) = word nudges the model toward a *negative* sentiment.  
+- **Magnitude** shows how strongly the word pulls the prediction. Larger absolute values mean a stronger influence.
+
+### How they work together
+
+The top 20 words add up to a net attribution close to **–0.0126** (the negative contribution of “if” dominates). Most of the remaining tokens pull a little toward positivity (e.g., “enjoy,” “american,” “pie”), but many strong negative signals (“this,” “cinematic,” “avoid,” “van,” etc.) outweigh them.
+
+Because the overall score is negative, the model classifies the review as **Negative** (prediction 0.013). The key takeaway for a human editor is:
+
+- **Warn‑style phrasing** (“if,” “avoid,” “at all costs”) and references to the movie titles (“this,” “van,” “refuse”) are the most influential in driving a negative verdict.  
+- **Positive words** (“enjoy,” “american,” “pie”) give only a minor counter‑signal that is insufficient to overcome the stronger negatives.
+
+Thus, the review’s overall sentiment is dominated by a series of warning cues and direct criticisms of the film, which the model correctly registers as negative.
+
+# EPR Explainer: 0.8855, Verifier: 0.3288

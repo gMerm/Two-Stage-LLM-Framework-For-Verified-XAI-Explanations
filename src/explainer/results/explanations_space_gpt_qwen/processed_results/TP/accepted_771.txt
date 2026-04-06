@@ -1,0 +1,76 @@
+<think>We need to explain both global and local explanations. Use only provided data. Provide concise but clear explanation. Must mention direction for each global feature. Use the importance scores and rank. Provide context: why important for diamond price.
+
+For local: explain each instance: actual vs predicted, error, main contributing features, their values ranges, contributions and direction, weight fractions.
+
+Also mention local interpretability confidence. Provide actionable insights maybe.
+
+Be careful not to add anything beyond data. Just summarize. Use bullet points maybe.
+
+Also mention that "Insufficient evidence" if claim cannot be supported. But we have enough.
+
+Let's craft explanation.</think>
+**Global picture – which attributes most sway the price model**
+
+| Rank | Feature | Importance score | Net influence on price |
+|------|---------|------------------|------------------------|
+| 1 | **carat** | 124.44 | **Positive** – larger weight, price rises sharply with size |
+| 2 | **color** | 102.26 | **Positive** – lower (better) color codes raise value |
+| 3 | **clarity** | 75.55 | **Positive** – higher clarity (less flaw) adds value |
+| 4 | **cut** | 53.20 | **Positive** – better cut grades lift price |
+| 5 | **y** | 32.99 | **Negative** – higher y (length) alone reduces value once other dimensions are considered |
+| 6 | **x** | 10.05 | **Positive** – wider diamonds slightly increase price |
+| 7 | **table** | 9.62 | **Positive** – larger table percentage gives a small price bump |
+| 8 | **depth** | 6.41 | **Negative** – deeper cut slightly lowers value |
+| 9 | **z** | 0.13 | **Positive** – taller diamond adds a negligible price boost |
+
+*Why it matters*: Carat dominates because price scales roughly with volume. Color, clarity, and cut are key qualitative marks that buyers pay for, so the model reflects that hierarchy. Length (y) is counter‑intuitively negative because very long diamonds may be viewed as elongated and less desirable when other proportions are fixed.
+
+---
+
+**Local explanations – two individual diamonds**
+
+1. **Instance 676**  
+   - **Actual price**: $3,172.00  
+   - **Predicted price**: $3,601.51  (≈ $430 over‑prediction)  
+   - **Key contributors**  
+     | Feature | Value range (sample) | Contribution (USD) | Direction | Weight |
+     |---------|----------------------|--------------------|-----------|--------|
+     | clarity | ≤ 2.0 | +2,075.04 | Positive | 0.423 |
+     | y | ≤ 6.54 & > 5.71 | –817.87 | Negative | 0.167 |
+     | color | ≤ 4.0 & > 3.0 | –723.16 | Negative | 0.148 |
+     | x | ≤ 6.55 & > 5.7 | +537.18 | Positive | 0.110 |
+     | z | ≤ 4.04 & > 3.53 | +262.97 | Positive | 0.054 |
+     | carat | ≤ 1.05 & > 0.7 | –185.91 | Negative | 0.038 |
+     | cut | ≤ 2.0 | –109.84 | Negative | 0.022 |
+     | table | ≤ 57.0 & > 56.0 | +102.95 | Positive | 0.021 |
+     | depth | ≤ 61.8 & > 61.0 | –86.28 | Negative | 0.018 |
+   - **Interpretability confidence**: 0.072  
+   - *Take‑away*: The diamond’s exceptional clarity boosts value the most, but a long, high‑color diamond pulls the model back, explaining the over‑prediction. A moderate confidence suggests some uncertainty in the exact contributions.
+
+2. **Instance 737**  
+   - **Actual price**: $1,981.00  
+   - **Predicted price**: $1,917.62  (≈ $63 under‑prediction)  
+   - **Key contributors**  
+     | Feature | Value range (sample) | Contribution (USD) | Direction | Weight |
+     |---------|----------------------|--------------------|-----------|--------|
+     | carat | ≤ 0.7 & > 0.4 | –2,897.62 | Negative | 0.487 |
+     | clarity | > 5.0 | +902.91 | Positive | 0.152 |
+     | y | ≤ 5.71 & > 4.72 | –884.52 | Negative | 0.149 |
+     | table | ≤ 57.0 & > 56.0 | –485.01 | Negative | 0.082 |
+     | x | ≤ 5.7 & > 4.71 | +324.50 | Positive | 0.055 |
+     | cut | ≤ 2.0 | –311.06 | Negative | 0.052 |
+     | color | ≤ 3.0 & > 1.0 | +85.92 | Positive | 0.014 |
+     | depth | ≤ 62.5 & > 61.8 | –30.62 | Negative | 0.005 |
+     | z | ≤ 3.53 & > 2.91 | +22.67 | Positive | 0.004 |
+   - **Interpretability confidence**: 0.117  
+   - *Take‑away*: The small carat size drives the predicted price down, but higher clarity and a slightly better shape (x dimension) add value, pulling the model close to the true price. Confidence is higher than for instance 676, indicating a more reliable local explanation.
+
+---
+
+**Actionable insights**
+
+- **Pricing focus**: For diamonds above 1 carat, clarity and cut are the strongest levers; for sub‑1‑carat pieces, carat size dominates the prediction.  
+- **Data quality**: The negative influence of large y (length) and depth suggests that exceptionally elongated or deep cuts are perceived as less valuable—potentially a signal to review cataloging or customer perception data.  
+- **Model trust**: Low confidence values (≈ 0.07) in instance 676 show that LIME’s local surrogate may be less reliable for certain feature combinations; consider additional local explainers or data inspection for such cases.
+
+# EPR Explainer: 0.5865, Verifier: 0.6653

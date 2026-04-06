@@ -1,0 +1,36 @@
+<think>We need to explain how each word influenced the model's sentiment prediction, based on attribution scores. The sample has 20 tokens. We should mention positive and negative contributions, magnitude, and overall effect. Need concise but clear. Provide action insights: e.g., words with high positive push positive, negative push negative. The final prediction is 0.0134 ~ near zero, but predicted negative. Explain that overall negative contributions outweigh positives. Need to refer to each token. Use natural language, no extra assumptions. Let's structure explanation: overview of overall trend, then list each token with its effect, mention top contributors (largest magnitude). Also mention how the combination shaped prediction. Keep concise. Let's do that.</think>
+**How the model read this review**
+
+The Integrated Gradients scores show that the overall sentiment was pulled strongly toward *negative* by a handful of words, while a few other words nudged it slightly toward *positive*. Because the negative scores outweigh the positive ones, the final probability stayed just above zero (0.013) and the model labeled the review as negative.
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Strong negative – the conditional “if” sets a warning tone that the film will be bad. |
+| **you** | +0.0126 | Strong positive – addresses the reader, implying the film could be enjoyable. |
+| **enjoy** | +0.0045 | Positive – suggests a pleasant experience. |
+| **films** | +0.0022 | Positive – gives general context that could be good. |
+| **like** | –0.0021 | Slight negative – the “like” here links to titles that are generally not critically acclaimed. |
+| **american** | +0.0051 | Positive – a specific movie name that may have fans. |
+| **pie** | +0.0029 | Positive – another title that could be liked. |
+| **,** | –0.0004 | Negligible negative – punctuation carries a very small penalty. |
+| **road** | –0.0018 | Negative – part of “Road Trip,” which is less appreciated. |
+| **trip** | +0.0032 | Positive – the word “trip” alone is neutral/positive. |
+| **&** | +0.0011 | Positive – the conjunction keeps the sentence upbeat. |
+| **van** | –0.0044 | Strong negative – “Van Wilder” is seen as low‑quality. |
+| **wilder** | +0.0030 | Positive – the name itself can be liked. |
+| **avoid** | –0.0013 | Negative – explicitly advises readers not to watch. |
+| **this** | –0.0055 | Strong negative – “this” refers to the film being criticized. |
+| **cinematic** | –0.0047 | Strong negative – “cinematic” is here used sarcastically. |
+| **refuse** | –0.0000076 | Negligible negative – almost no effect. |
+| **at** | –0.0029 | Negative – part of the phrase “at all costs.” |
+| **all** | –0.0033 | Negative – reinforces the warning. |
+| **costs** | –0.0029 | Negative – completes the warning “at all costs.” |
+
+**Putting it together**
+
+- **Top positive drivers**: *you*, *enjoy*, *american*, *pie*, *trip*, *wilder* – each contributes a few thousandths to a slightly positive sentiment.  
+- **Top negative drivers**: *if*, *this*, *cinematic*, *van*, *avoid*, *at*, *all*, *costs*, *road* – each pulls the prediction toward negative, with *if*, *this*, and *cinematic* being the strongest.
+
+The cumulative negative influence outweighs the positive pushes, leaving the model’s confidence very close to the neutral threshold but still classifying the review as **Negative**. This demonstrates that even a handful of strong negative words can dominate the sentiment signal in a review.
+
+# EPR Explainer: 0.8078, Verifier: 0.4388

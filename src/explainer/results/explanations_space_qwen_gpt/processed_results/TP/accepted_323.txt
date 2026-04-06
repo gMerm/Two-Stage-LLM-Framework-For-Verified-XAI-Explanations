@@ -1,0 +1,78 @@
+<think>Okay, let me tackle this explanation request step by step. The user wants me to convert Integrated Gradients token attributions into clear natural language explanations for both technical and non-technical audiences. 
+
+First, I need to carefully analyze the provided top_20_token_attributions data. The prediction is negative (0.013), so I'll focus on how each token's attribution contributed to that negative sentiment. 
+
+Looking at the tokens:
+- Negative contributors (negative attribution values) are pushing toward negative sentiment
+- Positive contributors (positive attribution values) are pushing toward positive sentiment, but since the overall prediction is negative, the negative contributors must dominate
+
+Let me group them by impact strength:
+Strong negative contributors:
+- "this" (-0.0055)
+- "cinematic" (-0.0047)
+- "van" (-0.0044)
+- "all" (-0.0033)
+- "costs" (-0.0029)
+- "avoid" (-0.0013)
+
+Moderate positive contributors:
+- "you" (+0.0126) - interesting, this positive attribution is actually pushing toward positive sentiment but is overpowered by negatives
+- "enjoy" (+0.0045)
+- "american" (+0.0051)
+- "pie" (+0.0029)
+
+Now I need to explain why "you" has positive attribution despite the negative review. Ah, because the model sees "if you enjoy films like American Pie" as a positive context that's being contrasted with the negative statement about the current film. The model is noting that the reviewer is saying "if you like those good movies, don't watch this bad one" - so "you" being positive actually highlights the negative contrast.
+
+For the negative words, I should explain how terms like "refuse" and "waste" (implied by "cinematic refuse") contribute to the negative sentiment. The attribution scores show how strongly each word pulls the prediction.
+
+I should avoid technical terms like "attribution" and instead say "how much each word influenced the negative rating." For non-technical audience, I'll focus on the words that made the review feel negative.
+
+Important to note: The positive words like "enjoy" and "american" are actually part of the contrast that makes the negative sentiment stronger, not indicators of positive sentiment. I must clarify this to prevent misunderstanding.
+
+Let me structure the explanation:
+1. Overall sentiment (negative)
+2. Strongest negative contributors (with their words)
+3. Key positive words that were overridden by negatives
+4. How they work together in the sentence structure
+
+For the technical explanation, I'll briefly mention the attribution direction but keep it simple. For non-technical, I'll focus on the words' emotional impact.
+
+Must be careful not to invent anything - stick strictly to the provided scores. For example, "refuse" has very low negative attribution (-7.55e-6) so I shouldn't overemphasize it.
+
+The phrase "cinematic refuse" is particularly strong - "refuse" is a very negative word, and "cinematic" amplifying it. But the attribution shows "cinematic" has higher negative score than "refuse" itself, which makes sense because "cinematic refuse" is the compound negative term.
+
+Also noting that punctuation like commas have negligible impact (the comma has -0.00039), so I'll skip mentioning those in the explanation.
+
+For the technical audience, I'll specify the attribution direction (positive/negative) and magnitude, but for non-technical, I'll just say "strongly negative" or "slightly positive" based on magnitude.
+
+Finally, I'll make sure to cover all top 20 tokens as requested, but group them by significance rather than listing all individually.
+</think>
+### Natural Language Explanation (Non-Technical)
+The model determined this review is negative (with 98.7% confidence). Here’s how key words shaped that verdict:
+
+- **Strongly negative words** dominated:  
+  Words like *"this"*, *"cinematic"*, *"van"* (from "Van Wilder"), *"all"*, and *"costs"* pulled the review toward negativity. For example, calling the film *"cinematic refuse"* (a harsh term for worthless trash) was a major factor.
+
+- **Contrasting positive words** were overridden:  
+  Phrases like *"if you enjoy films like American Pie"* initially suggested positivity (the model saw "enjoy," "American," and "Pie" as positive cues). However, the reviewer immediately rejected these ("*avoid this*"), making the negative contrast overpower the positive hints.
+
+- **Key takeaway**: The review’s negativity came from strong, direct insults (*"refuse," "waste," "mind-numbingly bad"*) and the contrast between praised films and the current film’s failure. Positive words like "enjoy" were used to highlight the negative experience, not to express approval.
+
+---
+
+### Technical Summary (Model Interpretability)
+The prediction was driven by **negative attribution dominance** (sum of negative scores > positive scores). Top contributors:
+
+| Token       | Attrib. | Influence Direction | Role in Prediction                     |
+|-------------|---------|---------------------|----------------------------------------|
+| **this**    | -0.0055 | Strongly negative   | Anchors the negative command ("avoid *this*") |
+| **cinematic**| -0.0047 | Strongly negative   | Amplifies "refuse" → *cinematic refuse* (value judgment) |
+| **van**     | -0.0044 | Strongly negative   | Part of "Van Wilder" (negative contrast to *enjoy* films) |
+| **all**     | -0.0033 | Negative            | Intensifies "avoid *at all costs*" (total rejection) |
+| **you**     | +0.0126 | Positive            | *Overridden* by negative context ("if *you* enjoy... avoid") |
+| **american**| +0.0051 | Positive            | *Overridden* (positive reference to "American Pie" contrasted with current film) |
+
+**Why the prediction was negative**:  
+The negative terms (*this, cinematic, van, all*) collectively outweighed the positive references (*you, enjoy, american*). The model interpreted the structure ("*if you enjoy X, avoid Y*") as emphasizing Y’s failure, not X’s quality. The strongest negative influence came from the phrase *"cinematic refuse at all costs"*, where multiple high-magnitude negative tokens aligned.
+
+# EPR Explainer: 0.7383, Verifier: 0.7613

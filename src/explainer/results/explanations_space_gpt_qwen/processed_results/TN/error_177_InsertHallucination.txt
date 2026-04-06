@@ -1,0 +1,51 @@
+<think>We need to explain how each word of top_20 contributed to the model's sentiment prediction. We have 20 tokens with attribution values. Provide explanation for each token. Positive tokens push positive sentiment; negative push negative. Also magnitude indicates strength.
+
+Also explain how collectively shape final prediction: final prediction is 0.01344 (near 0). Actually negative predicted sentiment? They say predicted_sentiment "Negative". The score maybe low probability of positive? They treat threshold 0.5? But 0.0134 is near zero => negative. The tokens: "if" negative large magnitude -0.0126; "you" positive +0.0126; they cancel. Others smaller. So we explain.
+
+We should not fabricate anything. Provide concise explanation for each token, highlight their effect.
+
+Also need to mention that "refuse" has negligible attribution.
+
+We need to focus on actionable insights: which tokens strongly push negative, positive etc.
+
+Also mention that collectively, the negative tokens outweigh positive leading to negative prediction.
+
+Let's produce answer.
+
+</think>
+**How each token affected the sentiment prediction**
+
+| Token | Attribution | Effect on prediction |
+|-------|-------------|----------------------|
+| **if** | –0.0126 | Large negative contribution – the word makes the review feel tentative and discourages a positive view. |
+| **you** | +0.0126 | Strong positive push – it addresses the reader directly, giving the sentence a more engaging tone. |
+| **enjoy** | +0.0045 | Slightly positive – the verb hints at liking, but its influence is small compared with other words. |
+| **films** | +0.0022 | Small positive – adds context about movie‑related content. |
+| **like** | –0.0021 | Mildly negative – the comparison starts a negative contrast, hinting at dislike. |
+| **american** | +0.0051 | Positive – a proper noun that mildly supports the idea of “enjoy” by referencing a known film. |
+| **pie** | +0.0029 | Positive – completes the movie title, reinforcing the “enjoy” context. |
+| **,** | –0.0004 | Negligible negative – punctuation is almost neutral but slightly drags the score down. |
+| **road** | –0.0018 | Negative – part of the next movie title; its presence introduces another negative comparison. |
+| **trip** | +0.0032 | Positive – balances “road” by completing the title “Road Trip.” |
+| **&** | +0.0011 | Positive – connective that adds cohesion between two titles. |
+| **van** | –0.0044 | Negative – the word “van” (from “Van Wilder”) carries a negative sentiment in this context. |
+| **wilder** | +0.0030 | Positive – the rest of the title provides a slight positive counter‑balance. |
+| **avoid** | –0.0013 | Negative – directly commands readers to stay away, reinforcing the negative tone. |
+| **this** | –0.0055 | Negative – highlights the specific film being criticized. |
+| **cinematic** | –0.0047 | Negative – the adjective frames the film poorly, weakening its perceived quality. |
+| **refuse** | –0.0000076 | Essentially neutral – practically no effect on the prediction. |
+| **at** | –0.0029 | Negative – part of the phrase “at all costs,” intensifying the warning. |
+| **all** | –0.0033 | Negative – further emphasizes the strong disapproval. |
+| **costs** | –0.0029 | Negative – completes the phrase “at all costs,” giving a final negative punch. |
+
+**Collective influence**
+
+- The positive tokens (“you,” “enjoy,” “american,” “pie,” “trip,” “&,” “wilder”) together add up to roughly **+0.020 **.
+- The negative tokens (“if,” “like,” “road,” “avoid,” “this,” “cinematic,” “at,” “all,” “costs,” plus minor negatives) sum to about **–0.030 **.
+- Because the negative contributions outweigh the positives, the overall score stays very low (≈ 0.013).  
+- The near‑zero final prediction indicates the model strongly classifies the review as **negative sentiment**.
+
+**Key takeaway**  
+The review’s negative sentiment is mainly driven by strong negative words such as *“if,” “this,” “cinematic,”* and the phrase *“at all costs.”* Positive cues like *“enjoy,” “american pie,”* and *“road trip”* are present but not enough to offset the overall negative tone.
+
+# EPR Explainer: 0.8594, Verifier: 0.4731

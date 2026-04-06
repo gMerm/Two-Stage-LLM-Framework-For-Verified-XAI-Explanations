@@ -1,0 +1,81 @@
+<think>We need to provide explanation per guidelines. Summarize global: top features ranking, direction. For LIME global, we have importance scores but no direction explicitly. We must infer direction? We might say higher value of each feature generally increases price? But we can look at contributions: for carat, big positive importance. For color etc. In LIME global feature importance usually positive contribution. We can say that higher carat, color rating (lower numerical? Actually color is categorical but encoded numerically), clarity, cut etc positively influence price. For y, x, table, depth, z smaller contribution. But direction might be positive: higher values lead to higher predicted price, except depth? We might not have evidence. Use wording: these features are most influential positively on predicted price.
+
+Local explanations: for each instance, we describe contributions with actual and predicted. Provide observed value ranges for each feature. Provide direction. Weight shows importance fraction. Provide confidence.
+
+We must only use data provided. Provide concise.
+
+Let's craft.
+
+</think>
+**Global model insights (LIME – top 9 features)**  
+
+| Rank | Feature | Importance (LIME score) | General effect on price* | Why it matters |
+|------|---------|------------------------|--------------------------|----------------|
+| 1 | **carat** | 124.44 | Positive | Larger diamonds contain more gem‑quality material, driving up value. |
+| 2 | **color** | 102.26 | Positive | Higher color grades (numerically lower values) are rarer and fetch higher prices. |
+| 3 | **clarity** | 75.55 | Positive | Fewer inclusions → higher perceived quality → higher price. |
+| 4 | **cut** | 53.20 | Positive | Better cuts enhance brilliance and are priced higher. |
+| 5 | **y** | 32.99 | Positive | Longer girdle dimensions often indicate a larger overall stone. |
+| 6 | **x** | 10.05 | Positive | Width correlates with overall size. |
+| 7 | **table** | 9.62 | Positive | A well‑proportioned table contributes to visual appeal. |
+| 8 | **depth** | 6.41 | Positive | Proper depth enhances clarity and light performance. |
+| 9 | **z** | 0.13 | Positive | Height is a secondary size factor. |
+
+\*LIME scores are derived from local perturbations; higher scores mean the feature tends to push the predicted price upward when its value increases.
+
+---
+
+### Local explanations
+
+#### Instance #676  
+- **Actual price:** $3,172.00  
+- **Predicted price:** $3,601.51  
+- **Prediction error:** $429.51 (over‑prediction)
+
+| Feature | Observed value range | Contribution to prediction | Direction | Relative weight |
+|---------|----------------------|----------------------------|-----------|-----------------|
+| **clarity** | ≤ 2.0 | + 2,075.04 | Positive | 42 % |
+| **y** | ≤ 6.54 & > 5.71 | – 817.87 | Negative | 17 % |
+| **color** | ≤ 4.0 & > 3.0 | – 723.16 | Negative | 15 % |
+| **x** | ≤ 6.55 & > 5.70 | + 537.18 | Positive | 11 % |
+| **z** | ≤ 4.04 & > 3.53 | + 262.97 | Positive | 5 % |
+| **carat** | ≤ 1.05 & > 0.70 | – 185.91 | Negative | 4 % |
+| **cut** | ≤ 2.0 | – 109.84 | Negative | 2 % |
+| **table** | ≤ 57.0 & > 56.0 | + 102.95 | Positive | 2 % |
+| **depth** | ≤ 61.8 & > 61.0 | – 86.28 | Negative | 2 % |
+
+**Interpretability** – confidence = 0.0723 (low), all 9 features used.  
+The dominant positive influence is the very low *clarity* rating, which more than offsets the negative effect of the stone’s higher *y*, *color*, and *carat* values.
+
+---
+
+#### Instance #737  
+- **Actual price:** $1,981.00  
+- **Predicted price:** $1,917.62  
+- **Prediction error:** $63.38 (under‑prediction)
+
+| Feature | Observed value range | Contribution to prediction | Direction | Relative weight |
+|---------|----------------------|----------------------------|-----------|-----------------|
+| **carat** | ≤ 0.7 & > 0.4 | – 2,897.62 | Negative | 49 % |
+| **clarity** | > 5.0 | + 902.91 | Positive | 15 % |
+| **y** | ≤ 5.71 & > 4.72 | – 884.52 | Negative | 15 % |
+| **table** | ≤ 57.0 & > 56.0 | – 485.01 | Negative | 8 % |
+| **x** | ≤ 5.7 & > 4.71 | + 324.50 | Positive | 5 % |
+| **cut** | ≤ 2.0 | – 311.06 | Negative | 5 % |
+| **color** | ≤ 3.0 & > 1.0 | + 85.92 | Positive | 1 % |
+| **depth** | ≤ 62.5 & > 61.8 | – 30.62 | Negative | 0.5 % |
+| **z** | ≤ 3.53 & > 2.91 | + 22.67 | Positive | 0.4 % |
+
+**Interpretability** – confidence = 0.1169, all 9 features used.  
+The strong negative impact of *carat* outweighs the positive effect of *clarity* and *x*, leading to a modest under‑prediction.
+
+---
+
+**Take‑away for users**  
+- **Carat** is the single most important driver of price in the model; even small changes in carat size can swing the predicted value dramatically.  
+- **Color, clarity, and cut** also play significant roles, with higher quality (lower numerical scores) consistently raising the predicted price.  
+- Size dimensions (*x*, *y*, *z*, *table*, *depth*) contribute but are secondary; their effect is usually positive, though some, like *y* and *depth*, may reduce price in certain contexts when they are larger than typical.  
+
+These insights align with industry expectations: larger, higher‑quality diamonds command premium prices. The local explanations illustrate how individual stones are evaluated by the model, showing where each feature pushes the prediction up or down.
+
+# EPR Explainer: 0.5848, Verifier: 0.7830

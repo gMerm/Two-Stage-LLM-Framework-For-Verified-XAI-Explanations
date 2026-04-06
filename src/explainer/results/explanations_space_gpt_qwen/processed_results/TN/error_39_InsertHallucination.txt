@@ -1,0 +1,46 @@
+<think>We need to explain how each word of top 20 token attributions influenced sentiment prediction. Provide for both positive and negative contributors. Should use natural language, concise, actionable. Use only data. Avoid technical. Provide description per token. Use the attribution values: negative means pushes negative, positive pushes positive. Also note magnitude relative to others.
+
+Need to mention the overall prediction was 0.0134 negative. So model predicted negative.
+
+Explain: 'if' negative large -0.0126: discourages positive sentiment. 'you' positive 0.0126: encourages positive. 'enjoy' positive small. 'films' positive small. 'like' negative small. 'american' positive bigger 0.0051. 'pie' positive 0.0029. ',' negative tiny. 'road' negative small. 'trip' positive 0.00316. '&' positive small. 'van' negative moderate -0.0044. 'wilder' positive 0.00298. 'avoid' negative small. 'this' negative -0.00554 major negative. 'cinematic' negative -0.00470. 'refuse' nearly zero. 'at' negative -0.00292. 'all' negative -0.00328. 'costs' negative -0.00288.
+
+Explain that the cumulative effect is negative dominated by strong negative tokens like 'this', 'cinematic', 'avoid', etc. Provide actionable: key negative words: this, cinematic, avoid, van. Positive: you, american, pie, enjoy, films, trip.
+
+Also note that punctuation like comma slightly negative.
+
+We should avoid technical jargon. Provide plain language. Mention that larger magnitude tokens have stronger influence.
+
+Ok.</think>
+**How each word in the review pushed the model toward a negative or positive sentiment**
+
+| Token | Attribution | Effect on the model’s opinion |
+|-------|-------------|--------------------------------|
+| **if** | –0.0126 | This word pushes the model toward *negative* sentiment. Its contribution is the second‑largest negative influence after “this.” |
+| **you** | +0.0126 | This word pushes the model toward *positive* sentiment. It has the largest positive influence in the top 20. |
+| **enjoy** | +0.0045 | Encourages a *positive* tone, though its influence is moderate. |
+| **films** | +0.0022 | Adds a mild *positive* tilt. |
+| **like** | –0.0021 | Slightly pulls the sentiment toward *negative*. |
+| **american** | +0.0051 | A strong *positive* cue, boosting the model’s confidence in a positive review. |
+| **pie** | +0.0029 | Adds a small *positive* signal. |
+| **,** | –0.0004 | Negligible negative influence—punctuation doesn’t change much. |
+| **road** | –0.0018 | Slight negative bias. |
+| **trip** | +0.0032 | Adds a modest *positive* effect. |
+| **&** | +0.0011 | Very small positive push. |
+| **van** | –0.0044 | A fairly strong *negative* signal. |
+| **wilder** | +0.0030 | Adds a small *positive* contribution. |
+| **avoid** | –0.0013 | Small negative push. |
+| **this** | –0.0055 | One of the strongest negative words in the list; it heavily tilts the model toward a negative prediction. |
+| **cinematic** | –0.0047 | Strong negative influence, reinforcing the overall negative tone. |
+| **refuse** | –0.0000 | Virtually no effect. |
+| **at** | –0.0029 | Slight negative bias. |
+| **all** | –0.0033 | Adds a moderate *negative* signal. |
+| **costs** | –0.0029 | Slight negative influence. |
+
+### What this means for the overall prediction
+- The model’s final probability (≈ 0.013) is very close to the neutral boundary, but the cumulative negative contributions outweigh the positives.
+- **Key negative drivers**: “this”, “cinematic”, “van”, “avoid”, and the cluster of “at all costs” words.  
+- **Key positive drivers**: “you”, “american”, “pie”, “enjoy”, “films”, “trip”, and “wilder”.
+
+Because the negative words carry larger absolute attribution values, they dominated the sentiment decision, leading the model to label the review as **negative**.
+
+# EPR Explainer: 0.7265, Verifier: 0.4231

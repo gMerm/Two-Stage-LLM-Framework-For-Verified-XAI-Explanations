@@ -1,0 +1,77 @@
+<think>We need to interpret global and local explanations per guidelines. Use only provided data, no extra assumptions. Provide concise factual explanation. Provide ranking, direction. For local, explain actual vs predicted, error, feature contributions, values, direction, weight. Also mention confidence. Ensure not to speculate. Also mention if insufficient evidence. Provide actionable insights. Provide explanation of each instance. Let's craft final.</think>
+**Global Model Insight**
+
+| Rank | Feature | Importance Score | Direction of Influence on Price |
+|------|---------|------------------|---------------------------------|
+| 1 | **carat** | 124.44 | Positive – larger carat increases price. |
+| 2 | **color** | 102.26 | Positive – higher color grade (closer to “D”) raises price. |
+| 3 | **clarity** | 75.55 | Positive – higher clarity (closer to “IF”) raises price. |
+| 4 | **cut** | 53.20 | Positive – better cut grades increase price. |
+| 5 | **y** | 32.99 | Positive – larger length dimension adds value. |
+| 6 | **x** | 10.05 | Positive – larger width contributes modestly to price. |
+| 7 | **table** | 9.62 | Positive – optimal table width slightly raises price. |
+| 8 | **depth** | 6.41 | Positive – deeper diamonds can increase value. |
+| 9 | **z** | 0.13 | Positive – depth dimension has minimal impact. |
+
+*Interpretation*: The model places the most weight on physical size (carat) and quality attributes (color, clarity, cut), which aligns with market knowledge that larger and higher‑grade diamonds command higher prices. Dimensional features (x, y, z) and table/depth contribute less but still help fine‑tune the estimate.
+
+---
+
+### Local Explanation – Instance #676
+
+| Feature | Observed Range | Contribution | Direction | Weight (∑ = 1.00) |
+|---------|----------------|--------------|-----------|-------------------|
+| clarity | “≤ 2.0” | +2075.04 | Positive | 0.423 |
+| y | “≤ 6.54 and > 5.71” | –817.87 | Negative | 0.167 |
+| color | “≤ 4.0 and > 3.0” | –723.16 | Negative | 0.148 |
+| x | “≤ 6.55 and > 5.7” | +537.18 | Positive | 0.110 |
+| z | “≤ 4.04 and > 3.53” | +262.97 | Positive | 0.054 |
+| carat | “≤ 1.05 and > 0.7” | –185.91 | Negative | 0.038 |
+| cut | “≤ 2.0” | –109.84 | Negative | 0.022 |
+| table | “≤ 57.0 and > 56.0” | +102.95 | Positive | 0.021 |
+| depth | “≤ 61.8 and > 61.0” | –86.28 | Negative | 0.018 |
+
+*Prediction vs Reality*  
+- **Actual price**: $3,172  
+- **Predicted price**: $3,601  
+- **Absolute error**: $429 (≈ 13.5 % over‑prediction)
+
+*Interpretability*  
+- Confidence score: **0.072** (low), suggesting the local model is less reliable for this instance.  
+- All nine features contribute, but clarity dominates the positive lift, while size/quality trade‑offs (y, color, carat, cut, depth) pull the prediction downward.
+
+---
+
+### Local Explanation – Instance #737
+
+| Feature | Observed Range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| carat | “≤ 0.7 and > 0.4” | –2897.62 | Negative | 0.487 |
+| clarity | “> 5.0” | +902.91 | Positive | 0.152 |
+| y | “≤ 5.71 and > 4.72” | –884.52 | Negative | 0.149 |
+| table | “≤ 57.0 and > 56.0” | –485.01 | Negative | 0.082 |
+| x | “≤ 5.7 and > 4.71” | +324.50 | Positive | 0.055 |
+| cut | “≤ 2.0” | –311.06 | Negative | 0.052 |
+| color | “≤ 3.0 and > 1.0” | +85.92 | Positive | 0.014 |
+| depth | “≤ 62.5 and > 61.8” | –30.62 | Negative | 0.005 |
+| z | “≤ 3.53 and > 2.91” | +22.67 | Positive | 0.004 |
+
+*Prediction vs Reality*  
+- **Actual price**: $1,981  
+- **Predicted price**: $1,918  
+- **Absolute error**: $63 (≈ 3.2 % under‑prediction)
+
+*Interpretability*  
+- Confidence score: **0.117** (moderate), indicating a relatively clearer explanation.  
+- The model heavily penalizes small carat size and moderate length (y) and table, while positive contributions come from higher clarity and width (x). The resulting prediction is close to the actual price.
+
+---
+
+**Actionable Takeaways**
+
+1. **For sellers**: Emphasize carat, color, clarity, and cut in marketing materials; these attributes drive most of the price premium.  
+2. **For buyers**: Look for high clarity and color in lower carat stones; the model shows these can offset small size.  
+3. **Model improvement**: The low confidence on instance 676 suggests the local surrogate may struggle with diamonds that have strong clarity but modest dimensional trade‑offs; consider adding more local perturbation points or refining the sampling strategy.  
+4. **Price forecasting**: Use the global ranking to set quick heuristics (e.g., a 0.1‑carat increase ≈ $500–$600 in predicted price), then adjust for cut/color/clarity per the local contributions.
+
+# EPR Explainer: 0.4768, Verifier: 0.6923

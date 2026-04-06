@@ -1,0 +1,44 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Use the mean absolute SHAP values as indicator of importance.
+
+We need to convert quantitative values into natural language explanations for both technical and non-technical audiences. Keep concise, actionable.
+
+We need to explain each feature: WKHP, OCCP, AGEP, SCHL, RELP, SEX, POBP, COW, MAR, RAC1P. Provide context: why they matter.
+
+We should present in order given. Possibly start with highest mean SHAP (WKHP), then next etc. Provide explanation.
+
+Make sure to only base on given quantitative data, do not add other details. Use "higher mean SHAP indicates stronger influence". Provide actionable insights: which features are most important, could be considered for interventions.
+
+Let's produce a structured explanation.
+
+Also need to avoid excessive technical terms but may mention model.
+
+Let's produce bullet points. Provide both technical and non-technical. Could say "for a non-technical audience: this means that ..." Provide context.
+
+Ok.</think>
+**How the model decided this person’s income is above (or below) the median**
+
+The model looks at each of the 10 demographic and employment attributes and decides how much each one pushes the predicted income toward the higher‑income class.  
+The numbers below are the *average* absolute influence (SHAP value) that each feature had across many predictions.  
+A higher number means that the feature was a stronger driver of the model’s decision for this person.
+
+| Rank | Feature | Mean absolute SHAP | What it tells the model | Why it matters for income |
+|------|---------|--------------------|-------------------------|--------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.904** | The most powerful signal. The model strongly believes that how many hours you work changes your income the most. | More hours usually mean more pay, and the model has learned that weekly work time is the biggest indicator of earning level. |
+| 2 | **OCCP** (occupation code) | **0.630** | Occupation explains a lot of the income difference. | Certain jobs (e.g., tech, healthcare, finance) tend to pay higher than others. The model uses the job type as a key income predictor. |
+| 3 | **AGEP** (age) | **0.517** | Age contributes a moderate but consistent signal. | Income typically grows with experience up to a point, so age is linked to earning potential. |
+| 4 | **SCHL** (educational attainment) | **0.465** | Education matters, but less than hours worked or job type. | Higher degrees (bachelor, master, professional) usually open doors to better‑paid positions. |
+| 5 | **RELP** (relationship to householder) | **0.343** | Relationship status influences income slightly. | Being a spouse, child, or other relative can affect job opportunities or earnings (e.g., married couples may have dual incomes). |
+| 6 | **SEX** (gender) | **0.224** | Gender has a smaller but noticeable effect. | The model captures gender‑related earning differences that appear in the data. |
+| 7 | **POBP** (place of birth) | **0.172** | Birthplace adds some context to income. | Cultural, regional, or migration patterns can influence job types and wages. |
+| 8 | **COW** (class of worker) | **0.137** | Employment type (private, government, self‑employed) is modestly relevant. | Different sectors have different average pay scales. |
+| 9 | **MAR** (marital status) | **0.102** | Marital status has a small influence. | Married people may benefit from dual incomes or shared financial responsibilities. |
+| 10 | **RAC1P** (race) | **0.053** | Race contributes the least to the prediction. | The model notes small income differences across racial groups in the data, but it’s a minor factor compared to the others. |
+
+### Take‑away for stakeholders
+- **Primary levers**: working hours and occupation are the strongest indicators of income. Interventions that increase job hours or shift into higher‑pay occupations could have the biggest impact.
+- **Secondary levers**: education, age, and relationships also shape earnings but to a lesser degree.
+- **Minimal levers**: gender, birthplace, employment class, marital status, and race play smaller roles in this model’s predictions.
+
+This ranking helps explain *why* the model assigned the income prediction it did for this individual, and highlights the attributes that most strongly drive income expectations in the data.
+
+# EPR Explainer: 0.9060, Verifier: 0.5495

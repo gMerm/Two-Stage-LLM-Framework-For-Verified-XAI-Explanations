@@ -1,0 +1,49 @@
+<think>We need to explain how each word influenced the model's sentiment prediction, for both positive and negative contributions, describing their impact. Use the data. Provide concise explanation. Let's craft a natural language explanation.
+
+We have top 20 token attributions: each token with attribution. Some negative, some positive. Must describe how each contributed.
+
+We should not make assumptions beyond given. So just describe that e.g., "The word 'if' has a negative attribution of -0.0126, meaning it slightly pulls the prediction towards negative sentiment." Similarly.
+
+Need to mention collectively shaping final prediction. Summarize.
+
+Let's produce an answer.</think>
+**How the top 20 words shaped the negative prediction**
+
+| Token | Attribution | Effect on the sentiment score |
+|-------|-------------|--------------------------------|
+| **if** | –0.0126 | Pulls the prediction slightly toward *negative* sentiment. |
+| **you** | +0.0126 | Pushes the score toward *positive* sentiment, but the effect is almost cancelled by the strong negative word that follows it. |
+| **enjoy** | +0.0045 | A small positive push. |
+| **films** | +0.0022 | Slightly positive. |
+| **like** | –0.0021 | Negative contribution. |
+| **american** | +0.0051 | Positive. |
+| **pie** | +0.0029 | Positive. |
+| **,** | –0.0004 | Negligible negative shift. |
+| **road** | –0.0018 | Minor negative push. |
+| **trip** | +0.0032 | Positive. |
+| **&** | +0.0011 | Slight positive. |
+| **van** | –0.0044 | Strong negative influence. |
+| **wilder** | +0.0030 | Positive. |
+| **avoid** | –0.0013 | Negative. |
+| **this** | –0.0055 | Significant negative impact. |
+| **cinematic** | –0.0047 | Strong negative contribution. |
+| **refuse** | –0.0000076 | Negligible negative shift. |
+| **at** | –0.0029 | Negative. |
+| **all** | –0.0033 | Negative. |
+| **costs** | –0.0029 | Negative. |
+
+**Key take‑aways**
+
+1. **Negative‑bias cluster**  
+   Words that directly criticize the film—*this*, *cinematic*, *avoid*, *van*, *all*, *costs*—carry the largest negative attributions. These tokens cumulatively pull the model’s score toward a negative prediction.
+
+2. **Positive‑bias cluster**  
+   Phrases that could indicate enjoyment—*you*, *enjoy*, *american pie*, *road trip*, *wilder*—add small positive pushes. Their combined effect is insufficient to overcome the stronger negative signals.
+
+3. **Balance of the sentence**  
+   The early token *if* also contributes a sizeable negative signal, while the following *you* counteracts it with a matching positive value. This pair effectively neutralizes each other, leaving the rest of the sentence’s bias to dominate.
+
+4. **Overall outcome**  
+   The net effect of these 20 tokens is a slight shift toward a negative prediction (model score ≈ 0.0134, labeled “Negative”). The strongest drivers are the negative words describing the film as *cinematic refuse*, urging the model to classify the review as negative.
+
+# EPR Explainer: 0.7218, Verifier: 0.5905

@@ -1,0 +1,38 @@
+<think>We need to explain how each word of top 20 token attributions influenced sentiment prediction. Provide explanation of both positive and negative contributors, describing their impact and how collectively shaped final prediction. Must base only on given data, no assumptions. Provide concise explanation for both technical and non-technical audiences. Should not make remarks about quality.
+
+We should mention prediction 0.0134 negative. Each token attribution indicates contribution. Sum of attributions approximate? We can mention that overall negative tokens outweigh positives leading to negative prediction. Provide per token explanation.
+
+Let's produce final.</think>
+**Explanation of how the top 20 words shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | This word slightly pulls the score toward *negative* because the model expects “if” in contexts that often lead to a warning or caution (“if you do this, you will see…”) – a subtle negative cue. |
+| **you** | +0.0126 | “you” is a neutral pronoun, but in this sentence it adds a small positive push, hinting at a direct address that can increase engagement. |
+| **enjoy** | +0.0045 | Suggests a positive experience, so it nudges the prediction toward *positive* sentiment. |
+| **films** | +0.0022 | A neutral word that adds a slight positive bias (films are generally neutral, but here it is in a supportive context). |
+| **like** | –0.0021 | Signals a comparison that, in this case, is negative (“like American Pie” is part of a broader negative list). |
+| **american** | +0.0051 | The word “american” is neutral, but its occurrence in a recognized movie title (“American Pie”) gives a tiny positive lift. |
+| **pie** | +0.0029 | Similar to “american”, it reinforces the movie reference and adds a small positive push. |
+| **,** | –0.0004 | The comma is a formatting token; the model treats it as a slight negative due to punctuation handling. |
+| **road** | –0.0018 | Part of “Road Trip”, which the model associates with a negative context here, so it pulls toward *negative*. |
+| **trip** | +0.0032 | Despite being part of a negative title, “trip” on its own gives a small positive contribution. |
+| **&** | +0.0011 | The ampersand is treated as a neutral symbol that gives a tiny positive. |
+| **van** | –0.0044 | As part of “Van Wilder”, this token is strongly negative in the model’s eye, strongly lowering the sentiment score. |
+| **wilder** | +0.0030 | Adds a modest positive, partly balancing the negative impact of “van”. |
+| **avoid** | –0.0013 | “Avoid” signals a warning, pushing the prediction toward *negative*. |
+| **this** | –0.0055 | “This” in the phrase “avoid this cinematic refuse” signals a negative stance, strongly pulling the score downward. |
+| **cinematic** | –0.0047 | The adjective “cinematic” here is attached to “refuse”; the model treats it as a negative modifier, lowering sentiment. |
+| **refuse** | –0.0000076 | Barely contributes but is negative, reinforcing the negative phrase. |
+| **at** | –0.0029 | Preposition in “at all costs” contributes a slight negative cue. |
+| **all** | –0.0033 | The word “all” amplifies the negativity in “all costs”, adding to the negative bias. |
+| **costs** | –0.0029 | “Costs” in “at all costs” reinforces the negative sentiment, lowering the score. |
+
+### Collective effect
+The sum of the top 20 attributions is negative, which matches the overall prediction of **0.013 → Negative**.  
+- **Positive contributors** (e.g., *you, enjoy, american, pie, trip, wilder*) provide small boosts but are outweighed by the negative signals.
+- **Strong negative signals** come from *if, like, road, van, avoid, this, cinematic, at, all, costs*, which together pull the prediction toward the negative class.
+
+In short, the model interprets the review as strongly negative because the key words that signal warning, dislike, or condemnation (especially *avoid this cinematic refuse at all costs*, *van*, *road*, etc.) dominate the sentiment landscape, outweighing the few mildly positive words.
+
+# EPR Explainer: 0.8818, Verifier: 0.3437

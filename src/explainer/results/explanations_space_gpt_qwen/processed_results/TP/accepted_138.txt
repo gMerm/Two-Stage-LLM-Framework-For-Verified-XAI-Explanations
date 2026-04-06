@@ -1,0 +1,37 @@
+<think>We need to explain how each word of the top_20_token_attributions influenced the model's sentiment prediction. Provide both positive and negative contributors, describing impact, how collectively shaped final prediction. Must only base on data provided. Must be concise, no extra. Let's parse. We have top 20 tokens with attribution scores. Positive attributions push towards positive sentiment. Negative push towards negative. We need explain each word's influence. So list each token, its attribution, interpret sign. Also describe combined effect leading to predicted negative sentiment (0.0134). The prediction is slightly above 0? Usually threshold 0.5? But 0.0134 indicates negative. So negative overall. We can note that the largest negative contributions: "this" -0.0055, "cinematic" -0.0047, "van" -0.0044, "at" -0.0029, "all" -0.0033, "costs" -0.0029, "avoid" -0.0013, "road" -0.0018, "like" -0.0021, "comma" -0.0004. Positive contributions: "you" 0.0126, "enjoy" 0.0045, "american" 0.0051, "pie" 0.0029, "trip" 0.0032, "van"? Actually negative. "&" 0.0011, "wilder" 0.0030, "films" 0.0022. Sum them? But we just explain.
+
+We should mention that "you" positive but "if" negative, etc. Also mention context: model thinks negative overall due to many negative words. Provide actionable insights: e.g., reviewer used negative words like "avoid", "cinematic refuse", "costs" to indicate negative. Positive words like "American Pie" etc were insufficient. Provide explanation for each token. Avoid technical terms. Provide concise. Let's produce.</think>
+**How each word shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | A neg‑intensity cue that lowers the score; it tells the model the speaker is *conditional* and slightly negative. |
+| **you** | +0.0126 | Personal address that nudges the model toward a positive tone, but is outweighed by stronger negatives. |
+| **enjoy** | +0.0045 | Suggests a positive experience, but the surrounding context reduces its weight. |
+| **films** | +0.0022 | Neutral/positive cue about the medium; slight positive lift. |
+| **like** | –0.0021 | A comparison that, here, adds a mild negative signal (the model expects “like” to introduce a comparison that may be negative). |
+| **american** | +0.0051 | Part of a film title that adds a small positive lift. |
+| **pie** | +0.0029 | Completes the title “American Pie” and gives a small positive boost. |
+| **,** | –0.0004 | The comma is treated as a punctuation cue that slightly discourages positivity. |
+| **road** | –0.0018 | Starts the title “Road Trip”; the model interprets it as a negative cue in this sentence. |
+| **trip** | +0.0032 | Gives a minor positive lift; the model sees “Road Trip” as a mixed reference. |
+| **&** | +0.0011 | Punctuation that the model treats as a neutral/positive small signal. |
+| **van** | –0.0044 | Part of “Van Wilder”; here it’s a stronger negative influence. |
+| **wilder** | +0.0030 | Gives a small positive lift; offsets “van” slightly. |
+| **avoid** | –0.0013 | Directly signals a recommendation against the film, strongly negative. |
+| **this** | –0.0055 | Indicates the specific movie being criticized; a strong negative cue. |
+| **cinematic** | –0.0047 | Suggests a film quality; here it contributes strongly to negativity. |
+| **refuse** | –0.0000076 | Very small negative impact; almost neutral. |
+| **at** | –0.0029 | Contextual preposition that slightly pulls the sentence toward negative. |
+| **all** | –0.0033 | Broad negative emphasis (“all costs”); reduces the score. |
+| **costs** | –0.0029 | Indicates a financial loss; a negative signal. |
+
+**Collective picture**
+
+- The five largest negative tokens (**this, cinematic, van, at, all**) together subtract more than the combined positive tokens (**you, enjoy, american, pie, trip, wilder**).  
+- The negative words describe the film as a “cinematic refuse” to be avoided, emphasizing loss (“all costs”).  
+- Positive tokens are mostly tied to film titles, which the model sees as insufficient to counter the strong negative context.  
+
+Because the net attribution remains negative, the model predicts a *negative* sentiment (0.0134). The explanation shows that the negative descriptors outweighed the neutral or mildly positive references to film titles.
+
+# EPR Explainer: 0.9037, Verifier: 0.4613

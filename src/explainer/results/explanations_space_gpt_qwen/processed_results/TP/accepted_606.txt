@@ -1,0 +1,80 @@
+<think>We need to interpret both global and local explanations based only on given data. Follow guidelines: no speculation beyond data. Provide concise factual summary. For global: rank, importance scores, direction? Only importance, but we don't have direction. But we can infer direction generally: higher carat increases price (positive). Color, clarity, cut likely positive too. But cannot assume? We must base on data only. We only have importance scores. Should we note "direction not provided" and cannot conclude. But guidelines: do not invent. So say "insufficient evidence to conclude direction" for global features.
+
+For local: we have contributions and direction for each feature. Provide explanation per instance.
+
+Also note instance_id, actual, predicted, error.
+
+Also mention interpretability confidence.
+
+Need to mention feature values ranges.
+
+Also mention relative importance weight.
+
+Let's craft concise answer.</think>
+**Global Model Insight**
+
+- **Top 9 drivers of price (LIME):**  
+  1. **carat** – importance ≈ 124.44  
+  2. **color** – importance ≈ 102.26  
+  3. **clarity** – importance ≈ 75.55  
+  4. **cut** – importance ≈ 53.20  
+  5. **y** – importance ≈ 32.99  
+  6. **x** – importance ≈ 10.05  
+  7. **table** – importance ≈ 9.62  
+  8. **depth** – importance ≈ 6.41  
+  9. **z** – importance ≈ 0.13  
+
+> *Insufficient evidence to conclude whether each feature’s influence is positive or negative; the LIME output only provides magnitude of importance.*
+
+---
+
+### Local Explanation – Instance 676
+| Feature | Observed Range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| clarity | `<= 2.0` | +2075.04 | positive | 0.423 |
+| y | `<= 6.54` & `> 5.71` | –817.87 | negative | 0.167 |
+| color | `<= 4.0` & `> 3.0` | –723.16 | negative | 0.148 |
+| x | `<= 6.55` & `> 5.7` | +537.18 | positive | 0.110 |
+| z | `<= 4.04` & `> 3.53` | +262.97 | positive | 0.054 |
+| carat | `<= 1.05` & `> 0.7` | –185.91 | negative | 0.038 |
+| cut | `<= 2.0` | –109.84 | negative | 0.022 |
+| table | `<= 57.0` & `> 56.0` | +102.95 | positive | 0.021 |
+| depth | `<= 61.8` & `> 61.0` | –86.28 | negative | 0.018 |
+
+- **Prediction context**:  
+  - Actual price: $3,172.00  
+  - Predicted price: $3,601.51  
+  - Absolute error: $429.51  
+
+- **Interpretability confidence**: 0.072 (low), using all 9 features.
+
+---
+
+### Local Explanation – Instance 737
+| Feature | Observed Range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| carat | `<= 0.7` & `> 0.4` | –2,897.62 | negative | 0.487 |
+| clarity | `> 5.0` | +902.91 | positive | 0.152 |
+| y | `<= 5.71` & `> 4.72` | –884.52 | negative | 0.149 |
+| table | `<= 57.0` & `> 56.0` | –485.01 | negative | 0.082 |
+| x | `<= 5.7` & `> 4.71` | +324.50 | positive | 0.055 |
+| cut | `<= 2.0` | –311.06 | negative | 0.052 |
+| color | `<= 3.0` & `> 1.0` | +85.92 | positive | 0.014 |
+| depth | `<= 62.5` & `> 61.8` | –30.62 | negative | 0.005 |
+| z | `<= 3.53` & `> 2.91` | +22.67 | positive | 0.004 |
+
+- **Prediction context**:  
+  - Actual price: $1,981.00  
+  - Predicted price: $1,917.62  
+  - Absolute error: $63.38  
+
+- **Interpretability confidence**: 0.117, using all 9 features.
+
+---
+
+**Take‑away:**  
+- Globally, *carat* and *color* dominate the model, followed by *clarity* and *cut*.  
+- In individual predictions, large contributions come from *clarity*, *y*, *color*, *x*, *z*, and *carat*, each pushing the price up or down depending on the feature’s value range.  
+- Confidence scores are low, indicating that the local explanations explain a modest portion of the model’s variance for these instances.
+
+# EPR Explainer: 0.3872, Verifier: 0.5474

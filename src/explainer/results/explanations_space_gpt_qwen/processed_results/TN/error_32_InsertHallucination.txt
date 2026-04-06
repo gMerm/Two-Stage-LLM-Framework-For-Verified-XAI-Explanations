@@ -1,0 +1,42 @@
+<think>We need to explain how each token of top 20 contributes to sentiment. We have to base explanation on the attribution values. Provide for both positive and negative tokens. Keep concise, actionable. Provide a natural language explanation. No extra technical. Should identify token effect: positive pushes towards positive, negative pushes towards negative. Also magnitude indicates strength.
+
+We should explain collective shape: sum of contributions leads to negative prediction.
+
+Let's produce explanation: mention highest positive attributions: you, american, etc. Highest negative: this, cinematic, at, all, costs. Also note that the overall predicted sentiment is negative due to negative contributions outweighing positives.
+
+We must not mention model specifics beyond attribution. Let's do.
+
+</think>
+**How the words shaped the prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| *you* | +0.0126 | Strongly nudges the model toward a positive feeling. |
+| *American* | +0.0051 | Adds to a positive tone, suggesting familiarity with the film. |
+| *pie* | +0.0029 | Mild positive lift, referencing a known movie. |
+| *enjoy* | +0.0045 | Encourages a positive vibe, indicating the reviewer could have liked it. |
+| *films* | +0.0022 | Small positive boost, giving context to the discussion. |
+| *trip* | +0.0032 | Slightly positive, tying into the movie‑genre reference. |
+| *van* | –0.0044 | Pushes toward negative, hinting at an unfavorable association. |
+| *Wilder* | +0.0030 | Slight positive because of a known actor, but outweighed by *van*. |
+| *if* | –0.0126 | Strong negative signal, setting a conditional warning. |
+| *like* | –0.0021 | Negative cue that the movies aren’t genuinely liked. |
+| *road* | –0.0018 | Small negative tilt. |
+| *&* | +0.0011 | Tiny positive contribution, connecting two film titles. |
+| *avoid* | –0.0013 | Warns against the film, negative impact. |
+| *this* | –0.0055 | Very strong negative, pointing directly at the movie. |
+| *cinematic* | –0.0047 | Strong negative, criticizing the film’s quality. |
+| *at* | –0.0029 | Adds to the negative warning. |
+| *all* | –0.0033 | Negative, amplifying the discouragement. |
+| *costs* | –0.0029 | Negative, implying the reviewer shouldn’t pay for it. |
+| *refuse* | –0.0000076 | Negligible negative, but still negative. |
+
+**Collective impact**
+
+- The biggest positives (*you*, *American*, *pie*, *enjoy*, *films*, *trip*, *Wilder*) together add roughly **+0.040** to the sentiment score.  
+- The negatives (*if*, *like*, *road*, *van*, *avoid*, *this*, *cinematic*, *at*, *all*, *costs*, *refuse*) sum to about **–0.057**.  
+- Because the negative contributions outweigh the positives, the overall prediction leans negative, resulting in a sentiment score of 0.013 (rounded to the model’s probability).  
+
+In plain terms, the reviewer’s warning (“if… avoid… this…”) and the critical descriptors (“cinematic refuse,” “all costs”) dominate the sentence, making the model predict a negative sentiment even though a few words hint at enjoyment.
+
+# EPR Explainer: 0.8478, Verifier: 0.3822

@@ -1,0 +1,57 @@
+<think>We need to explain how each word of top 20 token attributions influenced model's sentiment prediction, describing positive and negative contributions, collectively shaping final prediction. Must base on data only. Provide concise, actionable insights. For each token we explain effect: positive pushes toward positive sentiment, negative pushes toward negative. Use magnitude to explain strength.
+
+We must not mention quality or remarks. Just explanation. Avoid too technical.
+
+Let's craft: Start with summary: model predicted negative with score 0.013. Each token's attribution shows influence. Then list each token with direction and magnitude relative to threshold.
+
+We should maybe mention that larger absolute attribution indicates stronger influence.
+
+We can group similar tokens like "if" negative -0.0126 pushes negative strongly. "you" positive +0.0126 pushes positive but countered. etc.
+
+We need to describe collective shaping: The negative tokens like "if", "like", "road", "van", "avoid", "this", "cinematic", "at", "all", "costs" accumulate negative influence outweighing positive tokens like "you", "enjoy", "films", "american", "pie", "trip", "&", "wilder". So overall negative.
+
+Explain how each word contributed: mention that "if" strongly negative suggests conditional negative context, "you" positive indicates addressed to reader encouraging positive, etc.
+
+Also note punctuation tokens with small contributions.
+
+Make it clear for technical and non-technical.
+
+Ok produce final.</think>
+**How each token shaped the model’s negative sentiment prediction**
+
+The model assigns a small positive score (≈0.01) to the review, classifying it as negative.  
+The *Integrated Gradients* values tell us how each word nudged that score up or down.  
+A negative attribution means the word pushed the prediction toward a **negative** label;  
+a positive attribution nudged it toward **positive**. The larger the absolute value, the stronger the influence.
+
+| Token | Attribution | Effect on sentiment | Relative strength |
+|-------|-------------|---------------------|-------------------|
+| **if** | –0.0126 | Strongly negative – the conditional “if” signals a warning that sets a negative tone. | Highest negative |
+| **you** | +0.0126 | Strong positive – directly addressing the reader, the model sees a polite, engaging phrase. | Highest positive |
+| **enjoy** | +0.0045 | Mild positive – suggests enjoyment, but weak compared to “if”. | Small positive |
+| **films** | +0.0022 | Mild positive – indicates the subject matter, a neutral supportive cue. | Small positive |
+| **like** | –0.0021 | Slight negative – the word introduces a comparison that, in context, is part of a negative phrase (“avoid this cinematic refuse”). | Small negative |
+| **american** | +0.0051 | Moderate positive – brand name of a movie, gives a neutral or slightly positive feel. | Medium positive |
+| **pie** | +0.0029 | Small positive – part of the title “American Pie”; a neutral cue. | Small positive |
+| **,** | –0.0004 | Negligible negative – punctuation slightly lowers the score but is almost neutral. | Negligible |
+| **road** | –0.0018 | Small negative – part of “Road Trip”, but in this sentence contributes to the negative warning. | Small negative |
+| **trip** | +0.0032 | Small positive – movie title component, but less weight than “road”. | Small positive |
+| **&** | +0.0011 | Very small positive – a connecting symbol that gives a slight positive push. | Negligible |
+| **van** | –0.0044 | Moderate negative – part of “Van Wilder” within a negative context. | Medium negative |
+| **wilder** | +0.0030 | Small positive – movie title element, giving a mild positive effect. | Small positive |
+| **avoid** | –0.0013 | Small negative – direct instruction to stay away, reinforcing the negative stance. | Small negative |
+| **this** | –0.0055 | Moderate negative – pronoun that points to the film being critiqued, adding weight to the negative tone. | Medium negative |
+| **cinematic** | –0.0047 | Moderate negative – adjective that intensifies the criticism of the film. | Medium negative |
+| **refuse** | –0.0000076 | Virtually neutral – negligible impact. | Negligible |
+| **at** | –0.0029 | Small negative – preposition that contributes to the warning phrase. | Small negative |
+| **all** | –0.0033 | Small negative – part of the phrase “at all costs”, reinforcing negativity. | Small negative |
+| **costs** | –0.0029 | Small negative – final part of the warning phrase, adding to the negative push. | Small negative |
+
+### How the tokens worked together
+
+- **Negative side**: The ten tokens with negative attribution (especially *if*, *this*, *cinematic*, *van*, *avoid*, *at*, *all*, *costs*, *road*, *like*) cumulatively pull the prediction toward a negative sentiment. Their combined magnitude is larger than the positive side, so the model decides the review is negative.
+- **Positive side**: The positive tokens (*you*, *enjoy*, *films*, *american*, *pie*, *trip*, *wilder*, *&*) provide counter‑balancing pushes toward positivity, but their total influence is weaker than the negative side.
+
+In short, the model recognizes the overall warning tone (“avoid this cinematic refuse at all costs”) and lets the negative cues dominate, while the occasional neutral or mildly positive words (like *you* or *enjoy*) are outweighed. The final sentiment stays negative because the negative tokens have both stronger magnitude and a consistent pattern that signals a warning or critique.
+
+# EPR Explainer: 0.8372, Verifier: 0.6180

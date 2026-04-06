@@ -1,0 +1,47 @@
+<think>We need to explain each token's influence. Provide clear natural language explanation for technical and non-technical audiences. Should not invent. Use data. Provide impact of each token positive or negative, magnitude. Also mention how collectively shaped final prediction: predicted sentiment negative. We should mention that the overall negative contributions outweigh positives leading to low positive score 0.013. Provide each token description.
+
+We must not mention internal system prompts. Just explanation.
+
+Let's craft concise explanation: list token, contribution sign, effect on sentiment. Summarize overall.
+
+Also mention top 20 tokens include both positive and negative. Provide aggregated effect.
+
+Let's produce explanation.</think>
+**How the model read this review**
+
+The Integrated Gradients scores show that the model looked closely at 20 key words.  
+Positive scores nudged the prediction toward *positive* sentiment, while negative scores pushed it toward *negative* sentiment.  
+Because the total positive contribution is only 0.013 (very small), the model still classifies the review as **Negative**.
+
+| Token | Attribution | Effect on the prediction | Quick explanation |
+|-------|-------------|--------------------------|-------------------|
+| **if** | **–0.0126** | Strong negative push | The conditional “if” signals a warning (“avoid”), which the model treats as a cue for a bad movie. |
+| **you** | +0.0126 | Positive push | Direct address to the reader can be interpreted as encouraging or engaging, slightly easing negativity. |
+| **enjoy** | +0.0045 | Positive push | “Enjoy” suggests a favorable experience, countering the overall tone. |
+| **films** | +0.0022 | Positive push | Neutral/positive word that reinforces the idea of watching. |
+| **like** | –0.0021 | Small negative push | The comparison to known movies signals the reviewer’s expectation, but here it’s followed by negative context, so the model counts it as a mild negative cue. |
+| **american** | +0.0051 | Positive push | Part of a movie title; the model treats brand names as neutral/positive. |
+| **pie** | +0.0029 | Positive push | Completion of the movie title “American Pie”; contributes a mild positive tone. |
+| **,** | –0.0004 | Negligible negative push | Punctuation is almost ignored; it slightly drags the score downward. |
+| **road** | –0.0018 | Negative push | Part of “Road Trip”; the word “road” alone can hint at a mundane, less exciting journey. |
+| **trip** | +0.0032 | Positive push | Completes the title “Road Trip”; brings a small positive vibe. |
+| **&** | +0.0011 | Positive push | The conjunction connects titles, adding a little cohesion. |
+| **van** | –0.0044 | Strong negative push | “Van Wilder” is a known title; the model treats the word “van” here as a negative cue because the surrounding sentiment is bad. |
+| **wilder** | +0.0030 | Positive push | Completes the title “Van Wilder”; slightly positive. |
+| **avoid** | –0.0013 | Negative push | Directly instructs the reader not to watch; a clear negative signal. |
+| **this** | –0.0055 | Strong negative push | Refers to the film in question; combined with other negative words, it drives the sentiment negative. |
+| **cinematic** | –0.0047 | Strong negative push | The adjective “cinematic” is neutral in isolation, but here paired with “refuse” it becomes a negative cue. |
+| **refuse** | –0.0000 | Negligible negative push | The word “refuse” literally means waste; very slight negative effect. |
+| **at** | –0.0029 | Negative push | Preposition in the phrase “at all costs” emphasizes the urgency of the warning. |
+| **all** | –0.0033 | Negative push | Reinforces the extremity of the warning; adds to the negative tone. |
+| **costs** | –0.0029 | Negative push | Final part of the warning phrase; contributes to the overall negative sentiment. |
+
+### Collective impact
+
+- **Negative tokens** (e.g., *if, avoid, this, cinematic, at, all, costs*) provide a combined negative attribution of about –0.042, overwhelming the positive contributions.
+- **Positive tokens** (e.g., *you, enjoy, films, american, pie, road trip, & van wilder*) add roughly +0.025, but this is far smaller than the negative side.
+- The net effect leaves the model’s sentiment probability very close to zero for positivity (0.013) and firmly places the review in the **Negative** class.
+
+In plain terms: the reviewer’s repeated warnings (“avoid this film, at all costs”) and negative descriptors outweigh the few words that hint at enjoyment or familiar titles, leading the model to conclude that the movie is bad.
+
+# EPR Explainer: 0.8888, Verifier: 0.5157

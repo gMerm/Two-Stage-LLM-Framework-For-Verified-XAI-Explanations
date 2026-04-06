@@ -1,0 +1,50 @@
+<think>We need to explain how each word of the top 20 token attributions influenced the model's sentiment prediction. Provide explanation for each token: positive or negative, magnitude relative. Avoid making assumptions beyond given data. Summarize collective effect. Should be clear for both technical and non-technical audiences. Should focus on actionable insights. No extra remarks. Provide concise explanations.
+
+Let's produce explanation: mention prediction 0.0134 close to zero negative. The tokens have attributions either positive or negative. Summarize each token: e.g., "if" has negative contribution -0.0126 meaning it pushes toward negative sentiment. "you" positive +0.0126, etc.
+
+We should note that tokens like "this", "cinematic", "avoid" etc contribute strongly negative, while "you", "enjoy", "american", etc positive but smaller magnitude.
+
+Also mention that collective sum of attributions equals overall model output (approx). So negative tokens dominate leading to negative sentiment.
+
+We should avoid making assumptions about semantics beyond sign. Provide actionable insights: e.g., highlight that negative words outweigh positive words.
+
+Ok.</think>
+**What the numbers say about each word**
+
+| Token | Attribution | Effect on the prediction |
+|-------|-------------|---------------------------|
+| **if** | –0.0126 | Strongly pushes the model toward a negative score. |
+| **you** | +0.0126 | Strongly pushes the model toward a positive score, but the effect is almost cancelled by “if”. |
+| **enjoy** | +0.0045 | Gives a small positive push. |
+| **films** | +0.0022 | Small positive contribution. |
+| **like** | –0.0021 | Slightly negative. |
+| **american** | +0.0051 | Moderately positive. |
+| **pie** | +0.0029 | Small positive. |
+| **,** | –0.0004 | Negligible negative effect. |
+| **road** | –0.0018 | Slightly negative. |
+| **trip** | +0.0032 | Small positive. |
+| **&** | +0.0011 | Tiny positive. |
+| **van** | –0.0044 | Moderately negative. |
+| **wilder** | +0.0030 | Small positive. |
+| **avoid** | –0.0013 | Slight negative. |
+| **this** | –0.0055 | Strong negative. |
+| **cinematic** | –0.0047 | Strong negative. |
+| **refuse** | –0.0000 | Effect too small to matter. |
+| **at** | –0.0029 | Small negative. |
+| **all** | –0.0033 | Small negative. |
+| **costs** | –0.0029 | Small negative. |
+
+**How they combine to give the final sentiment**
+
+- The model’s overall prediction is 0.0134, a very small positive value that is treated as “Negative” by the threshold.
+- The negative‑attributing tokens (“if”, “this”, “cinematic”, “van”, “avoid”, “all”, etc.) together pull the score down.
+- The positive‑attributing tokens (“you”, “enjoy”, “american”, “pie”, “trip”, “wilder”, etc.) push it up.
+- Because the sum of the negative contributions outweighs the positives, the net result is a negative sentiment.
+
+**Key takeaway for non‑technical readers**
+
+- The words that tell the model *what* the movie is (e.g., “American Pie”, “Van Wilder”) give it a small positive feeling.
+- The words that describe *how* bad the movie is (e.g., “cinematic refuse”, “avoid”, “this”) give it a stronger negative feeling.
+- Since the negative words are stronger overall, the review is classified as negative, even though a few positive words appear.
+
+# EPR Explainer: 0.7214, Verifier: 0.3564

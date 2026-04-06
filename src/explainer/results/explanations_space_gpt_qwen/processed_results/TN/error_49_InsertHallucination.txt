@@ -1,0 +1,47 @@
+<think>We need to explain how each word of top_20 contributed to prediction. Provide explanation in natural language for both technical and non-technical. Use quantitative data only. Show positive or negative influence. Mention how collectively shaped final prediction (negative). Provide actionable insights. Keep concise, avoid unnecessary technical language. Use the token attributions values. Provide explanation: e.g., "if" negative, strong negative, etc.
+
+Let's craft explanation.</think>
+**How the model decided the review is negative**
+
+| Word | Attribution | Effect on sentiment |
+|------|-------------|---------------------|
+| if | –0.0126 | Pushes the prediction toward **negative**. |
+| you | +0.0126 | Counteracts the “if” by nudging a little toward **positive**. |
+| enjoy | +0.0045 | Small positive push. |
+| films | +0.0022 | Small positive push. |
+| like | –0.0021 | Weak negative push. |
+| american | +0.0051 | Positive push. |
+| pie | +0.0029 | Positive push. |
+| , | –0.0004 | Negligible negative push. |
+| road | –0.0018 | Small negative push. |
+| trip | +0.0032 | Positive push. |
+| & | +0.0011 | Positive push. |
+| van | –0.0044 | Substantial negative push. |
+| wilder | +0.0030 | Positive push. |
+| avoid | –0.0013 | Negative push. |
+| this | –0.0055 | Strong negative push. |
+| cinematic | –0.0047 | Strong negative push. |
+| refuse | –0.0000 | No real effect. |
+| at | –0.0029 | Small negative push. |
+| all | –0.0033 | Small negative push. |
+| costs | –0.0029 | Small negative push. |
+
+### What the numbers mean
+- **Positive attribution** → word helps the model believe the review is positive.  
+- **Negative attribution** → word helps the model believe the review is negative.  
+- The **magnitude** tells us how strongly the word influences the decision.  
+
+### Putting it together
+The review’s overall score is 0.013 (very close to the neutral 0.5 cutoff), but the mix of signals tips it into the negative side:
+
+* **Strong negative words** – “if”, “this”, “cinematic”, “van”, “avoid”, and a cluster of words around “at all costs” pull the prediction down.  
+* **Positive words** – “you”, “enjoy”, “american pie”, “trip”, “wilder”, and the small boost from “you” and “enjoy” slightly counteract the negatives, but not enough to overcome the negative weight.
+
+Because the negative contributions are larger in magnitude than the positives, the model ends up labeling the review as **negative**.
+
+### Take‑away for reviewers or developers
+- Phrases like *“avoid this cinematic”* or *“at all costs”* are very powerful signals for negativity.  
+- Even a positive cue such as *“enjoy”* or *“you”* cannot override a strong negative context when the words are tightly linked to the negative core.  
+- For a more balanced model, consider giving more weight to sentiment‑neutral words or adding context‑aware handling of “if …” constructions.
+
+# EPR Explainer: 0.7616, Verifier: 0.5527

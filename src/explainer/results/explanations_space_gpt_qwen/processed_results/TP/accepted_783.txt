@@ -1,0 +1,40 @@
+<think>We need to explain how each word of top_20 tokens influenced model's sentiment prediction. Provide both positive and negative contributions, mention magnitude relative to prediction, etc. Ensure concise, actionable insights. Use the quantitative data only. No additional assumptions. Must explain both positive and negative tokens.
+
+We should list tokens with attribution, describe sign meaning. Could mention that positive tokens push toward positive sentiment but overall prediction is negative due to negative tokens outweighing positives. Provide cumulative effect maybe.
+
+Let's craft explanation.</think>
+**How the model arrived at a negative prediction (≈ 0.013)**  
+
+The Integrated Gradients scores tell us how each word nudged the model toward a positive or negative sentiment. Positive values pull the prediction up (more positive), negative values pull it down (more negative).  
+
+| Token | Attribution | Effect on sentiment | Notes |
+|-------|-------------|---------------------|-------|
+| **if** | –0.0126 | Strong negative push | Early “if” frames the sentence as a warning, tipping the tone negative. |
+| **you** | +0.0126 | Strong positive push | Direct address can be friendly, offsetting some negativity. |
+| **enjoy** | +0.0045 | Small positive push | Suggests a potential positive experience. |
+| **films** | +0.0022 | Small positive push | Neutral, but slightly positive. |
+| **like** | –0.0021 | Small negative push | Suggests comparison that the reviewer deems unfavorable. |
+| **american** | +0.0051 | Moderate positive push | Part of a movie title; neutral/positive. |
+| **pie** | +0.0029 | Small positive push | Part of the title “American Pie.” |
+| **,** | –0.0004 | Negligible negative | Punctuation doesn’t change sentiment meaningfully. |
+| **road** | –0.0018 | Small negative push | Starts the title “Road Trip.” |
+| **trip** | +0.0032 | Small positive push | Complements “road”; neutral. |
+| **&** | +0.0011 | Small positive push | Connects two titles, slightly positive. |
+| **van** | –0.0044 | Moderate negative push | Begins the title “Van Wilder,” flagged as disliked. |
+| **wilder** | +0.0030 | Small positive push | Complements “van”; neutral. |
+| **avoid** | –0.0013 | Small negative push | Explicit warning; negative. |
+| **this** | –0.0055 | Strong negative push | Identifies the film as the target of criticism. |
+| **cinematic** | –0.0047 | Strong negative push | Criticizes the film’s quality. |
+| **refuse** | –0.0000076 | Negligible negative | Extremely small influence; essentially neutral. |
+| **at** | –0.0029 | Small negative push | Part of the phrase “at all costs.” |
+| **all** | –0.0033 | Moderate negative push | Intensifies the warning. |
+| **costs** | –0.0029 | Small negative push | Completes the warning phrase. |
+
+### Summary of the collective effect
+- **Negative tokens** (e.g., “if”, “like”, “avoid”, “this”, “cinematic”) together exert a large downward pull, overwhelming the small positive pushes.
+- **Positive tokens** (e.g., “you”, “enjoy”, “american”, “pie”) partially offset the negativity but are not strong enough to flip the final prediction.
+- The overall attribution sum is slightly negative, driving the model’s prediction toward a **negative sentiment** even though the sentence starts with a question (“If you enjoy...”).  
+
+This breakdown shows which words the model views as most critical for labeling the review as negative, and highlights how a handful of strongly negative tokens dominate the sentiment signal.
+
+# EPR Explainer: 0.7448, Verifier: 0.4987

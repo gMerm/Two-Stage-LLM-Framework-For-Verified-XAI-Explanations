@@ -1,0 +1,52 @@
+<think>Okay, let me tackle this explanation request step by step. The user wants natural language explanations of token attributions from an IMDB sentiment analysis model, based solely on the provided data. 
+
+First, I need to understand the core task: converting quantitative attribution scores into clear insights about how each word influenced the negative prediction. The prediction is strongly negative (0.013), so most tokens should have negative contributions, but I must be careful not to assume - I'll only use the given scores.
+
+Looking at the top_20 tokens, I notice several patterns:
+- The most negative contributors are "this" (-0.0055), "cinematic" (-0.0047), "refuse" (-0.0000075), "at" (-0.0029), "all" (-0.0033), "costs" (-0.0029). These form a cluster of negative phrases ("cinematic refuse", "at all costs").
+- Positive contributors are weaker: "you" (0.0126), "enjoy" (0.0045), "american" (0.0051), "pie" (0.0029), "trip" (0.0032), "wilder" (0.0030). 
+- Some tokens like "like" and "road" have small negative scores, but their magnitude is low.
+
+Important nuance: The negative attribution for "refuse" is extremely small (-7.5e-6), so I should note it's negligible compared to others. The phrase "cinematic refuse" as a whole carries weight through "cinematic" and "refuse" together, but I must explain individual tokens as requested.
+
+For non-technical audience, I'll avoid terms like "attribution score" and say "how much each word pulled the prediction toward negative/positive". For technical audience, I can keep "attribution" but clarify magnitude.
+
+Biggest risk: Overinterpreting. For example, "american pie" is a film title, but the model treats "american" and "pie" separately. I must not say "the model knows American Pie is a comedy" - only that "american" had positive attribution and "pie" had positive too.
+
+Now structuring the explanation:
+1. Start with the overall sentiment (strongly negative)
+2. Group negative tokens by their phrases: "cinematic refuse at all costs" (high negative impact)
+3. Note positive tokens but emphasize they were overruled by stronger negatives
+4. Mention negligible tokens like "refuse" to be precise
+
+Checking for guideline compliance:
+- No invented details (e.g., won't say "American Pie is funny" - only that "american" had +0.0051)
+- All explanations based on given scores
+- Avoiding technical terms like "Integrated Gradients" in final output
+
+Final check: The top negative tokens ("this", "cinematic", "refuse", "all", "costs") form the core criticism phrase, while positive tokens refer to the films the reviewer dislikes - which ironically reinforces the negative sentiment. But I must not say "ironically" - just state the scores.
+
+For the explanation, I'll focus on:
+- Most negative words: "this", "cinematic", "all", "costs"
+- Notable positive words: "you", "enjoy", "american" (though small)
+- Clarify that "refuse" has near-zero impact
+- Conclude that the negative phrases dominated
+
+This should be concise while covering all 20 tokens as requested.
+</think>
+The model predicted a strongly negative sentiment (0.013) for this review. Here's how the top words influenced the prediction based *only* on their attribution scores:
+
+**Strongly Negative Contributors (pulling toward negative):**  
+- `this` (-0.0055), `cinematic` (-0.0047), `all` (-0.0033), `costs` (-0.0029), `at` (-0.0029)  
+  → These form the critical phrase "cinematic refuse at all costs," with `this` and `cinematic` carrying the strongest negative weight.  
+- `refuse` (-0.0000075) has negligible impact (nearly zero).  
+- `van` (-0.0044), `road` (-0.0018) contribute weakly negative to the film references.  
+
+**Weak Positive Contributors (pulling toward positive, but overruled):**  
+- `you` (+0.0126), `enjoy` (+0.0045), `american` (+0.0051), `pie` (+0.0029), `trip` (+0.0032), `wilder` (+0.0030)  
+  → These reference the disliked films ("American Pie," "Road Trip," "Van Wilder"), but their positive influence was too weak to overcome the negative phrases.  
+
+**Key Insight:**  
+The negative words ("this," "cinematic," "all," "costs") formed the core criticism phrase, dominating the prediction. The positive words (referring to the films the reviewer dislikes) were present but too weak to change the overall negative verdict. The review's strongest negative impact came from describing the film as "cinematic refuse at all costs."
+
+# EPR Explainer: 0.6479, Verifier: 0.6982

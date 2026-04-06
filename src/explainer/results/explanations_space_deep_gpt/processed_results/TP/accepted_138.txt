@@ -1,0 +1,59 @@
+<think>Okay, so I need to explain how each of the top 20 tokens in this IMDB review influenced the model's sentiment prediction using Integrated Gradients. The review is negative, and the model predicted a low probability (0.0134) for positive sentiment.
+
+First, looking at the token attributions: some are positive, others negative. Positive tokens help push towards positive sentiment; negatives do the opposite.
+
+Let me go through each token one by one:
+
+1. "if": Negative (-0.0126). This word is often used in conditionals but here it might signal a warning or condition to avoid something, contributing negatively.
+   
+2. "you": Positive (+0.0126). It's a pronoun; maybe the model associates it with direct address suggesting a strong opinion, hence positive sentiment.
+
+3. "enjoy": Positive (+0.0045). The word implies positive feelings, aligning with enjoyment, so this makes sense as a positive contributor.
+
+4. "films": Positive (+0.00217). Films are typically neutral unless context adds emotion, but here it's part of mentioning enjoyable ones, so slightly positive.
+
+5. "like": Negative (-0.002075). The word itself is neutral, but in the sentence structure, it might be used to list negative examples, hence a slight negative impact.
+
+6. "american": Positive (+0.0051). Refers to "American Pie," a known comedy, so positive association for the model.
+
+7. "pie": Positive (+0.0029). Again, part of "American Pie," which is popular and positive in this context.
+
+8. ",": Slightly negative (-0.000393). Punctuation doesn't carry sentiment alone; maybe it's context-dependent or the model treats it neutrally with a small negative.
+
+9. "road": Negative (-0.0018). Part of "Road Trip," which in this case is being criticized, so the word gets a slight negative attribution.
+
+10. "trip": Positive (+0.00316). Despite being part of a disliked film, it might carry a neutral connotation, but maybe the model sees some positive aspects or the structure gives it a small boost.
+
+11. "&": Positive (+0.00112). The conjunction doesn't have inherent sentiment, so this is puzzling. Maybe context makes it slightly positive.
+
+12. "van": Negative (-0.004416). Part of "Van Wilder," which is being criticized, so the word gets a negative score.
+
+13. "wilder": Positive (+0.00297). Despite being part of a disliked film, perhaps the model associates it with something positive or the structure gives it a slight positive boost.
+
+14. "avoid": Negative (-0.001279). Clearly negative; advising to avoid implies dislike.
+
+15. "this": Negative (-0.005536). Pronoun pointing to the film, which is being avoided, so contributes negatively.
+
+16. "cinematic": Negative (-0.0047). Describing a refuse as cinematic in a negative way, hence the word's impact is negative.
+
+17. "refuse": Very slight negative (-7.55e-06). Almost negligible, but still negative. It's part of describing the film as refuse.
+
+18. "at": Negative (-0.002924). Part of the phrase "at all costs," which is negative in context.
+
+19. "all": Negative (-0.003276). Emphasizing avoidance across everything, making it more negative.
+
+20. "costs": Negative (-0.002878). Again, part of the negative phrase about costs.
+
+Putting it all together: The review is mostly negative with a few positive tokens that are overwhelmed by the negatives. Words like "films," "american," and "pie" contribute positively, but they're outweighed by words like "avoid," "cinematic refuse," etc., leading to an overall negative sentiment.
+</think>
+The model predicts a strongly negative sentiment for this review based on the language used. Key positive contributors include words referring to enjoyable films ("films," "american," "pie"), while the majority of tokens, especially those like "avoid," "refuse," and "costs," carry strong negative connotations, overwhelming the positive influences and leading to the negative prediction.
+
+**Explanation for Technical Audience:**
+
+The Integrated Gradients method reveals that while certain words ("enjoy," "films") have positive attributions, they are overwhelmed by negatively attributed tokens such as "avoid" (-0.001279) and "cinematic refuse." The cumulative effect of these negative influences results in the model's prediction of a highly negative sentiment (probability ≈ 0.0134).
+
+**Explanation for Non-Tech Audience:**
+
+The review strongly criticizes the film, using words like "avoid," "refuse," and "waste," which heavily influence the model to predict a negative sentiment. While there are mentions of enjoyable films, their impact is minor compared to the negative language used.
+
+# EPR Explainer: 0.6313, Verifier: 0.9268

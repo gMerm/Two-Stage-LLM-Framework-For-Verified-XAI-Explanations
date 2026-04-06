@@ -1,0 +1,25 @@
+<think>We need to produce clear explanations for each feature based on mean absolute SHAP values. Provide context on why matters for income prediction. Audience both technical and non-technical. We should explain that WKHP highest mean absolute SHAP, etc. Use natural language. Also maybe mention relative ordering. No extra data beyond given. Provide actionable insights? We can say that features with higher SHAP are more influential. Provide what each feature means. Provide how it could affect income. Also mention that lower values mean less influence. Provide concise. Let's do it.</think>
+**How the model thinks about each feature (in order of importance)**  
+
+| Feature | Mean absolute SHAP value | Why it matters for predicting whether someone earns above or below the median income |
+|---------|--------------------------|-----------------------------------------------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.90** | The number of hours a person works each week is the strongest driver of their income. More hours typically mean higher wages, while part‑time work is often associated with lower earnings. |
+| **OCCP** (occupation code) | **0.63** | The type of job a person holds strongly influences pay. Certain occupations (e.g., engineering, management) command higher salaries, whereas others (e.g., hospitality, retail) tend to pay less. |
+| **AGEP** (age) | **0.52** | Age captures experience and career stage. Mid‑career individuals (often 30‑50 years old) usually earn more than younger workers just starting out or older workers approaching retirement. |
+| **SCHL** (educational attainment) | **0.46** | Higher education levels are closely linked to better-paying jobs. A college degree or advanced training usually boosts earning potential compared to only a high‑school diploma or less. |
+| **RELP** (relationship to householder) | **0.34** | Being the householder or a primary earner in a household often correlates with higher income. Conversely, being a spouse, child, or roommate can indicate a lower‑earning or non‑earning role. |
+| **SEX** (gender) | **0.22** | Gender can influence earnings due to differences in job roles, hours worked, or systemic wage gaps. In this dataset, the model detects that gender contributes to income differences. |
+| **POBP** (place of birth) | **0.17** | Origin (e.g., born in the U.S. vs. abroad) can be a proxy for immigration status, language skills, or access to certain job markets, which in turn affect earnings. |
+| **COW** (class of worker) | **0.14** | Whether a person works in private industry, government, or is self‑employed affects salary structures. Private sector roles often pay more than many public sector or informal jobs. |
+| **MAR** (marital status) | **0.10** | Marital status can impact income through shared resources, career choices, or caregiving responsibilities. Married individuals sometimes have higher combined earnings than singles. |
+| **RAC1P** (race) | **0.05** | Race is the least influential feature in this model but still captures systemic disparities in wages that persist across demographic groups. |
+
+### Take‑away
+
+- **Hours worked (WKHP) and occupation (OCCP)** together explain most of the model’s prediction. If someone works many hours in a high‑paying job, the model will strongly lean toward “above median” income.  
+- **Age and education** also play major roles, reflecting experience and qualifications.  
+- Other factors—relationship to householder, gender, birthplace, worker class, marital status, and race—add smaller adjustments to the final prediction.  
+
+The higher the mean absolute SHAP value, the more the feature shifts the model’s prediction in either direction. Features with very low values (e.g., race) still carry information, but their impact is comparatively minor.
+
+# EPR Explainer: 0.8251, Verifier: 0.5706

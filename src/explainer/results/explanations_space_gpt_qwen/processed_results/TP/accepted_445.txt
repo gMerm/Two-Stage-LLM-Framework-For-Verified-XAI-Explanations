@@ -1,0 +1,39 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Use only quantitative data: the features list and mean_abs_shap values. Provide clear natural language for technical and non-technical. Provide explanation of each feature's importance. Must think step by step: list features sorted? They are in order of importance: WKHP highest, then OCCP, etc. Provide context: why working hours, occupation, age, education, relationship, sex, place of birth, class of worker, marital status, race.
+
+Be concise but clear. Should explain that mean abs shap value indicates strength. Provide actionable insights: e.g., working hours most important.
+
+Let's produce explanation: start with statement that the model relies most on work hours, then occupation, etc. For each feature: explain its importance.
+
+Use bullet list maybe. Provide both technical and non-technical phrasing. Provide context: e.g., higher work hours -> higher income probability. For non-technical: "People who work more hours are more likely to earn above the median."
+
+Also mention that race has lowest influence.
+
+Let's draft.</think>
+**Which factors the model used to decide if this person earns above the median?**  
+The SHAP values show how strongly each feature pulls the prediction up or down.  
+A higher mean absolute SHAP value means the feature matters more to the model’s decision.
+
+| Rank | Feature | Mean | What it tells the model | Why it matters for income |
+|------|---------|------|------------------------|---------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.90** | The most decisive signal – the model gives this feature the biggest weight. | More weekly work hours strongly increase the chance of a higher income; it’s a direct proxy for effort and capacity to earn. |
+| 2 | **OCCP** (occupation code) | **0.63** | Occupation gives the model a strong clue about typical earnings for that job. | Different jobs pay very different wages; knowing the occupation helps estimate likely income. |
+| 3 | **AGEP** (age) | **0.52** | Age has a significant but less direct influence. | Age can correlate with experience, career stage, and earning potential. |
+| 4 | **SCHL** (education level) | **0.46** | Education is an important, though not top, predictor. | Higher education often leads to better-paying jobs and higher income. |
+| 5 | **RELP** (relationship to householder) | **0.34** | Relationship status gives context about household responsibilities. | Being a spouse, partner, or child can affect job choices, work hours, and therefore income. |
+| 6 | **SEX** (gender) | **0.22** | Gender has a moderate effect. | Gender can reflect systemic wage gaps and occupational distribution. |
+| 7 | **POBP** (place of birth) | **0.17** | Birthplace offers some cultural or regional insight. | Regional origins can influence education and job opportunities that affect income. |
+| 8 | **COW** (class of worker) | **0.14** | Worker type (private, government, self‑employed, etc.) is modestly informative. | Different employment sectors have different typical pay scales. |
+| 9 | **MAR** (marital status) | **0.10** | Marital status has a small influence. | Married individuals may have different economic circumstances or job choices. |
+| 10 | **RAC1P** (race) | **0.05** | Race is the least influential feature in this model. | While race can affect income through systemic factors, it plays a minor role here. |
+
+### Take‑away for non‑technical users
+- **Working hours** and **occupation** are the biggest drivers of whether this person is likely to earn above the median.  
+- **Age**, **education**, and **relationship** also matter but less strongly.  
+- **Gender, birthplace, employment type, marital status, and race** contribute only a little to the prediction.
+
+### Take‑away for technical users
+- The model’s feature importance (mean absolute SHAP) ranks WKHP > OCCP > AGEP > SCHL > RELP > SEX > POBP > COW > MAR > RAC1P.  
+- WKHP and OCCP together account for ~90% of the predictive weight, suggesting a focused feature set could maintain most performance.  
+- The low weight for RAC1P indicates minimal direct influence on the prediction in this particular model.
+
+# EPR Explainer: 0.8749, Verifier: 0.6348

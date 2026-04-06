@@ -1,0 +1,53 @@
+<think>We need to explain how each word in top 20 tokens influenced the model's sentiment prediction. We must only use the quantitative data provided. Provide natural language explanation for both technical and non-technical audiences, concise, actionable insights. Identify and describe impact of all tokens, positive and negative. Explain collectively shaped final prediction.
+
+We need to interpret each token's attribution: positive contributions push toward positive sentiment; negative push toward negative. Since prediction is 0.013 (close to zero, negative sentiment). So negative tokens likely dominate.
+
+We have tokens: if, you, enjoy, films, like, american, pie, ,, road, trip, &, van, wilder, avoid, this, cinematic, refuse, at, all, costs.
+
+We need to describe each token influence magnitude and direction. Provide context: the review is negative; tokens that are negative have stronger contributions: "this" -0.0055, "cinematic" -0.0047, "van" -0.0044, "refuse" almost zero. Negative attributions: "avoid", "at", "all", "costs", "road", "like", ",", etc.
+
+Positive attributions: "you" 0.0126, "american" 0.0051, "pie" 0.0029, "trip" 0.0032, "&" 0.0011, "enjoy" 0.0045, "films" 0.0022.
+
+Explain how they collectively shape: positives partially offset negatives but net negative. Provide actionable insight: most negative influence from "this", "cinematic", "van", "avoid", "at", "all", "costs". Also mention that some positive tokens like "you" and "american" moderate negativity but insufficient.
+
+Provide clear explanation. Avoid unnecessary technical language. Focus on actionable insights: e.g., highlight words with highest magnitude as key drivers.
+
+Also include that "refuse" is negligible. Also punctuation token has small negative effect.
+
+Let's produce final answer.</think>
+**How the top 20 words shaped the model’s negative sentiment prediction**
+
+| Token | Attribution | Effect on sentiment | Why it matters |
+|-------|-------------|---------------------|----------------|
+| **if** | –0.0126 | Pushes the score toward *negative* | A very strong negative cue; the model sees “if” as a conditional that often precedes a warning. |
+| **you** | +0.0126 | Pushes the score toward *positive* | Highest positive weight; the model interprets “you” as addressing the reader, which can add a friendly tone. |
+| **enjoy** | +0.0045 | Slightly positive | “Enjoy” signals enjoyment, a positive cue. |
+| **films** | +0.0022 | Slightly positive | Indicates the topic (films) and carries a neutral‑to‑positive connotation. |
+| **like** | –0.0021 | Slightly negative | Here it pairs with a later negative phrase (“American Pie, Road Trip & Van Wilder; avoid”), so the model treats it as part of a comparison that ultimately down‑votes the sentiment. |
+| **american** | +0.0051 | Positive | A proper noun that adds an explicit reference to a known movie, slightly boosting positivity. |
+| **pie** | +0.0029 | Positive | The word “pie” is part of “American Pie” and adds a positive reference. |
+| **,** | –0.0004 | Negligible negative | Punctuation is almost neutral but the model treats commas as a very small negative shift. |
+| **road** | –0.0018 | Slightly negative | “Road” is part of “Road Trip” and the overall phrase is later negated (“avoid”). |
+| **trip** | +0.0032 | Positive | “Trip” by itself is neutral‑to‑positive, but within the phrase it helps balance the negative “avoid”. |
+| **&** | +0.0011 | Positive | The ampersand is treated as a mild positive cue linking two movie titles. |
+| **van** | –0.0044 | Strong negative | “Van” is part of “Van Wilder”; the model associates it with a less favorable movie, pushing the score negative. |
+| **wilder** | +0.0030 | Positive | Counteracts the negative “van” by adding a slightly positive cue. |
+| **avoid** | –0.0013 | Negative | Directly advises against watching, a clear negative signal. |
+| **this** | –0.0055 | Strong negative | “This” targets the specific film in question, making the criticism more direct. |
+| **cinematic** | –0.0047 | Strong negative | “Cinematic” is used sarcastically, so the model treats it as a negative comment. |
+| **refuse** | –0.0000076 | Neutral | Essentially no effect; the model ignores this word. |
+| **at** | –0.0029 | Negative | Part of the phrase “at all costs”; the model takes it as a negative modifier. |
+| **all** | –0.0033 | Negative | Adds emphasis to the negative “avoid”; stronger negativity. |
+| **costs** | –0.0029 | Negative | Completes the negative phrase “at all costs,” reinforcing the warning. |
+
+### Key take‑aways
+
+1. **Top negative drivers** – “if”, “this”, “cinematic”, “van”, “at”, “all”, “costs”, “avoid”, “like”, and “road” together pull the prediction toward a negative sentiment.  
+2. **Top positive drivers** – “you”, “american”, “pie”, “trip”, “&”, and “enjoy” provide some positive influence but are weaker and are outweighed by the negatives.  
+3. **Balance of forces** – The positives partially offset the negatives, but the overall net attribution is still strongly negative, matching the final prediction of 0.013 (negative sentiment).
+
+### Actionable insight
+
+If you want the model to see the review as more positive, focus on increasing the strength of the positive tokens (e.g., adding more words that explicitly praise the film) or reducing the influence of strong negatives (“this”, “cinematic”, “avoid”). Conversely, the current review is driven largely by the negative framing words, which dominate the final sentiment decision.
+
+# EPR Explainer: 0.8219, Verifier: 0.4492

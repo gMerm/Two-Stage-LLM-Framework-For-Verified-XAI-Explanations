@@ -1,0 +1,64 @@
+<think>We need to provide explanation: global explanations, and local explanations for each instance. Use provided data only. No speculation. Summarize ranking, direction of influence (positive/negative). For local: describe contributions, values, direction, weight fraction, and maybe mention prediction vs actual and error. Also mention confidence. Must keep concise, no extra commentary. Let's prepare.</think>
+**Global Explanation (LIME, top 9 features)**  
+
+| Rank | Feature | Importance Score | Direction of Influence on Price |
+|------|---------|------------------|---------------------------------|
+| 1 | **carat** | 124.44 | Positive – larger carat → higher price |
+| 2 | **color** | 102.26 | Positive – better color (lower numerical value) → higher price |
+| 3 | **clarity** | 75.55 | Positive – higher clarity (lower numerical value) → higher price |
+| 4 | **cut** | 53.20 | Positive – better cut quality → higher price |
+| 5 | **y** | 32.99 | Negative – larger y‑dimension (length) slightly lowers price in this model |
+| 6 | **x** | 10.05 | Positive – larger width → modest price increase |
+| 7 | **table** | 9.62 | Positive – higher table percentage → slight price increase |
+| 8 | **depth** | 6.41 | Positive – greater depth percentage → slight price increase |
+| 9 | **z** | 0.13 | Positive – larger depth (height) → negligible effect |
+
+These ranks indicate the relative contribution of each attribute to the price prediction across the entire dataset. The most powerful drivers are size (carat) and quality indicators (color, clarity, cut), while dimensional aspects (x, y, z, table, depth) have smaller, sometimes opposite, effects.
+
+---
+
+### Local Explanation – Instance 676  
+
+| Feature | Observed Value | Contribution to Prediction | Direction | Weight |
+|---------|----------------|----------------------------|-----------|--------|
+| **clarity** | `<= 2.0` | +2075.04 | Positive | 42.34 % |
+| **y** | `<= 6.54 and > 5.71` | –817.87 | Negative | 16.69 % |
+| **color** | `<= 4.0 and > 3.0` | –723.16 | Negative | 14.75 % |
+| **x** | `<= 6.55 and > 5.7` | +537.18 | Positive | 10.96 % |
+| **z** | `<= 4.04 and > 3.53` | +262.97 | Positive | 5.37 % |
+| **carat** | `<= 1.05 and > 0.7` | –185.91 | Negative | 3.79 % |
+| **cut** | `<= 2.0` | –109.84 | Negative | 2.24 % |
+| **table** | `<= 57.0 and > 56.0` | +102.95 | Positive | 2.10 % |
+| **depth** | `<= 61.8 and > 61.0` | –86.28 | Negative | 1.76 % |
+
+*Prediction vs reality:*  
+- Actual price: **$3,172**  
+- Predicted price: **$3,601.51**  
+- Absolute error: **$429.51** (model over‑predicts)
+
+*Interpretability:* confidence **0.0723** (low) with all 9 features used. The large positive contribution from **clarity** dominates the prediction, while negative influences from **y**, **color**, **carat**, and **cut** partially offset it.
+
+---
+
+### Local Explanation – Instance 737  
+
+| Feature | Observed Value | Contribution to Prediction | Direction | Weight |
+|---------|----------------|----------------------------|-----------|--------|
+| **carat** | `<= 0.7 and > 0.4` | –2897.62 | Negative | 48.74 % |
+| **clarity** | `> 5.0` | +902.91 | Positive | 15.19 % |
+| **y** | `<= 5.71 and > 4.72` | –884.52 | Negative | 14.88 % |
+| **table** | `<= 57.0 and > 56.0` | –485.01 | Negative | 8.16 % |
+| **x** | `<= 5.7 and > 4.71` | +324.50 | Positive | 5.46 % |
+| **cut** | `<= 2.0` | –311.06 | Negative | 5.23 % |
+| **color** | `<= 3.0 and > 1.0` | +85.92 | Positive | 1.45 % |
+| **depth** | `<= 62.5 and > 61.8` | –30.62 | Negative | 0.52 % |
+| **z** | `<= 3.53 and > 2.91` | +22.67 | Positive | 0.38 % |
+
+*Prediction vs reality:*  
+- Actual price: **$1,981**  
+- Predicted price: **$1,917.62**  
+- Absolute error: **$63.38** (small under‑prediction)
+
+*Interpretability:* confidence **0.1169** (moderate) with all 9 features used. The dominant negative effect of a very small **carat** value reduces the price, while **clarity** and **x** provide the primary positive adjustments. Overall, the model’s prediction is close to the actual price, with a small error.
+
+# EPR Explainer: 0.3410, Verifier: 0.6835

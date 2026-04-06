@@ -1,0 +1,114 @@
+<think>Okay, let me tackle this explanation request. The user wants me to convert Integrated Gradients token attributions into clear natural language explanations for both technical and non-technical audiences. 
+
+First, I need to carefully analyze the provided data. The review is clearly negative (prediction 0.013, sentiment "Negative"), and the top 20 tokens show both positive and negative attributions. The key is to focus only on what's given - no making up details.
+
+Hmm, looking at the attributions: 
+- Positive contributors (pushing toward negative sentiment? Wait no - wait, the prediction is negative but the attributions... need to be careful. Actually, for negative sentiment prediction, positive attributions would mean words that make the model think "negative", while negative attributions would mean words that make it think "positive" but in this case the overall prediction is negative so the negative attributions are actually working against the negative prediction? This is confusing. Let me think again.
+
+Wait, the method says: "Positive attributions push the prediction toward positive sentiment, while negative attributions push toward negative sentiment." But the prediction is negative (0.013), so actually the negative attributions (which are negative numbers) are pushing toward negative sentiment. So for negative sentiment prediction:
+- Negative attribution values (like -0.012 for "if") mean that word contributes to negative sentiment
+- Positive attribution values (like 0.012 for "you") mean that word contributes to positive sentiment? But that would be counterintuitive for a negative review.
+
+Wait no - let's clarify with the method description: "Positive attributions push the prediction toward positive sentiment". So if a word has a positive attribution, it makes the model think "this is positive", but since the overall prediction is negative, those positive words must be outweighed by stronger negative words. 
+
+So for this negative review:
+- Words with negative attribution (e.g., "if" at -0.012) are contributing to the negative sentiment
+- Words with positive attribution (e.g., "you" at +0.012) are actually making the model think "positive" but are weak compared to the negative words
+
+But that seems odd for a negative review. Let me check the actual review: "If you enjoy films like American Pie..." - this is a negative review, so "if you enjoy" is setting up a contrast, meaning "if you like good movies, you'll avoid this". So "if" and "you" might be part of the negative setup.
+
+Looking at the tokens:
+- "if" has -0.012 (negative attribution, so contributing to negative sentiment)
+- "you" has +0.012 (positive attribution? But that seems counter to the review's tone)
+
+Wait, I think I have it backwards. The attribution sign indicates direction:
+- Negative attribution (e.g., -0.012) means this token makes the prediction more negative
+- Positive attribution (e.g., +0.012) means this token makes the prediction more positive
+
+But the review is negative, so the dominant tokens should have negative attributions. Let's list the strongest negative ones:
+- "if": -0.0126
+- "like": -0.0020
+- "road": -0.0018
+- "van": -0.0044
+- "this": -0.0055
+- "cinematic": -0.0047
+- "avoid": -0.0013
+- "at": -0.0029
+- "all": -0.0033
+- "costs": -0.0029
+
+And the positive ones (making it seem positive, but weak):
+- "you": +0.0126
+- "enjoy": +0.0045
+- "films": +0.0022
+- "american": +0.0051
+- "pie": +0.0029
+- "trip": +0.0032
+- "&": +0.0011
+- "wilder": +0.0030
+
+Ah, so the positive attributions are actually the words that would make a review seem positive (like "enjoy", "films like American Pie"), but since the reviewer says "avoid this", those words are being used in a negative context. The model is picking up that the reviewer is saying "if you like those good movies, you should avoid this bad one", so the positive words are actually part of the negative sentiment construction.
+
+For the explanation, I should:
+1. Note that the model predicted negative sentiment (0.013)
+2. Explain that negative attribution scores (negative numbers) indicate words contributing to negative sentiment
+3. Positive attribution scores (positive numbers) indicate words that would normally suggest positive sentiment but are used in a negative context
+4. Group the strongest contributors
+
+The strongest negative contributors are "if" (-0.0126), "this" (-0.0055), "cinematic" (-0.0047), "van" (-0.0044)
+The strongest positive contributors (which the model misinterprets as positive but are actually in negative context) are "you" (+0.0126), "enjoy" (+0.0045), "american" (+0.0051)
+
+For non-technical audience, I'll avoid terms like "attribution" and say "words that made the model think negative" or "words that seemed positive but were used negatively".
+
+For technical audience, I can say "negative attribution scores indicate contribution to negative sentiment".
+
+I need to be careful not to say "the word 'you' is positive" - it's that the word has a positive attribution score, but in context it's part of a negative statement.
+
+Also, the review has many negative words like "refuse", "waste", "bad" but they're not in top 20 - the top 20 are the most influential tokens, not necessarily the most negative words.
+
+Now to structure the explanation concisely:
+- Start with overall prediction
+- Highlight strongest negative contributors (with their scores)
+- Note that some positive words (like "enjoy") have positive attribution but are used negatively
+- Explain that the negative words outweighed the positive ones
+
+For the non-technical version, I'll say:
+"The model predicted a negative review (0.013). The strongest negative influences were 'if' (making the model think 'this is bad'), 'this', and 'cinematic'. Words like 'you' and 'enjoy' had positive scores (as if the review was positive), but the negative context made the overall sentiment negative."
+
+For technical version:
+"The top contributors to negative sentiment: 'if' (-0.0126), 'this' (-0.0055), 'cinematic' (-0.0047). Positive attributions (e.g., 'you' +0.0126, 'enjoy' +0.0045) indicate words typically associated with positive sentiment, but their use in negative context resulted in net negative prediction."
+
+Wait, but the prediction is negative, so the negative attributions are the dominant force. The positive attributions are weak compared to the strong negative ones.
+
+I should emphasize that the negative words have higher magnitude (absolute value) than positive words:
+- Strongest negative: "if" at 0.0126
+- Strongest positive: "you" at 0.0126 (same magnitude but opposite sign)
+
+So the negative "if" and positive "you" are equally strong but opposite, but there are many other negative words that tip the balance.
+
+In the explanation, I'll say the negative words collectively outweighed the positive ones.
+
+Now to write it concisely for both audiences.
+</think>
+### For Non-Technical Audience  
+The model predicted a strongly negative review (0.013 out of 1, meaning "very negative"). The words most responsible for this judgment were:  
+- **"if"** (strongest negative influence): Sets up the contrast ("*if* you like good movies, avoid this").  
+- **"this"**, **"cinematic"**, **"van"**, **"avoid"** (strong negative): Highlight the film as worthless ("*this cinematic refuse*").  
+- **"costs"**, **"all"**, **"at"** (negative): Emphasize the film’s worthlessness ("*avoid this at all costs*").  
+
+Words like **"you"** and **"enjoy"** had *positive* scores (as if the review were praising), but they were used in a negative context (e.g., "*if you enjoy good films, avoid this*"). The negative words dominated, making the overall sentiment negative.  
+
+---
+
+### For Technical Audience  
+The model’s negative prediction (0.013) was driven by:  
+- **Strong negative contributors** (pushing sentiment toward negative):  
+  - `if` (-0.0126): Highest impact, framing the review as a negative comparison.  
+  - `this` (-0.0055), `cinematic` (-0.0047), `van` (-0.0044): Directly label the film as worthless.  
+  - `avoid` (-0.0013), `all` (-0.0033), `costs` (-0.0029): Reinforce the negative imperative.  
+- **Weak positive contributors** (pushing sentiment toward positive, but contextually negative):  
+  - `you` (+0.0126), `enjoy` (+0.0045), `american` (+0.0051): Words typically associated with positive sentiment, but used in a negative contrast (e.g., "*if you enjoy good films*").  
+
+The negative attributions (absolute values) collectively outweighed the positive ones, resulting in a negative prediction.
+
+# EPR Explainer: 0.6277, Verifier: 1.0180

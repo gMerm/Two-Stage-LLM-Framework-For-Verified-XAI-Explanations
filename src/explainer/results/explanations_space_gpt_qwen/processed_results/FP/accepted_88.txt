@@ -1,0 +1,62 @@
+<think>We need to explain how each word of top 20 token attributions influenced model's sentiment prediction, for both technical and non-technical audiences. Should base explanation solely on data. Provide concise explanation for each token, noting positive or negative contribution and magnitude relative to final prediction. Use natural language.
+
+The data: token and attribution. The prediction 0.0134 (close to neutral but negative?). Actually predicted sentiment negative; threshold maybe >0.5 positive? This is 0.013 negative. But explanation should mention that the majority of contributions are negative, leading to negative sentiment. Some positive tokens like "you", "enjoy", "american", "pie", "road", "trip", "van", "wilder", "&" etc. Negative tokens: "if", "like", "road", "avoid", "this", "cinematic", "at", "all", "costs", "van", etc. Also punctuation tokens with small negative contributions.
+
+We need to describe impact: tokens with highest absolute attribution: "this" -0.0055369, "cinematic" -0.0047005, "van" -0.0044165, "if" -0.0126376, "you" +0.0125961, "american" +0.0051003, etc. Show that the largest negative contribution came from "if"?? Actually absolute 0.0126 for "if" and "you" positive. But "this" is second negative. So explanation: "if" strongly pushes negative? Wait "if" attribution is negative, meaning pushes towards negative sentiment? Actually the sign: negative attribution pushes negative sentiment; positive pushes positive. But we need to confirm: In integrated gradients, positive attribution indicates token increases prediction logit? They said positive attributions push toward positive sentiment, negative push toward negative sentiment. So yes.
+
+So "if" pushes negative strongly; "you" pushes positive strongly. The net effect is negative because more negative tokens.
+
+We should produce a narrative: The review overall negative; tokens like "if" and "this" and "cinematic" heavily drive negative. Positive tokens like "you", "enjoy", "american", "pie" reduce negativity slightly but not enough. Provide actionable insights: to mitigate negative sentiment, remove words like "if", "this", "cinematic", "avoid", "all" etc.
+
+We need to mention for both technical and non-technical audiences. Could provide bullet list or table summarizing token, effect, magnitude. Provide plain language for non-technical: "The word 'if' strongly makes the model think the movie is bad." For technical: "High negative attribution".
+
+Also we need to explain collectively shaped final prediction: sum of all contributions? The prediction is low positive ~0.013 but negative sentiment. The aggregated negative contributions outweigh positives.
+
+Also mention punctuation tokens: commas and ampersand contribute small negative or positive.
+
+We must not include extra data.
+
+Let's produce explanation.</think>
+**What the numbers say (in plain language)**  
+
+| Token | Attribution | What it does |
+|-------|-------------|--------------|
+| **if** | –0.0126 | Tells the model the review is more negative. |
+| **you** | +0.0126 | Gives a tiny lift toward a positive reading. |
+| **enjoy** | +0.0045 | Adds a small positive note. |
+| **films** | +0.0022 | Slightly positive. |
+| **like** | –0.0021 | Pushes the prediction toward negative. |
+| **american** | +0.0051 | Positive influence. |
+| **pie** | +0.0029 | Positive, but small. |
+| **,** | –0.0004 | Negligible negative pull. |
+| **road** | –0.0018 | Weak negative push. |
+| **trip** | +0.0032 | Small positive boost. |
+| **&** | +0.0011 | Very small positive signal. |
+| **van** | –0.0044 | Stronger negative influence. |
+| **wilder** | +0.0030 | Positive but modest. |
+| **avoid** | –0.0013 | Small negative. |
+| **this** | –0.0055 | Strong negative signal. |
+| **cinematic** | –0.0047 | Strong negative. |
+| **refuse** | –0.0000076 | Essentially neutral. |
+| **at** | –0.0029 | Negative, but minor. |
+| **all** | –0.0033 | Negative. |
+| **costs** | –0.0029 | Negative. |
+
+**Why the review is judged negative**
+
+- **Strong negative words**: “if”, “this”, “cinematic”, “van”, and “avoid” together pull the model’s score far into the negative side.  
+- **Positive words**: “you”, “enjoy”, “american”, “pie”, “trip”, “wilder” give only a modest lift.  
+- The **overall balance** of negative attributions outweighs the positives, so the model ends up with a very low positive prediction value (0.013) which is interpreted as negative sentiment.
+
+**Key take‑aways**
+
+- Words that explicitly signal dislike or critique (“this”, “cinematic”, “van”) dominate the sentiment picture.  
+- Words that mildly soften or reference enjoyment (“enjoy”, “american”) have limited effect and cannot overturn the negative trend.  
+- Even punctuation (commas, ampersand) and tiny negative tokens contribute, but their influence is tiny compared to the core words.  
+
+**What a user can do**
+
+- To change the sentiment, you would need to replace or remove the high‑negative tokens (“this”, “cinematic”, “van”, “avoid”) and add stronger positive language.  
+- Adding more emphatic positive words would help, but the current review leans heavily toward a negative assessment.
+
+# EPR Explainer: 0.9700, Verifier: 0.6279

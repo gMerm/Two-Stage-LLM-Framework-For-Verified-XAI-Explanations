@@ -1,0 +1,35 @@
+<think>We need to explain each word of top 20 token attributions and how they influence model's sentiment prediction. Provide for both positive and negative contributors. Should base solely on given attribution scores. Keep concise. Use natural language. Avoid technical detail. Mention how each token's attribution sign indicates direction. Should talk about collective shaping of final prediction. Provide description for each token. Provide overall insight: many negative tokens pull down, some positive but smaller. Also mention prediction close to zero. Ok.</think>
+**How the 20 most influential words shaped the model’s negative prediction**
+
+| Token | Attribution (positive = pushes toward “positive”, negative = pushes toward “negative”) | What it does for the sentiment |
+|-------|----------------------------------------------------------------------------------------|--------------------------------|
+| **if** | –0.0126 | “if” weakens the sentence overall, nudging the model toward negative. |
+| **you** | +0.0126 | “you” slightly lifts the sentiment, but the effect is nearly canceled by “if”. |
+| **enjoy** | +0.0045 | A small positive lift, suggesting the reviewer might like something. |
+| **films** | +0.0022 | Adds a mild positive cue. |
+| **like** | –0.0021 | Pushes the meaning toward “not like”, pulling the prediction negative. |
+| **american** | +0.0051 | Positive reference to a movie title, boosting sentiment a bit. |
+| **pie** | +0.0029 | Continues the positive momentum from “American Pie”. |
+| **,** | –0.0004 | Negligible negative push; punctuation slightly weakens the tone. |
+| **road** | –0.0018 | Negative impact; “road” alone doesn’t help the sentiment. |
+| **trip** | +0.0032 | Mild positive contribution, balancing “road” a bit. |
+| **&** | +0.0011 | Small positive effect, linking two titles. |
+| **van** | –0.0044 | Strong negative signal; “van” alone harms the sentiment. |
+| **wilder** | +0.0030 | Counteracts some of the negative from “van”, but still weak. |
+| **avoid** | –0.0013 | Negative cue, urging the model to reject the film. |
+| **this** | –0.0055 | Strong negative cue; “this” signals the film is the target of criticism. |
+| **cinematic** | –0.0047 | Negative descriptor, reduces sentiment. |
+| **refuse** | –0.0000 | Negligible negative impact. |
+| **at** | –0.0029 | Minor negative cue. |
+| **all** | –0.0033 | Adds a negative tone (“all costs”). |
+| **costs** | –0.0029 | Negative payoff; “all costs” reinforces the harsh view. |
+
+**What this tells us**
+
+- The overall prediction (≈ 0.013) is almost neutral, but the sum of many small negative contributions pulls it into the “Negative” class.
+- Tokens that reference specific movie titles (“American Pie”, “Road Trip”, “Van Wilder”) bring positive signals, yet these are outweighed by broader negative words such as “avoid”, “this”, “cinematic”, and “all costs”.
+- The presence of a strong negative cue (“this” –0.0055) and “cinematic” –0.0047) dominates, shaping the final negative sentiment.
+- The small positive token “you” (+0.0126) almost cancels the effect of “if”, showing how competing signals balance each other.
+- Overall, the review’s harsh language and warnings dominate the sentiment, leading the model to classify it as negative.
+
+# EPR Explainer: 0.8809, Verifier: 0.6533

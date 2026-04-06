@@ -1,0 +1,41 @@
+<think>We need to explain every feature's influence on the model prediction for this individual, based on mean absolute SHAP values. The explanation must be clear for technical and non-technical audiences. Provide context on why each matters for income prediction. We should base explanation only on provided data: order of features and mean_abs_shap values.
+
+We should highlight ranking: WKHP highest, then OCCP, AGEP, SCHL, RELP, SEX, POBP, COW, MAR, RAC1P. Provide context: working hours, occupation, age, education, relationship status, sex, place of birth, class of worker, marital status, race.
+
+Need to phrase: "WKHP has the strongest influence: individuals who work more hours are more likely to have higher income." etc.
+
+We should interpret absolute SHAP values: magnitude indicates influence; sign not given. So we cannot say increase or decrease; only importance.
+
+Provide actionable insights: e.g., for improving model transparency or targeting interventions.
+
+Keep concise.
+
+No mention of internal prompts. Let's produce.</think>
+**How the model is “thinking” about this person**
+
+The model looks at ten personal and job‑related factors to decide whether the individual’s income is above or below the median ($≈ $40 000).  
+The **mean absolute SHAP value** tells us how strongly each factor pulls the prediction in one direction or the other, on average, across many people. A larger number means the model relies on that feature more heavily.
+
+| # | Feature | Mean absolute SHAP | Why it matters for income prediction |
+|---|---------|-------------------|--------------------------------------|
+| 1 | **WKHP** – usual hours worked per week | **0.90** | People who work longer hours tend to earn more. Hours worked is the strongest driver of the model’s prediction. |
+| 2 | **OCCP** – occupation code | **0.63** | Different jobs pay very differently. The occupation the person holds strongly signals expected earnings. |
+| 3 | **AGEP** – age | **0.52** | Income usually rises with experience and age, up to a point, then may decline. Age is a key indicator of career stage. |
+| 4 | **SCHL** – educational attainment | **0.46** | Higher education levels are strongly linked to better-paying jobs and higher salaries. |
+| 5 | **RELP** – relationship to householder | **0.34** | Being a spouse, partner, or adult child can influence work status and income (e.g., dual‑income households). |
+| 6 | **SEX** – sex | **0.22** | Gender differences in wages exist in many societies; sex is a moderately influential factor in the model. |
+| 7 | **POBP** – place of birth | **0.17** | Place of birth can reflect different educational or economic backgrounds that affect earnings. |
+| 8 | **COW** – class of worker (e.g., private, government, self‑employed) | **0.14** | The sector or employment type shapes salary structures; self‑employment can lead to higher or lower income. |
+| 9 | **MAR** – marital status | **0.10** | Married individuals often have higher household incomes due to two earners or shared resources. |
+|10 | **RAC1P** – race | **0.05** | Racial disparities in income exist; the model uses race as a weaker but still present signal. |
+
+**Key take‑aways**
+
+1. **Work hours dominate** – the longer someone works, the higher the predicted income, reflecting a clear salary‑hours relationship.  
+2. **Job and education are next most important** – occupation and schooling are strong, almost equally powerful predictors.  
+3. **Other social factors (age, relationship, sex, place of birth, etc.)** provide additional context but have less influence individually.  
+4. The model uses all ten variables together; even the smallest contributors (e.g., race) help fine‑tune the prediction.
+
+Understanding these rankings can help stakeholders focus on the most impactful factors—like improving job quality or education—to lift incomes, while also recognizing the nuanced role of demographic context.
+
+# EPR Explainer: 0.8738, Verifier: 0.4839

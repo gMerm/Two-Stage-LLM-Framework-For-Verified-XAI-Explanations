@@ -1,0 +1,94 @@
+<think>We need to provide explanations. Must follow guidelines: only use provided data. So we produce global explanation: list features, rank, direction? The global importance does not provide direction; but we can infer direction: higher carat increases price, etc. But must base on data only; we have no direction per global feature. We can say positive influence based on domain knowledge but can't use assumption beyond data. However guidelines: "Do not invent data or assumptions beyond what is explicitly provided." We could infer direction from contributions? No, only contributions for local. But for global we have importance scores. But no sign. So we can say "The importance score indicates relative magnitude of influence; higher carat has the highest importance, etc." We can note that these features likely have positive impact based on general understanding, but cannot assert. So say "direction cannot be determined from the provided output" or "Insufficient evidence to conclude direction." That aligns with guidelines.
+
+For local explanations: Provide each instance explanation with features, values, contribution, direction, weight, plus error.
+
+Also include interpretability confidence.
+
+Provide concise actionable insights.
+
+Let's craft explanation accordingly.</think>
+**Global Feature Influence (LIME)**  
+- **Top 9 drivers of price prediction (by absolute importance score)**  
+  1. **carat** – 124.44  
+  2. **color** – 102.26  
+  3. **clarity** – 75.55  
+  4. **cut** – 53.20  
+  5. **y** – 32.99  
+  6. **x** – 10.05  
+  7. **table** – 9.62  
+  8. **depth** – 6.41  
+  9. **z** – 0.13  
+
+*Direction of influence:* The XAI output lists only magnitude, not sign, so we cannot state whether each feature raises or lowers the predicted price based solely on the supplied data.  
+*Actionable insight:* The model relies most heavily on physical size (carat), quality grading (color, clarity, cut), and shape dimensions (y, x, table, depth, z). Monitoring these attributes gives the greatest leverage for understanding price swings.
+
+---
+
+## Local Explanations
+
+### Instance #676  
+| Feature | Value Range | Contribution (USD) | Direction | Weight (∑=1) |
+|---------|-------------|--------------------|-----------|--------------|
+| clarity | ≤ 2.0 | +2 075.04 | positive | 0.423 |
+| y | ≤ 6.54 ∧ > 5.71 | –817.87 | negative | 0.167 |
+| color | ≤ 4.0 ∧ > 3.0 | –723.16 | negative | 0.148 |
+| x | ≤ 6.55 ∧ > 5.70 | +537.18 | positive | 0.110 |
+| z | ≤ 4.04 ∧ > 3.53 | +262.97 | positive | 0.054 |
+| carat | ≤ 1.05 ∧ > 0.70 | –185.91 | negative | 0.038 |
+| cut | ≤ 2.0 | –109.84 | negative | 0.022 |
+| table | ≤ 57.0 ∧ > 56.0 | +102.95 | positive | 0.021 |
+| depth | ≤ 61.8 ∧ > 61.0 | –86.28 | negative | 0.018 |
+
+**Prediction gap**  
+- Actual: \$3 172.00  
+- Predicted: \$3 601.51  
+- Absolute error: \$429.51 (≈13.5 % higher than the true value)
+
+**Interpretability confidence**: 0.072 (low)  
+**Number of features used**: 9
+
+*Interpretation:*  
+- The dominant positive pull comes from **clarity** (≈42 % of the total effect).  
+- The model predicts a higher price because the clarity grade is very good, but lower scores on **y**, **color**, and **carat** pull the price down.  
+- Overall, the explanation shows why the model over‑estimates the price: the clarity contribution outweighs the negative influence of the other attributes.
+
+---
+
+### Instance #737  
+| Feature | Value Range | Contribution (USD) | Direction | Weight (∑=1) |
+|---------|-------------|--------------------|-----------|--------------|
+| carat | ≤ 0.7 ∧ > 0.4 | –2 897.62 | negative | 0.487 |
+| clarity | > 5.0 | +902.91 | positive | 0.152 |
+| y | ≤ 5.71 ∧ > 4.72 | –884.52 | negative | 0.149 |
+| table | ≤ 57.0 ∧ > 56.0 | –485.01 | negative | 0.082 |
+| x | ≤ 5.7 ∧ > 4.71 | +324.50 | positive | 0.055 |
+| cut | ≤ 2.0 | –311.06 | negative | 0.052 |
+| color | ≤ 3.0 ∧ > 1.0 | +85.92 | positive | 0.014 |
+| depth | ≤ 62.5 ∧ > 61.8 | –30.62 | negative | 0.005 |
+| z | ≤ 3.53 ∧ > 2.91 | +22.67 | positive | 0.004 |
+
+**Prediction gap**  
+- Actual: \$1 981.00  
+- Predicted: \$1 917.62  
+- Absolute error: \$63.38 (≈3.2 % lower than the true value)
+
+**Interpretability confidence**: 0.117 (moderate)  
+**Number of features used**: 9
+
+*Interpretation:*  
+- The **carat** contribution is the largest negative driver, pulling the predicted price far below the true value.  
+- A strong positive **clarity** score partially offsets the low carat, but other negatives from **y**, **table**, **cut**, and **depth** keep the prediction low.  
+- The explanation shows why the model under‑predicts: the tiny carat outweighs the beneficial attributes.
+
+---
+
+### Take‑away for stakeholders  
+
+| Instance | Why the model over‑/under‑predicts | Key leverage point |
+|----------|-----------------------------------|--------------------|
+| #676 | High clarity boosts price; lower y, color, carat reduce it | Inspect clarity grading vs. size trade‑offs |
+| #737 | Very small carat dominates, pulling price down | Consider carat threshold effects in pricing |
+
+These explanations are fully traceable to the supplied LIME output and help both experts and non‑technical users see which diamond attributes drive the predicted price and why each model prediction may deviate from the observed value.
+
+# EPR Explainer: 0.5992, Verifier: 0.7572

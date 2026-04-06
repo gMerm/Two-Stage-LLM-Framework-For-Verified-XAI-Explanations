@@ -1,0 +1,64 @@
+<think>We need to explain both global and local explanations. Use the provided data only. Avoid speculation. Summarize top features, their importance, direction. For local, explain each instance with contributions, values ranges, directions, weights. Also note prediction error. Also interpret confidence.
+
+Let's craft concise explanation.</think>
+**Global Model Insight**
+
+| Rank | Feature | Importance Score | Direction of Influence | Why It Matters |
+|------|---------|-----------------|------------------------|----------------|
+| 1 | **carat** | 124.44 | + | Larger stones carry more mass and are rarer, driving up price. |
+| 2 | **color** | 102.26 | + | Fewer color shades (higher color grade) increase desirability and value. |
+| 3 | **clarity** | 75.55 | + | Fewer inclusions mean higher clarity and price. |
+| 4 | **cut** | 53.20 | + | A better cut improves brilliance, raising price. |
+| 5 | **y** | 32.99 | + | The diamond’s height contributes to overall size and thus value. |
+| 6 | **x** | 10.05 | + | Width complements size and influences perceived mass. |
+| 7 | **table** | 9.62 | + | Table proportion affects cut quality and value. |
+| 8 | **depth** | 6.41 | + | Depth ratio impacts shape and value. |
+| 9 | **z** | 0.13 | + | Depth dimension’s influence is minimal compared to other features. |
+
+These rankings show that mass‑related traits (carat, height, width) dominate price prediction, followed by quality descriptors (color, clarity, cut). All listed features positively push price upward; the model learns that higher values or better grades lead to higher expected price.
+
+---
+
+### Local Explanation – Instance 676
+- **Actual price**: \$3,172.00  
+- **Predicted price**: \$3,601.51  
+- **Prediction error**: **+\$429.51** (over‑prediction)
+
+| Feature | Observed Range | Contribution | Direction | Weight (≈% of total impact) |
+|---------|----------------|--------------|-----------|-----------------------------|
+| clarity | ≤ 2.0 | +2075.04 | positive | 42.3 % |
+| y | ≤ 6.54 and > 5.71 | –817.87 | negative | 16.7 % |
+| color | ≤ 4.0 and > 3.0 | –723.16 | negative | 14.8 % |
+| x | ≤ 6.55 and > 5.7 | +537.18 | positive | 10.9 % |
+| z | ≤ 4.04 and > 3.53 | +262.97 | positive | 5.4 % |
+| carat | ≤ 1.05 and > 0.7 | –185.91 | negative | 3.8 % |
+| cut | ≤ 2.0 | –109.84 | negative | 2.2 % |
+| table | ≤ 57.0 and > 56.0 | +102.95 | positive | 2.1 % |
+| depth | ≤ 61.8 and > 61.0 | –86.28 | negative | 1.8 % |
+
+**Interpretation**  
+The dominant driver (+42 % of the predicted price) is *clarity* at its lowest category, giving a large positive lift. Two large negative contributions come from *y* and *color*—the diamond is taller and of a lower color grade, pulling the price down. *x*, *z*, and *table* add modest positive effects. The negative *carat* contribution indicates the stone’s weight is below the model’s optimal range for this price level, partially offsetting the clarity boost. The model’s confidence in this explanation is low (0.072), suggesting the explanation is somewhat uncertain.
+
+---
+
+### Local Explanation – Instance 737
+- **Actual price**: \$1,981.00  
+- **Predicted price**: \$1,917.62  
+- **Prediction error**: **–\$63.38** (under‑prediction)
+
+| Feature | Observed Range | Contribution | Direction | Weight (≈% of total impact) |
+|---------|----------------|--------------|-----------|-----------------------------|
+| carat | ≤ 0.7 and > 0.4 | –2897.62 | negative | 48.7 % |
+| clarity | > 5.0 | +902.91 | positive | 15.2 % |
+| y | ≤ 5.71 and > 4.72 | –884.52 | negative | 14.9 % |
+| table | ≤ 57.0 and > 56.0 | –485.01 | negative | 8.2 % |
+| x | ≤ 5.7 and > 4.71 | +324.50 | positive | 5.5 % |
+| cut | ≤ 2.0 | –311.06 | negative | 5.2 % |
+| color | ≤ 3.0 and > 1.0 | +85.92 | positive | 1.4 % |
+| depth | ≤ 62.5 and > 61.8 | –30.62 | negative | 0.5 % |
+| z | ≤ 3.53 and > 2.91 | +22.67 | positive | 0.4 % |
+
+**Interpretation**  
+For this small diamond, *carat* contributes the largest negative amount, reflecting its very low weight. A substantial negative lift from *y* (height) and *table* (table size) pulls the price further down. Positive contributions come from *clarity*, *x*, *color*, and *z*, but together they only partially compensate for the negative terms. The model’s confidence is moderate (0.117), indicating reasonable but not perfect certainty in the explanation. The small prediction error (‑\$63) shows the model’s overall estimate is close to the actual price despite the opposing effects of the features.
+
+# EPR Explainer: 0.4964, Verifier: 0.6786

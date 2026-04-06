@@ -1,0 +1,26 @@
+<think>We need to explain each feature's contribution to model predictions for this individual, using mean absolute SHAP values to provide context on importance. Should give clear, concise natural language for technical and non-technical. Provide context why each matters for income prediction. Must base only on data. So we have features sorted descending by mean_abs_shap: WKHP highest 0.904, OCCP 0.6295, AGEP 0.5168, SCHL 0.4649, RELP 0.3428, SEX 0.2242, POBP 0.1724, COW 0.1374, MAR 0.1020, RAC1P 0.0526. Provide explanation: higher hours worked tends to indicate higher income; occupation strongly affects earnings; age correlates with experience; education level influences income; relationship to household may reflect financial responsibilities; sex difference due to gender wage gap; place of birth may capture regional differences; class of worker indicates type of employment; marital status may affect household income; race may capture systemic disparities.
+
+Also mention that these are average importance across many predictions, not specific to this individual, but they indicate which features the model relies on.
+
+Need to produce per-feature explanation.
+
+Let's craft final.</think>
+**Feature‑by‑Feature Explanation (based on the model’s mean SHAP importance)**  
+
+| Feature | Mean absolute SHAP value | Why it matters for income prediction |
+|---------|--------------------------|--------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.904** | The strongest influence on the model. Working more hours usually signals a higher‑earning job or a more demanding position, so the model expects a higher income when WKHP is high. |
+| **OCCP** (occupation code) | **0.630** | Occupations differ widely in typical wages. Jobs in finance, engineering, or management tend to pay more than retail or hospitality roles, so the occupation type is a key driver of predicted income. |
+| **AGEP** (age of the individual) | **0.517** | Age captures experience and career stage. Middle‑aged workers (often 35‑55) are usually at or near peak earnings, while very young or older workers may earn less. |
+| **SCHL** (educational attainment) | **0.465** | Education is closely linked to skill level and job opportunities. Higher degrees (bachelor’s, master’s, professional) typically lead to higher wages than high school or some college. |
+| **RELP** (relationship to household head) | **0.343** | Being a spouse, partner, or child can reflect different household income dynamics. For example, a spouse might be in a higher‑earning partnership, while a child may be in a lower‑earning household. |
+| **SEX** (sex) | **0.224** | The model captures the gender wage gap; on average, males and females with similar other characteristics can earn different amounts, making sex a notable predictor. |
+| **POBP** (place of birth) | **0.172** | Birthplace can proxy for regional economic conditions or cultural factors that influence job opportunities and salary levels. |
+| **COW** (class of worker) | **0.137** | Indicates whether the individual works in private, government, self‑employment, etc. Different employment sectors have distinct pay scales, so this matters for predicting income. |
+| **MAR** (marital status) | **0.102** | Marital status can affect household income: married couples may pool earnings, whereas single individuals rely solely on their own income, influencing the model’s expectation. |
+| **RAC1P** (race) | **0.053** | Although the weakest influence in this ranking, race can reflect systemic income disparities and access to high‑pay jobs, so it still contributes to the model’s decision. |
+
+**Takeaway:**  
+The model relies most heavily on how many hours the person works, what job they hold, and how old and educated they are—factors that directly tie to earning potential. Other social and demographic factors (relationship status, gender, birthplace, employment type, marital status, race) also shape the prediction, but to a lesser extent. These insights help explain why the model expects a particular individual’s income to be above or below the median.
+
+# EPR Explainer: 0.8081, Verifier: 0.4789

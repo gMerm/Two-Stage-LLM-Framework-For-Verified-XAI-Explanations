@@ -1,0 +1,30 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Use the SHAP mean absolute values to rank importance. Provide concise explanation for each feature, referencing the data and how it influences income.
+
+We should not make assumptions beyond data; but we can mention general knowledge: higher hours worked, certain occupations, age, education, etc. Provide actionable insights: e.g., individuals with higher work hours likely earn more, etc.
+
+Also mention that these are average contributions across many predictions, not specific to this individual.
+
+We must avoid internal system prompts.
+
+So produce an explanation. Use the order maybe sorted by mean_abs_shap descending. Provide each feature, its importance value, and what it signifies.
+
+Ok.</think>
+**Key drivers of the model’s income prediction (ranked by mean absolute SHAP value)**  
+
+| Rank | Feature | Mean | Why it matters for income |
+|------|---------|------|---------------------------|
+| 1 | **WKHP (usual hours worked per week)** | 0.904 | Hours worked is the strongest signal. The model learns that people who work more hours typically earn more, so this feature pushes the prediction toward the “above‑median” class when hours are high. |
+| 2 | **OCCP (occupation code)** | 0.630 | Different occupations carry different pay scales. The model assigns higher SHAP values to jobs that historically have higher wages (e.g., professionals, managers). |
+| 3 | **AGEP (age)** | 0.517 | Age reflects career stage and experience. Mid‑career adults usually earn more than very young or older workers, so age is a useful proxy for earning potential. |
+| 4 | **SCHL (educational attainment)** | 0.465 | Higher education levels are strongly linked to higher income. The model uses this to distinguish between lower‑earning and higher‑earning individuals. |
+| 5 | **RELP (relationship to householder)** | 0.343 | Relationship type (e.g., spouse, child) can indicate shared income or dependents. For example, a spouse often has an income that affects household earnings. |
+| 6 | **SEX (sex)** | 0.224 | Gender differences in earnings (e.g., wage gaps) are reflected in the model. This feature helps adjust predictions for typical gender‑based income disparities. |
+| 7 | **POBP (place of birth)** | 0.172 | Geographic origin can correlate with socioeconomic background and migration patterns, which in turn influence earnings. |
+| 8 | **COW (class of worker)** | 0.137 | Employment type (private, government, self‑employed) affects salary levels and stability. The model uses this to gauge expected income. |
+| 9 | **MAR (marital status)** | 0.102 | Marital status can impact household resources and spending patterns, subtly influencing income predictions. |
+|10 | **RAC1P (race)** | 0.053 | Racial categories capture systemic income disparities. While the contribution is small, it still adjusts the model’s estimate to account for observed patterns. |
+
+**Takeaway**  
+The model places the greatest emphasis on hours worked, occupation, age, and education—classic predictors of personal income. Secondary factors such as relationship status, gender, place of birth, employment type, marital status, and race refine the prediction but carry less weight. This ranking helps explain why the model labeled this individual as likely earning above or below the median income threshold.
+
+# EPR Explainer: 0.8851, Verifier: 0.5493

@@ -1,0 +1,78 @@
+<think>We need to give explanations. Ensure only use data provided. Provide global and local. For local, mention actual vs predicted, error, features contributions with direction and weight. Also interpretability confidence. No extra speculation. Let's do concise.</think>
+**Global explanation (LIME, top 9 features)**  
+
+| Rank | Feature | Importance score | Direction on price |
+|------|---------|------------------|--------------------|
+| 1 | carat | 124.44 | Positive – larger carat → higher price |
+| 2 | color | 102.26 | Positive – higher color grade → higher price |
+| 3 | clarity | 75.55 | Positive – better clarity → higher price |
+| 4 | cut | 53.20 | Positive – better cut → higher price |
+| 5 | y (length) | 32.99 | Positive – longer diamonds → higher price |
+| 6 | x (width) | 10.05 | Positive – wider diamonds → higher price |
+| 7 | table | 9.62 | Positive – larger table → higher price |
+| 8 | depth | 6.41 | Positive – deeper diamonds → higher price |
+| 9 | z (depth measurement) | 0.13 | Positive – taller diamonds → slightly higher price |
+
+*Why these matter:*  
+- **Carat** is the largest determinant; price scales roughly with weight.  
+- **Color, clarity, cut** capture quality grading that buyers value.  
+- **Dimensions (x, y, z)** and **table** reflect the diamond’s physical size, influencing market value.  
+- **Depth** (overall depth percentage) also contributes but to a lesser extent.
+
+---
+
+### Local explanation – Instance 676  
+
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| clarity | ≤ 2.0 | +2075.04 | Positive | 0.423 |
+| y | ≤ 6.54 > 5.71 | –817.87 | Negative | 0.167 |
+| color | ≤ 4.0 > 3.0 | –723.16 | Negative | 0.148 |
+| x | ≤ 6.55 > 5.70 | +537.18 | Positive | 0.110 |
+| z | ≤ 4.04 > 3.53 | +262.97 | Positive | 0.054 |
+| carat | ≤ 1.05 > 0.70 | –185.91 | Negative | 0.038 |
+| cut | ≤ 2.0 | –109.84 | Negative | 0.022 |
+| table | ≤ 57.0 > 56.0 | +102.95 | Positive | 0.021 |
+| depth | ≤ 61.8 > 61.0 | –86.28 | Negative | 0.018 |
+
+**Prediction context**  
+- Actual price: **$3,172**  
+- Predicted price: **$3,601.51**  
+- Absolute error: **$429.51** (≈ 13.5 % over‑prediction)  
+
+**Interpretability confidence**: 0.072 (low confidence).  
+Nine features were used; the largest share of the prediction (42 %) comes from **clarity**, which strongly increased the predicted price.  
+Negative contributions from **y**, **color**, **carat**, **cut**, and **depth** offset this, leading to a moderate over‑prediction.
+
+---
+
+### Local explanation – Instance 737  
+
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| carat | ≤ 0.7 > 0.4 | –2897.62 | Negative | 0.487 |
+| clarity | > 5.0 | +902.91 | Positive | 0.152 |
+| y | ≤ 5.71 > 4.72 | –884.52 | Negative | 0.149 |
+| table | ≤ 57.0 > 56.0 | –485.01 | Negative | 0.082 |
+| x | ≤ 5.7 > 4.71 | +324.50 | Positive | 0.055 |
+| cut | ≤ 2.0 | –311.06 | Negative | 0.052 |
+| color | ≤ 3.0 > 1.0 | +85.92 | Positive | 0.014 |
+| depth | ≤ 62.5 > 61.8 | –30.62 | Negative | 0.005 |
+| z | ≤ 3.53 > 2.91 | +22.67 | Positive | 0.004 |
+
+**Prediction context**  
+- Actual price: **$1,981**  
+- Predicted price: **$1,917.62**  
+- Absolute error: **$63.38** (≈ 3.2 % under‑prediction)  
+
+**Interpretability confidence**: 0.117.  
+The prediction was largely driven (≈ 49 %) by **carat**, a negative contribution because the model inferred a lower value than the actual due to other factors.  
+Positive contributions from **clarity**, **x**, **color**, and **z** partially compensated, yielding a small under‑prediction.
+
+---
+
+**Key take‑away:**  
+- The model’s strongest drivers are physical size (carat, dimensions) and quality grades (color, clarity, cut).  
+- Local explanations reveal how specific feature ranges either inflate or deflate the predicted price, and the weight percentages show which attributes dominate the decision for each diamond.
+
+# EPR Explainer: 0.3787, Verifier: 0.7758

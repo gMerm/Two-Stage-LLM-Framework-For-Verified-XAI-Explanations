@@ -1,0 +1,58 @@
+<think>We need to explain how each word influenced model prediction, based on the attribution scores. Provide natural language explanation for both technical and non-technical audiences, but concise. We need to describe positive and negative contributions and overall effect. Use the data only.
+
+We must not add new info. So we will say that tokens with positive attribution push toward positive sentiment, negative push toward negative. Provide magnitude context.
+
+Also the sample's prediction is 0.0134 which is close to neutral but labelled negative. So we can explain that overall negative contributions outweigh positives.
+
+Let's craft explanation.
+
+Also we should mention that "if" has large negative effect, "you" positive, etc. Provide insight: tokens "avoid", "this", "cinematic" etc heavily negative.
+
+We can structure: introduction, then list each token with effect, then summary.
+
+Let's comply with guidelines: only use quantitative data. No extra assumptions.
+
+Let's produce final.</think>
+**How the top 20 words shaped the model’s prediction for review #198**
+
+The model uses each token’s attribution score to decide how that word pushes the sentiment toward **positive** or **negative**.  
+- **Positive attribution** (value > 0) nudges the prediction toward a positive rating.  
+- **Negative attribution** (value < 0) pulls the prediction toward a negative rating.  
+- The **magnitude** tells how strongly that word influences the outcome.
+
+Below is a quick look at each of the 20 most influential words in the review:
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Strongly negative; the word “if” alone would almost flip the score toward a negative prediction. |
+| **you** | +0.0126 | Strong positive influence; “you” helps the model lean a bit toward positivity. |
+| **enjoy** | +0.0045 | Mild positive boost. |
+| **films** | +0.0022 | Slight positive push. |
+| **like** | –0.0021 | Small negative push, counteracting the word “enjoy.” |
+| **american** | +0.0051 | Moderate positive influence. |
+| **pie** | +0.0029 | Small positive effect. |
+| **,** | –0.0004 | Negligible negative impact. |
+| **road** | –0.0018 | Minor negative effect. |
+| **trip** | +0.0032 | Small positive influence. |
+| **&** | +0.0011 | Very small positive boost. |
+| **van** | –0.0044 | Significant negative influence. |
+| **wilder** | +0.0030 | Small positive push. |
+| **avoid** | –0.0013 | Minor negative impact. |
+| **this** | –0.0055 | Strong negative contribution. |
+| **cinematic** | –0.0047 | Strong negative effect. |
+| **refuse** | –0.0000076 | Negligible negative impact. |
+| **at** | –0.0029 | Small negative influence. |
+| **all** | –0.0033 | Moderate negative contribution. |
+| **costs** | –0.0029 | Minor negative effect. |
+
+### What the numbers tell us
+
+- **Negative words dominate**: The sum of the negative attributions (~ –0.050) is larger than the sum of the positives (~ +0.035).  
+- **Key negative drivers**: “if,” “this,” “cinematic,” “van,” and “american” (negative) collectively pull the score toward a negative sentiment.  
+- **Positive counter‑balance**: Words like “you,” “enjoy,” “american,” and “wilder” provide modest positive pushes, but not enough to offset the stronger negatives.
+
+### Final outcome
+
+Because the overall influence leans toward the negative side, the model outputs a **negative** sentiment (probability ≈ 0.013). The review’s wording—particularly the strong negative descriptors (“avoid,” “this,” “cinematic”)—skewed the prediction despite some mildly positive terms.
+
+# EPR Explainer: 0.7740, Verifier: 0.5324

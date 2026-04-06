@@ -1,0 +1,41 @@
+<think>We need to explain how each word of top 20 token attributions influenced model's sentiment prediction. Use natural language, accessible. Provide for both technical and non-technical? The instructions: "Explain how each word of the top_20_token_attributions influenced the model's sentiment prediction. Identify and describe the impact of all tokens (both positive and negative contributors), detailing how each one collectively shaped the final prediction." So we list tokens with their attribution, positive or negative, and describe influence.
+
+We should keep concise, avoid making assumptions beyond data. Use the actual attribution values.
+
+We must not reveal internal prompts. Ok.
+
+Let's produce an explanation.</think>
+**How the top 20 words shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Pulls the score downward – suggests a conditional or doubtful tone that weakens positivity. |
+| **you** | +0.0126 | Adds a small positive tilt, inviting the reader, but it’s outweighed by stronger negative words. |
+| **enjoy** | +0.0045 | Lightly nudges the model toward a positive mood. |
+| **films** | +0.0022 | Slightly positive, indicating the subject is a movie. |
+| **like** | –0.0021 | Negative because it precedes titles that the model treats as not genuinely liked. |
+| **american** | +0.0051 | Positive, highlighting a specific (well‑known) film type. |
+| **pie** | +0.0029 | Positive; it’s the title of a known comedy, slightly boosting positivity. |
+| **,** | –0.0004 | Tiny negative contribution, mostly due to punctuation pattern. |
+| **road** | –0.0018 | Negative because it precedes “trip,” which the model treats less favorably. |
+| **trip** | +0.0032 | Positive, referencing another movie title that slightly lifts the score. |
+| **&** | +0.0011 | Very small positive, connecting two titles. |
+| **van** | –0.0044 | Negative; part of “van Wilder,” a title that the model associates with lower sentiment. |
+| **wilder** | +0.0030 | Positive, but its impact is offset by “van.” |
+| **avoid** | –0.0013 | Negative – a direct recommendation to skip the film. |
+| **this** | –0.0055 | Strong negative; signals that the film itself is undesirable. |
+| **cinematic** | –0.0047 | Negative – the adjective “cinematic” here is coupled with disdain. |
+| **refuse** | –0.0000076 | Practically neutral; the word itself has no noticeable effect. |
+| **at** | –0.0029 | Negative, part of the phrase “at all costs.” |
+| **all** | –0.0033 | Negative, reinforces the “at all costs” warning. |
+| **costs** | –0.0029 | Negative – completing the warning phrase, it pulls the score further downward. |
+
+**Putting it all together**
+
+- The strongest **negative pulls** come from *if*, *this*, *cinematic*, *avoid*, *at*, *all*, and *costs*, together outweighing the positive signals.  
+- Positive tokens (*you*, *enjoy*, *films*, *american*, *pie*, *trip*, *van*, *wilder*) provide mild optimism, but their combined contribution is smaller than the negative forces.  
+- The net effect of the top 20 tokens is a **negative shift** in the model’s output, reflected in the low probability (≈0.013) for a positive sentiment.  
+
+Thus, the model’s sentiment prediction is driven mainly by the warning‑style words (“avoid this cinematic refuse at all costs”) and a few mild positives from film titles, leading it to classify the review as negative.
+
+# EPR Explainer: 0.7679, Verifier: 0.5760

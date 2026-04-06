@@ -1,0 +1,43 @@
+<think>Alright, I'm looking at the global explanations for diamond price prediction based on the provided XAI output. The model used is an XGBRegressor with LIME for explainability. 
+
+First, I notice that carat has the highest importance score, which makes sense because larger diamonds are generally more valuable. Color comes next, likely because rarer colors (like D-E) command higher prices. Clarity is third, as fewer inclusions mean higher quality and price.
+
+Cut, y, x, table, depth, z follow, with their scores decreasing. It's interesting that some features like carat have a much higher score than others, indicating they're more influential.
+
+Now, looking at the local explanations for instance 676: clarity is the top contributor, positively impacting price. However, y and color negatively affect it. This could mean that smaller depth (y) or lower color grades might reduce the price despite good clarity.
+
+For instance 737, carat has a strong negative impact because maybe the diamond is too small, but clarity helps offset that. Other features like table size and cut also play roles, showing how multiple factors interact to influence price.
+</think>
+### Global Explanations
+The model predicts diamond prices using an XGBRegressor with LIME for explainability. The top contributing features are:
+
+1. **Carat**: Most influential due to larger diamonds being more valuable.
+2. **Color**: Higher grades (rarer) increase price.
+3. **Clarity**: Lower numbers (fewer inclusions) boost value.
+4. **Cut**: Better cuts enhance appeal and price.
+5. **Y**: Diamond's depth affects brilliance; optimal depth increases price.
+
+### Local Explanations
+
+#### Instance 676
+- **Actual Price**: $3,172.0  
+- **Predicted Price**: $3,601.51 (Error: $429.51)  
+
+**Key Features:**
+- **Clarity**: Positive contribution ($2,075), enhancing price.
+- **Color**: Negative impact ($-817), lower grade reduces value.
+- **Y Depth**: Lower optimal depth ($-817), affecting brilliance.
+
+#### Instance 737
+- **Actual Price**: $1,981.0  
+- **Predicted Price**: $1,917.62 (Error: $63.38)  
+
+**Key Features:**
+- **Carat**: Negative impact ($-2,897), smaller size lowers price.
+- **Clarity**: Positive contribution ($902), high clarity increases value.
+- **Table Size**: Negative effect ($-485), optimal table size affects proportions.
+
+### Conclusion
+Diamond prices are influenced primarily by carat, color, and clarity. Local factors like depth (y) and table size also play significant roles in price prediction.
+
+# EPR Explainer: 0.6275, Verifier: 1.1406

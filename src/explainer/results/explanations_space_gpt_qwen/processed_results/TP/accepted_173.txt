@@ -1,0 +1,46 @@
+<think>We need to explain each token's influence, positive or negative, to sentiment prediction, based on Integrated Gradients attribution values. The model predicts negative sentiment with a score of 0.0134 (probably probability?). We need to explain how each of the top 20 tokens contributed.
+
+We must not add extra info beyond given data. Provide explanation for each token: if attribution negative, push toward negative sentiment; if positive, push toward positive; magnitude indicates strength. Also discuss overall effect: many negative tokens outweigh positives leading to final negative prediction.
+
+Be concise, but detail each token. No extra assumptions. Also avoid referencing unknown things. We should use language accessible to non-technical.
+
+Let's produce bullet list per token. Mention that some tokens like "if" etc. have small negative/positive contributions. Provide actionable insights: key negative tokens: "this", "cinematic", "avoid", "van", "costs", etc. Positive tokens: "you", "enjoy", "american", "pie", "trip", etc.
+
+Also mention the final prediction is negative.
+
+Ok.</think>
+**How the model’s sentiment prediction was shaped by the top 20 words**
+
+| Token | Attribution | Effect on sentiment | Why it matters |
+|-------|-------------|---------------------|----------------|
+| **if** | –0.0126 | pushes toward **negative** | It weakens the sentence’s overall positivity by suggesting a conditional doubt. |
+| **you** | +0.0126 | pushes toward **positive** | Directly addresses the reader, encouraging a personal, favorable tone. |
+| **enjoy** | +0.0045 | pushes toward **positive** | Signals a favorable action, but its influence is small compared to other words. |
+| **films** | +0.0022 | pushes toward **positive** | Indicates the subject (films) but with limited impact. |
+| **like** | –0.0021 | pushes toward **negative** | Sets up a comparison that the model sees as unfavorable. |
+| **american** | +0.0051 | pushes toward **positive** | A proper noun that, by itself, leans slightly positive. |
+| **pie** | +0.0029 | pushes toward **positive** | Completes the movie reference, adding a mild positive feel. |
+| **,** | –0.0004 | pushes toward **negative** | Negligible punctuation effect but slightly drags the tone down. |
+| **road** | –0.0018 | pushes toward **negative** | Part of “Road Trip” but the word alone is viewed less favorably. |
+| **trip** | +0.0032 | pushes toward **positive** | Complements “road” with a mild positive push. |
+| **&** | +0.0011 | pushes toward **positive** | Minimal positive influence. |
+| **van** | –0.0044 | pushes toward **negative** | Negative connotation for “Van Wilder” in the model’s eyes. |
+| **wilder** | +0.0030 | pushes toward **positive** | Balances “van” slightly but still weak. |
+| **avoid** | –0.0013 | pushes toward **negative** | Directly signals a warning, lowering sentiment. |
+| **this** | –0.0055 | pushes toward **negative** | Strongly shifts the sentence toward a negative stance. |
+| **cinematic** | –0.0047 | pushes toward **negative** | Conveys a negative cinematic quality. |
+| **refuse** | –0.0000076 | essentially neutral | Minimal effect; the word leans negative but very weak. |
+| **at** | –0.0029 | pushes toward **negative** | Adds a negative context to the phrase “at all costs.” |
+| **all** | –0.0033 | pushes toward **negative** | Strengthens the negative urgency. |
+| **costs** | –0.0029 | pushes toward **negative** | Finalizes the negative warning. |
+
+### Putting it together
+
+- **Negative contributors** (e.g., *if*, *like*, *van*, *avoid*, *this*, *cinematic*, *at*, *all*, *costs*) collectively pull the sentiment toward a negative prediction. Their combined negative attribution outweighs the positive words.
+- **Positive contributors** (e.g., *you*, *enjoy*, *american*, *pie*, *trip*, *wilder*) add small positive nudges, but their total impact is insufficient to overcome the negative pressure.
+- The largest single negative influence comes from **“this”** (–0.0055), followed by **“cinematic”** (–0.0047) and **“van”** (–0.0044). These words strongly signal a negative review tone.
+- The overall prediction (0.0134 probability of positive) is almost negligible, reflecting that the negative signals dominate.
+
+**Takeaway:** The review’s strong negative wording—especially phrases like “avoid this cinematic refuse at all costs”—drives the model’s final negative sentiment, while a few mild positive references are outweighed by the more forceful negative tokens.
+
+# EPR Explainer: 0.7716, Verifier: 0.4614

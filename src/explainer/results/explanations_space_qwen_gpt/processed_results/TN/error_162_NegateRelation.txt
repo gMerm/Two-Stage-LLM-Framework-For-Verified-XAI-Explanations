@@ -1,0 +1,57 @@
+<think>Okay, the user wants me to explain token attributions from an IMDB review sentiment analysis. Let me carefully process this.
+
+First, I need to understand the data. The review is negative (prediction 0.013), and we have top 20 tokens with their attribution scores. Positive scores mean words pushed toward negative sentiment (since prediction is negative), negative scores mean words pulled toward positive (but the review is negative so those are counteracting influences).
+
+Hmm, important note: for negative predictions, positive attributions actually mean words that make the model think "more negative". Need to phrase this clearly to avoid confusion.
+
+Let me group the tokens by direction:
+- Strong negative contributors (negative attribution): "if" (-0.0126), "like" (-0.0021), "road" (-0.0018), "van" (-0.0044), "this" (-0.0055), "cinematic" (-0.0047), "at" (-0.0029), "all" (-0.0033), "costs" (-0.0029)
+- Positive contributors (positive attribution): "you" (0.0126), "enjoy" (0.0045), "films" (0.0022), "american" (0.0051), "pie" (0.0029), "trip" (0.0032), "&" (0.0011), "wilder" (0.0030)
+
+Wait, "you" has the highest positive attribution (0.0126) but the review is negative. That's interesting - it's the word that most strongly pulled the prediction toward positive, but the overall sentiment is negative because other words dominated.
+
+For non-technical explanation, I should:
+- Explain that high positive attribution = words making it seem more positive (but model still says negative)
+- High negative attribution = words making it seem more negative
+- Focus on the strongest influences
+
+The strongest negative contributors are "if" (-0.0126) and "this" (-0.0055), while strongest positive is "you" (0.0126). But note: "you" is part of a negative phrase ("if you enjoy... avoid"), so its positive attribution is actually a counterpoint to the overall negative sentiment.
+
+For technical audience, I'll mention the attribution direction clearly. For non-technical, I'll say "words that made the model think 'more negative'" without using "negative attribution" jargon.
+
+Important: Must not invent anything. The explanation must only use the given numbers. For example, I can't say "the word 'refuse' is negative" - I have to say it had a very small negative attribution (-7.5e-6), so it barely contributed.
+
+Now structuring the explanation:
+1. State the overall sentiment (negative)
+2. Explain the two types of influences (positive/negative attribution in context of negative prediction)
+3. Highlight top 3 negative contributors (strongest negative attributions)
+4. Highlight top 3 positive contributors (strongest positive attributions, meaning words that would have made it seem positive)
+5. Note that despite "you" and "enjoy" pulling toward positive, the negative words dominated
+
+Wait, "if" has the strongest negative attribution (-0.0126) - that's crucial. It's the word most associated with making the model predict negative. Similarly, "this" (-0.0055) is strong.
+
+For the positive side, "you" is the strongest (0.0126), meaning it's the word that most made the model think "this might be positive", but the context ("if you enjoy... avoid") made it negative.
+
+I should clarify that in the phrase "if you enjoy films like American Pie", the words "if", "like", and "films" actually contributed to the negative prediction because they set up a contrast with the negative recommendation.
+
+Also noting that punctuation like comma (attribution -0.0004) had minimal effect.
+
+Finally, the explanation must be concise - no more than 3-4 sentences for non-tech, maybe 5 for tech.
+
+Double-checking numbers: 
+- Most negative: "if" (-0.0126) > "this" (-0.0055) > "cinematic" (-0.0047)
+- Most positive: "you" (0.0126) > "american" (0.0051) > "enjoy" (0.0045)
+
+Yes, that's correct from the data.
+</think>
+The model predicted a negative sentiment (0.013) for this review. Attribution scores show how each word influenced this prediction:  
+- **Strongest negative contributors** (pushing toward negative):  
+  - "if" (−0.0126) and "this" (−0.0055) were the top drivers—phrases like *"if you enjoy films... avoid this"* created a negative contrast.  
+  - "cinematic refuse" (−0.0047, −0.000007) and "costs" (−0.0029) reinforced harsh criticism.  
+- **Strongest positive contributors** (pulling toward positive, but overruled):  
+  - "you" (+0.0126) and "enjoy" (+0.0045) suggested a positive context, but the surrounding negative phrasing (e.g., *"avoid this"*) dominated.  
+  - "American Pie" (+0.0051, +0.0029) referenced positive films, yet the review condemned them as examples to avoid.  
+
+**Key insight**: The words *"if," "this,"* and *"cinematic"* were most critical in shaping the negative prediction, while positive references like *"you"* and *"enjoy"* were neutralized by the overall critical tone.
+
+# EPR Explainer: 0.6510, Verifier: 0.9782

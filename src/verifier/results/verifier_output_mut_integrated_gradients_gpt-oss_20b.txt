@@ -1,0 +1,42 @@
+{
+    "confidence": 0.95,
+    "verdict": "reject",
+    "justification": "The explanation reorders the tokens compared to the XAI content: it lists \"films\" before \"you\" and \"enjoy\", violating the required ranking order. This is a clear SwapMinorFeature error. Additionally, the explanation introduces domain‑specific interpretations (e.g., \"this\" is often used to highlight a subject in a positive context) that are not derived from the provided data, which is a form of fabricated mechanism, but the primary violation is the ordering.",
+    "error type": "SwatTopFeature"
+}
+
+{
+  "confidence": 0.92,
+  "verdict": "reject",
+  "justification": "The explanation contains two major fidelity issues: (1) it misstates the attribution signs for the tokens \"van\" (should be +0.0044, but explained as negative) and \"trip\" (should be –0.0032, but explained as positive). (2) The ordering of tokens in the explanation swaps the positions of \"trip\" and \"van\" relative to the original top‑20 list, which is a minor ranking swap. Additionally, the CoT section is missing; only the final explanation is provided. These discrepancies violate the faithfulness and logical consistency requirements.",
+  "error type": "IncorrectValue"
+}
+
+{
+  "confidence": 0.99,
+  "verdict": "reject",
+  "justification": "The explanation misinterprets the sign of the Integrated Gradients attributions. Positive attribution values (e.g., \"if\", \"like\", \"road\", etc.) are described as nudging the model toward a positive sentiment, whereas in Integrated Gradients a positive attribution actually increases the predicted probability of the current class (here, negative sentiment). This directional relationship is inconsistent with the XAI Content, violating the verification criteria for IG explanations.",
+  "error type": "NegateRelation"
+}
+
+{
+    "confidence": 0.92,
+    "verdict": "reject",
+    "justification": "The explanation omitted the token \"you\" from the top‑20 list and listed the tokens in an incorrect order (\"enjoy\" appears before \"you\"), violating the strict ranking requirement. Additionally, it introduced words such as \"unamusing\" and \"mean‑spirited\" that are not present in the provided XAI content, constituting hallucination. These discrepancies mean the explanation is not faithful to the data.",
+    "error type": "OmitFeature"
+}
+
+{
+    "confidence": 0.95,
+    "verdict": "reject",
+    "justification": "The explanation faithfully lists all tokens with correct attribution values and preserves the exact ranking from the XAI content. However, it introduces a proximity‑weighting mechanism and a 1.3× amplification factor for token pairs, which is not present in the provided XAI data and violates the instruction to use only the supplied information. This fabricated mechanism constitutes a hallucination, making the explanation not faithful.",
+    "error type": "FabricatedMechanism"
+}
+
+{
+  "confidence": 0.95,
+  "verdict": "reject",
+  "justification": "The explanation faithfully reproduces the token order, attribution signs, and values from the XAI Content, with no omissions or fabricated statements. However, the CoT section is empty, violating the requirement that the CoT be present and not empty. This constitutes a MissingCoT error.",
+  "error type": "MissingCoT"
+}
+

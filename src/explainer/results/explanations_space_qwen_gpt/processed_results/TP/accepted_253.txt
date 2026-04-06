@@ -1,0 +1,75 @@
+<think>Okay, the user wants me to explain token attributions from an IMDB sentiment analysis model. Let me carefully go through the data they provided.
+
+First, I need to understand what the top_20_token_attributions represent. The model predicts negative sentiment (0.0134), so I should look for tokens that contributed to this negative prediction. Positive attributions push toward positive sentiment, but here most are negative since the prediction is negative.
+
+Looking at the tokens:
+- "if" has a strong negative attribution (-0.0126), meaning it pulled the prediction toward negative.
+- "you" is positive (0.0126), but that's actually working against the negative prediction? Wait no - since the overall prediction is negative, a positive attribution would mean it slightly counteracted the negative sentiment, but the negative tokens dominate.
+
+I should group them by direction:
+Negative contributors (pulling toward negative sentiment):
+- "if" (-0.0126) - strongest negative
+- "like" (-0.0021)
+- "road" (-0.0018)
+- "van" (-0.0044)
+- "this" (-0.0055)
+- "cinematic" (-0.0047)
+- "refuse" (-0.0000075) - very small
+- "at" (-0.0029)
+- "all" (-0.0033)
+- "costs" (-0.0029)
+
+Positive contributors (pulling toward positive, but weakly):
+- "you" (0.0126) - strongest positive
+- "enjoy" (0.0045)
+- "films" (0.0022)
+- "american" (0.0051)
+- "pie" (0.0029)
+- "trip" (0.0032)
+- "&" (0.0011)
+- "wilder" (0.0030)
+
+Now to explain this simply. The key point is that negative tokens outweighed positive ones. "if" is the strongest negative, which makes sense because the review starts with a conditional that leads to strong criticism. 
+
+I notice "refuse" has almost negligible attribution (-7.5e-6), so I'll mention it's very weak. The commas and "&" are minor.
+
+For non-technical audience, I'll avoid terms like "attribution" and say "how much each word influenced the prediction." For technical, I can keep the terms but still simplify.
+
+Important: Must not invent anything. The explanation must stick strictly to the numbers given. For example, I can't say "the word 'refuse' is negative" because it's not about the word's meaning but the attribution value. I'll say "the word 'refuse' had a very small negative influence."
+
+Also need to explain why the prediction is negative: because the negative tokens collectively outweighed the positive ones.
+
+Let me check the strongest negative vs strongest positive:
+- Strongest negative: "if" (-0.0126)
+- Strongest positive: "you" (0.0126) - interestingly equal magnitude but opposite sign.
+
+But since "if" is negative and the prediction is negative, it makes sense. The positive "you" is actually part of the phrase "if you enjoy" which is setting up the criticism, so the negative influence of "if" dominates.
+
+For the explanation, I'll structure it as:
+1. Overall prediction is negative
+2. List key negative contributors (highlighting strongest)
+3. Note that positive words exist but were outweighed
+4. Mention very small contributors like "refuse"
+
+Avoid technical jargon like "Integrated Gradients" in the explanation since it's for non-technical audience. Just say "the model's analysis shows..."
+
+Double-checking all tokens: there are 20 tokens listed, all accounted for in my grouping.
+
+The most important insight is that the critical negative words like "if" and "this" drove the negative sentiment, not the positive words like "enjoy" which were part of a negative context.
+</think>
+The model predicted a negative sentiment (0.013) for this review. Here's how the top words influenced this outcome:
+
+**Strongest negative contributors (pushing toward negative sentiment):**
+- **"if"** (-0.0126): The strongest negative influence, signaling the review’s critical tone ("*If you enjoy... avoid this*").
+- **"this"** (-0.0055): Directly points to the film as negative ("*avoid this cinematic refuse*").
+- **"cinematic"** (-0.0047) and **"refuse"** (-0.0000075): Combined with "this," they reinforce the film’s perceived worthlessness.
+- **"all costs"** (-0.0033 / -0.0029): Emphasizes the review’s warning ("*avoid... at all costs*").
+
+**Weaker positive contributors (pulling toward positive, but outweighed):**
+- **"you"** (0.0126): The strongest positive influence (part of "*if you enjoy*"), but this phrase sets up criticism.
+- **"enjoy"** (0.0045), **"films"** (0.0022), **"american"** (0.0051), **"pie"** (0.0029), **"trip"** (0.0032): These positive words describe the *comparative films* (e.g., *American Pie*), not the reviewed film.
+
+**Key insight:**  
+The negative words ("if," "this," "cinematic") dominated the prediction. Even positive words like "enjoy" were used critically (e.g., "*If you enjoy films like... avoid this*"). The review’s strong negative framing overrode minor positive references, leading to the final negative score.
+
+# EPR Explainer: 0.6233, Verifier: 1.1391

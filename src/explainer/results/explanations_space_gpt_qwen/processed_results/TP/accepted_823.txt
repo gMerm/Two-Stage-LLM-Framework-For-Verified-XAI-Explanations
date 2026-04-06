@@ -1,0 +1,49 @@
+<think>We need to explain how each word influenced model's sentiment prediction, based on attribution values. Provide natural language explanations, for technical and non-technical. Mention positive and negative tokens. Avoid making assumptions beyond data.
+
+We should describe magnitude and direction, how they collectively shape final prediction of negative sentiment. Also mention some tokens like punctuation have small negative contribution.
+
+Let's produce concise but thorough explanation.
+
+Also note that overall prediction 0.013 (close to 0). Negative sentiment. Provide context: tokens with highest positive attribution (you, american, pie etc). Negative tokens: avoid, this, cinematic, etc.
+
+Also mention "if" strongly negative because of its value. Provide interpretation: "if" introduces conditional but here it contributes to negativity.
+
+Also show cumulative effect: sum of top 20 maybe near negative. We can mention that negative tokens outweigh positives, leading to negative prediction.
+
+Ok produce answer.</think>
+**How each token nudged the model’s sentiment prediction**
+
+| Token | Attribution (±) | Effect on the prediction |
+|-------|-----------------|--------------------------|
+| **if** | –0.0126 | The word “if” pulls the score strongly toward a negative sentiment, likely because the model associates conditional “if” phrases with uncertainty or criticism. |
+| **you** | +0.0126 | “you” pushes the score toward positivity; the model interprets a personal address as a cue for a more friendly tone. |
+| **enjoy** | +0.0045 | “enjoy” gives a small positive lift, but its influence is outweighed by the negative words that follow. |
+| **films** | +0.0022 | Slightly positive, reflecting a neutral or mildly favorable view of the genre. |
+| **like** | –0.0021 | A small negative push; the model treats “like” in this context as part of a comparison that turns out negative. |
+| **american** | +0.0051 | Positively influences the score, hinting at a familiar, perhaps more appealing reference. |
+| **pie** | +0.0029 | Positive but modest; part of the title “American Pie” is perceived as a friendly reference. |
+| **,** | –0.0004 | Negligible negative effect from the comma (a punctuation token). |
+| **road** | –0.0018 | Small negative contribution; part of “Road Trip” that the model deems less favorable. |
+| **trip** | +0.0032 | Positive contribution from “Trip,” offsetting the earlier negative of “road.” |
+| **&** | +0.0011 | Minor positive boost from the ampersand, treated as a simple conjunction. |
+| **van** | –0.0044 | Strong negative impact; “van” (as in “Van Wilder”) is associated with a more negative sentiment in this context. |
+| **wilder** | +0.0030 | Small positive lift, partly balancing the negativity of “van.” |
+| **avoid** | –0.0013 | Directly encourages a negative prediction. |
+| **this** | –0.0055 | Strong negative influence; the model sees “this” as a marker of the film being discussed. |
+| **cinematic** | –0.0047 | Strong negative impact; “cinematic” is used sarcastically here. |
+| **refuse** | –0.0000076 | Virtually neutral; a negligible negative effect. |
+| **at** | –0.0029 | Negative, reinforcing the idea that the film is to be avoided “at all costs.” |
+| **all** | –0.0033 | Further negative push, strengthening the “at all costs” phrase. |
+| **costs** | –0.0029 | Adds to the negative sentiment, completing the warning “at all costs.” |
+
+**Putting it all together**
+
+- The *negative* tokens (e.g., “if,” “avoid,” “this,” “cinematic,” “at,” “all,” “costs,” “van”) outweigh the *positive* ones. Their combined negative attribution (~–0.06) dominates, steering the model toward a negative sentiment.
+- The *positive* tokens (“you,” “enjoy,” “american,” “pie,” “trip,” “wilder,” “you” again) provide modest lifts, but their total positive attribution (~+0.04) is insufficient to overcome the stronger negative signals.
+- Consequently, the final prediction is a very low probability of a positive review (0.013), labeled as **Negative**.
+
+**Key take‑away**
+
+The model’s sentiment is mainly decided by the presence of strongly negative words that warn the reader to avoid the film, while occasional positive words (like “you” or “enjoy”) only slightly soften the overall negative tone. The net effect is a clear negative classification.
+
+# EPR Explainer: 0.9320, Verifier: 0.3668

@@ -1,0 +1,76 @@
+<think>We need to provide explanations. Must base solely on provided data. For global: rank features, direction positive? The importance scores are positive but need direction. For global, LIME provides importance score but no direction. We can infer direction: higher carat increases price, higher color (finer color?) actually lower color grade (D=1 etc). But can't assume. Must state that based on typical domain knowledge? But guidelines: Only based on provided data. No direction info in global. So state insufficient evidence to conclude direction. But we can say features with higher importance contribute to prediction but direction unknown. Provide context: importance indicates relevance.
+
+Local: Provide explanations for instance 676 and 737. Provide contributions, direction, weight. Also mention prediction error.
+
+Include instance-level details: actual vs predicted, error.
+
+Also include local interpretability confidence.
+
+No additional assumptions. Provide concise explanation.</think>
+**Global explanation (LIME)**  
+
+| Rank | Feature | Importance score | Direction of influence* | Context |
+|------|---------|------------------|------------------------|---------|
+| 1 | carat | 124.44 | *Insufficient evidence to conclude* | Size of the diamond – a larger carat usually drives higher value. |
+| 2 | color | 102.26 | *Insufficient evidence to conclude* | Color grade (D–J) – finer color typically adds value. |
+| 3 | clarity | 75.55 | *Insufficient evidence to conclude* | Clarity grade (I1–IF) – fewer inclusions usually increase price. |
+| 4 | cut | 53.20 | *Insufficient evidence to conclude* | Cut quality (Poor–Excellent) – better cut improves sparkle and value. |
+| 5 | y | 32.99 | *Insufficient evidence to conclude* | Depth dimension (mm) – influences overall shape and visual impact. |
+| 6 | x | 10.05 | *Insufficient evidence to conclude* | Length dimension (mm). |
+| 7 | table | 9.62 | *Insufficient evidence to conclude* | Table percentage – affects surface area. |
+| 8 | depth | 6.41 | *Insufficient evidence to conclude* | Overall depth percentage. |
+| 9 | z | 0.13 | *Insufficient evidence to conclude* | Height dimension (mm). |
+
+\*The XAI output provides importance scores but does not indicate whether higher or lower values of each feature increase the predicted price. Thus we cannot state the direction without additional domain‑specific assumptions.
+
+---
+
+### Local explanation – Instance 676  
+| Feature | Value range | Contribution to prediction | Direction | Weight |
+|---------|-------------|----------------------------|-----------|--------|
+| clarity | `<= 2.0` | +2075.04 | positive | 0.423 |
+| y | `<= 6.54 and > 5.71` | –817.87 | negative | 0.167 |
+| color | `<= 4.0 and > 3.0` | –723.16 | negative | 0.148 |
+| x | `<= 6.55 and > 5.7` | +537.18 | positive | 0.110 |
+| z | `<= 4.04 and > 3.53` | +262.97 | positive | 0.054 |
+| carat | `<= 1.05 and > 0.7` | –185.91 | negative | 0.038 |
+| cut | `<= 2.0` | –109.84 | negative | 0.022 |
+| table | `<= 57.0 and > 56.0` | +102.95 | positive | 0.021 |
+| depth | `<= 61.8 and > 61.0` | –86.28 | negative | 0.018 |
+
+**Prediction details**  
+- **Actual price:** $3,172  
+- **Predicted price:** $3,601.51  
+- **Absolute error:** $429.51 (model over‑estimates by ~13.5 %)  
+- **Interpretability confidence:** 0.0723 (moderate certainty that the nine features capture most of the local effect)
+
+---
+
+### Local explanation – Instance 737  
+| Feature | Value range | Contribution to prediction | Direction | Weight |
+|---------|-------------|----------------------------|-----------|--------|
+| carat | `<= 0.7 and > 0.4` | –2,897.62 | negative | 0.487 |
+| clarity | `> 5.0` | +902.91 | positive | 0.152 |
+| y | `<= 5.71 and > 4.72` | –884.52 | negative | 0.149 |
+| table | `<= 57.0 and > 56.0` | –485.01 | negative | 0.082 |
+| x | `<= 5.7 and > 4.71` | +324.50 | positive | 0.055 |
+| cut | `<= 2.0` | –311.06 | negative | 0.052 |
+| color | `<= 3.0 and > 1.0` | +85.92 | positive | 0.014 |
+| depth | `<= 62.5 and > 61.8` | –30.62 | negative | 0.005 |
+| z | `<= 3.53 and > 2.91` | +22.67 | positive | 0.004 |
+
+**Prediction details**  
+- **Actual price:** $1,981  
+- **Predicted price:** $1,917.62  
+- **Absolute error:** $63.38 (model under‑estimates by ~3.2 %)  
+- **Interpretability confidence:** 0.1169 (slightly higher certainty than instance 676)
+
+---
+
+**Take‑away for stakeholders**
+
+*Globally*, the model heavily relies on size (carat), quality grades (color, clarity, cut) and physical dimensions. Exact direction of influence is not specified by the LIME output, so domain knowledge should be consulted when interpreting the signs.
+
+*Locally*, each instance’s prediction is driven by a mix of positive and negative contributions. For instance 676, clarity had the largest positive influence, offset by a negative contribution from a relatively high y dimension. For instance 737, carat had the strongest negative influence (reflecting a low carat value relative to the model’s reference point), while clarity and color contributed positively. The confidence scores indicate that the nine selected features explain a modest fraction of the model’s behavior; additional hidden factors may still play a role.
+
+# EPR Explainer: 0.5344, Verifier: 0.6256

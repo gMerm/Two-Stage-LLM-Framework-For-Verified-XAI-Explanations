@@ -1,0 +1,62 @@
+<think>We need to explain how each word of top 20 token attributions influenced the model's sentiment prediction. Provide both positive and negative contributions. Use only the given data. Provide concise explanations. Must not add assumptions.
+
+We have tokens with attribution values. Positive contributions push toward positive sentiment. Negative push toward negative. Magnitude indicates strength. We need to explain each token's impact and collective shape.
+
+We can mention that the prediction is 0.0134, close to zero but negative sentiment. The sum of top 20 attributions? Let's compute approximate sum: sum given values: -0.0126375556 + 0.0125961145 + 0.0045203231 + 0.0021744878 -0.0020754779 + 0.0051003154 + 0.0028989785 -0.0003934605 -0.0018063271 + 0.0031642872 + 0.0011230998 -0.0044164942 + 0.0029774320 -0.0012793547 -0.0055369358 -0.0047005126 -7.555e-06 -0.0029249040 -0.0032766033 -0.0028788315.
+
+Let's approximate: positives: 0.0125961145+0.0045203231+0.0021744878+0.0051003154+0.0028989785+0.0031642872+0.0011230998+0.0029774320 = sum: 0.0125961+0.0045203=0.0171164; +0.0021745=0.0192909; +0.0051003=0.0243912; +0.0028990=0.0272902; +0.0031643=0.0304545; +0.0011231=0.0315776; +0.0029774=0.0345550.
+
+Negatives: -0.0126376-0.0020755-0.0003935-0.0018063-0.0044165-0.0012794-0.0055369-0.0047005-0.0000076-0.0029249-0.0032766-0.0028788 = sum: let's add: -0.0126376-0.0020755=-0.0147131; -0.0003935=-0.0151066; -0.0018063=-0.0169129; -0.0044165=-0.0213294; -0.0012794=-0.0226088; -0.0055369=-0.0281457; -0.0047005=-0.0328462; -0.0000076=-0.0328538; -0.0029249=-0.0357787; -0.0032766=-0.0390553; -0.0028788=-0.0419341.
+
+Total sum = positives 0.0345550 + negatives -0.0419341 = -0.0073791. So negative overall.
+
+Explain each token: "if" negative strong -0.0126; "you" positive small; "enjoy" positive; "films" positive; "like" negative small; "american" positive; "pie" positive; "," negative small; "road" negative; "trip" positive; "&" positive; "van" negative; "wilder" positive; "avoid" negative; "this" negative strong; "cinematic" negative; "refuse" negligible; "at" negative; "all" negative; "costs" negative.
+
+We should also note that tokens like "if", "like", "road", "van" have negative contributions likely due to context of negative phrase? But we cannot guess reasons; we should only state that these tokens had negative attributions pushing toward negative sentiment.
+
+Explain collective effect: sum negative, driving prediction negative.
+
+Also note that some positive tokens offset some negative, but not enough.
+
+We can group by categories: positive tokens encouraging positive sentiment: "you", "enjoy", "films", "american", "pie", "trip", "&", "wilder". Negative: rest.
+
+We should not invent.
+
+Ok.</think>
+**How each top token shaped the model’s sentiment**
+
+| Token | Attribution | Effect on the prediction |
+|-------|-------------|--------------------------|
+| **if** | –0.0126 | Strong push toward **negative** sentiment. |
+| **you** | +0.0126 | Slight push toward **positive** sentiment. |
+| **enjoy** | +0.0045 | Mild push toward **positive** sentiment. |
+| **films** | +0.0022 | Small push toward **positive** sentiment. |
+| **like** | –0.0021 | Mild push toward **negative** sentiment. |
+| **american** | +0.0051 | Small push toward **positive** sentiment. |
+| **pie** | +0.0029 | Small push toward **positive** sentiment. |
+| **,** | –0.0004 | Negligible push toward **negative** sentiment. |
+| **road** | –0.0018 | Small push toward **negative** sentiment. |
+| **trip** | +0.0032 | Small push toward **positive** sentiment. |
+| **&** | +0.0011 | Small push toward **positive** sentiment. |
+| **van** | –0.0044 | Noticeable push toward **negative** sentiment. |
+| **wilder** | +0.0030 | Small push toward **positive** sentiment. |
+| **avoid** | –0.0013 | Small push toward **negative** sentiment. |
+| **this** | –0.0055 | Noticeable push toward **negative** sentiment. |
+| **cinematic** | –0.0047 | Noticeable push toward **negative** sentiment. |
+| **refuse** | –0.0000 | Virtually no effect. |
+| **at** | –0.0029 | Small push toward **negative** sentiment. |
+| **all** | –0.0033 | Small push toward **negative** sentiment. |
+| **costs** | –0.0029 | Small push toward **negative** sentiment. |
+
+**What the numbers say**
+
+* The **overall contribution of the top 20 tokens is negative** (≈ –0.007), matching the final prediction of 0.013 (negative sentiment).
+* Tokens that hint at enjoyment or familiar film titles (“you”, “enjoy”, “american”, “pie”, “trip”, “wilder”) give **positive nudges**, but their total strength is outweighed by the negative influence of words that signal warning or criticism (“if”, “like”, “van”, “avoid”, “this”, “cinematic”, “at”, “all”, “costs”).
+* The negative tokens that have the largest impact are “if” and “this”, each pushing the sentiment toward negative by more than 0.01. “cinematic” and “van” also contribute significantly in the negative direction.
+* Positive tokens provide only modest reinforcement; collectively they add a little weight but cannot reverse the overall negative trend.
+
+**Take‑away**
+
+The model’s prediction is dominated by a handful of strongly negative words (“if”, “this”, “cinematic”, “van”) that outweigh the modest positive signals from words that describe enjoyment or familiar titles. As a result, the review is classified as negative.
+
+# EPR Explainer: 0.4745, Verifier: 0.5345

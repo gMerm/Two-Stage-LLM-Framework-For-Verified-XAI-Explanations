@@ -1,0 +1,45 @@
+<think>We need to explain how each word influenced the model's sentiment prediction, both positive and negative contributors, and how they collectively shaped final prediction. The dataset context: IMDB movie reviews, prediction 0.0134 which is near neutral but predicted negative. So the model predicted negative sentiment; low positive probability. The attributions show contributions to the prediction. Negative attributions push toward negative. Positive push toward positive.
+
+We have tokens with attribution values. We need to interpret each token's contribution. Provide explanation for both technical and non-technical audiences, but concise, actionable insights. So we can give a brief summary: tokens with highest positive influence: "you", "american", "pie", etc. Negative: "if", "like", "van", "avoid", etc. We need to show that overall negative influence outweighs positive, leading to negative sentiment. Provide details: magnitude indicates strength. Some tokens have small contributions like "refuse" negative almost zero.
+
+We should not mention that "prediction near neutral" or mention threshold. Just interpret. We must use the data only. We can say "token 'if' contributes -0.0126, meaning it strongly pushes towards negative" etc.
+
+Also mention that the negative tokens are more influential in magnitude and count, leading to negative final prediction. Also note that positive tokens like "you" have slightly higher contribution but still relatively small. Provide actionable insight: focus on removing negative words or increasing positive words to shift sentiment.
+
+Ok. Provide concise natural language explanation. Use bullet list maybe. Shouldn't be too technical. Also include mention of token "refuse" has negligible contribution. Let's produce.</think>
+**How each word shaped the model’s prediction**
+
+| Token | Attribution | Effect on sentiment | How it moved the prediction |
+|-------|-------------|---------------------|-----------------------------|
+| **if** | –0.0126 | Strong negative | The word “if” pushes the model toward a negative rating. |
+| **you** | +0.0126 | Strong positive | “you” nudges the model toward a positive feeling, almost canceling the “if”. |
+| **enjoy** | +0.0045 | Mild positive | Adds a small positive signal. |
+| **films** | +0.0022 | Mild positive | Slightly helps a positive view. |
+| **like** | –0.0021 | Mild negative | Moves the sentiment slightly negative. |
+| **american** | +0.0051 | Moderate positive | Strengthens the positive side. |
+| **pie** | +0.0029 | Mild positive | Adds a little positive influence. |
+| **,** | –0.0004 | Negligible negative | Very small negative push. |
+| **road** | –0.0018 | Mild negative | Small negative influence. |
+| **trip** | +0.0032 | Mild positive | A modest positive boost. |
+| **&** | +0.0011 | Minor positive | Adds a tiny positive signal. |
+| **van** | –0.0044 | Moderate negative | Strong negative contribution. |
+| **wilder** | +0.0030 | Mild positive | Adds a little positive. |
+| **avoid** | –0.0013 | Mild negative | Slight negative push. |
+| **this** | –0.0055 | Strong negative | Strongly encourages a negative view. |
+| **cinematic** | –0.0047 | Strong negative | Adds a substantial negative signal. |
+| **refuse** | –0.0000076 | Negligible negative | Virtually no effect. |
+| **at** | –0.0029 | Mild negative | Small negative influence. |
+| **all** | –0.0033 | Moderate negative | Adds a moderate negative push. |
+| **costs** | –0.0029 | Mild negative | Small negative effect. |
+
+**Collective impact**
+
+- The negative tokens (“if”, “like”, “van”, “this”, “cinematic”, “all”, etc.) have larger absolute attributions and more tokens, so their combined pull toward a negative sentiment outweighs the positive tokens.
+- The highest positive influence comes from “you”, “american”, and “pie”, but their magnitudes are still smaller than the strongest negative contributors.
+- As a result, the overall attribution sum leans negative, leading the model to predict a negative review (prediction ≈ 0.013).
+
+**Take‑away**
+
+If you want the model to see a review as more positive, focus on adding or strengthening words with large positive attributions (e.g., “you”, “american”, “pie”, “enjoy”) and reduce the use of strongly negative words such as “if”, “this”, “cinematic”, or “van”. This balanced shift would move the prediction toward a more positive sentiment.
+
+# EPR Explainer: 0.8933, Verifier: 0.4419

@@ -1,0 +1,88 @@
+<think>We need to provide global explanation: list features rank, importance score, direction of influence? We have no direction in global data. But we can infer: typically carat positive, color (lower values maybe better?), clarity, cut, etc. But must not invent beyond data. We can state "direction not specified in provided output." Provide context.
+
+Local explanation: for each instance, we need to describe predicted vs actual, error, and explain each feature contribution with value/range, direction, weight fraction. Also mention confidence. Provide concise actionable insights. Must use only data provided.
+
+Ok. Let's craft.</think>
+**Global Explanation (LIME – top 9 features)**  
+
+| Rank | Feature | Importance Score | Direction of influence (as reported) |
+|------|---------|------------------|--------------------------------------|
+| 1 | carat | 124.44 | *Not specified in the output* |
+| 2 | color | 102.26 | *Not specified in the output* |
+| 3 | clarity | 75.55 | *Not specified in the output* |
+| 4 | cut | 53.20 | *Not specified in the output* |
+| 5 | y | 32.99 | *Not specified in the output* |
+| 6 | x | 10.05 | *Not specified in the output* |
+| 7 | table | 9.62 | *Not specified in the output* |
+| 8 | depth | 6.41 | *Not specified in the output* |
+| 9 | z | 0.13 | *Not specified in the output* |
+
+*Interpretation:*  
+The model’s global explanation highlights **carat** as the strongest predictor of price, followed by **color**, **clarity**, and **cut**. The subsequent geometric measurements (**y**, **x**, **table**, **depth**, **z**) contribute progressively less to price variance. Although the direction (positive/negative) for each feature is not given in the global output, the relative magnitudes align with domain knowledge: larger carat and higher quality color/clarity generally increase price, whereas the geometric dimensions have a smaller, mixed effect.
+
+---
+
+### Local Explanation – Instance #676  
+
+| Feature | Observed value/range | Contribution to prediction | Direction | Weight (fraction of total effect) |
+|---------|----------------------|-----------------------------|-----------|-----------------------------------|
+| clarity | `<= 2.0` | +2075.04 | positive | 0.423 |
+| y | `<= 6.54 and > 5.71` | –817.87 | negative | 0.167 |
+| color | `<= 4.0 and > 3.0` | –723.16 | negative | 0.148 |
+| x | `<= 6.55 and > 5.7` | +537.18 | positive | 0.110 |
+| z | `<= 4.04 and > 3.53` | +262.97 | positive | 0.054 |
+| carat | `<= 1.05 and > 0.7` | –185.91 | negative | 0.038 |
+| cut | `<= 2.0` | –109.84 | negative | 0.022 |
+| table | `<= 57.0 and > 56.0` | +102.95 | positive | 0.021 |
+| depth | `<= 61.8 and > 61.0` | –86.28 | negative | 0.018 |
+
+**Prediction details**  
+- **Actual price:** \$3,172.00  
+- **Predicted price:** \$3,601.51  
+- **Absolute error:** \$429.51  
+
+**Interpretability**  
+- Confidence score: **0.072** (low, suggesting the local model may not capture all nuance).  
+- All nine features used, reflecting the full set of attributes supplied to the model.
+
+**Insight:**  
+The model’s over‑prediction is mainly driven by a strong positive contribution from *clarity* and moderate positives from *x* and *z*. Negative contributions from *y*, *color*, and *carat* pull the estimate down, but not enough to offset the high clarity effect.
+
+---
+
+### Local Explanation – Instance #737  
+
+| Feature | Observed value/range | Contribution to prediction | Direction | Weight (fraction of total effect) |
+|---------|----------------------|-----------------------------|-----------|-----------------------------------|
+| carat | `<= 0.7 and > 0.4` | –2897.62 | negative | 0.487 |
+| clarity | `> 5.0` | +902.91 | positive | 0.152 |
+| y | `<= 5.71 and > 4.72` | –884.52 | negative | 0.149 |
+| table | `<= 57.0 and > 56.0` | –485.01 | negative | 0.082 |
+| x | `<= 5.7 and > 4.71` | +324.50 | positive | 0.055 |
+| cut | `<= 2.0` | –311.06 | negative | 0.052 |
+| color | `<= 3.0 and > 1.0` | +85.92 | positive | 0.014 |
+| depth | `<= 62.5 and > 61.8` | –30.62 | negative | 0.005 |
+| z | `<= 3.53 and > 2.91` | +22.67 | positive | 0.004 |
+
+**Prediction details**  
+- **Actual price:** \$1,981.00  
+- **Predicted price:** \$1,917.62  
+- **Absolute error:** \$63.38  
+
+**Interpretability**  
+- Confidence score: **0.117** (slightly higher than Instance #676, indicating a more reliable local explanation).  
+- Nine features used, covering all available attributes.
+
+**Insight:**  
+The substantial under‑prediction is dominated by a negative contribution from *carat* (≈ –$2,898), which outweighs the positive effects of *clarity* and *x*. The negative influence of *y*, *table*, and *cut* further suppresses the estimate. The small positive contributions from *color*, *depth*, and *z* have limited impact.
+
+---
+
+**Overall take‑away**  
+- **Carat** is the most powerful driver of price in both global and local contexts.  
+- **Color** and **clarity** contribute strongly but can shift the sign depending on their specific ranges.  
+- **Geometric dimensions** (*x*, *y*, *z*, *table*, *depth*) provide nuanced adjustments that can either raise or lower the prediction, often offsetting the dominant carat effect.  
+
+These explanations allow practitioners to see exactly how each attribute nudges the model’s output for any given diamond.
+
+# EPR Explainer: 0.4731, Verifier: 0.6178

@@ -1,0 +1,41 @@
+<think>We need to explain how each word influenced the sentiment prediction. We have 20 tokens with attributions. We should identify positive and negative contributors, and explain collectively shaping the prediction. The prediction is 0.0134, near zero but negative sentiment. Provide concise explanation. Use natural language for both technical and non-technical audience. Need to avoid invented details beyond given data. Provide each token with its attribution magnitude and sign. Probably describe that positive tokens push slightly towards positive but negative tokens outweigh, causing negative prediction. Should mention the impact of top positive tokens: 'you', 'enjoy', 'american', 'pie', 'road', 'trip', '&', 'wilder', 'films', 'van' (though van is negative). etc. Negative tokens: 'if', 'like', 'road', 'van', 'avoid', 'this', 'cinematic', 'at', 'all', 'costs', comma? etc. Provide overall explanation. Ensure no extra technical jargon. Let's produce.</think>
+**How each word shaped the model’s decision**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Pushes the prediction toward negative. |
+| **you** | +0.0126 | Pushes the prediction toward positive. |
+| **enjoy** | +0.0045 | Slightly positive. |
+| **films** | +0.0022 | Slightly positive. |
+| **like** | –0.0021 | Slightly negative. |
+| **american** | +0.0051 | Positive. |
+| **pie** | +0.0029 | Positive. |
+| **,** | –0.0004 | Negligible negative. |
+| **road** | –0.0018 | Negative. |
+| **trip** | +0.0032 | Positive. |
+| **&** | +0.0011 | Positive. |
+| **van** | –0.0044 | Negative. |
+| **wilder** | +0.0030 | Positive. |
+| **avoid** | –0.0013 | Negative. |
+| **this** | –0.0055 | Negative. |
+| **cinematic** | –0.0047 | Negative. |
+| **refuse** | –0.0000 | Neutral (essentially zero). |
+| **at** | –0.0029 | Negative. |
+| **all** | –0.0033 | Negative. |
+| **costs** | –0.0029 | Negative. |
+
+### What the numbers tell us
+
+* **Positive words** (e.g., *you, enjoy, american, pie, trip, wilder*) give the model a gentle push toward a positive sentiment.  
+* **Negative words** (e.g., *if, like, road, van, avoid, this, cinematic, at, all, costs*) pull the prediction toward a negative sentiment.  
+* The overall **net effect** is negative: the sum of the negative attributions outweighs the positives, giving a very small positive probability (≈0.013) and the model labels the review as *Negative*.
+
+### How the tokens work together
+
+1. **Context of praise vs. criticism** – Tokens such as *enjoy*, *films*, *american*, *pie*, *trip*, and *wilder* hint at a positive tone, but their influence is modest.  
+2. **Strong negative cues** – Words like *if*, *this*, *cinematic*, *refuse*, *avoid*, *van*, *at*, *all*, and *costs* carry a strong negative weight, strongly steering the prediction away from positivity.  
+3. **Balance of forces** – Even though the model picks up a few positive clues, the larger, more negative signals dominate, resulting in the final negative classification.
+
+**Bottom line:** The review contains a few words that could hint at enjoyment, but the overall language is dominated by negative descriptors and warnings. The integrated‑gradients scores show that the negative words outweigh the positives, leading the model to predict a negative sentiment.
+
+# EPR Explainer: 0.6526, Verifier: 0.5874

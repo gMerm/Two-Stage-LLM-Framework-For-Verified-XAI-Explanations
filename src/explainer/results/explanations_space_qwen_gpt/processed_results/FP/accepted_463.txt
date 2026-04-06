@@ -1,0 +1,33 @@
+<think>Okay, let me break this down. The user wants me to explain token attributions from an IMDB review analysis. First, I need to understand the data: it's a negative review with 20 tokens that most influenced the model's negative prediction.
+
+Hmm, looking at the top_20_token_attributions, I notice positive attributions (pushing toward negative sentiment) and negative attributions (which actually mean the token contributed to negativity). Wait no - the attribution sign is key: negative values mean the token pushed the prediction toward negative (since prediction is 0.013 which is negative). So for "if" with -0.0126, that's a strong negative contributor.
+
+Let me sort these by magnitude to find the most impactful tokens. The strongest negative contributors are "if" (-0.0126), "this" (-0.0055), "cinematic" (-0.0047), "van" (-0.0044), "all" (-0.0033), etc. The positive ones like "you" (0.0126) actually helped the model see it as negative - wait no, "you" has positive attribution but the prediction is negative. That means "you" was a positive word that made the model think "wait this might be positive?" but other words overruled it.
+
+Important: I must not confuse the sign. Positive attribution = pushes toward positive sentiment, but since prediction is negative, those tokens were overridden. For example "enjoy" has +0.0045 but the review is negative, so this token was a weak positive that didn't change the outcome.
+
+Now for the explanation: I'll group by contribution direction. First list the strongest negative contributors (most negative attributions) since they drove the negative prediction. Then mention the positive tokens that were overruled. Need to keep it simple - no jargon like "attribution scores", just say "words that most strongly made the model think it was negative".
+
+Wait, the token "refuse" has almost zero attribution (-7.5e-6), so I should note it's negligible. Same for punctuation like commas.
+
+For non-technical audience: "The words 'if', 'this', and 'cinematic' were key in making the model classify this as a negative review." For technical: "Tokens with most negative attributions (e.g. 'if' at -0.0126) dominated the prediction."
+
+Must avoid saying "the model thinks" - it's about the prediction. And absolutely no adding words like "I think" - just state the facts from data.
+
+Double-checking: prediction is 0.013 (negative), so all negative attributions are correct. The positive attributions like "you" (+0.0126) were actually making the model consider positive, but the negative words won. But I shouldn't say "won" - just state the net effect.
+
+Final structure: 
+1. Start with overall sentiment (negative)
+2. List top 3 negative contributors with their impact
+3. Mention the positive tokens that were overruled
+4. Note negligible tokens (like "refuse")
+5. Keep it under 5 sentences total.
+</think>
+The review was classified as negative (prediction: 0.013). The strongest negative influences were:  
+- **"if"** (−0.0126): Strongly pushed the model toward negative sentiment.  
+- **"this"** (−0.0055) and **"cinematic"** (−0.0047): Key negative descriptors.  
+- **"van"** (−0.0044), **"all"** (−0.0033), and **"costs"** (−0.0029): Reinforced the negative judgment.  
+
+Weaker positive words like **"you"** (+0.0126) and **"enjoy"** (+0.0045) briefly suggested positivity but were overruled by the dominant negative terms. Punctuation (e.g., "," at −0.0004) and low-impact words (e.g., "refuse" at −0.000007) had negligible influence. The negative words collectively defined the review’s harsh tone.
+
+# EPR Explainer: 0.7348, Verifier: 0.9781

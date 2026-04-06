@@ -1,0 +1,39 @@
+<think>We need to produce natural language explanations for each feature, using the mean_abs_shap values. Should explain importance ranking, why each matters for income prediction, and maybe give context on specific values.
+
+We should only use provided quantitative data. We have the list of features sorted? The order is given as list in XAI output. The mean_abs_shap corresponds. We should explain: WKHP highest 0.904, etc. Provide context: weekly hours worked influences income etc. Mention relative importance: WKHP > OCCP > AGEP > SCHL > RELP > SEX > POBP > COW > MAR > RAC1P. Also mention that RAC1P least influence.
+
+Need to be concise. Should also mention that these are mean absolute SHAP values meaning overall effect magnitude, not direction.
+
+Also provide actionable insights: e.g., focus on hours worked, occupation, age, education etc.
+
+We'll produce a bullet list or paragraph for each.
+
+Also maybe include a short summary.
+
+Let's craft explanation.
+
+</think>
+**Feature‑wise influence on income prediction (in order of importance)**  
+
+| Rank | Feature | Mean absolute SHAP | Why it matters for income |
+|------|---------|--------------------|---------------------------|
+| 1 | **WKHP** (weekly hours worked) | **0.904** | The amount of time spent working each week is the strongest driver of the model’s income estimate. More hours typically translate into higher pay or access to higher‑paying jobs, so the model heavily weighs this variable. |
+| 2 | **OCCP** (occupation) | **0.630** | Job type captures industry, skill level and typical earnings. Certain occupations are associated with higher wages, so the model uses occupation as a key indicator of likely income. |
+| 3 | **AGEP** (age) | **0.517** | Age reflects career stage and experience. Mid‑career individuals often earn more than very young or older workers, making age an important predictor of income. |
+| 4 | **SCHL** (education level) | **0.465** | Educational attainment strongly correlates with earning potential. Higher degrees generally lead to better‑paid positions, so the model values education next after occupation and work hours. |
+| 5 | **RELP** (relationship to household head) | **0.343** | Relationship status can indicate dependency or household income structure. For example, spouses or partners may share income, while children are typically non‑earning, so this feature influences the model’s income expectation. |
+| 6 | **SEX** (gender) | **0.224** | Gender differences in pay remain present in many sectors. The model captures this disparity, giving gender a moderate impact on income predictions. |
+| 7 | **POBP** (place of birth) | **0.172** | Birthplace can be a proxy for socioeconomic background or migration patterns that affect earning prospects, so it contributes modestly to the prediction. |
+| 8 | **COW** (class of worker) | **0.137** | Employment type (private, public, self‑employed) influences wage structures. The model considers this factor, though its effect is relatively small. |
+| 9 | **MAR** (marital status) | **0.102** | Marital status may affect household income through dual earners or economic support, but it has a limited predictive power compared to other features. |
+| 10 | **RAC1P** (race) | **0.053** | Race has the smallest impact in this model, suggesting that, after controlling for other variables, it explains only a minor portion of income variation. |
+
+**Key takeaways for a non‑technical audience**
+
+- The model’s most confident signals come from *how many hours you work per week* and *what job you have*. These are the biggest income drivers.
+- Age and education also matter a lot, reflecting experience and qualifications.
+- Family relationships, gender, birthplace, employment type, marital status, and race play smaller roles in the model’s decision, but they still influence the overall prediction to some degree.  
+
+This ranking helps you see which aspects of a person’s profile the model considers most important for determining whether they earn above or below the median income threshold.
+
+# EPR Explainer: 0.9136, Verifier: 0.5041

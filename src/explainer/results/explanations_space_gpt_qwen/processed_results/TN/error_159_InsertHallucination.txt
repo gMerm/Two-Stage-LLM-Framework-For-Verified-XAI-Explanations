@@ -1,0 +1,49 @@
+<think>We need to explain how each word of the top_20_token_attributions influenced the model's sentiment prediction. Identify and describe impact of all tokens positive and negative, detailing how each one collectively shaped final prediction. We have tokens and attribution values. The overall prediction probability is 0.0134 close to 0: negative. Attributions show positive tokens add to prediction towards positive, negative subtract. We need to explain to both technical and non-technical audiences, but keep concise and actionable insights. Use plain language, no extra assumptions.
+
+We should mention each token's contribution: e.g., "if" negative small contribution -0.0126, "you" positive 0.0126, "enjoy" +0.0045, etc. We should say that the combined positive contributions amount to sum of positive attributions and negative contributions amount to sum of negative attributions. Provide totals maybe. Then explain net effect: net negative, leading to negative sentiment. Also mention that some tokens like "avoid" and "this" have strong negative contributions.
+
+Also note that tokens like "refuse" nearly zero, etc. Provide interpretation: words that denote negative aspects like "avoid", "cinematic", "refuse", "costs" reduce positive sentiment; words that are neutral or mild positive words like "you", "enjoy", "american" slightly increase. So final negative.
+
+Let's compute sums: positive attributions: tokens: you 0.0125961145, enjoy 0.0045203231, films 0.0021744878, american 0.0051003154, pie 0.0028989785, trip 0.0031642872, & 0.0011230998, wilder 0.0029774320, van? actually van is negative. So total positive: sum: 0.0125961+0.0045203+0.0021745+0.0051003+0.0028990+0.0031643+0.0011231+0.0029774 = let's calculate: 0.0125961+0.0045203=0.0171164; +0.0021745=0.0192909; +0.0051003=0.0243912; +0.0028990=0.0272902; +0.0031643=0.0304545; +0.0011231=0.0315776; +0.0029774=0.0345550. So positives sum ~0.0346.
+
+Negatives: tokens: if -0.0126376, like -0.0020755, road -0.0018063, vanish? van -0.0044165, avoid -0.0012794, this -0.0055369, cinematic -0.0047005, refuse -7.555e-06 ~0, at -0.0029249, all -0.0032766, costs -0.0028788, comma -0.0003935. Sum negative: add absolute values: 0.0126376+0.0020755=0.0147131; +0.0018063=0.0165194; +0.0044165=0.0209359; +0.0012794=0.0222153; +0.0055369=0.0277522; +0.0047005=0.0324527; +0.0000076=0.0324603; +0.0029249=0.0353852; +0.0032766=0.0386618; +0.0028788=0.0415406; +0.0003935=0.0419341. So negative sum ~0.0419. So net negative ~0.0074 difference negative (negative minus positive). So that yields negative prediction. We can explain that.
+
+Make sure not to mention too much calculation but could include.
+
+Ok produce explanation.</think>
+**How each highlighted word nudged the model toward a negative review**
+
+| Token | Attribution | Effect on sentiment | Quick take‑away |
+|-------|-------------|---------------------|-----------------|
+| **if** | –0.0126 | Strong negative push | “If” makes the sentence feel conditional and uncertain, tipping the model toward caution. |
+| **you** | +0.0126 | Strong positive push | “You” addresses the reader directly and adds a neutral/positive voice. |
+| **enjoy** | +0.0045 | Small positive push | Suggests a mild positive feeling. |
+| **films** | +0.0022 | Small positive push | A neutral noun that slightly warms the tone. |
+| **like** | –0.0021 | Small negative push | Indicates a comparison that the model treats as a mild downgrade. |
+| **american** | +0.0051 | Moderate positive push | A brand name that slightly boosts positivity. |
+| **pie** | +0.0029 | Small positive push | Adds a playful word that lifts the sentiment a bit. |
+| **,** | –0.0004 | Negligible negative push | Commas are treated as minor separators that slightly dampen the tone. |
+| **road** | –0.0018 | Small negative push | Contributes to the overall negative vibe. |
+| **trip** | +0.0032 | Small positive push | Adds a sense of movement that the model interprets positively. |
+| **&** | +0.0011 | Very small positive push | The ampersand ties together words that are slightly positive. |
+| **van** | –0.0044 | Moderate negative push | “Van” is part of a negative phrase (“Van Wilder”) that lowers sentiment. |
+| **wilder** | +0.0030 | Small positive push | The second part of the name that lightens the negativity a touch. |
+| **avoid** | –0.0013 | Small negative push | A clear recommendation against the film. |
+| **this** | –0.0055 | Strong negative push | “This” anchors the negative comment. |
+| **cinematic** | –0.0047 | Moderate negative push | Labels the film in a way that the model sees as negative. |
+| **refuse** | –0.0000 | No real effect | Virtually neutral in the model’s view. |
+| **at** | –0.0029 | Small negative push | Minor negative contribution. |
+| **all** | –0.0033 | Small negative push | Adds to the negative context. |
+| **costs** | –0.0029 | Small negative push | Implies a high price for a bad film, reinforcing negativity. |
+
+**What these numbers tell us**
+
+- The **positive** tokens (you, enjoy, american, pie, trip, & etc.) together contribute about **+0.035** to the predicted sentiment.  
+- The **negative** tokens (if, like, road, van, this, cinematic, all, costs, etc.) together push the sentiment down by about **–0.042**.  
+- Because the negative contribution outweighs the positive, the overall score stays low (0.013), leading the model to label the review as **negative**.
+
+**Take‑away for readers**
+
+The model is most sensitive to words that directly criticize the film (“avoid”, “this”, “cinematic”) and those that frame it in a bad light (“van”, “road”). Positive words (“you”, “enjoy”, “american”) only give a slight lift, insufficient to override the strong negative signals. Thus, the final prediction reflects the reviewer’s overall negative tone.
+
+# EPR Explainer: 0.6601, Verifier: 0.5580

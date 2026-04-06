@@ -1,0 +1,67 @@
+<think>We need to explain each feature, using mean absolute SHAP values. Provide context on why it matters. Provide natural language for both technical and non-technical? Probably just clear explanation. The instruction: "Explain every feature that influenced the model's prediction for this individual. For every feature provide context on why it matters for income prediction." So list features with description, mention the mean SHAP value indicates importance relative to others.
+
+We must only base on data provided. So we cannot add extra. Should refer to order list: WKHP, OCCP, etc.
+
+Need to show reasoning step by step inside <think> tags. Then final answer.
+
+Let's produce final explanation: first mention that higher mean absolute SHAP indicates greater influence. Then go through each feature.
+
+Use concise but context-rich sentences. Provide actionable insight. Use technical and non-technical. Let's craft.
+
+</think>
+<think>We need to translate the quantitative mean‑absolute SHAP values into plain explanations for each feature, highlighting why each feature matters for predicting whether a person’s income is above or below the median. The list is already ordered by importance, so we can note the relative influence and give a short context for each variable.</think>
+
+**How to read these numbers**
+
+- A **higher mean absolute SHAP value** means the feature contributes more, on average, to the model’s income prediction.  
+- A **lower value** indicates a weaker overall influence.  
+- The values are relative – they show the model’s *ranking* of importance, not an absolute threshold.
+
+---
+
+### 1. **WKHP (Usual hours worked per week)** – 0.90  
+**Why it matters:**  
+Hours worked are a direct proxy for employment intensity. People who work longer hours typically have higher salaries or earn more overtime, making this the strongest predictor of crossing the median income threshold.
+
+### 2. **OCCP (Occupation code)** – 0.63  
+**Why it matters:**  
+Different occupations come with different typical earnings. Knowing a person’s job type helps the model estimate their likely salary band.
+
+### 3. **AGEP (Age)** – 0.52  
+**Why it matters:**  
+Age reflects career stage and experience. Middle‑aged individuals often earn more than younger workers, while older workers may be in senior roles or on the way to retirement.
+
+### 4. **SCHL (Educational attainment)** – 0.46  
+**Why it matters:**  
+Higher education levels are strongly linked to better-paying jobs. The model uses this to gauge potential earning capacity.
+
+### 5. **RELP (Relationship to householder)** – 0.34  
+**Why it matters:**  
+A person’s role in the household (e.g., spouse, child, roommate) can indicate their employment status and support structure, which the model interprets as a modest income signal.
+
+### 6. **SEX (Sex)** – 0.22  
+**Why it matters:**  
+Sex can correlate with gender‑related wage gaps and occupational segregation, so the model includes it as a small but noticeable predictor.
+
+### 7. **POBP (Place of birth)** – 0.17  
+**Why it matters:**  
+Place of birth may capture socioeconomic background or migration status, affecting earnings in subtle ways.
+
+### 8. **COW (Class of worker)** – 0.14  
+**Why it matters:**  
+Employment type (private, government, self‑employed) influences typical salary ranges and benefits, adding another layer of income estimation.
+
+### 9. **MAR (Marital status)** – 0.10  
+**Why it matters:**  
+Marital status can affect income through shared resources or dual‑income households, but its impact is modest.
+
+### 10. **RAC1P (Race)** – 0.05  
+**Why it matters:**  
+Race is the weakest predictor in this model, though it can reflect systemic disparities that influence earning potential.
+
+---
+
+**Bottom line:**  
+The model bases its decision mainly on how many hours a person works and what occupation they hold. Age, education, and household role add further context, while sex, place of birth, employment class, marital status, and race contribute progressively smaller signals. Understanding these relationships can help explain why the model classified this individual’s income as above or below the median.
+
+# EPR Explainer: 0.8361, Verifier: 0.5365

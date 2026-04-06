@@ -1,0 +1,46 @@
+<think>We need to explain how each word of the top_20_token_attributions influenced the model's sentiment prediction. Provide for both positive and negative contributors, detailing how each collectively shaped final prediction. Must only use provided quantitative data. Not to invent details. Provide concise explanation. Also mention that prediction is negative. The attributions show contribution to probability of positive? Actually integrated gradients: positive attributions push toward positive, negative toward negative. So each token's attribution value indicates contribution. Need to interpret. Summarize contributions: e.g., "if" has -0.0126 meaning strong negative influence. "you" positive small. Provide overall. Also note that tokens with negative attributions like "avoid" etc. combine to produce overall negative prediction.
+
+Need to mention magnitude: magnitude indicates strength. Provide explanation for each token. Also mention that collectively, the negative tokens outweigh positive, leading to negative sentiment.
+
+Also note that the overall prediction is 0.013 (low positive?), but predicted negative. So maybe 0.013 is probability of positive? But they say predicted sentiment Negative. Provide explanation accordingly.
+
+Let's craft explanation: start with brief summary of prediction. Then each token explanation. Use plain language.
+
+Need to keep under guidelines: No extra remarks. Provide concise explanation.
+
+Also ensure not to mention internal system. Good.
+
+Let's produce.</think>
+**Model prediction**  
+The model gives the review a very low probability of being positive (≈ 0.01) and classifies it as **Negative**.  
+The Integrated Gradients scores tell us which words pulled the score toward positivity and which pushed it toward negativity.
+
+**Token‑level influence**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Strongly pushes the review toward negative sentiment. |
+| **you** | +0.0126 | Small positive push; helps slightly toward a positive reading. |
+| **enjoy** | +0.0045 | Slight positive push; suggests a favorable view. |
+| **films** | +0.0022 | Small positive push; indicates relevance to movie context. |
+| **like** | –0.0021 | Minor negative push; weakly discourages a positive sentiment. |
+| **american** | +0.0051 | Positive push; adds a specific reference that helps positivity. |
+| **pie** | +0.0029 | Positive push; supports the positive “like” pair. |
+| **,** | –0.0004 | Negligible negative push; punctuation has a tiny effect. |
+| **road** | –0.0018 | Small negative push; discourages positivity. |
+| **trip** | +0.0032 | Positive push; complements “road” in a movie‑related phrase. |
+| **&** | +0.0011 | Small positive push; part of a compound title. |
+| **van** | –0.0044 | Strong negative push; pulls the sentiment away from positive. |
+| **wilder** | +0.0030 | Positive push; balances the negative “van” to some extent. |
+| **avoid** | –0.0013 | Negative push; suggests a warning. |
+| **this** | –0.0055 | Strong negative push; signals the subject being criticized. |
+| **cinematic** | –0.0047 | Strong negative push; directly opposes positive tone. |
+| **refuse** | –0.0000076 | Effectively neutral; negligible negative influence. |
+| **at** | –0.0029 | Negative push; part of the discouraging phrase “at all costs”. |
+| **all** | –0.0033 | Negative push; reinforces the discouraging sentiment. |
+| **costs** | –0.0029 | Negative push; concludes the discouraging phrase. |
+
+**Collective effect**  
+The large negative contributions from words like **if, this, cinematic, avoid, all, costs, van** outweigh the small positive contributions from **you, enjoy, films, american, pie, trip, & wilder**. The net effect is a strong negative bias, which aligns with the model’s low positive probability and the final “Negative” classification.
+
+# EPR Explainer: 0.8948, Verifier: 0.6172

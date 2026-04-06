@@ -1,0 +1,49 @@
+<think>Okay, let me break this down step by step. The user wants me to explain how each token in the top 20 attributions influenced the sentiment prediction for this negative movie review. 
+
+First, I need to understand the data: the model predicted negative sentiment (0.013, close to 0), and we have 20 tokens with their attribution scores. Positive attributions push toward positive sentiment, negative ones toward negative. The magnitude shows strength.
+
+Looking at the tokens:
+- "if" has -0.0126 (strong negative)
+- "you" has +0.0126 (strong positive)
+- "enjoy" +0.0045 (positive)
+- "films" +0.0022 (positive)
+- "like" -0.0021 (negative)
+- "american" +0.0051 (positive)
+- "pie" +0.0029 (positive)
+- ... and so on
+
+Hmm, interesting conflict here. The words "if", "you", "like" etc. are creating a positive context (like enjoying comedies), but the negative tokens like "avoid", "cinematic refuse" are pulling the sentiment down. The strong negative attribution for "if" (-0.0126) stands out - that's the biggest single influence.
+
+Wait, I should check if the positive words are actually contributing to the negative prediction. The review says "If you enjoy films like American Pie... avoid this", so the "if" is setting up a contrast. The negative tokens are winning because they're stronger in magnitude.
+
+Let me calculate the net effect: summing all attributions. The negative ones (like "if", "avoid", "this", "cinematic refuse") have larger magnitudes than the positive ones. For example, "if" alone is -0.0126 while the strongest positive "you" is +0.0126 - but they're working against each other. The review's actual sentiment comes from the negative words dominating.
+
+Important: I must not invent anything. The data shows "if" has strong negative attribution, so I'll explain it as the conditional phrase creating the contrast that leads to the negative recommendation.
+
+For non-technical audience, I'll avoid terms like "attribution" and say "how much each word contributed to the negative feeling". For technical, I'll keep the terms but stay concise.
+
+Biggest mistake would be to say "the model thought 'if' was negative" - it's not about the word itself, but how it's used in context. The explanation must reflect that the negative score comes from the word's role in the critical contrast.
+
+Also noting: "refuse" has near-zero attribution (-7.5e-6), so I'll mention it's negligible. "costs" has -0.0029, which is minor compared to "if" or "cinematic".
+
+Finally, I'll structure the explanation to show:
+1. The strongest negative influences (with their scores)
+2. The positive words that were countered
+3. How the negative words collectively dominated
+</think>
+The model predicted a negative sentiment (0.013, near 0) for this review. Below is a clear breakdown of how the top 20 tokens influenced this prediction, based *only* on the provided attribution scores:
+
+**Strongest Negative Contributors (pushing prediction toward negative):**  
+- **"if"** (-0.0126): The largest negative influence. This conditional word sets up the contrast ("if you enjoy *positive* films, *avoid* this"), making the negative recommendation more forceful.  
+- **"this"** (-0.0055), **"cinematic"** (-0.0047), **"refuse"** (-0.0000075): These form the core negative phrase "cinematic refuse," strongly reinforcing the review's harsh judgment.  
+- **"avoid"** (-0.0013), **"all"** (-0.0033), **"costs"** (-0.0029): Amplify the urgency of the negative warning ("avoid at all costs").  
+
+**Positive Contributors (pushing prediction toward positive, but overpowered):**  
+- **"you"** (+0.0126), **"enjoy"** (+0.0045), **"films"** (+0.0022), **"american"** (+0.0051), **"pie"** (+0.0029), **"trip"** (+0.0032), **"wilder"** (+0.0030): These words reference positive films (e.g., *American Pie*), creating a contrast that the model uses to highlight the current film’s failure.  
+
+**Key Insight:**  
+The negative words (especially **"if"**, **"this"**, and **"cinematic refuse"**) dominated the prediction by framing the review as a strong warning against the film. The positive words ("enjoy," "films," etc.) were contextually *used to emphasize the film’s failure*, so their positive attribution was overruled by the stronger negative phrasing. The model’s final negative score reflects this critical contrast.  
+
+*Note: "refuse" has negligible impact (score ≈ 0), and punctuation (e.g., ",") had minimal influence.*
+
+# EPR Explainer: 0.6633, Verifier: 1.1308

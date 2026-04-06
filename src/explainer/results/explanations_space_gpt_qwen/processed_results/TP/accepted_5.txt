@@ -1,0 +1,40 @@
+<think>We need to explain each feature's influence for the individual's prediction, based on mean absolute SHAP values. Provide context on why matters for income prediction. Should be concise. Should avoid technical talk. Should be clear for both technical and non-technical. Use the data: mean_abs_shap values. Highest is WKHP 0.904, then OCCP 0.629, AGEP 0.517, SCHL 0.465, RELP 0.343, SEX 0.224, POBP 0.172, COW 0.137, MAR 0.102, RAC1P 0.053.
+
+Need to say that higher mean abs shap indicates stronger influence on model predictions, independent of direction. So WKHP most important, etc. Provide context: hours worked influences income, occupation relates to earning potential, age related to experience, education matters, relationship to householder might correlate with support or responsibilities, sex relates to gender wage gap, place of birth might reflect immigration status, class of worker shows employment type, marital status might reflect joint income, race influences systemic inequalities. Also mention that these values are averages across dataset; for this particular individual, the feature contributed some amount (but we don't have specific SHAP per individual). We should still mention the magnitude as relative importance.
+
+Make sure to adhere to guidelines: only use provided quantitative data, no assumptions beyond that. Use concise language. Use actionable insights. For each feature, explain why matters for income prediction. Let's craft.</think>
+**Feature importance (ranked by mean absolute SHAP value)**  
+1. **WKHP (Usual hours worked per week)** – 0.904  
+   *Why it matters:* More weekly work hours typically lead to higher earnings. The model gives this feature the strongest overall influence, indicating that hours worked is a primary signal for predicting whether income is above the median.
+
+2. **OCCP (Occupation code)** – 0.630  
+   *Why it matters:* Different occupations have different pay scales. The occupation a person holds is a strong predictor of expected income, so the model heavily weighs this feature.
+
+3. **AGEP (Age)** – 0.517  
+   *Why it matters:* Age reflects career stage and experience. Generally, older workers have had more time to build skills and income, making age an important factor.
+
+4. **SCHL (Educational attainment)** – 0.465  
+   *Why it matters:* Higher education levels are linked to better-paying jobs. The model treats education as a key determinant of earning potential.
+
+5. **RELP (Relationship to householder)** – 0.343  
+   *Why it matters:* This feature can signal household structure (e.g., spouse, child, roommate). Household composition can influence individual income through shared responsibilities or combined earnings.
+
+6. **SEX (Sex)** – 0.224  
+   *Why it matters:* Gender differences in wages exist due to various societal and workplace factors. The model incorporates sex as a moderate contributor to income prediction.
+
+7. **POBP (Place of birth)** – 0.172  
+   *Why it matters:* Place of birth can reflect immigration status, cultural background, or language proficiency, all of which may affect job opportunities and income.
+
+8. **COW (Class of worker)** – 0.137  
+   *Why it matters:* The type of employment (e.g., private, government, self‑employed) affects earning patterns. The model uses this to gauge typical income levels for each employment category.
+
+9. **MAR (Marital status)** – 0.102  
+   *Why it matters:* Married individuals might benefit from dual incomes or shared financial responsibilities, influencing individual income expectations.
+
+10. **RAC1P (Race)** – 0.053  
+    *Why it matters:* Race can be associated with historical and systemic disparities in job access and wage gaps. Although its influence is the smallest in the model, it still contributes to the overall prediction.
+
+**Bottom line**  
+The model relies most on how many hours someone works and the job they hold, while education, age, and household relationships also play substantial roles. Features related to gender, place of birth, class of worker, marital status, and race provide additional, though smaller, context that helps refine the income prediction.
+
+# EPR Explainer: 0.8124, Verifier: 0.5367

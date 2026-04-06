@@ -1,0 +1,31 @@
+<think>We need to explain each feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Use the provided mean absolute SHAP values to indicate relative importance. Need to convert to natural language for both technical and non-technical audiences. Concise, no extra technical language beyond necessary. Also mention that higher mean SHAP indicates stronger influence.
+
+Let's produce explanation sorted maybe by importance? Could keep order as given. Use each feature name and interpret.
+
+We should explain that WKHP has highest mean SHAP (0.904) meaning hours worked per week strongly influences predicted income. OCCP next, etc.
+
+Also maybe add that features with low values like RAC1P have minimal influence.
+
+Ok. Let's output.</think>
+**How the model judged this person’s income**
+
+The model looks at ten pieces of information. The size of each value in the table below (the “mean abs SHAP”) tells us how much that piece of information, on average, sways the model’s decision about whether the person earns above or below the median ($40 k).
+
+| Feature | Mean abs SHAP | What it means for income |
+|---------|--------------|---------------------------|
+| **WKHP** (usual hours worked per week) | **0.90** | Working more hours is a strong signal of a higher income. This feature has the biggest influence on the prediction. |
+| **OCCP** (occupation code) | 0.63 | The type of job (e.g., manager, technician, clerical) is a key driver of earnings. |
+| **AGEP** (age) | 0.52 | Age captures career stage and experience; older workers often earn more. |
+| **SCHL** (educational attainment) | 0.46 | Higher education levels generally lead to higher pay. |
+| **RELP** (relationship to householder) | 0.34 | Who the person lives with (spouse, child, roommate, etc.) can reflect family responsibilities that affect work hours and income. |
+| **SEX** | 0.22 | Gender differences in pay still exist in many jobs, so sex contributes to the model’s estimate. |
+| **POBP** (place of birth) | 0.17 | Geographic origin can influence cultural or network factors that affect earnings. |
+| **COW** (class of worker) | 0.14 | Whether the person works privately, for the government, or is self‑employed affects salary expectations. |
+| **MAR** (marital status) | 0.10 | Marital status can correlate with household responsibilities and income stability. |
+| **RAC1P** (race) | 0.05 | Race has the smallest influence in this model; its effect on income prediction is minor compared to other features. |
+
+**Take‑away**
+
+The model mainly relies on how many hours the person works and what job they hold, followed by age and education. Features that relate to family or personal background (sex, place of birth, race, etc.) play a smaller role. The numbers above show the relative weight each factor carries when deciding if the individual’s income is above or below the median threshold.
+
+# EPR Explainer: 0.8349, Verifier: 0.6603

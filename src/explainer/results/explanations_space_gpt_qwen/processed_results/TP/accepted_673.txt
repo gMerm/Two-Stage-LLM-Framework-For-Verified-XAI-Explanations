@@ -1,0 +1,39 @@
+<think>We need to explain how each word of the top 20 token attributions influenced the model's sentiment prediction. The model predicted negative sentiment with probability 0.0134. The attribution scores show contributions. Positive contributions push toward positive, negative push toward negative. We must describe each token's impact and how collectively shaped final prediction. Avoid inventing. So we should state for each token: sign and magnitude, meaning influence, e.g., "if" negative, so pulls toward negative. Provide concise insights. Should be understandable to both technical and non-technical. Let's produce a list or paragraph.
+
+We should mention that tokens with higher magnitude had bigger influence. Summarize that the majority are negative contributors, leading to negative prediction. The most negative tokens: "this", "cinematic", "at", "all", "costs" etc. The most positive tokens: "you", "enjoy", "american", "pie", "road trip" etc. Mention that the negative words dominate.
+
+Also mention that overall the attribution sum might be near negative, leading to low positive probability.
+
+We should not mention internal reasoning. Just output explanation.
+
+Let's produce.</think>
+**How each top token guided the model’s sentiment decision**
+
+| Token | Attribution | Effect on the prediction | What it tells the model |
+|-------|-------------|--------------------------|--------------------------|
+| **if** | –0.0126 | Pulls the prediction toward *negative* | The conditional “if” hints that the following statement is an exception, a subtle negative cue. |
+| **you** | +0.0126 | Pushes the prediction toward *positive* | Addressing the reader directly is usually neutral or mildly positive, so the model treats it as a small positive signal. |
+| **enjoy** | +0.0045 | Positive | “Enjoy” is a clear positive verb; it encourages a positive sentiment. |
+| **films** | +0.0022 | Positive | Generic “films” adds a mild positive context. |
+| **like** | –0.0021 | Negative | “Like” here introduces a comparison to other movies, but the overall tone is negative, so the model weakly pushes toward negativity. |
+| **american** | +0.0051 | Positive | Naming a specific film franchise usually signals relevance; the model leans slightly positive. |
+| **pie** | +0.0029 | Positive | As part of the title, it keeps the positive influence of “American Pie.” |
+| **,** | –0.0004 | Negligible negative | The comma is almost neutral; the tiny negative value reflects the model’s bias toward punctuation as a negative cue. |
+| **road** | –0.0018 | Negative | Part of “Road Trip”; the word alone is mildly negative. |
+| **trip** | +0.0032 | Positive | When combined with “road,” the pair slightly balances to positive. |
+| **&** | +0.0011 | Positive | The ampersand links two titles, adding a small positive weight. |
+| **van** | –0.0044 | Negative | “Van” in “Van Wilder” carries a negative vibe in this context. |
+| **wilder** | +0.0030 | Positive | Slightly offsets the negativity of “van.” |
+| **avoid** | –0.0013 | Negative | Directly signals a warning, pulling toward negative. |
+| **this** | –0.0055 | Strong negative | “This” refers to the movie being reviewed and carries a strong negative implication. |
+| **cinematic** | –0.0047 | Strong negative | “Cinematic” is a positive adjective, but in this sentence it frames the film as a “refuse,” flipping its effect to negative. |
+| **refuse** | –0.0000076 | Essentially neutral | The word itself is negative, but its contribution is negligible. |
+| **at** | –0.0029 | Negative | Used in the phrase “at all costs,” it reinforces the negative warning. |
+| **all** | –0.0033 | Negative | Adds to the strong negative tone of the warning. |
+| **costs** | –0.0029 | Negative | Finalizes the negative warning (“at all costs”). |
+
+**Collective impact**
+
+The model’s final sentiment probability (≈ 1.3 %) is low because the *negative* tokens dominate in both count and magnitude. While the positives (“you,” “enjoy,” “american,” “pie,” “trip”) provide mild support for a positive reading, the strong negative signals (“this,” “cinematic,” “avoid,” “at,” “all,” “costs”) outweigh them, steering the prediction decisively toward a negative label. Thus, the review is interpreted as an overall negative assessment, consistent with the low positive probability.
+
+# EPR Explainer: 0.8706, Verifier: 0.5592

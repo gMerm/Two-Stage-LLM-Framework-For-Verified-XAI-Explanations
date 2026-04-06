@@ -1,0 +1,104 @@
+<think>We need to explain how each token influenced the prediction. Provide for technical and non-technical audiences. But guidelines: concise, actionable insights, avoid unnecessary technical language. But still need to describe impact of all tokens (positive and negative contributors) and how they collectively shaped final prediction.
+
+We have sample number, review text, prediction ~0.0134 (negative). The top 20 token attributions list: token, attribution values. We should explain each token's influence: positive contributions pushing toward positive sentiment, negative toward negative. Also mention magnitude relative. Possibly group high magnitude contributions.
+
+We must base explanation only on provided data. No assumptions beyond. Provide a brief summary of overall influence: negative contributions outweigh positives, resulting in negative sentiment.
+
+Also maybe include percentages of total contribution? Not necessary. Keep concise.
+
+We should address both technical and non-technical: maybe explain that positive attributions are those with positive values, negative values negative. For non-technical, say words that made the model think more positive or more negative.
+
+Let's craft a paragraph for each token: e.g., "The word 'if' has a slight negative attribution (-0.0126), nudging the model toward a negative prediction." And so on. Could combine similar tokens.
+
+We also can mention the net sum of these top 20 attributions. Let's sum quickly: Use approximate. Let's sum the values:
+
+if: -0.0126376
+you: +0.0125961
+enjoy: +0.0045203
+films: +0.0021745
+like: -0.0020755
+american: +0.0051003
+pie: +0.0028990
+,: -0.0003935
+road: -00.0018063
+trip: +0.0031643
+&: +0.0011231
+van: -0.0044165
+wilder: +0.0029774
+avoid: -0.0012794
+this: -0.0055369
+cinematic: -0.0047005
+refuse: -7.56e-06
+at: -0.0029249
+all: -0.0032766
+costs: -0.0028788
+
+Sum positives: 0.0125961+0.0045203+0.0021745+0.0051003+0.0028990+0.0031643+0.0011231+0.0029774 = let's sum: 0.0125961+0.0045203=0.0171164; +0.0021745=0.0192909; +0.0051003=0.0243912; +0.0028990=0.0272902; +0.0031643=0.0304545; +0.0011231=0.0315776; +0.0029774=0.0345550.
+
+Negatives: -0.0126376 -0.0020755 -0.0003935 -0.0018063 -0.0044165 -0.0012794 -0.0055369 -0.0047005 -0.00000756 -0.0029249 -0.0032766 -0.0028788 = sum: Let's sum absolute: 0.0126376+0.0020755=0.0147131; +0.0003935=0.0151066; +0.0018063=0.0169129; +0.0044165=0.0213294; +0.0012794=0.0226088; +0.0055369=0.0281457; +0.0047005=0.0328462; +0.00000756=0.03285376; +0.0029249=0.03577866; +0.0032766=0.03905526; +0.0028788=0.04193406.
+
+So negative sum is larger magnitude (~0.0419) than positive (~0.0346). So net negative. This matches negative prediction.
+
+So explanation: these tokens contributed overall negative sentiment. Words like "avoid", "cinematic refuse", "this", "at all costs" are negative.
+
+Also note some positive words like "enjoy", "american pie", etc. but still outweighed by negative tokens.
+
+Provide actionable insights: the model is sensitive to certain negative words and phrases like "avoid", "refuse", "costs" that strongly push negative. Also positive words not enough.
+
+Also mention that punctuation contributes small negative.
+
+Also mention that the token "you" has a positive attribution but magnitude almost equal to "if". So the context of question.
+
+Let's craft answer accordingly.
+
+Also need to follow guidelines: "Provide explanation for both technical and non-technical audiences." But maybe we can keep it simple but include small note that for technical: positive/negative attributions etc.
+
+But guidelines: focus on actionable insights, avoid unnecessary technical language.
+
+We should not mention "Integrated Gradients" details beyond the method overview. But maybe mention that each token's attribution shows its influence. For non-technical: words that make model think positive or negative.
+
+Ok. Let's produce answer.</think>
+**What the numbers mean**  
+* A positive attribution (+) tells the model that the word nudges the prediction toward **positive** sentiment.  
+* A negative attribution (–) pulls the prediction toward **negative** sentiment.  
+* The larger the absolute value, the stronger that word’s influence.
+
+Below is a quick walk‑through of the 20 most influential words in this review, followed by how they together shaped the final decision.
+
+| Token | Attribution | Effect on the model |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Slightly negative – the model thinks “if” signals doubt or a conditional that can lower confidence. |
+| **you** | +0.0126 | Slightly positive – the model interprets “you” as addressing the reader, nudging it toward a positive tone. |
+| **enjoy** | +0.0045 | Mildly positive – “enjoy” normally signals a good experience. |
+| **films** | +0.0022 | Mildly positive – generic reference to movies. |
+| **like** | –0.0021 | Slightly negative – in this context “like” introduces the titles and subtly signals a comparison that the model treats as negative. |
+| **american** | +0.0051 | Positive – the adjective “american” (as part of “American Pie”) pulls toward positivity. |
+| **pie** | +0.0029 | Positive – the film title contributes a mild positive lift. |
+| **,** | –0.0004 | Tiny negative – punctuation can slightly lower sentiment. |
+| **road** | –0.0018 | Slight negative – part of “Road Trip” adds a small negative lift. |
+| **trip** | +0.0032 | Mildly positive – the noun “trip” gives a small positive boost. |
+| **&** | +0.0011 | Very small positive – the ampersand is treated as neutral/positive. |
+| **van** | –0.0044 | Noticeably negative – “van” (from “Van Wilder”) pulls the prediction toward negativity. |
+| **wilder** | +0.0030 | Mildly positive – the surname adds a small positive lift. |
+| **avoid** | –0.0013 | Negative – the word “avoid” signals a recommendation against the film. |
+| **this** | –0.0055 | Substantial negative – pointing at the movie itself as something to avoid. |
+| **cinematic** | –0.0047 | Substantial negative – the adjective “cinematic” is used sarcastically, pulling the model negative. |
+| **refuse** | –0.0000 | Negligible negative – “refuse” is effectively neutral in this snippet. |
+| **at** | –0.0029 | Negative – part of the phrase “at all costs” carries a negative signal. |
+| **all** | –0.0033 | Negative – reinforces the “at all costs” phrase. |
+| **costs** | –0.0029 | Negative – completes the “at all costs” warning. |
+
+### How they combine
+
+* **Positive pushes** (≈ +0.035) – words like “enjoy,” “american,” “pie,” “you,” and “trip” give the model a light lift toward a positive reading.  
+* **Negative pulls** (≈ –0.042) – words such as “if,” “avoid,” “this,” “cinematic,” “van,” and especially the whole “at all costs” phrase outweigh the positives.  
+
+The net effect is a **negative** prediction (0.0134), meaning the model decides the review is overall negative.  
+
+### Take‑away for non‑technical users  
+If you want the model to read a review as positive, keep strong negative words (“avoid,” “refuse,” “costs,” etc.) out of the sentence, and add more explicit positives (“great,” “excellent,” “loved”). The numbers above show which words most tip the scale.  
+
+### Take‑away for technical users  
+When tuning or debugging, focus on the tokens with the largest negative magnitudes (e.g., “this,” “cinematic,” “van”) as they dominate the sentiment shift. Adjusting token embeddings or providing more balanced context around these can help align predictions with human judgment.
+
+# EPR Explainer: 0.7391, Verifier: 0.3814

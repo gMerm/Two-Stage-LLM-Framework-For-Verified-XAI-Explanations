@@ -1,0 +1,30 @@
+<think>We need to produce explanations for each feature based on mean absolute SHAP values. The order given: WKHP, OCCP, AGEP, SCHL, RELP, SEX, POBP, COW, MAR, RAC1P. We need to explain why each matters for income prediction, in natural language, for both technical and non-technical. Should be concise. Use only the data; no invented data. Just mention mean abs shap values magnitude indicates importance. Should explain each.
+
+We should also mention that higher values mean more impact. Provide context like "usual hours worked per week" is most influential because more hours often leads to higher income. Occupation code also high. Age moderate. Education moderate. Relationship to household moderate. Sex less. Place of birth moderate. Class of worker less. Marital status lower. Race least. We might mention ranking. Let's produce explanation for each.
+
+Use simple language. Use bullet points. Provide both technical (mention SHAP) and non-technical explanation.
+
+Let's output.</think>
+**How the model decides whether someone earns above or below the median income**
+
+Below is a short explanation of every feature the model used for this prediction.  
+For each feature we note its *mean absolute SHAP value* – the higher this number, the more the feature sways the model’s decision.
+
+| Feature | Mean abs SHAP | Why it matters for income prediction |
+|---------|---------------|-------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.904** | The largest influence. Working more hours typically leads to a higher salary, so the model heavily weighs how many hours a person works. |
+| **OCCP** (occupation code) | **0.630** | Indicates the type of job (e.g., engineer, teacher). Certain occupations command higher wages, so the model uses this to gauge earning potential. |
+| **AGEP** (age) | **0.517** | Age reflects career experience and stage. Mid‑career individuals often earn more than entry‑level or retirees, so age helps the model estimate income. |
+| **SCHL** (educational attainment) | **0.465** | Higher education levels are generally linked to better‑paid jobs. The model uses schooling to predict whether income will exceed the median. |
+| **RELP** (relationship to householder) | **0.343** | Shows living arrangements (spouse, child, roommate). Household structure can affect earning capacity or dependence, giving the model additional context. |
+| **SEX** | **0.224** | Gender can influence earning gaps in many societies. The model considers this as a secondary factor when predicting income. |
+| **POBP** (place of birth) | **0.172** | Birthplace may correlate with socioeconomic background or migration patterns that affect job opportunities, so it provides a modest cue. |
+| **COW** (class of worker) | **0.137** | Indicates employment type (private, public, self‑employed). Different sectors pay differently, giving the model another, smaller signal. |
+| **MAR** (marital status) | **0.102** | Married or single status can affect income through shared resources or dual earning, but it is a relatively weak predictor. |
+| **RAC1P** (race) | **0.053** | The model assigns the smallest influence to race. While disparities exist, this particular feature contributes only marginally to the prediction. |
+
+**Key take‑away**
+
+The model relies most on *how many hours a person works* and *what job they have*, followed by age and education. Other social and demographic details add some nuance but play a smaller role in deciding whether the predicted income is above or below the median threshold.
+
+# EPR Explainer: 0.8648, Verifier: 0.5214

@@ -1,0 +1,66 @@
+<think>Okay, let me tackle this explanation request. The user wants me to convert Integrated Gradients token attributions into natural language explanations for both technical and non-technical audiences. 
+
+First, I need to carefully analyze the provided data. The top_20_token_attributions show which words most influenced the model's negative prediction (0.0134 prediction score). I notice most attributions are negative (pushing toward negative sentiment), with a few positive ones.
+
+Hmm, the key is to focus only on what's given - no inventing details. Let me group the tokens by their attribution direction:
+
+Negative contributors (pulling toward negative sentiment):
+- "if" (-0.0126) - strongest negative
+- "like" (-0.0021)
+- "road" (-0.0018)
+- "van" (-0.0044)
+- "this" (-0.0055)
+- "cinematic" (-0.0047)
+- "refuse" (-0.0000075) - very weak
+- "at" (-0.0029)
+- "all" (-0.0033)
+- "costs" (-0.0029)
+
+Positive contributors (pulling toward positive, but weak):
+- "you" (0.0126) - strongest positive
+- "enjoy" (0.0045)
+- "films" (0.0022)
+- "american" (0.0051)
+- "pie" (0.0029)
+- "trip" (0.0032)
+- "&" (0.0011)
+- "wilder" (0.0030)
+
+Wait, the positive tokens are actually referencing the movies the reviewer dislikes ("American Pie", "Road Trip", "Van Wilder") - so the model is correctly interpreting that the reviewer is saying "if you enjoy these good movies, avoid this bad one." The positive attributions for "enjoy", "films", etc. are actually part of the negative sentiment because they're setting up the contrast with the bad movie.
+
+Important to clarify this nuance: the positive attributions aren't indicating positive sentiment about the movie being reviewed, but rather about the reference movies. The model's negative prediction comes from the negative words ("avoid", "refuse", "waste") and the negative context.
+
+I should structure the explanation to:
+1. State the overall sentiment (negative)
+2. Explain that the strongest influence came from the negative words
+3. Clarify that positive attributions are about the reference movies, not the reviewed film
+4. Note that weak negative tokens like "refuse" had minimal impact
+
+For non-technical audience, I'll avoid terms like "attribution" and say "words that most influenced the negative rating." For technical, I can mention "negative attribution scores" but keep it simple.
+
+Must be careful not to say "refuse" was important - its attribution is tiny (-7.55e-6) so it's negligible. The main negative drivers are "if", "this", "cinematic", "avoid" etc.
+
+Also need to explain why "you" has positive attribution - because it's part of "if you enjoy" which sets up the negative contrast. The model correctly identifies that this phrase is used negatively.
+
+The most impactful negative words are "if" (strongest negative), "this", "cinematic", and "costs" - these form the core of the negative sentiment. The positive words are actually reinforcing the negative by referencing disliked movies.
+
+I'll make sure to emphasize that the positive words don't mean the review is positive - they're part of the negative comparison. That's crucial for understanding the model's reasoning.
+
+Now to write concisely: focus on top 5 negative words and clarify the positive words' context. Skip the weakest tokens like "refuse" since their effect is negligible.
+</think>
+The model predicted a strongly negative sentiment (0.013) for this review. Here's how the top words influenced the prediction:
+
+**Strongest negative influences** (pushing toward negative sentiment):  
+- "if" (largest negative impact) sets up the critical contrast: *"if you enjoy good movies, avoid this one."*  
+- "this" and "cinematic refuse" directly condemn the film as worthless.  
+- "avoid" and "costs" reinforce the recommendation to skip the movie.  
+- "all" and "at" emphasize total dismissal of the film's value.
+
+**Weak positive influences** (pulling toward *positive* sentiment, but **not** about the reviewed film):  
+- "you," "enjoy," "films," "american," "pie," "road," "trip," "wilder," "&" all refer to *other movies* (e.g., *American Pie*), which the reviewer dislikes. The model correctly interprets these as *negative context* (e.g., "if you enjoy *those* films, avoid *this*").  
+
+**Key insight**: The negative words ("if," "this," "refuse," "avoid") dominate the prediction. The positive-sounding words describe *other movies* the reviewer hates, making them indirect negative cues for *this* film. The model correctly identifies the review as negative because the strongest influences reject the film entirely.  
+
+*Note: "refuse" had negligible impact (attribution ≈ -0.0000075) and doesn't meaningfully affect the prediction.*
+
+# EPR Explainer: 0.6844, Verifier: 0.9666

@@ -1,0 +1,46 @@
+<think>Okay, let me approach this step by step. The user wants a clear explanation of how each token in the top 20 attributions influenced the sentiment prediction, based solely on the provided data. 
+
+First, I need to understand the core concept: Integrated Gradients attribution scores show whether a word pushes the prediction toward positive (positive score) or negative (negative score) sentiment. The magnitude indicates strength.
+
+Looking at the top_20_token_attributions, I'll group them by sign to make the explanation coherent. 
+
+For negative contributors (pushing toward negative sentiment):
+- "if" has the strongest negative impact (-0.0126), which makes sense as it sets up a conditional that leads to criticism
+- "american", "pie", "road", "trip", "van", "wilder" are all negative despite being positive words in isolation because they're used in a context of "avoiding" bad films
+- Words like "refuse", "cinematic", "avoid", "costs" all carry negative weight in this critical context
+
+For positive contributors (pushing toward positive sentiment):
+- "you" is positive (0.0126) - interesting because it's a pronoun, but the model treats it as a positive signal in this specific context
+- "enjoy" (0.0045) and "films" (0.0022) are positive words that actually contribute to the negative sentiment when used in the conditional "if you enjoy..."
+
+I notice the strongest negative words are "if", "this", "cinematic", "refuse", "avoid" - all key words in the review's critical message. The positive words like "you" and "enjoy" are actually part of the negative framing ("if you enjoy X, avoid this").
+
+Important to note: The model's prediction is negative (0.013), so the negative contributions outweigh positive ones. The top negative contributors dominate the explanation.
+
+I should avoid saying "the model thinks 'refuse' is negative" - instead say "in this review, 'refuse' contributed to the negative sentiment". Must stick strictly to the data without adding interpretation.
+
+Also need to handle the very small negative value for "refuse" (-7.56e-6) - it's negligible compared to others, so I'll mention it but not overemphasize.
+
+For the explanation structure:
+1. State the overall sentiment (negative)
+2. Explain negative contributors (strongest first)
+3. Explain positive contributors (weaker ones)
+4. Note that negative words dominate
+
+Must be concise - the user wants actionable insights, not a full linguistic analysis. And absolutely no made-up details beyond the data provided.
+</think>
+The model predicted a negative sentiment (0.013) for this review. Here's how the top tokens influenced the prediction based *only* on their attribution scores:
+
+**Negative contributors (pushing prediction toward negative sentiment):**  
+- `"if"` (strongest negative, -0.0126): Sets up a critical conditional ("if you enjoy X, avoid this").  
+- `"this"` (-0.0055), `"cinematic"` (-0.0047), `"avoid"` (-0.0013): Directly criticize the film as worthless.  
+- `"american"`, `"pie"`, `"road"`, `"trip"`, `"van"`, `"wilder"` (all negative scores): Used in the context of "avoiding" these films, making them negative signals.  
+- Smaller negative contributors: `"like"` (-0.0021), `"refuse"` (-0.0000076), `"at all costs"` (-0.0033).  
+
+**Positive contributors (pushing prediction toward positive sentiment, but weak):**  
+- `"you"` (strongest positive, +0.0126): Used in a critical context ("if you enjoy..."), making it a negative signal *despite* its positive score.  
+- `"enjoy"` (+0.0045), `"films"` (+0.0022), `"trip"` (+0.0032): Positive words that *contribute to negativity* here due to the review's critical framing.  
+
+**Key insight:** The negative words ("if", "this", "cinematic", "avoid") dominated the prediction, while positive words like "you" and "enjoy" were *overridden* by the review's critical context. The model focused on the strong negative phrasing ("avoid this cinematic refuse") rather than the positive words.
+
+# EPR Explainer: 0.6748, Verifier: 0.9897

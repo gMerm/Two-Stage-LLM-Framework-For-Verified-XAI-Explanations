@@ -1,0 +1,41 @@
+<think>We need to explain every feature with its SHAP value context. Provide natural language explanations. Focus on technical and non-technical. Keep concise. Use the ranking to explain importance. Use only provided data. Provide context of why each feature matters.
+
+We should mention the absolute mean SHAP values in a comparative manner: WKHP highest at 0.904, then OCCP 0.63, etc. Mention that WKHP is top predictor. Provide context: hours worked per week. OCCP: occupation. AGEP: age. SCHL: education. RELP: relationship to householder. SEX: gender. POBP: place of birth. COW: class of worker. MAR: marital status. RAC1P: race.
+
+Explain each feature's relevance: e.g., more hours = likely higher income. Certain occupations have higher pay. Age correlated with career progression. Education level influences earning potential. Relationship might indicate shared resources or support. Gender differences in wages. Place of birth can correlate with socio-economic factors. Class of worker indicates employer type, which affects pay. Marital status can affect household income and resources. Race may reflect systemic disparities.
+
+Need to tie to model importance: the higher the SHAP value, the more the model uses that feature.
+
+Also mention that SHAP values are absolute, ignoring direction. So we can't say whether the feature increased or decreased prediction. Just that it mattered.
+
+Let's craft explanation for each.
+
+Use bullet or paragraph? Provide concise narrative.
+
+Make sure to not add assumptions beyond provided. But we can infer typical reasons. Should be okay.
+
+Let's answer.</think>
+**How the model used each feature to decide if this person earns above or below the median ($≈\$40,000$)**  
+
+| Feature | Mean absolute SHAP value | Why the model cares about it | Practical takeaway |
+|---------|--------------------------|------------------------------|--------------------|
+| **WKHP (usual hours worked per week)** | **0.904** | The amount of time spent working is the strongest signal of earning power. More hours usually mean more wages. | If you’re trying to estimate future income, look first at the person’s weekly hours. |
+| **OCCP (occupation code)** | **0.630** | Different jobs have different pay scales. The model captures the typical income associated with each occupation. | Knowing the occupation can give a quick sense of expected earnings. |
+| **AGEP (age)** | **0.517** | Age reflects career stage. Younger workers may have lower wages, while older workers may have more experience and higher pay. | Age is a proxy for experience; older workers often earn more. |
+| **SCHL (education level)** | **0.465** | Higher educational attainment generally leads to better-paying jobs. The model learns these patterns. | Encourage higher education when forecasting income potential. |
+| **RELP (relationship to householder)** | **0.343** | Being a spouse or partner can mean combined household income or shared expenses, influencing overall financial status. | Relationship status can hint at financial stability. |
+| **SEX (gender)** | **0.224** | Gender can correlate with wage gaps that the model detects. | Be aware that gender disparities exist in pay; the model reflects this. |
+| **POBP (place of birth)** | **0.172** | Birthplace can signal cultural or socioeconomic backgrounds that affect earning opportunities. | Place of origin can indirectly influence income prospects. |
+| **COW (class of worker)** | **0.137** | Employment type (private, government, self‑employed) carries different salary structures. | Different employer types affect average pay. |
+| **MAR (marital status)** | **0.102** | Married individuals may have dual incomes or more financial resources. | Marital status can modestly shift income expectations. |
+| **RAC1P (race)** | **0.053** | Race is linked to systemic inequities in the labor market that the model picks up. | Recognize that race can influence earning power due to broader social factors. |
+
+**Takeaway for all audiences**
+
+- The strongest evidence the model uses comes from how many hours someone works each week; if that is high, the person is more likely to be in the high‑income class.  
+- Occupation, age, and education also provide significant signals.  
+- Features related to social context—relationship, gender, birthplace, marital status, and race—have smaller but still measurable effects.  
+
+These mean absolute SHAP values tell us which aspects the model relies on most when predicting whether a person’s income is above or below the median. They help us focus on the most influential variables without needing to see the exact direction (increase or decrease) of each effect.
+
+# EPR Explainer: 0.9809, Verifier: 0.5597

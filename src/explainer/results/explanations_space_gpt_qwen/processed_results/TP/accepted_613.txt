@@ -1,0 +1,104 @@
+<think>We need to explain each word's influence on sentiment prediction. Positive attributions push toward positive sentiment, negative push toward negative. Provide actionable insights? just explanation. Use only given data. No invented details. Provide for all tokens. Provide description of how each one shaped final prediction. The prediction score 0.0134 near zero but labeled negative. The top 20 tokens have attribution values listed. We need to explain each.
+
+We need to be concise, avoid unnecessary technical language, but clear. Provide both positive and negative contributions. Possibly rank them. Also note that "if" and "you" have large magnitude.
+
+Explain collectively shaping final prediction: sum of attributions leads to small positive but negative prediction maybe due to other tokens not in top 20. So mention that although some positive tokens exist, negative tokens dominate.
+
+We must not mention any guidelines or mention that we cannot reveal system prompts.
+
+Let's prepare explanation:
+
+- For each token, say "Token 'if': attribution -0.0126 → strongly pushes prediction toward negative sentiment; indicates that the presence of conditional 'if' in this context signals negativity." But careful: 'if' is negative? In text, 'If you enjoy...' The 'if' is negative attribution because it reduces positive sentiment? Yes.
+
+Similarly for 'you': attribution +0.0126 pushes toward positive? Wait 'you' positive contribution? Might be due to pronoun used in positive sentence? but it's positive. But the context of sentence: 'If you enjoy...' So 'you' adds positivity.
+
+But we need to describe influence not semantics. So just say positive attribution pushes toward positive. Provide magnitude and impact.
+
+Also mention that overall negative tokens outnumber positive contributions, leading to final negative prediction.
+
+Provide for all tokens:
+
+List tokens with attribution, indicate sign.
+
+We should also mention that magnitude shows strength of influence: e.g., 'if' and 'you' have largest magnitude contributions.
+
+Also note that 'refuse' has negligible negative attribution.
+
+Let's craft.
+
+Need to be concise. Use bullet points? Or paragraphs. Might use table.
+
+Also mention that tokens like 'american', 'pie', 'wilder', 'trip' have small positive contributions, but overall negative tokens such as 'avoid', 'this', 'cinematic', 'at', 'all', 'costs', 'van', 'road', 'like', ',' have negative contributions.
+
+Also mention that 'enjoy' and 'films' positive.
+
+Also mention that the sum of these attributions is approx? We can compute approximate sum: Let's sum quickly:
+
+-0.012637555599212646
++0.012596114538609982 = -0.000041441060602664
++0.0045203231275081635 = 0.0044788820669055
++0.002174487803131342 = 0.006653369870036842
+-0.002075477968901396 = 0.004577891901135446
++0.005100315436720848 = 0.009678207337856294
++0.0028989785350859165 = 0.01257718587294221
+-0.0003934605047106743 = 0.012183725368231535
+-0.0018063271418213844 = 0.01037739822641015
++0.0031642871908843517 = 0.013541685417294502
++0.0011230998206883669 = 0.01466478523798287
+-0.0044164941646158695 = 0.010248291073367002
++0.002977431984618306 = 0.013225723058 - approx 0.013225723058 -0? let's compute: 0.010248291073367002 + 0.002977431984618306 = 0.013225723057985308
+-0.0012793546775355935 = 0.011946368380449715
+-0.00553693575784564 = 0.006409432622604075
+-0.004700512625277042 = 0.0017089199973270331
+-7.555005140602589e-06 = 0.0017013649921864308
+-0.0029249039944261312 = -0.001223538... actually subtract: 0.0017013649921864308 - 0.0029249039944261312 = -0.0012235390022397004
+-0.0032766032963991165 = -0.004500142298638817
+-0.0028788314666599035 = -0.007378973765298721
+
+So sum of top 20 is about -0.00738. Negative contribution overall. That supports negative prediction.
+
+We can mention this aggregated negative effect.
+
+Now produce explanation.
+
+Let's proceed.</think>
+**How each word in the top‑20 list pulled the sentiment score toward “negative” or “positive”**
+
+| Token | Attribution | Effect on the prediction |
+|-------|-------------|--------------------------|
+| **if** | –0.0126 | The largest negative swing – tells the model that the sentence is conditional and, in this context, is associated with a negative tone. |
+| **you** | +0.0126 | A very strong positive push – the pronoun is treated as a friendly reference that slightly offsets negativity. |
+| **enjoy** | +0.0045 | Adds a positive feel, suggesting the reviewer’s enjoyment of similar films. |
+| **films** | +0.0022 | Small positive bias toward a movie‑related context. |
+| **like** | –0.0021 | Negative because “like” precedes the mention of specific movies that the reviewer ultimately dislikes. |
+| **american** | +0.0051 | Positive, likely because “American Pie” is a well‑known, well‑received film. |
+| **pie** | +0.0029 | Positive support for the “American Pie” reference. |
+| **,** | –0.0004 | Minor negative tilt – commas often separate clauses that the model treats as distinct. |
+| **road** | –0.0018 | Negative, since it leads into “Road Trip,” a film the reviewer criticizes. |
+| **trip** | +0.0032 | Positive, but outweighed by the preceding negative “road.” |
+| **&** | +0.0011 | Neutral to slightly positive, joining the two movie titles. |
+| **van** | –0.0044 | Strong negative: “Van Wilder” is mentioned as a disliked film. |
+| **wilder** | +0.0030 | Positive for the name itself, but the overall “Van Wilder” phrase is negative. |
+| **avoid** | –0.0013 | Negative – the word “avoid” directly signals a recommendation against the film. |
+| **this** | –0.0055 | Very strong negative; the pronoun ties the whole negative description to the film. |
+| **cinematic** | –0.0047 | Negative because it precedes a scathing critique (“cinematic refuse”). |
+| **refuse** | –0.0000 | Negligible, but in the negative context it keeps the overall tone down. |
+| **at** | –0.0029 | Negative, as it connects to the phrase “at all costs,” intensifying the warning. |
+| **all** | –0.0033 | Negative; reinforces the breadth of the criticism (“at all costs”). |
+| **costs** | –0.0029 | Negative, completing the “at all costs” warning. |
+
+### What the numbers tell us
+
+1. **Magnitude matters** – The two tokens with the largest absolute attributions are *if* and *you*.  
+   *If* pulls the score far into the negative direction, while *you* pulls it back toward positive.  
+2. **Positive words are outweighed by negatives** – The sum of all 20 attributions is about **–0.0074**, a net negative influence.  
+3. **Context is key** – Tokens that appear inside a negative phrase (e.g., *avoid this cinematic refuse at all costs*) have stronger negative weights than the same words would in a neutral context.  
+4. **Small contributors still count** – Even the comma and “&” add tiny biases that, when added together, slightly shift the overall sentiment.
+
+### How they shaped the final prediction
+
+The model starts from a baseline and adjusts the score by adding each token’s attribution. In this review, the negative contributions (especially *if*, *this*, *cinematic*, *avoid*, *van*, etc.) outweigh the positives. As a result, the final predicted probability of “positive” is only **0.0134**, and the model labels the review as **negative**.  
+
+In short, the review’s warning language and references to disliked films dominate the signal, pushing the model toward a negative sentiment despite a few positively‑oriented words.
+
+# EPR Explainer: 0.8637, Verifier: 0.6358

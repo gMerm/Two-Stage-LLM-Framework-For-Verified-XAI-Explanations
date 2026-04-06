@@ -1,0 +1,28 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Base explanation only on provided quantitative data. So use mean absolute SHAP values to rank importance. We should explain for each feature the relative importance and maybe why it matters (e.g., working hours, occupation, age, education). Provide for both technical and non-technical audiences? The guidelines: "focus on actionable insights". We must be concise, avoid unnecessary technical language. So produce explanation in natural language: list features sorted by importance, explain what each mean SHAP value indicates: higher importance, lower. Provide context for each feature: why it matters for income prediction. Use the given values. Not invent new data.
+
+Also note that we are to "explain every feature that influenced the model's prediction for this individual." So we should cover all 10 features in order given? The order in the list may not be sorted. But we can present sorted descending importance: WKHP 0.904, OCCP 0.629, AGEP 0.516, SCHL 0.464, RELP 0.342, SEX 0.224, POBP 0.172, COW 0.137, MAR 0.102, RAC1P 0.052.
+
+We'll explain each: WKHP: usual hours worked per week is the strongest predictor. It reflects employment intensity. Higher hours likely lead to higher income. OCCP: occupation code also strong. Different occupations pay differently. AGEP: age influences career stage. SCHL: education attainment: higher degree likely higher income. RELP: relationship to household, maybe spouse or child could affect income due to household dynamics. SEX: gender differences in income. POBP: place of birth may correlate with migration patterns, etc. COW: class of worker: employment type (private, government). MAR: marital status: married often have dual incomes. RAC1P: race: disparities in income.
+
+We need to mention that mean absolute SHAP values indicate average contribution magnitude. We can note that features with higher values are more influential. Provide actionable insight: if you want to improve income predictions, focus on these features. For non-technical: say which aspects most impact predictions. Keep concise.
+
+Let's prepare final answer.</think>
+**Key drivers of the model’s income prediction (ranked by strength)**  
+
+| Feature | Mean | Why it matters for income prediction |
+|---------|------|--------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.904** | The largest influence. More hours typically mean more work, higher wages, and a higher chance of earning above the median. |
+| **OCCP** (occupation code) | **0.630** | Different jobs pay very differently. The model uses the occupation to estimate expected earnings. |
+| **AGEP** (age) | **0.517** | Age reflects career stage: younger workers often have lower pay, mid‑career workers higher pay, and older workers may be nearing retirement. |
+| **SCHL** (educational attainment) | **0.465** | Higher education usually opens higher‑paying positions, so the model treats it as a strong income indicator. |
+| **RELP** (relationship to householder) | **0.343** | Being a spouse, partner, or dependent can influence household income dynamics and affect the individual’s own earnings. |
+| **SEX** (sex) | **0.224** | Gender differences in wages exist in many datasets; the model captures this effect. |
+| **POBP** (place of birth) | **0.172** | Birthplace can be a proxy for cultural, linguistic, or migration factors that influence job opportunities. |
+| **COW** (class of worker) | **0.137** | Whether the person works in private, government, or self‑employment affects expected salary ranges. |
+| **MAR** (marital status) | **0.102** | Married individuals often have dual incomes, which the model recognizes as a modest income boost. |
+| **RAC1P** (race) | **0.053** | Racial disparities in pay are reflected, though this feature is the least influential in the model. |
+
+**Take‑away for non‑technical audiences:**  
+The model says that *how many hours a person works per week* and *what kind of job they have* are the biggest clues to whether their income is above the median. Education, age, and gender also play noticeable roles, while things like place of birth or marital status have smaller but still measurable effects. Understanding these relationships helps explain why some individuals are predicted to earn more than others.
+
+# EPR Explainer: 0.8813, Verifier: 0.6022

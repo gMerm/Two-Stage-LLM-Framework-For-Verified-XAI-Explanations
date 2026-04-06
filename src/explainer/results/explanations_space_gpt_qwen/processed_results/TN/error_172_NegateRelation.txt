@@ -1,0 +1,51 @@
+<think>We need to explain how each word influenced sentiment prediction. Use only given data. Provide natural language explanation for both technical and non-technical. Mention positive/negative contributions and magnitude. Summarize collective effect.
+
+We should not invent details. We can talk about top 20 tokens, each token with attribution sign and magnitude. We should convey that many tokens are negative, driving prediction negative, but some positive contributions slightly counterbalance but overall negative.
+
+Let's do concise bullet or paragraph. Provide actionable insight: which tokens most negative, which positive. Mention that token "if" strongly negative, "you" positive etc.
+
+We must mention the prediction probability 0.0134 negative. So we say that these tokens together lead to strong negative sentiment. Provide explanation.
+
+Also maybe explain relative importance: magnitude of contributions. Provide order.
+
+Okay.</think>
+**How the model read this review**
+
+The Integrated Gradients scores show how each token nudged the model toward a **negative** sentiment (prediction ≈ 0.01).  
+Positive scores pull the prediction toward “positive”; negative scores pull it toward “negative.”  The larger the absolute value, the stronger the influence.
+
+| # | Token | Attribution | Effect on sentiment |
+|---|-------|-------------|---------------------|
+| 1 | **if** | ‑0.0126 | Strongly pushes the prediction negative. |
+| 2 | **you** | +0.0126 | Slightly pulls the prediction positive. |
+| 3 | **enjoy** | +0.0045 | Small positive push. |
+| 4 | **films** | +0.0022 | Small positive push. |
+| 5 | **like** | ‑0.0021 | Small negative push. |
+| 6 | **american** | +0.0051 | Positive push. |
+| 7 | **pie** | +0.0029 | Positive push. |
+| 8 | **,** | ‑0.0004 | Negligible negative effect. |
+| 9 | **road** | ‑0.0018 | Small negative push. |
+|10 | **trip** | +0.0032 | Positive push. |
+|11 | **&** | +0.0011 | Small positive push. |
+|12 | **van** | ‑0.0044 | Negative push. |
+|13 | **wilder** | +0.0030 | Positive push. |
+|14 | **avoid** | ‑0.0013 | Negative push. |
+|15 | **this** | ‑0.0055 | Strong negative push. |
+|16 | **cinematic** | ‑0.0047 | Strong negative push. |
+|17 | **refuse** | ‑0.0000076 | Negligible negative push. |
+|18 | **at** | ‑0.0029 | Small negative push. |
+|19 | **all** | ‑0.0033 | Small negative push. |
+|20 | **costs** | ‑0.0029 | Small negative push. |
+
+**What happened overall**
+
+- The **most powerful negative tokens** are “if”, “this”, “cinematic”, “van”, and “you” (the latter actually helps a bit).  
+- Positive tokens (“you”, “enjoy”, “films”, “american”, “pie”, “trip”, “&”, “wilder”) provide modest counter‑balance, but their magnitudes are far smaller than the negative contributions.  
+- Even the most positive word (“you”) is matched by a slightly larger negative word (“if”).  
+- Collectively, the sum of these 20 scores is heavily negative, which explains why the model’s confidence in a negative review (≈ 0.01 probability of positive) is so low.
+
+**Takeaway**
+
+If you want to change the model’s sentiment for this review, you would need to **remove or replace the strong negative tokens** (“if”, “this”, “cinematic”, “van”, “avoid”) or add even stronger positive words. The current mix of tokens, though containing some upbeat terms, is dominated by negative language, leading the model to predict a negative sentiment.
+
+# EPR Explainer: 0.7042, Verifier: 0.6320

@@ -1,0 +1,97 @@
+<think>We need to explain how each word of top_20 contributed, both positive and negative. Provide explanation in clear natural language for technical and non-technical audiences. Must base only on provided data, no invented details.
+
+We have sample_number 198, review text, prediction 0.013... predicted sentiment negative. top_20 token attributions list of token and attribution numeric.
+
+We need to identify and describe impact of all tokens (positive and negative contributors), detailing how each one collectively shaped final prediction.
+
+Essentially explain that tokens with positive attribution push toward positive sentiment, negative push toward negative. Provide magnitude relative.
+
+Also need to mention that the overall prediction is negative because negative tokens outweigh positive. Provide explanation that "if" had largest negative contribution; "you" positive etc.
+
+Let's analyze the numbers:
+
+Tokens with positive attribution:
+- you: 0.012596
+- enjoy: 0.004520
+- films: 0.002174
+- american: 0.005100
+- pie: 0.002899
+- road trip: 0.003164
+- &: 0.001123
+- wilder: 0.002977
+- ... others? Maybe no more positive tokens in list.
+
+Tokens with negative attribution:
+- if: -0.012638
+- like: -0.002075
+- comma: -0.000393
+- road: -0.001806
+- van: -0.004416
+- avoid: -0.001279
+- this: -0.005537
+- cinematic: -0.004701
+- at: -0.002925
+- all: -0.003277
+- costs: -0.002879
+- plus maybe 'refuse' near zero negative.
+
+So we can describe that the model gives negative weight to words that suggest negativity ("if" suggests a conditional maybe implying doubt, etc). Actually the attribution interpretation: negative attributions push toward negative sentiment, positive push toward positive.
+
+We can state the sum of attributions: compute approximate total? Let's sum quickly: positive contributions: 0.012596+0.004520+0.002174+0.005100+0.002899+0.003164+0.001123+0.002977 = approximate 0.032? Let's sum: 0.012596+0.004520=0.017116; +0.002174=0.01929; +0.005100=0.02439; +0.002899=0.027289; +0.003164=0.030453; +0.001123=0.031576; +0.002977=0.034553. Negative contributions: sum of negatives: -0.012638-0.002075-0.000393-0.001806-0.004416-0.001279-0.005537-0.004701-0.002925-0.003277-0.002879 = let's sum absolute: 0.012638+0.002075=0.014713; +0.000393=0.015106; +0.001806=0.016912; +0.004416=0.021328; +0.001279=0.022607; +0.005537=0.028144; +0.004701=0.032845; +0.002925=0.03577; +0.003277=0.039047; +0.002879=0.041926. So negative sum is -0.04193. So net is about -0.00738, which matches prediction ~0.013 positive? Wait prediction 0.0134 close to zero but positive; the sign of prediction is positive (maybe probability of positive?). But predicted_sentiment is "Negative". Hmm the model's prediction is low probability maybe but they interpret as negative. The attributions net negative, so they push negative.
+
+Need to mention that although there are some positive words, the overall negative weight dominates.
+
+Also note that tokens like "if" strongly negative because maybe conditional? "you" positive because subject.
+
+Also "this" and "cinematic" strongly negative.
+
+Also "avoid" negative.
+
+Also mention that "refuse" negligible.
+
+Ok.
+
+Need to be concise but explain.
+
+Also mention that tokens collectively shaped final prediction: negative words more influence, making prediction negative.
+
+Let's write explanation.</think>
+**How each word in the review helped the model decide “Negative”**
+
+| Token | Attribution | Effect on sentiment | What the model thinks |
+|-------|-------------|--------------------|-----------------------|
+| **if** | –0.0126 | Strongly pushes toward negative | The presence of a conditional “if” gives the model a hint of doubt or warning. |
+| **you** | +0.0126 | Pushes toward positive | Addressing the reader (“you”) is interpreted as a neutral or slightly positive cue. |
+| **enjoy** | +0.0045 | Small positive push | The verb “enjoy” normally signals enjoyment, so the model nudges the sentiment slightly upward. |
+| **films** | +0.0022 | Small positive | The word “films” itself is neutral but is given a tiny positive tilt. |
+| **like** | –0.0021 | Weak negative | “Like” in this context is paired with negative titles (“American Pie, Road Trip”) and pulls the score down a little. |
+| **american** | +0.0051 | Positive | The name “American” (as in “American Pie”) gives a small positive bump. |
+| **pie** | +0.0029 | Positive | “Pie” is part of the title; it adds a little positive weight. |
+| **,** | –0.0004 | Negligible negative | The comma is treated as a tiny negative signal. |
+| **road** | –0.0018 | Small negative | Part of the “Road Trip” title; slightly negative. |
+| **trip** | +0.0032 | Positive | The word “trip” in the title gives a small positive. |
+| **&** | +0.0011 | Positive | The ampersand, treated as a link, nudges sentiment a touch up. |
+| **van** | –0.0044 | Strong negative | In “Van Wilder,” the word “van” is given a clear negative contribution. |
+| **wilder** | +0.0030 | Positive | “Wilder” adds a small positive influence. |
+| **avoid** | –0.0013 | Small negative | “Avoid” signals a warning, pushing the sentiment down. |
+| **this** | –0.0055 | Strong negative | The demonstrative “this” in “this cinematic refuse” strongly flags a negative judgment. |
+| **cinematic** | –0.0047 | Strong negative | “Cinematic” is treated as a negative cue when coupled with “refuse.” |
+| **refuse** | –7.6 × 10⁻⁶ | Practically neutral | Virtually no impact. |
+| **at** | –0.0029 | Small negative | The preposition in “at all costs” adds a slight negative. |
+| **all** | –0.0033 | Small negative | The word “all” in the phrase “all costs” nudges the score slightly lower. |
+| **costs** | –0.0029 | Small negative | “Costs” completes the negative “at all costs” phrase. |
+
+### What the numbers mean
+
+- **Positive attribution** (+) = the word encourages a **positive** prediction.
+- **Negative attribution** (–) = the word encourages a **negative** prediction.
+- The *magnitude* shows how strongly that word pushes the sentiment.
+
+### Combined effect
+
+Adding all 20 contributions gives a **net negative** influence (about –0.007).  
+Although the words “you,” “enjoy,” “american,” “pie,” “trip,” and “wilder” each offer small positive nudges, the stronger negative signals from “if,” “this,” “cinematic,” “van,” and others outweigh them. This imbalance steers the model toward a low probability of a positive review, which the system labels as **Negative**.
+
+In short: the model sees more “warning” and “dislike” words than “enjoyment” words, so it predicts a negative sentiment.
+
+# EPR Explainer: 0.7269, Verifier: 0.5164

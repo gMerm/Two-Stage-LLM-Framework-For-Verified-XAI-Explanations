@@ -1,0 +1,43 @@
+{
+  "confidence": 0.92,
+  "verdict": "reject",
+  "justification": "The explanation incorrectly assigns the 29.6875% coverage and 1.0 max activation to the \"middle-left\" region, while the XAI content shows these values belong to the \"middle-center\" region. It also swaps the mean activation values between the two regions. This top‑region name swap directly contradicts the XAI data, rendering the explanation non‑faithful.",
+  "error type": "SwapTopFeature"
+}
+
+{
+    "confidence": 0.95,
+    "verdict": "reject",
+    "justification": "The explanation incorrectly assigns coverage percentages to the two regions: it reports middle-center as covering 1.6 % and middle-left as covering 29.7 %, whereas the XAI Content specifies the opposite (29.6875 % for middle-center and 1.5625 % for middle-left). This mismatch is a swap of coverage values for two minor features.",
+    "error type": "SwapMinorFeature"
+}
+
+{
+  "confidence": 0.95,
+  "verdict": "reject",
+  "justification": "The explanation accurately reports the numerical values (max activation, mean activation, coverage, region statistics) as given in the XAI Content. However, it introduces an interpretation that the high activations in the middle‑center region \"actually argue against the 'ship' prediction\". This claim is not supported by the XAI Content, which states that the activations correspond to the predicted class. The explanation therefore contains a fabricated mechanism, violating the requirement that no causal mechanisms or interpretations beyond the provided data be introduced.",
+  "error type": "FabricatedMechanism"
+}
+
+{
+    "confidence": 0.96,
+    "verdict": "reject",
+    "justification": "The explanation omits the key region \"middle-center\" listed in the XAI content. It only mentions the \"middle-left\" region, failing to discuss the most important region (highest coverage and mean activation). This omission violates the requirement that all significant spatial regions present in the XAI content must be discussed in both the CoT and the final explanation.",
+    "error type": "OmitFeature"
+}
+
+
+{
+  "confidence": 0.95,
+  "verdict": "reject",
+  "justification": "The explanation faithfully reproduces all quantitative values from the XAI content (max, mean, coverage, region statistics). However, it introduces a Grad‑CAM++ spatial gradient flow mechanism with a decay factor of 0.88 per pixel distance, which is not mentioned anywhere in the XAI content or its textual explanation. This fabricated mechanism constitutes a hallucination, violating the requirement that the explanation remain grounded solely in the provided XAI data.",
+  "error type": "InsertHallucination"
+}
+
+{
+    "confidence": 0.95,
+    "verdict": "reject",
+    "justification": "The CoT section is completely empty, which violates the requirement that the reasoning process must be present. While the final explanation accurately reflects the XAI content (activations, coverage, and region metrics match), the absence of the CoT means the verification cannot be fully performed.",
+    "error type": "MissingCoT"
+}
+

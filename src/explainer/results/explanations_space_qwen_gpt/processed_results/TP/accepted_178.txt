@@ -1,0 +1,66 @@
+<think>Okay, let me approach this systematically. The user wants a natural language explanation of Integrated Gradients token attributions for an IMDB negative review. 
+
+First, I need to analyze the provided data carefully. The prediction is strongly negative (0.013), so I should focus on how the top tokens collectively drive this sentiment. 
+
+Looking at the top 20 tokens, I notice several patterns:
+- The most negative contributors (large negative attributions) are words like "avoid", "cinematic", "refuse", "costs" - these form a negative cluster
+- Positive contributors are mostly small (e.g., "enjoy", "films", "american") but actually push toward negative sentiment? Wait no - the attribution sign determines direction. Negative attribution means it contributes to negative prediction.
+
+Wait, important clarification: 
+- Positive attribution = pushes toward positive sentiment (but here all positive attributions are small)
+- Negative attribution = pushes toward negative sentiment (which dominates)
+
+So "if" has -0.0126 (strong negative), "you" has +0.0126 (positive but small). But since the overall prediction is negative, the negative tokens must outweigh the positive ones.
+
+Let me list the strongest negative tokens:
+1. "if" (-0.0126) - that's the largest negative
+2. "this" (-0.0055)
+3. "cinematic" (-0.0047)
+4. "van" (-0.0044)
+5. "all" (-0.0033) etc.
+
+And the positive tokens:
+"you" (+0.0126) is actually the strongest positive, but it's still small compared to the negative magnitude. 
+
+Now, I need to explain this in simple terms without technical jargon. For non-techies: "The words 'if' and 'avoid' were most important in making the model think this is a bad review." For techies: "The negative attributions for 'if' and 'this' dominate the sentiment."
+
+I should group tokens by their sentiment impact:
+- Strong negative: "if", "this", "cinematic", "van wilder" (but "van" is separate token)
+- Mild positive: "enjoy", "films", "american" (but these are actually negative contributors? Wait no - "enjoy" has positive attribution meaning it would push toward positive if alone, but in context it's part of a negative phrase "if you enjoy... avoid")
+
+Ah! Critical point: The model interprets "if you enjoy films like American Pie... avoid" as negative, so the positive words are being used in a negative context. So "enjoy" gets positive attribution but the overall phrase is negative.
+
+Must clarify this in explanation to avoid confusion. The attribution scores don't mean the words are positive/negative themselves, but how they contribute to the model's prediction.
+
+For the explanation:
+- Start with overall sentiment (negative)
+- Highlight strongest negative tokens and why (they're in phrases like "avoid this cinematic refuse")
+- Note that positive words like "enjoy" are actually part of the negative construction
+- Keep it under 100 words as per conciseness requirement
+
+Also must avoid:
+- Saying "American Pie" is positive (it's not - the model sees it as a reference for bad movies)
+- Inventing why tokens matter (only use given data)
+
+Double-checking magnitudes: 
+- "if" is -0.0126 (largest negative)
+- "you" is +0.0126 (largest positive but small)
+- But since prediction is negative, the negative tokens win.
+
+Final structure:
+1. Overall: Model predicts negative sentiment
+2. Key negative words: "if", "this", "cinematic" (strongest contributors)
+3. Note that even positive words like "enjoy" are used in negative context
+4. Total effect: Negative phrases dominated by strong negative tokens
+</think>
+The model predicted a strongly negative sentiment (0.013) for this review. The top 20 tokens reveal how specific words shaped this judgment:
+
+- **Strong negative contributors**:  
+  "if" (−0.0126), "this" (−0.0055), "cinematic" (−0.0047), and "van" (−0.0044) were the most influential in driving the negative prediction. These words appear in phrases like "avoid this cinematic refuse," directly signaling the reviewer’s disdain.
+
+- **Mild positive contributors** (which did not override the negative context):  
+  "you" (+0.0126), "enjoy" (+0.0045), and "american" (+0.0051) were interpreted as part of the negative comparison ("if you enjoy films like American Pie... avoid"), making them *less* influential than the negative terms.
+
+Collectively, the negative phrases ("avoid this cinematic refuse," "mind-numbingly bad") dominated, with the strongest negative tokens ("if," "this," "cinematic") outweighing all positive-leaning words. The review’s harsh language directly caused the negative prediction.
+
+# EPR Explainer: 0.7679, Verifier: 0.9412

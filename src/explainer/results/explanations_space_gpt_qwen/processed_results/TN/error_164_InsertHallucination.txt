@@ -1,0 +1,74 @@
+<think>We need to provide explanation of global and local with details. Use only data. Follow guidelines. Provide concise. Let's craft.</think>
+**Global explanation (LIME)**  
+
+| Rank | Feature | Importance Score | Direction | Why it matters for price |
+|------|---------|------------------|-----------|--------------------------|
+| 1 | **carat** | 124.44 | Positive | Heavier stones cost more; size dominates price. |
+| 2 | **color** | 102.26 | Positive | Lower color grades (fewer color pigments) command higher prices. |
+| 3 | **clarity** | 75.55 | Positive | Fewer inclusions (higher clarity) increase value. |
+| 4 | **cut** | 53.20 | Positive | Better cut enhances brilliance, raising price. |
+| 5 | **y** | 32.99 | Positive | Larger vertical dimension signals larger volume, boosting value. |
+| 6 | **x** | 10.05 | Positive | Width contributes to overall size and is positively correlated with price. |
+| 7 | **table** | 9.62 | Positive | Larger table area improves light return, adding value. |
+| 8 | **depth** | 6.41 | Positive | Optimal depth balances size and cut quality. |
+| 9 | **z** | 0.13 | Positive | Height contributes minimally but still slightly increases price. |
+
+All listed features have a positive influence, meaning higher values of each tend to raise the predicted price.
+
+---
+
+### Local explanation – Instance #676  
+| Feature | Value range | Contribution | Direction | Weight (fraction of total effect) |
+|---------|-------------|--------------|-----------|-----------------------------------|
+| clarity | “<= 2.0” | +2075.04 | Positive | 0.423 |
+| y | “<= 6.54 and > 5.71” | –817.87 | Negative | 0.167 |
+| color | “<= 4.0 and > 3.0” | –723.16 | Negative | 0.148 |
+| x | “<= 6.55 and > 5.7” | +537.18 | Positive | 0.110 |
+| z | “<= 4.04 and > 3.53” | +262.97 | Positive | 0.054 |
+| carat | “<= 1.05 and > 0.7” | –185.91 | Negative | 0.038 |
+| cut | “<= 2.0” | –109.84 | Negative | 0.022 |
+| table | “<= 57.0 and > 56.0” | +102.95 | Positive | 0.021 |
+| depth | “<= 61.8 and > 61.0” | –86.28 | Negative | 0.018 |
+
+**Interpretation**  
+- The model strongly rewards the high‑clarity level (clarity <= 2.0), contributing over two‑thirds of the prediction.  
+- Negative contributions come mainly from a moderate vertical dimension (y) and a relatively high color grade (color <= 4.0).  
+- Width (x) and height (z) provide small positive boosts.  
+- Overall, the explanation explains the over‑prediction of **$3601.51** against the actual **$3172.00**.  
+
+**Local interpretability**  
+- Confidence: 0.072  
+- All 9 features used; the explanation captures the majority of the prediction.
+
+---
+
+### Local explanation – Instance #737  
+| Feature | Value range | Contribution | Direction | Weight |
+|---------|-------------|--------------|-----------|--------|
+| carat | “<= 0.7 and > 0.4” | –2897.62 | Negative | 0.487 |
+| clarity | “> 5.0” | +902.91 | Positive | 0.152 |
+| y | “<= 5.71 and > 4.72” | –884.52 | Negative | 0.149 |
+| table | “<= 57.0 and > 56.0” | –485.01 | Negative | 0.082 |
+| x | “<= 5.7 and > 4.71” | +324.50 | Positive | 0.055 |
+| cut | “<= 2.0” | –311.06 | Negative | 0.052 |
+| color | “<= 3.0 and > 1.0” | +85.92 | Positive | 0.014 |
+| depth | “<= 62.5 and > 61.8” | –30.62 | Negative | 0.005 |
+| z | “<= 3.53 and > 2.91” | +22.67 | Positive | 0.004 |
+
+**Interpretation**  
+- The very small carat (<= 0.7) is the main driver pulling the predicted price down; it accounts for roughly half the total effect.  
+- Clarity above 5.0 adds a positive component, but it is outweighed by negative contributions from a small vertical dimension (y), a modest table, and a sub‑optimal cut.  
+- Width (x) and color provide small positive adjustments.  
+- The net prediction **$1917.62** is close to the actual **$1981.00**, with a modest error of **$63.38**.
+
+**Local interpretability**  
+- Confidence: 0.117  
+- 9 features used; explanation accounts for the bulk of the prediction.
+
+---
+
+**Summary**  
+The XGBRegressor assigns the greatest importance to physical size (carat, y, x) and visual quality (color, clarity, cut).  
+For individual diamonds, the local LIME explanations show how specific ranges of these attributes push the price estimate up or down, matching the observed prediction errors.
+
+# EPR Explainer: 0.4388, Verifier: 0.6627

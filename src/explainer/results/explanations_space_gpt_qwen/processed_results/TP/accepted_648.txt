@@ -1,0 +1,53 @@
+<think>We need to explain each token's influence on the sentiment prediction. Provide natural language explanation for technical and non-technical audiences. We should base only on quantitative data. So mention each token and its attribution magnitude and direction. Possibly group them: positive contributions (push toward positive) and negative (push toward negative). Also discuss how they collectively shape the prediction. Provide concise, actionable insights. Avoid invented details. Let's list each token with its attribution. Also note that prediction is 0.01344; low positive, but labeled negative. So negative contributions dominate.
+
+We need to explain each token: "if" - negative -12.6k indicates strongly pushes negative. "you" positive 12.6k contributes positive. But overall negative. Also mention that "enjoy" positive small. "films" positive small. "like" negative small. "american" positive moderate. "pie" positive small. "," negative small. "road" negative moderate. "trip" positive moderate. "&" positive small. "van" negative large. "wilder" positive small. "avoid" negative. "this" negative large. "cinematic" negative large. "refuse" negligible negative. "at" negative moderate. "all" negative moderate. "costs" negative moderate.
+
+Need to explain how each collectively leads to negative prediction. Provide actionable insights: words like "avoid", "this", "cinematic", "van" etc. contribute to negative. The presence of "you" and "enjoy" slightly offset but not enough.
+
+Let's produce explanation.
+
+</think>
+**How each word nudged the model toward a negative rating**
+
+| Token | Attribution (effect size) | What the model did with it |
+|-------|---------------------------|---------------------------|
+| **if** | –0.0126 | This word pushed the sentiment *toward negative* by the largest amount. |
+| **you** | +0.0126 | “You” nudged the prediction *toward positive*, almost cancelling the effect of “if”. |
+| **enjoy** | +0.0045 | A small positive push – the model thinks the speaker may like something. |
+| **films** | +0.0022 | Slightly positive, suggesting the subject is a movie. |
+| **like** | –0.0021 | A tiny negative influence – the model reads “like” as a hint of comparison, slightly hurting positivity. |
+| **american** | +0.0051 | Positive, hinting at a known film title. |
+| **pie** | +0.0029 | Small positive from the movie name “American Pie”. |
+| **,** | –0.0004 | Negligible negative, nothing to worry about. |
+| **road** | –0.0018 | Negative, the model sees “road” as part of “Road Trip” and slightly lowers the score. |
+| **trip** | +0.0032 | Positive, the word “trip” helps a bit. |
+| **&** | +0.0011 | Tiny positive from the ampersand, no real impact. |
+| **van** | –0.0044 | Large negative – “van” in “Van Wilder” strongly lowers the sentiment. |
+| **wilder** | +0.0030 | Small positive from the film name “Van Wilder”. |
+| **avoid** | –0.0013 | Negative – the word “avoid” signals the model to downgrade the rating. |
+| **this** | –0.0055 | Strong negative – “this” points the model to the specific movie being critiqued. |
+| **cinematic** | –0.0047 | Very negative – “cinematic” in this context is interpreted as a criticism. |
+| **refuse** | –0.0000 | Essentially zero, no effect. |
+| **at** | –0.0029 | Small negative. |
+| **all** | –0.0033 | Slightly negative. |
+| **costs** | –0.0029 | Negative – “costs” adds a further drop in sentiment. |
+
+**Putting it all together**
+
+The model looked at 20 key words.  
+- The most *negative* tokens were “if”, “this”, “cinematic”, “van”, and “refuse” (the last barely matters).  
+- The biggest *positive* token was “you”, followed by “american”, “enjoy”, and “pie”.
+
+Because the negative tokens have larger magnitudes, the overall influence leans heavily negative, resulting in a low probability (≈0.013) for a positive review. Even though “you” and a few positive words counteract some negativity, they aren’t enough to flip the prediction.
+
+**Key take‑aways**
+
+| Action | Why it matters |
+|--------|----------------|
+| Highlight words like **“avoid”**, **“this”**, **“cinematic”**, **“van”** | These are the strongest signals pushing the review toward a negative sentiment. |
+| Note that **“you”** and **“enjoy”** give a modest positive lift | They slightly soften the negativity but are insufficient to change the overall outcome. |
+| Recognize that even neutral punctuation or conjunctions (“,”, “&”) have almost no effect | They can be ignored when explaining the sentiment. |
+
+In short, the model’s negative prediction is mainly driven by words that directly warn against or criticize the movie, while a handful of positive words only marginally mitigate that sentiment.
+
+# EPR Explainer: 0.8697, Verifier: 0.6109

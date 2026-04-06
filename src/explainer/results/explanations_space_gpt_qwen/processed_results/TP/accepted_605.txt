@@ -1,0 +1,33 @@
+<think>We need to explain each feature's contribution to model prediction for this individual, based on SHAP mean absolute values. Provide context on why it matters for income prediction. Only use provided data, no assumptions beyond it. Must be concise, actionable insights. Need to convert mean abs shap values into natural language explanation of importance. Should order features as given.
+
+We need to explain each feature and why it matters. Use the mean SHAP values as relative importance. For instance, WKHP has highest mean abs shap 0.904, so most influential. OCCP second, etc. Provide actionable insight: focus on these features when explaining model predictions. Provide context: e.g., hours worked per week influences income because more hours can lead to higher earnings. Occupation code indicates job type. Age affects experience. Education level indicates skill. Relationship to householder may capture socioeconomic context. Sex may correlate with earnings disparities. Place of birth may capture regional differences. Class of worker indicates employment type. Marital status may correlate with stability. Race may reflect disparities.
+
+We must not add new facts beyond dataset context. Provide for technical and non-technical audiences. Use clear language.
+
+Let's craft.</think>
+**How the model “thinks” about this person’s income**
+
+The table below shows each feature that the model used, how strongly it pulled the prediction in either direction (the *mean absolute SHAP* value), and a quick note on why that feature is relevant for estimating whether someone earns above or below the median income.
+
+| Rank | Feature | Mean absolute SHAP | Why it matters for income |
+|------|---------|--------------------|---------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.90** | Working more hours usually means a higher paycheck, so the model relies heavily on this number to gauge earning potential. |
+| 2 | **OCCP** (occupation code) | **0.63** | Different jobs pay very differently. Knowing the occupation gives the model a strong clue about expected income. |
+| 3 | **AGEP** (age) | **0.52** | Age often reflects experience and career stage; older workers may have higher earnings, but the relationship can vary by industry. |
+| 4 | **SCHL** (education level) | **0.46** | More schooling typically leads to better-paying jobs. The model uses education as a key indicator of skill level and marketability. |
+| 5 | **RELP** (relationship to householder) | **0.34** | This tells the model whether the person is a primary earner, spouse, child, etc., which can signal their likely role in household income. |
+| 6 | **SEX** (sex) | **0.22** | Gender can be correlated with wage gaps; the model accounts for this when predicting income. |
+| 7 | **POBP** (place of birth) | **0.17** | Birthplace can reflect regional education, economic conditions, or immigration status that influence earning power. |
+| 8 | **COW** (class of worker) | **0.14** | Whether the person works in the private sector, government, or is self‑employed can affect salary structures and benefits. |
+| 9 | **MAR** (marital status) | **0.10** | Married individuals sometimes earn more due to dual incomes or spousal support, so marital status can help the model estimate income. |
+| 10 | **RAC1P** (race) | **0.05** | Racial background may be associated with disparities in job opportunities or wages; the model includes it as a small but measurable factor. |
+
+### Take‑away
+
+- The model’s biggest lever is **weekly working hours (WKHP)**, followed by **job type (OCCP)**, **age**, and **education**.  
+- These top four features should be highlighted when explaining why the model predicted this person’s income to be above or below the median.  
+- Less influential features (like race, marital status, or place of birth) still play a role but contribute less to the final decision.  
+
+By focusing on the most important features, you can give clear, actionable explanations of the model’s prediction.
+
+# EPR Explainer: 0.8554, Verifier: 0.5245

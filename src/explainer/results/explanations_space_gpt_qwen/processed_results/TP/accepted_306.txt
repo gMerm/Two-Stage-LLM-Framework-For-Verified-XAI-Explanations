@@ -1,0 +1,68 @@
+<think>We must produce explanation. Follow guidelines: base only on data given. Provide global and local explanations. Keep concise, no speculation beyond data. Provide ranking, direction, context. For local, include instance details, actual vs predicted, error, feature values, contributions, direction, weight, confidence. Use given data. Ensure we don't add anything else.
+
+Ok. Let's craft final answer.</think>
+**Global explanation (LIME, top 9 features)**  
+
+| Rank | Feature | Importance score | Direction of influence on price | Why it matters for diamond pricing |
+|------|---------|------------------|---------------------------------|-------------------------------------|
+| 1 | **carat** | 124.44 | Positive | Heavier stones are generally more valuable. |
+| 2 | **color** | 102.26 | Positive | Better color grades (closer to “D”) raise value. |
+| 3 | **clarity** | 75.55 | Positive | Fewer inclusions (higher clarity) increase value. |
+| 4 | **cut** | 53.20 | Positive | Superior cut improves brilliance and market price. |
+| 5 | **y** | 32.99 | Positive | Larger length (y dimension) raises price. |
+| 6 | **x** | 10.05 | Positive | Larger width (x dimension) also contributes to value. |
+| 7 | **table** | 9.62 | Positive | Table size influences appearance and price. |
+| 8 | **depth** | 6.41 | Positive | Depth ratio affects optical performance and value. |
+| 9 | **z** | 0.13 | Positive | Height (z dimension) has minimal impact compared to other factors. |
+
+All listed features exert a positive effect on the predicted price; larger or higher‑quality values increase the price estimate.
+
+---
+
+### Local explanations
+
+#### Instance #676  
+*Actual price*: $3,172  
+*Predicted price*: $3,601.51  
+*Absolute error*: $429.51 (≈ 13.6 % higher than actual)  
+
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| **clarity** | `<= 2.0` | +2,075.04 | Positive | 0.423 |
+| **y** | `<= 6.54 and > 5.71` | –817.87 | Negative | 0.167 |
+| **color** | `<= 4.0 and > 3.0` | –723.16 | Negative | 0.148 |
+| **x** | `<= 6.55 and > 5.70` | +537.18 | Positive | 0.110 |
+| **z** | `<= 4.04 and > 3.53` | +262.97 | Positive | 0.054 |
+| **carat** | `<= 1.05 and > 0.70` | –185.91 | Negative | 0.038 |
+| **cut** | `<= 2.0` | –109.84 | Negative | 0.022 |
+| **table** | `<= 57.0 and > 56.0` | +102.95 | Positive | 0.021 |
+| **depth** | `<= 61.8 and > 61.0` | –86.28 | Negative | 0.018 |
+
+**Interpretability score**: 0.0723 (confidence) with 9 features used.  
+The prediction is mainly driven by high clarity (large positive contribution), counterbalanced by smaller negative effects from y, color, carat, cut, and depth. The overall positive weight of clarity outweighs the negatives, leading to the over‑prediction.
+
+---
+
+#### Instance #737  
+*Actual price*: $1,981  
+*Predicted price*: $1,917.62  
+*Absolute error*: $63.38 (≈ 3.2 % lower than actual)  
+
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| **carat** | `<= 0.7 and > 0.4` | –2,897.62 | Negative | 0.487 |
+| **clarity** | `> 5.0` | +902.91 | Positive | 0.152 |
+| **y** | `<= 5.71 and > 4.72` | –884.52 | Negative | 0.149 |
+| **table** | `<= 57.0 and > 56.0` | –485.01 | Negative | 0.082 |
+| **x** | `<= 5.7 and > 4.71` | +324.50 | Positive | 0.055 |
+| **cut** | `<= 2.0` | –311.06 | Negative | 0.052 |
+| **color** | `<= 3.0 and > 1.0` | +85.92 | Positive | 0.014 |
+| **depth** | `<= 62.5 and > 61.8` | –30.62 | Negative | 0.005 |
+| **z** | `<= 3.53 and > 2.91` | +22.67 | Positive | 0.004 |
+
+**Interpretability score**: 0.1169 (confidence) with 9 features used.  
+The prediction is pulled down mainly by the negative contribution of a low carat weight (–2,898) and further reduced by y, table, and cut. The positive effects from clarity, x, and color partially offset this, resulting in a slightly lower predicted price than the actual.
+
+---
+
+# EPR Explainer: 0.3756, Verifier: 0.5605

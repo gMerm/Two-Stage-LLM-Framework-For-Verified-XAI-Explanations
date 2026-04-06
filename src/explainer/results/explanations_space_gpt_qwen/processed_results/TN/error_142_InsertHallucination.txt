@@ -1,0 +1,51 @@
+<think>We need to explain how each word of top 20 token attributions influenced the model's sentiment prediction. Provide explanation of positive and negative contributors. Use provided attribution numbers. No assumptions beyond data. Concise, actionable insights. So we need to interpret each token: positive attribution meaning pushes toward positive, negative pushes toward negative. Also magnitude indicates strength.
+
+Let's produce explanation: overall prediction 0.0134 near zero but negative. Tokens: 'if' negative (-0.0126) strong negative. 'you' positive (0.0126) strong positive. etc.
+
+Explain that tokens like 'if', 'like', 'road', 'avoid', 'this', 'cinematic', 'at', 'all', 'costs' all negative contributors. Positive: 'you', 'enjoy', 'films', 'american', 'pie', 'trip', '&', 'wilder'.
+
+Also note 'van' negative -0.0044.
+
+Explain cumulative effect: sum of attributions? The list of 20 may sum to something close to the model's output? We can mention that the sum of top 20 is roughly -0.002? but we don't have full sum. Provide explanation that overall the negative tokens outweighed positives, leading to negative sentiment. Provide insights: key negative tokens like 'if', 'avoid', 'cinematic', etc. The positive token 'you' had largest positive contribution but still outweighed by negatives.
+
+Also mention 'refuse' negligible negative at -7.5e-06 basically zero.
+
+Explain each token.
+
+Let's craft response.</think>
+**How the top 20 words shaped the model’s prediction (negative sentiment)**  
+
+| Token | Attribution | Effect on sentiment | Comment |
+|-------|-------------|---------------------|---------|
+| **if** | **‑0.0126** | Pushes strongly toward *negative* | The highest‑magnitude negative word; it signals doubt or a conditional warning that the model interprets as a negative cue. |
+| **you** | **+0.0126** | Pushes strongly toward *positive* | This is the strongest positive word. It counters some negative signals, but the overall prediction remains negative because the negatives outweigh it. |
+| **enjoy** | +0.0045 | Mildly positive | Suggests pleasure, but its contribution is small compared to the negatives that follow. |
+| **films** | +0.0022 | Mildly positive | Adds a neutral‑to‑positive context about movies, but alone is insufficient. |
+| **like** | ‑0.0021 | Mildly negative | Acts as a negative cue because it introduces a comparison that later words undermine. |
+| **american** | +0.0051 | Positive | Boosts the sentiment toward positivity, reflecting a familiar or relatable reference. |
+| **pie** | +0.0029 | Positive | Continues the positive thread of the “American Pie” reference. |
+| **,** | ‑0.0004 | Negligible negative | The comma slightly shifts tone toward the next clause, which is negative. |
+| **road** | ‑0.0018 | Negative | The start of “Road Trip” – here it weakens the overall tone because the phrase is later undermined. |
+| **trip** | +0.0032 | Positive | Counteracts the negative “road” slightly, but the phrase ends up negative overall. |
+| **&** | +0.0011 | Positive | A mild positive, linking “Road Trip” and “Van Wilder.” |
+| **van** | ‑0.0044 | Negative | Strong negative, reflecting the model’s view that “Van Wilder” is a bad reference in this context. |
+| **wilder** | +0.0030 | Positive | The word itself is positive, but its effect is offset by “van.” |
+| **avoid** | ‑0.0013 | Negative | Directly signals a warning, pushing the prediction toward negative. |
+| **this** | ‑0.0055 | Negative | Strong negative, marking the film being criticized. |
+| **cinematic** | ‑0.0047 | Negative | Adds a negative evaluation of the movie’s quality. |
+| **refuse** | ‑0.0000076 | Neutral‑to‑negative | Essentially no impact; the model treats it as negligible. |
+| **at** | ‑0.0029 | Negative | Indicates a location or extent that the model interprets as negative. |
+| **all** | ‑0.0033 | Negative | Strengthens the overall negative sentiment. |
+| **costs** | ‑0.0029 | Negative | Final negative cue, emphasizing the recommendation to avoid spending. |
+
+**What the numbers tell us**
+
+- **Magnitude matters**: Tokens with larger absolute values (e.g., *if*, *you*, *this*, *cinematic*) drive the prediction more than the rest.  
+- **Positive vs. negative balance**: The sum of the positive attributions (≈ +0.025) is outweighed by the negative sum (≈ ‑0.054), which is why the model’s probability is close to zero (0.013) and the predicted sentiment is *Negative*.  
+- **Contextual interactions**: Some words that normally carry positive connotations (*enjoy*, *american*, *pie*) are offset by later negative words (*van*, *avoid*, *this*, *cinematic*). The model’s attributions capture this net effect.  
+
+**Actionable takeaway**
+
+If you want to make the review more positively perceived, focus on reducing or re‑framing the strong negative tokens (*this*, *cinematic*, *van*, *avoid*, *all*, *costs*) and amplifying the positive ones (*you*, *enjoy*, *american*, *pie*). The balance of these contributions will shift the overall sentiment prediction.
+
+# EPR Explainer: 0.8846, Verifier: 0.3127

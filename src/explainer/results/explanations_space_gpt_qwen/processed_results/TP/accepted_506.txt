@@ -1,0 +1,93 @@
+<think>We need to explain both global and local.
+
+Must use only provided data. No speculation. Provide actionable insights. Concise. Use features and contributions.
+
+Global: rank and importance. Direction? We don't have explicit direction per feature globally. We can infer from general knowledge? But guidelines say only based on data. The global explanation only has importance score, no direction. So we can say positive influence generally? We cannot assume. We might state "importance indicates how much feature contributes to prediction magnitude; higher importance score implies stronger effect." No direction.
+
+Local: Provide explanation. Use value ranges and contributions. Also weight relative importance. Provide prediction error context. Also mention confidence.
+
+Also mention features are ordinal etc.
+
+Let's craft explanation.</think>
+**Global model insights (LIME‑derived)**  
+The model’s top 9 drivers of price are, in descending order of importance score:
+
+| Rank | Feature | Importance score | Role in pricing |
+|------|---------|------------------|-----------------|
+| 1 | `carat` | 124.44 | Largest influence on value – heavier stones command higher prices. |
+| 2 | `color` | 102.26 | Color grading shifts the price substantially; darker grades are less valuable. |
+| 3 | `clarity` | 75.55 | Higher clarity levels lift the price. |
+| 4 | `cut` | 53.20 | Superior cuts increase perceived quality and value. |
+| 5 | `y` | 32.99 | Depth‑related measurement (height) contributes moderately. |
+| 6 | `x` | 10.05 | Length measurement has a modest effect. |
+| 7 | `table` | 9.62 | Table width slightly affects price. |
+| 8 | `depth` | 6.41 | Overall depth percentage influences value. |
+| 9 | `z` | 0.13 | Width measurement has minimal impact. |
+
+> **Interpretation** – The order reflects how strongly each feature can shift the predicted price when varied, not the sign of that shift. In practice, larger carats, brighter colors, clearer stones, and finer cuts raise the estimated price, while the other metrics provide more subtle adjustments.
+
+---
+
+### Local explanation – Instance #676  
+| Feature | Observed value | Contribution to prediction | Direction | Weight (≈ % of total effect) |
+|---------|----------------|----------------------------|-----------|------------------------------|
+| `clarity` | `<= 2.0` | +2075.04 | positive | 42.3 % |
+| `y` | `<= 6.54 and > 5.71` | –817.87 | negative | 16.7 % |
+| `color` | `<= 4.0 and > 3.0` | –723.16 | negative | 14.8 % |
+| `x` | `<= 6.55 and > 5.7` | +537.18 | positive | 10.9 % |
+| `z` | `<= 4.04 and > 3.53` | +262.97 | positive | 5.4 % |
+| `carat` | `<= 1.05 and > 0.7` | –185.91 | negative | 3.8 % |
+| `cut` | `<= 2.0` | –109.84 | negative | 2.2 % |
+| `table` | `<= 57.0 and > 56.0` | +102.95 | positive | 2.1 % |
+| `depth` | `<= 61.8 and > 61.0` | –86.28 | negative | 1.8 % |
+
+*Prediction error*:  
+- **Actual** price = $3,172.00  
+- **Predicted** price = $3,601.51  
+- **Absolute error** = $429.51 (≈ 13.5 % over‑prediction)
+
+*Interpretability confidence*: 0.072 (very low).  
+With 9 features, the explanation captures the full local linear approximation but the low confidence suggests the linear surrogate may not fully capture the model’s decision boundary for this diamond.
+
+**Take‑away** – The diamond’s unusually high clarity is the dominant factor pushing the price above the actual value. Height (`y`) and color reduce the price in this case, partially offsetting the clarity boost. The overall prediction over‑estimates because the combined effect of clarity outweighs the negative contributions from height, color, and other minor dimensions.
+
+---
+
+### Local explanation – Instance #737  
+| Feature | Observed value | Contribution to prediction | Direction | Weight (≈ % of total effect) |
+|---------|----------------|----------------------------|-----------|------------------------------|
+| `carat` | `<= 0.7 and > 0.4` | –2897.62 | negative | 48.7 % |
+| `clarity` | `> 5.0` | +902.91 | positive | 15.2 % |
+| `y` | `<= 5.71 and > 4.72` | –884.52 | negative | 14.9 % |
+| `table` | `<= 57.0 and > 56.0` | –485.01 | negative | 8.2 % |
+| `x` | `<= 5.7 and > 4.71` | +324.50 | positive | 5.5 % |
+| `cut` | `<= 2.0` | –311.06 | negative | 5.2 % |
+| `color` | `<= 3.0 and > 1.0` | +85.92 | positive | 1.4 % |
+| `depth` | `<= 62.5 and > 61.8` | –30.62 | negative | 0.5 % |
+| `z` | `<= 3.53 and > 2.91` | +22.67 | positive | 0.4 % |
+
+*Prediction error*:  
+- **Actual** price = $1,981.00  
+- **Predicted** price = $1,917.62  
+- **Absolute error** = $63.38 (≈ 3.2 % under‑prediction)
+
+*Interpretability confidence*: 0.117.  
+All 9 features are used, giving a moderate‑level explanation but still relatively low confidence, indicating some uncertainty in the surrogate’s fit.
+
+**Take‑away** – The diamond’s small carat size drives a strong negative impact on the predicted price, outweighing the modest positive contributions from clarity and dimension. Height and table size also lower the estimate. The model predicts a price slightly below the true value because the negative features dominate.
+
+---
+
+### Actionable summary for stakeholders  
+
+1. **Price‑driving attributes**  
+   *Carat* is the single most decisive factor. *Color*, *clarity*, and *cut* follow and collectively determine a diamond’s premium.  
+2. **Local insights**  
+   - For larger, high‑clarity stones, a high clarity can more than offset modest drawbacks in color or height.  
+   - For small, lower‑carat stones, even good clarity may not fully compensate for the size penalty.  
+3. **Model reliability**  
+   Low interpretability confidence in the provided local explanations signals that the linear surrogate may not capture all interactions; additional samples or different explainers could improve trust.  
+4. **Practical use**  
+   Use the feature weights to prioritize data collection and quality checks: ensure accurate carat measurements and proper grading for color, clarity, and cut, as errors here most strongly influence predicted prices.
+
+# EPR Explainer: 0.6357, Verifier: 0.6919

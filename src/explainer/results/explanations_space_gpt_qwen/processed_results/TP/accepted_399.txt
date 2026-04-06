@@ -1,0 +1,20 @@
+<think>We need to convert heatmap data into natural language explanations for technical and non-technical audiences, focusing on spatial patterns and activation strengths, concise, no extra assumptions. Use the quantitative data. Let's analyze:
+
+Sample 2 predicted ship, confidence 92.44%. Activation stats: max 1.0, mean 0.4472, coverage 31.25%. Regions: middle-center: 29.6875% coverage, max 1.0, mean 0.7263. middle-left: 1.5625% coverage, max 0.639, mean same.
+
+We need to describe which spatial regions most strongly influenced the classification, patterns (max, mean, coverage), identify most important regions, assess alignment with predicted class. So we mention that the majority of activation is in middle-center region, which likely corresponds to the main hull/structure of the ship. The middle-left region also has some activation. Provide explanation for both technical and non-technical? The guidelines say "for both technical and non-technical audiences." So we can produce a single explanation that is understandable to both. Maybe a short paragraph that is concise but clear.
+
+We cannot reveal internal prompts. Provide natural language explanation based on data. Ensure no extra assumptions beyond what is given.
+
+We can phrase: The heatmap indicates the model focused mainly on the central part of the image; maximum activation of 1.0 in that region. The mean activation in that region is 0.73, which is higher than the overall mean 0.45. The region covers ~30% of the image. Another smaller region on the middle-left side also shows activation, but lower (~0.64). So overall, the model's attention aligns with the ship's central body.
+
+Let's produce answer.</think>
+**Model focus for Image #2 (label: ship)**  
+- **Overall attention**: The Grad‑CAM++ map activates roughly one‑third (31 %) of the 32 × 32 pixels, with an average activation of 0.45 and a peak of 1.0.  
+- **Key region**: The **middle‑center** area dominates the signal—covering 29.7 % of the image, its mean activation is 0.73 and its maximum is 1.0.  
+- **Secondary signal**: A small patch on the **middle‑left** side (1.6 % of the image) shows weaker activation (max = 0.64, mean = 0.64).  
+- **Interpretation**: The model’s strongest focus lies in the central part of the picture, which is where a ship’s hull or main body would normally appear. The weaker left‑side activation may correspond to a side view or an auxiliary feature of the vessel.  
+
+Thus, the heatmap’s high‑activation regions align well with the expected location of a ship in the image, supporting the correct prediction with high confidence.
+
+# EPR Explainer: 0.9323, Verifier: 0.5010

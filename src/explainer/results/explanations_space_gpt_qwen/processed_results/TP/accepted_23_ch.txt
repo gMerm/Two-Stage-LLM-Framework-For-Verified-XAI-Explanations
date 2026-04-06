@@ -1,0 +1,50 @@
+<think>We need to explain how each word influenced the model's sentiment prediction. Use only data given. We must avoid making assumptions beyond provided. Provide explanation for each token with its attribution sign and magnitude relative to others. Also mention collective shaping. Also mention top 20 tokens list. Need to give concise natural language explanations for both technical and non-technical audiences. Avoid too technical. Provide actionable insights? The instruction says "focus on actionable insights". We can summarize which words push positive, negative, magnitude, and how overall leads to negative prediction. Also mention that overall prediction 0.0134 (close to neutral but negative? Actually prediction is 0.0134 maybe threshold 0.5? But predicted sentiment negative? Actually maybe lower value means negative. So we can explain that negative attributions dominate.
+
+Let's craft explanation: start with intro, overall prediction negative. Then list tokens with description: e.g., "if" negative, meaning condition might be not satisfied for positive sentiment; "you" positive slightly; "enjoy" positive small; "films" positive small; "like" negative slight; etc. Also mention the strongest negative tokens: "this" (-0.00554), "cinematic" (-0.00470), "van" (-0.00442), "at" (-0.00292), "all" (-0.00328), "costs" (-0.00288), "road" (-0.00181). Also positive tokens: "you" (0.0126), "american" (0.00510), "pie" (0.00290), "trip" (0.00316), "van" actually negative? Wait van negative. & is positive 0.00112, wilder positive 0.00298, etc.
+
+We should mention that the negative tokens collectively outweigh positives leading to negative sentiment.
+
+Also highlight that tokens like "refuse" has negligible influence.
+
+Also provide actionable insight: for sentiment improvement, reducing negative words like "avoid", "cinematic", "this" would reduce negative influence. For positive, increasing words like "you", "american", "pie", "trip" may slightly shift.
+
+But we should only base on data.
+
+Let's craft final answer accordingly.</think>
+**How each word in the review pushed the model toward a negative sentiment**
+
+| Token | Attribution | Effect on the prediction | Quick take‑away |
+|-------|-------------|--------------------------|-----------------|
+| **if** | –0.0126 | Slightly pulls the score down | “Conditional” language often weakens a positive claim. |
+| **you** | +0.0126 | Brings the score up | Direct address to the reader adds a small positive lift. |
+| **enjoy** | +0.0045 | Small positive push | Suggests a pleasant experience. |
+| **films** | +0.0022 | Minor positive push | Indicates the subject matter. |
+| **like** | –0.0021 | Small negative push | Implicates comparison that is not favorable. |
+| **american** | +0.0051 | Positive push | Brand name that may carry positive connotations. |
+| **pie** | +0.0029 | Positive push | Completes the brand name “American Pie”. |
+| **,** | –0.0004 | Negligible negative | Comma itself does not matter. |
+| **road** | –0.0018 | Slight negative push | “Road Trip” may be seen as mediocre. |
+| **trip** | +0.0032 | Positive push | Part of the film title that can be enjoyed. |
+| **&** | +0.0011 | Minor positive | Connects two titles, giving a bit of extra credit. |
+| **van** | –0.0044 | Strong negative push | “Van Wilder” is associated with a bad review. |
+| **wilder** | +0.0030 | Positive push | Completes the title, slightly redeeming it. |
+| **avoid** | –0.0013 | Slight negative push | Explicit recommendation to skip the film. |
+| **this** | –0.0055 | Largest negative push | Directly flags the film as undesirable. |
+| **cinematic** | –0.0047 | Strong negative push | Words like “cinematic” normally boost positivity, but the context makes it negative. |
+| **refuse** | –0.0000 | No real effect | Essentially neutral. |
+| **at** | –0.0029 | Small negative push | Preposition that weakens the sentiment. |
+| **all** | –0.0033 | Negative push | Implies totality of the negative claim. |
+| **costs** | –0.0029 | Negative push | Warns the reader about spending. |
+
+### What the numbers mean for the final prediction
+- The **overall prediction** is 0.013, a value that the model interprets as *negative* sentiment.  
+- The negative tokens (especially **this**, **cinematic**, **van**, **at**, **all**, **costs**) together outweigh the positive tokens.  
+- The strongest positive influences are **you** and **american**, but even they are too weak to change the overall negative direction.
+
+### Take‑away for different audiences
+
+- **Non‑technical readers**: The review contains many words that tell you the movie is bad (“avoid this cinematic waste”, “this is a refuse”). The few positive words (“enjoy”, “American Pie”) are not enough to change the overall feeling.  
+- **Technical readers**: The IG attributions show a clear imbalance: a total of about –0.038 negative weight versus +0.027 positive weight. The negative bias dominates, pushing the prediction into the negative class.  
+- **Actionable insight**: If you want a more balanced or positive prediction, you would need to reduce the impact of the strong negative tokens (e.g., remove “avoid this”, “cinematic”, “van”) or increase the strength of the positive tokens (e.g., add more words like “enjoy”, “fun”, “great”). In practice, the review as written is strongly negative, and the model reflects that accurately.
+
+# EPR Explainer: 0.9474, Verifier: 0.3542

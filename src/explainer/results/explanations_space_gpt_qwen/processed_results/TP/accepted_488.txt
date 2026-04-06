@@ -1,0 +1,57 @@
+<think>We need to explain how each word of the top_20_token_attributions influenced the model's sentiment prediction. Identify and describe impact of all tokens (both positive and negative). Provide concise, actionable insights. Only based on quantitative data given.
+
+We have tokens and attributions. Positive attributions push toward positive, negative push toward negative. We should explain each token's contribution: magnitude and direction. Also describe collective shaping of final prediction. Provide for both technical and non-technical audiences. Maybe give bullet list.
+
+We should avoid assumptions beyond data. The sample prediction is 0.01344, close to neutral but predicted negative.
+
+We will explain: "if" negative big; "you" positive small; etc.
+
+Let's produce explanation: "if" strongly negative; "you" positive; "enjoy" positive but small; "films" small positive; "like" negative small; "american" positive moderate; "pie" positive small; "," negative tiny; "road" negative small; "trip" positive moderate; "&" positive small; "van" negative moderate; "wilder" positive small; "avoid" negative small; "this" negative moderate; "cinematic" negative moderate; "refuse" negligible negative; "at" negative small; "all" negative small; "costs" negative small.
+
+We should say collectively negative tokens outweigh positives, resulting in negative prediction. The negative tokens include 'if', 'like', 'road', 'avoid', 'this', 'cinematic', 'at', 'all', 'costs', 'van', etc.
+
+Also note that some tokens like "you" and "enjoy" are positive but small; overall negative outweighs.
+
+Provide actionable insight: focus on negative words like "if", "avoid", "this", "cinematic" etc.
+
+We should keep concise, avoid technical language but include necessary interpretation.
+
+Let's craft explanation.</think>
+**How the top 20 words shaped the model’s prediction**
+
+| Token | Attribution | Effect on sentiment | How it helped the model decide “Negative” |
+|-------|-------------|---------------------|-------------------------------------------|
+| **if** | –0.0126 | Strong negative | A big negative cue that made the model lean toward a bad review. |
+| **you** | +0.0126 | Small positive | A slight positive push, but almost canceled by “if.” |
+| **enjoy** | +0.0045 | Positive | Adds a positive tone, but not enough to override the negative words. |
+| **films** | +0.0022 | Positive | Minor positive influence. |
+| **like** | –0.0021 | Small negative | Slightly pushes the prediction downward. |
+| **american** | +0.0051 | Positive | A positive signal that slightly lifts sentiment. |
+| **pie** | +0.0029 | Positive | Small positive contribution. |
+| **,** | –0.0004 | Negligible negative | Tiny negative touch. |
+| **road** | –0.0018 | Small negative | Minor negative push. |
+| **trip** | +0.0032 | Positive | Adds a small positive cue. |
+| **&** | +0.0011 | Positive | Minimal positive influence. |
+| **van** | –0.0044 | Moderate negative | A clear negative sign, pulling the prediction down. |
+| **wilder** | +0.0030 | Positive | Small positive contribution. |
+| **avoid** | –0.0013 | Small negative | Minor negative effect. |
+| **this** | –0.0055 | Moderate negative | Strong negative cue that pushes the sentiment down. |
+| **cinematic** | –0.0047 | Moderate negative | Significant negative influence. |
+| **refuse** | –0.0000 | Negligible negative | Essentially no effect. |
+| **at** | –0.0029 | Small negative | Minor negative push. |
+| **all** | –0.0033 | Small negative | Minor negative influence. |
+| **costs** | –0.0029 | Small negative | Minor negative push. |
+
+### What this means for the overall prediction
+
+- **Negative tokens dominate**: Words such as *if*, *this*, *cinematic*, *van*, *avoid*, *at*, *all*, and *costs* collectively exert a stronger negative influence than the positive tokens.
+- **Positive tokens are present but weaker**: Tokens like *you*, *enjoy*, *american*, *pie*, *trip*, and *wilder* give the model a slight positive nudge, but their cumulative effect is outweighed by the negatives.
+- **Resulting sentiment**: The balance tips toward negative, leading the model to output a sentiment score of 0.013 (just above neutral but still classified as “Negative”).
+
+### Take‑away for users
+
+- The model is most sensitive to explicit negative cues (e.g., *this*, *cinematic*, *avoid*).
+- Even if a review contains some positive words (*you*, *enjoy*), the presence of multiple strong negative words will steer the prediction toward a negative sentiment.
+- Understanding which words carry the most weight can help writers decide whether their message will be interpreted as positive or negative by the model.
+
+# EPR Explainer: 0.7429, Verifier: 0.4141

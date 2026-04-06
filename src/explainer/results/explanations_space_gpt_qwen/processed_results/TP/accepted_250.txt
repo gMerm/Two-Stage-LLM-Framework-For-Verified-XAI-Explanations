@@ -1,0 +1,20 @@
+<think>We need to explain each feature with context on why it matters for income prediction, based on mean absolute SHAP values. Should explain that WKHP highest importance, etc. Provide for technical and non-technical? They said focus on actionable insights, concise, avoid unnecessary technical language. Provide context per feature. Use the dataset context. No invented details. Let's produce a paragraph per feature, order as given. Use the mean SHAP values to indicate importance ranking. Use the provided data. Mention that WKHP (usual hours worked per week) is most influential. Provide reasons for each. Use straightforward language.</think>
+**Feature‑level explanation of the model’s prediction**
+
+| Feature | Mean absolute SHAP | What it tells us about income |
+|---------|-------------------|------------------------------|
+| **WKHP** (usual hours worked per week) | **0.90** | The model puts the biggest emphasis on how many hours a person works each week. Longer work hours typically correlate with higher pay, so this feature is the strongest signal the model uses to decide if someone earns above the median. |
+| **OCCP** (occupation code) | **0.63** | Job type is the next most influential factor. Certain occupations (e.g., managerial, professional) are linked to higher incomes, so the occupation code helps the model distinguish between higher‑ and lower‑earning roles. |
+| **AGEP** (age) | **0.52** | Age captures career experience and progression. Older individuals often have more experience and therefore higher earnings, making age a useful predictor. |
+| **SCHL** (educational attainment) | **0.46** | Education level is closely tied to earning potential; higher degrees generally open doors to better paying jobs. |
+| **RELP** (relationship to householder) | **0.34** | The person’s role in the household (spouse, child, roommate) can reflect their economic responsibilities and income‑generating capacity. |
+| **SEX** (sex) | **0.22** | Gender is a proxy for many social and economic dynamics that influence earnings, such as career opportunities and wage gaps. |
+| **POBP** (place of birth) | **0.17** | Where a person was born can reflect cultural, regional, or socioeconomic background, all of which can affect job prospects and income. |
+| **COW** (class of worker) | **0.14** | Employment type (private, government, self‑employed) affects income stability and potential earnings, so the model uses it as a moderate signal. |
+| **MAR** (marital status) | **0.10** | Marital status can influence economic behavior, such as shared resources or dual‑income households, thus adding some predictive power. |
+| **RAC1P** (race) | **0.05** | Race is the weakest signal among the features, but it still contributes a small amount to the overall prediction, reflecting broader socioeconomic patterns. |
+
+**Takeaway:**  
+The model relies most heavily on *work hours* and *occupation*, then on *age* and *education*. Features that reflect personal background (gender, birthplace, race) and household role are less influential but still provide incremental information. This hierarchy shows which aspects of an individual’s profile the model deems most informative for determining whether their income is above or below the median.
+
+# EPR Explainer: 0.8443, Verifier: 0.6068

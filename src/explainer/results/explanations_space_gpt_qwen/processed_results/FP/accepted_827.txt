@@ -1,0 +1,43 @@
+<think>We must explain the global feature importance. Provide top 15 features with their scores, direction. We don't have explicit direction sign. But we can infer likely: higher alcohol -> higher quality. But we cannot say sign? The XAI output only includes importance scores, not direction. We can mention that importance score indicates magnitude of contribution but not direction. Provide context of each. Also note interactions. We need to ensure not to invent any additional data. Just use what's given. For interactions, we can explain combined effect. Provide context: higher sulphates beneficial. Total sulfur dioxide importance. Provide actionable insights: monitor these.
+
+Let's craft explanation.</think>
+**Global feature importance for wine‑quality classification (EBM, global approximation)**  
+
+| Rank | Feature | Importance score | What it means |
+|------|---------|------------------|---------------|
+| 1 | **alcohol** | 0.781 | Alcohol has the strongest influence on whether a wine is predicted as high‑quality. A higher alcohol content typically signals richer body and maturity, which the model learns to associate with quality scores ≥ 7. |
+| 2 | **sulphates** | 0.613 | Sulphates contribute markedly to the decision. In winemaking sulphates are added to stabilise the wine; a moderate to high sulphate level is often linked with perceived quality. |
+| 3 | **total sulfur dioxide** | 0.375 | Total SO₂ is an important preservative. The model captures its effect on quality, with optimal ranges improving shelf life and taste. |
+| 4 | **volatile acidity** | 0.314 | Volatile acidity is a key spoilage indicator. The model uses its value to gauge freshness; higher levels usually lower quality, so the feature is highly discriminative. |
+| 5 | **citric acid** | 0.254 | Citric acid adds fruitiness and helps balance acidity. Its level is an important cue for the model when separating high‑ from low‑quality wines. |
+| 6 | **density** | 0.215 | Density correlates with sugar and alcohol content. The model leverages this relationship to assess quality. |
+| 7 | **citric acid & pH** (interaction) | 0.165 | The combined pattern of citric acid and pH improves prediction. For example, a wine with moderate citric acid and a slightly higher pH may be seen as higher quality. |
+| 8 | **chlorides** | 0.165 | Chloride concentration (saltiness) is a marker of wine balance; the model finds it relevant for quality discrimination. |
+| 9 | **residual sugar** | 0.118 | Residual sugar influences sweetness and perceived body. Its level is used by the model to fine‑tune the quality estimate. |
+| 10 | **residual sugar & chlorides** (interaction) | 0.083 | The joint pattern of sugar and chloride levels adds subtle nuance to the classification. |
+| 11 | **total sulfur dioxide & sulphates** (interaction) | 0.080 | The combined preservative and stabiliser effect of total SO₂ and sulphates improves the model’s decision accuracy. |
+| 12 | **pH & sulphates** (interaction) | 0.074 | The interplay between acidity (pH) and sulphates is informative for quality assessment. |
+| 13 | **total sulfur dioxide & density** (interaction) | 0.070 | Jointly, total SO₂ and density help the model capture nuances in preservation and body. |
+| 14 | **free sulfur dioxide** | 0.070 | Free SO₂, the unbound preservative, is an additional quality cue. |
+| 15 | **free sulfur dioxide & pH** (interaction) | 0.066 | The combination of free SO₂ and pH gives the model extra leverage in distinguishing quality levels. |
+
+### Why these features matter for wine quality
+
+* **Alcohol** – Higher alcohol usually indicates a fuller body and mature grape sugars, both hallmarks of premium wines.
+* **Sulphates** – Acts as a preservative and can improve mouthfeel; higher levels are often found in higher‑quality wines.
+* **Sulfur dioxide (total & free)** – Protects against oxidation and spoilage; the right amount is essential for a stable, high‑quality product.
+* **Volatile acidity** – Excessive volatile acidity signals spoilage; lower values align with higher quality.
+* **Citric acid & pH** – Together they describe the acidity balance, a key sensory attribute.
+* **Density, residual sugar, chlorides** – These physicochemical proxies relate to sweetness, body, and balance, all influencing perceived quality.
+
+### Feature interactions
+
+The EBM’s global approximation shows that combining two features often yields a stronger signal than either alone. For instance:
+
+* **Citric acid & pH**: A wine that is slightly more acidic (lower pH) but still has sufficient citric acid tends to be rated higher.
+* **Total sulfur dioxide & sulphates**: When both preservative measures are at optimal levels, the model more confidently predicts high quality.
+* **Residual sugar & chlorides**: Balancing sweetness with saltiness improves the wine’s profile, aiding classification.
+
+These interactions highlight that wine quality is not governed by a single attribute but by how several physicochemical factors co‑occur. Understanding and monitoring these key variables and their combinations can guide winemakers in adjusting fermentation, aging, and bottling processes to consistently produce higher‑quality wines.
+
+# EPR Explainer: 0.8698, Verifier: 0.6383

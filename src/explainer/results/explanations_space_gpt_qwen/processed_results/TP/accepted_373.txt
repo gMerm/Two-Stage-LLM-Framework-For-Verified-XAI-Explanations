@@ -1,0 +1,59 @@
+<think>We need to explain how each word influenced model's sentiment prediction. Provide explanations for positive and negative contributors, and how they collectively shaped final prediction. Must base only on given quantitative data. Avoid assumptions.
+
+We have sample: negative sentiment predicted 0.013442 (close to neutral but predicted negative). We have top 20 token attributions. Each token has attribution positive or negative. We need to describe impact.
+
+Need to mention magnitude and direction. Provide concise, natural language.
+
+Let's produce explanation:
+
+- Start with overall: The review predicted negative.
+
+- Then list tokens with explanation: positive contributions push toward positive; negative push toward negative.
+
+- Indicate that 'if' strongly negative, etc.
+
+- Summarize collective effect: negative tokens outweigh positives leading to negative prediction.
+
+- Provide actionable insight: if want to adjust, focus on tokens like 'avoid', 'this', 'cinematic', etc.
+
+Also need to describe how each token influenced the final prediction. Could phrase: "token X had attribution Y meaning X contributed Y toward sentiment."
+
+Let's craft.
+
+</think>
+**How the review’s words shaped the model’s prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Strongly pushes the review toward *negative* sentiment. |
+| **you** | +0.0126 | Pushes toward *positive* sentiment, almost balancing “if”. |
+| **enjoy** | +0.0045 | Mildly adds to a positive tone. |
+| **films** | +0.0022 | Slight positive contribution. |
+| **like** | –0.0021 | Slightly negative, dampening a positive phrase. |
+| **american** | +0.0051 | Adds a positive cue, hinting at a known comedy. |
+| **pie** | +0.0029 | Continues the positive streak. |
+| **,** | –0.0004 | Negligible negative shift. |
+| **road** | –0.0018 | Weak negative signal. |
+| **trip** | +0.0032 | Positive lift. |
+| **&** | +0.0011 | Minor positive boost. |
+| **van** | –0.0044 | Strong negative influence, countering “wilder”. |
+| **wilder** | +0.0030 | Positive contribution. |
+| **avoid** | –0.0013 | Negative cue, discouraging the film. |
+| **this** | –0.0055 | Strong negative, identifying the target. |
+| **cinematic** | –0.0047 | Strong negative, calling it a bad movie. |
+| **refuse** | –0.0000076 | Practically neutral. |
+| **at** | –0.0029 | Negative, adding urgency. |
+| **all** | –0.0033 | Negative, broadening the warning. |
+| **costs** | –0.0029 | Negative, warning about spending. |
+
+### What this means
+
+- **Negative‑weighted words dominate.** Tokens like “if”, “this”, “cinematic”, “at”, and “all” carry the largest negative attributions, strongly steering the model toward a negative prediction.  
+- **Positive cues are mostly about titles or mild praise.** Words such as “you”, “enjoy”, “american”, “pie”, “trip”, and “wilder” add small positive signals, but they are outweighed by the stronger negatives.  
+- **The final score (≈ 0.013) reflects a net negative influence.** The cumulative effect of the negatives outpaces the positives, giving the model a weak but decisive negative sentiment.
+
+### Take‑away for users
+
+If you want to turn a negative review into a positive one, focus on replacing or removing high‑negative tokens—especially “this”, “cinematic”, and “at all costs”—and emphasize stronger positive phrases that have higher attributions (e.g., “you enjoy films like American Pie”). This shift would reduce the negative attribution sum and move the prediction toward a more positive sentiment.
+
+# EPR Explainer: 0.8711, Verifier: 0.3921

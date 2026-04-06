@@ -1,0 +1,64 @@
+<think>We need to explain how each word contributed, positive or negative, to sentiment prediction. The prediction probability is 0.0134 for positive (maybe probability of positive? It's negative sentiment). The attribution scores show which tokens push toward positive or negative. We must base solely on given data, no extra. Must be concise and avoid unnecessary technical language. Provide actionable insights. Also mention that tokens collectively shaped final prediction.
+
+We have top 20 tokens. For each token, we should describe effect. The sign indicates direction: positive attribution pushes toward positive, negative pushes toward negative. Magnitude indicates strength. Should mention that the overall negative prediction is due to sum of negative contributions outweighing positive ones.
+
+We must be careful not to misinterpret magnitude relative. Provide a brief description per token.
+
+Also note that tokens "if" has negative attribution, but "you" has positive. This could be explained: presence of "if" indicates conditional but negative sentiment; "you" signals direct address, slight positive. Provide explanation.
+
+Also note that "avoid" has negative attribution, "this" negative, "cinematic" negative, "at all costs" negative, etc.
+
+Also "american pie" tokens positive but less strong.
+
+Also "van" negative.
+
+We should avoid adding extraneous info.
+
+Ok.
+
+We can produce explanation: The model's final negative prediction is largely due to strong negative tokens like "this", "cinematic", "avoid", "at", "all", "costs", "van", etc. Positive tokens like "you", "enjoy", "films", "american", "pie", "trip", "van wilder" but those are weaker. Provide actionable insights: to shift sentiment to positive, one might reduce negative words, add more positive ones.
+
+Also mention that punctuation tokens like comma have small negative effect.
+
+Also note that "refuse" has negligible effect.
+
+We should not mention that it's the top 20. We can say: The top 20 tokens include those with strongest contributions.
+
+Ok.
+
+Now produce answer.</think>
+**How the top 20 words shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment | Insight |
+|-------|-------------|---------------------|---------|
+| **if** | –0.0126 | Pulls the prediction toward *negative* sentiment. | A conditional marker that the model interprets as a hint of doubt or caution, reducing positivity. |
+| **you** | +0.0126 | Pushes the prediction toward *positive* sentiment. | Direct address slightly boosts positivity, but the effect is balanced by stronger negatives. |
+| **enjoy** | +0.0045 | Adds a small positive push. | Indicates a positive verb, but its impact is modest. |
+| **films** | +0.0022 | Mild positive contribution. | Generic noun that leans toward positivity when paired with “enjoy.” |
+| **like** | –0.0021 | Slight negative pull. | The model views “like” in this context as a comparison to something worse, nudging toward negativity. |
+| **american** | +0.0051 | Positive push. | Brand name that the model treats as a neutral‑positive cue. |
+| **pie** | +0.0029 | Positive push. | Completes the positive phrase “American Pie.” |
+| **,** | –0.0004 | Negligible negative effect. | Punctuation adds almost no weight; tiny negative shift. |
+| **road** | –0.0018 | Slight negative pull. | “Road” alone is weak; in this phrase the model slightly sees it as a negative cue. |
+| **trip** | +0.0032 | Positive contribution. | Completes “Road Trip,” a slightly positive phrase. |
+| **&** | +0.0011 | Very small positive effect. | The conjunction itself is neutral but leans positive in this context. |
+| **van** | –0.0044 | Strong negative push. | “Van” in “Van Wilder” is interpreted as a negative cue here. |
+| **wilder** | +0.0030 | Positive contribution. | Balances the negative effect of “van” but still modest. |
+| **avoid** | –0.0013 | Negative pull. | Explicitly tells the reader to stay away, reinforcing negativity. |
+| **this** | –0.0055 | Strong negative push. | “This” marks the subject as something the model finds negative. |
+| **cinematic** | –0.0047 | Negative pull. | The adjective “cinematic” is interpreted as a negative descriptor in this sentence. |
+| **refuse** | –0.0000076 | Negligible effect. | No real influence on sentiment. |
+| **at** | –0.0029 | Negative pull. | Phrases “at all costs” intensify negativity. |
+| **all** | –0.0033 | Negative effect. | Intensifies the negative command “avoid.” |
+| **costs** | –0.0029 | Negative contribution. | Completes the phrase “at all costs,” strengthening the negative stance. |
+
+### Summary of how the tokens worked together
+
+- **Negative drivers**: “this,” “cinematic,” “avoid,” “at,” “all,” “costs,” “van” (strongest) dominate the overall score. Their combined effect pulls the prediction toward a very low positive probability (0.0134), which the model interprets as a strongly negative review.
+- **Positive drivers**: “you,” “enjoy,” “films,” “american,” “pie,” “trip,” “wilder,” and a few others provide small positive nudges. However, their magnitudes are far smaller than the strongest negative tokens.
+- **Punctuation and neutral words**: Tokens like commas, “refuse,” and “&” have almost no influence; they are effectively ignored by the model.
+
+**Take‑away for a reviewer**  
+If the goal is to steer the sentiment toward positive, replace or remove the strongest negative words (“this,” “cinematic,” “avoid,” “at,” “all,” “costs,” “van”) and add more of the positive tokens (“enjoy,” “films,” “American Pie,” “Road Trip”) with higher frequency or stronger sentiment. This balance will shift the integrated‑gradient total toward a higher positive probability.
+
+# EPR Explainer: 0.9733, Verifier: 0.5407

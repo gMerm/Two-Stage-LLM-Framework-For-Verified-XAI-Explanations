@@ -1,0 +1,35 @@
+<think>We need to explain how each word influenced the prediction. The attribution list shows each token's attribution score. Positive contributions push toward positive sentiment; negative push toward negative. We need to describe both positive and negative tokens, collectively shaping final prediction. Use the quantitative data. Keep concise, actionable insights, for both technical and non-technical. No extra speculation. Provide clear natural language. So for each token, say whether it helped or hurt sentiment, and its relative strength (large positive or negative). Also mention overall that the negative tokens outweigh positive ones, leading to negative prediction. Mention the magnitude order. Also note some tokens have very small contributions like "refuse". Provide summary.
+
+Let's produce explanation.</think>
+**How each word shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment | Insight |
+|-------|-------------|---------------------|---------|
+| **if** | –0.0126 | Negative | The word “if” strongly pulls the score toward *negative*. |
+| **you** | +0.0126 | Positive | “you” pushes the score slightly toward *positive*, nearly balancing the effect of “if”. |
+| **enjoy** | +0.0045 | Positive | Adds a small positive boost, hinting that the reviewer could be enjoying something. |
+| **films** | +0.0022 | Positive | Slight positive influence, aligning with a general discussion of movies. |
+| **like** | –0.0021 | Negative | Weakly drags the sentiment down, suggesting the movie is not “like” the mentioned titles. |
+| **american** | +0.0051 | Positive | A modest positive push, perhaps because “American Pie” is a popular title. |
+| **pie** | +0.0029 | Positive | Supports the positive stance toward the referenced movie. |
+| **,** | –0.0004 | Negative | Negligible negative influence (comma as a token). |
+| **road** | –0.0018 | Negative | Slight negative impact, possibly because “road” is part of a negative phrase (“Road Trip” is another movie). |
+| **trip** | +0.0032 | Positive | Adds a positive touch to the mention of “Road Trip”. |
+| **&** | +0.0011 | Positive | Minimal positive contribution (symbol). |
+| **van** | –0.0044 | Negative | Strong negative effect—“van” comes from “Van Wilder,” a movie the reviewer dislikes. |
+| **wilder** | +0.0030 | Positive | Positive counterbalance to “van.” |
+| **avoid** | –0.0013 | Negative | Weakly encourages a negative sentiment. |
+| **this** | –0.0055 | Negative | One of the strongest negative tokens, signalling the film in question is bad. |
+| **cinematic** | –0.0047 | Negative | Further negative pressure, calling the movie a bad cinema experience. |
+| **refuse** | –7.6 × 10⁻⁶ | Negative | Negligible negative effect (almost zero). |
+| **at** | –0.0029 | Negative | Weak negative influence. |
+| **all** | –0.0033 | Negative | Adds a small negative weight. |
+| **costs** | –0.0029 | Negative | Slightly negative, warning readers to avoid paying for the film. |
+
+### Collective effect
+- **Positive tokens** (you, enjoy, films, american, pie, trip, wilder) sum to about **+0.032 **.
+- **Negative tokens** (if, like, road, avoid, this, cinematic, at, all, costs, van) sum to about **–0.051 **.
+
+The negative contributions outweigh the positive ones, which is why the model outputs a very low probability (≈0.013) for a positive review—labeling it **Negative**. The strongest negative signals come from the word *if* (which negates an otherwise positive context) and from *this* and *cinematic* that directly target the film’s poor quality. Small positive tokens such as *you* and *enjoy* are not enough to counterbalance these negative signals.
+
+# EPR Explainer: 0.8121, Verifier: 0.5019

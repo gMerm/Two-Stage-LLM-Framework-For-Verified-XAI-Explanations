@@ -1,0 +1,38 @@
+<think>We need to explain each feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Base explanation on provided quantitative data: feature list and mean_abs_shap values. We need to describe relative importance. Should provide for both technical and non-technical audiences but concise. Use the SHAP values to indicate relative importance ranking.
+
+We need to be careful to not add extraneous info beyond what is given. Use only the provided data. Provide explanation that WKHP has highest mean_abs_shap 0.904, so most important. OCCP next, etc.
+
+Explain context: working hours per week, occupation, age, education, relationship, sex, place of birth, class of worker, marital status, race.
+
+We should explain what each feature represents and why it might influence income prediction.
+
+Also note that these are mean absolute SHAP values across predictions; we can explain they represent overall importance.
+
+The user says "Explain every feature that influenced the model's prediction for this individual." So for each feature provide context. Use the provided data. Provide actionable insights? Not necessary.
+
+We should avoid too technical language. Provide short sentences.
+
+Let's produce explanation: "The model uses these features to decide if income above median. Highest impact is WKHP, etc."
+
+Ok.</think>
+**How the model decided this person’s income was above/ below the median**
+
+The model looked at ten pieces of information about the person. The numbers you see in the list (the “mean absolute SHAP values”) tell us how much each piece of information, on average, pushes the prediction up or down. A higher number means that feature is more influential.
+
+| Rank | Feature | Mean abs SHAP | Why it matters for income |
+|------|---------|---------------|---------------------------|
+| 1 | **WKHP** – Usual hours worked per week | **0.904** | Working more hours generally leads to higher pay. This feature gives the biggest signal about whether the person earns above or below the median. |
+| 2 | **OCCP** – Occupation code | **0.630** | Different jobs have very different pay scales. The type of job the person holds is a strong indicator of earnings. |
+| 3 | **AGEP** – Age | **0.517** | Age often reflects experience and career stage; older workers may have higher wages. |
+| 4 | **SCHL** – Educational attainment | **0.465** | Higher education levels are usually linked to better-paying jobs, so this feature helps the model gauge potential income. |
+| 5 | **RELP** – Relationship to householder | **0.343** | Being a spouse, child, or other relation can hint at employment status and income level. |
+| 6 | **SEX** – Sex | **0.224** | In many datasets, gender can correlate with earnings due to occupational segregation or wage gaps. |
+| 7 | **POBP** – Place of birth | **0.172** | Birthplace can be a proxy for cultural, educational, or immigration factors that influence earning potential. |
+| 8 | **COW** – Class of worker (employment type) | **0.137** | Whether the person works in private, government, or as a self‑employed individual affects typical income levels. |
+| 9 | **MAR** – Marital status | **0.102** | Marital status can correlate with financial stability and job choices, impacting earnings. |
+|10 | **RAC1P** – Race | **0.053** | Racial background can reflect systemic disparities or advantages in the labor market that affect income. |
+
+**Bottom line**  
+The model bases its prediction mainly on how many hours the person works each week and the type of job they hold. Education, age, and family relationships also play important roles, while gender, birthplace, employment type, marital status, and race have smaller but still measurable influences.
+
+# EPR Explainer: 0.8678, Verifier: 0.4725

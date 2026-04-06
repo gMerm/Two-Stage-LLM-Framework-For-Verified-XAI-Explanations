@@ -1,0 +1,62 @@
+<think>Okay, let me tackle this explanation request. The user wants me to convert Integrated Gradients token attributions into natural language explanations for both technical and non-technical audiences. 
+
+First, I need to carefully analyze the provided attribution data. The model predicted "Negative" sentiment (0.0134), so I'll focus on how the tokens collectively pushed toward negative sentiment. 
+
+Looking at the top 20 tokens, I notice several patterns:
+- Positive contributors (positive attribution) are mostly words like "enjoy", "films", "american", "pie" - but their magnitudes are small (0.002-0.005)
+- Negative contributors (negative attribution) are stronger, especially "if", "like", "avoid", "this", "cinematic", "refuse", "all", "costs"
+
+Hmm, the strongest negative is "if" (-0.0126) followed by "this" (-0.0055) and "cinematic" (-0.0047). I should explain why these words are impactful. 
+
+For "if": The negative attribution makes sense because the sentence is setting up a conditional for negative recommendation ("If you enjoy X, avoid Y"). The word "if" itself is triggering the negative frame.
+
+For "cinematic refuse": The combined negative impact of "cinematic" (-0.0047) and "refuse" (-0.000007) is significant - "refuse" is actually very weakly negative but "cinematic" is strongly negative in this context.
+
+I should be careful not to overinterpret: The attribution scores don't mean "cinematic" is inherently negative, but in this specific sentence structure it's contributing to the negative sentiment.
+
+For the positive contributors like "enjoy" (0.0045) and "american" (0.0051), I'll note they're weak positive signals that were overpowered by the stronger negative words.
+
+The punctuation tokens like "," and "&" have negligible effects (-0.00039 and +0.0011) - I'll mention they're insignificant.
+
+Now for audience adaptation:
+- For non-technical: Focus on "which words made the review sound negative" with simple terms like "strongly negative" vs "slightly positive"
+- For technical: Mention attribution magnitudes and direction but keep it concise
+
+I'll structure the explanation to:
+1. State the overall sentiment (negative)
+2. Group tokens by impact (strongest negatives first)
+3. Explain key words without inventing context
+4. Note that positive words were present but overpowered
+
+Must avoid:
+- Saying "refuse" means "trash" (it's a noun here)
+- Claiming "American Pie" is negative (it's the reference being avoided)
+- Overstating weak attributions (e.g., "refuse" is barely negative)
+
+Double-checking magnitudes: The top negative is "if" at -0.0126, which is about twice as strong as "this" (-0.0055). That's why it's the most impactful word.
+
+For the explanation, I'll lead with the strongest contributors since that's what the model prioritized. The "if" phrase is crucial - it's the setup for the negative recommendation.
+</think>
+### Natural Language Explanation
+
+**Overall Sentiment:** The model predicted a strong negative sentiment (0.013), meaning the review expresses clear dislike.  
+
+**Key Influences on the Prediction:**  
+- **Strongest negative drivers:**  
+  - *"if"* (strongly negative) sets up the negative recommendation ("If you enjoy X, avoid Y").  
+  - *"this"* and *"cinematic refuse"* (both strongly negative) directly condemn the film as worthless.  
+  - *"avoid"* and *"all costs"* (negative) emphasize the reviewer’s urgency to steer clear of the film.  
+
+- **Weak positive signals (overpowered by negatives):**  
+  - *"enjoy"*, *"films"*, *"american"*, *"pie"*, and *"trip"* (slightly positive) reference the *type* of films the reviewer dislikes. These words alone would suggest positivity, but they are overshadowed by the negative context.  
+
+- **Neutral/negligible terms:**  
+  - Punctuation (e.g., `","`, `"&"`) and words like *"refuse"* have minimal impact (near-zero attribution).  
+
+**Why the Prediction is Negative:**  
+The review uses phrases like *"avoid this cinematic refuse at all costs"* and *"mind-numbingly bad"*. The negative words (*if, avoid, this, cinematic, refuse, all costs*) collectively dominate the model’s decision, overwhelming the weak positive references to other films. The strongest contributors (*if*, *this*, *cinematic*) directly link to the reviewer’s harsh condemnation.  
+
+**In simple terms:**  
+> "The words *if*, *this*, and *cinematic refuse* were the most critical in making the model label this review negative. They frame the film as worthless trash, while the mention of other films (*American Pie*) was just context—too weak to change the overall negative tone."
+
+# EPR Explainer: 0.7632, Verifier: 1.2260

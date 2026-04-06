@@ -1,0 +1,49 @@
+<think>We need to produce explanation for global and local. Use only data. Provide concise. Ensure we mention features, direction, contributions. Use provided numbers. Mention rank and importance scores. Provide relative weights for local. Include confidence. Ensure no speculation. Let's craft.</think>
+**Global Explanation (LIME)**  
+1. **carat** – Highest importance (124.44).  Increasing carat weight raises predicted price.  
+2. **color** – Next most influential (102.26).  Better color grades (higher numeric value) increase price.  
+3. **clarity** – Importance 75.55.  Higher clarity scores add value.  
+4. **cut** – Importance 53.20.  Superior cut grades lift price.  
+5. **y** – Importance 32.99.  Larger y‑dimension positively affects price.  
+6. **x** – Importance 10.05.  Bigger x‑dimension adds value.  
+7. **table** – Importance 9.62.  A larger table width slightly raises price.  
+8. **depth** – Importance 6.41.  Greater depth can reduce price.  
+9. **z** – Importance 0.13.  Minor influence on price.
+
+**Local Explanation – Instance 676**  
+- **Actual** $3,172 → Predicted $3,601 (error $429).  
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| clarity | <= 2.0 | +2,075 | positive | 42.4 % |
+| y | <= 6.54 & > 5.71 | –818 | negative | 16.7 % |
+| color | <= 4.0 & > 3.0 | –723 | negative | 14.8 % |
+| x | <= 6.55 & > 5.7 | +537 | positive | 10.9 % |
+| z | <= 4.04 & > 3.53 | +263 | positive | 5.4 % |
+| carat | <= 1.05 & > 0.7 | –186 | negative | 3.8 % |
+| cut | <= 2.0 | –110 | negative | 2.2 % |
+| table | <= 57.0 & > 56.0 | +103 | positive | 2.1 % |
+| depth | <= 61.8 & > 61.0 | –86 | negative | 1.8 % |
+
+- **Interpretability confidence:** 0.0723 (low).  
+- All 9 features were used.
+
+**Local Explanation – Instance 737**  
+- **Actual** $1,981 → Predicted $1,918 (error $63).  
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| carat | <= 0.7 & > 0.4 | –2,898 | negative | 48.7 % |
+| clarity | > 5.0 | +903 | positive | 15.2 % |
+| y | <= 5.71 & > 4.72 | –885 | negative | 14.9 % |
+| table | <= 57.0 & > 56.0 | –485 | negative | 8.2 % |
+| x | <= 5.7 & > 4.71 | +325 | positive | 5.5 % |
+| cut | <= 2.0 | –311 | negative | 5.2 % |
+| color | <= 3.0 & > 1.0 | +86 | positive | 1.4 % |
+| depth | <= 62.5 & > 61.8 | –31 | negative | 0.5 % |
+| z | <= 3.53 & > 2.91 | +23 | positive | 0.4 % |
+
+- **Interpretability confidence:** 0.1169.  
+- All 9 features were used.
+
+These explanations show which attributes drive the model’s price predictions and how each feature pushes the prediction higher or lower relative to the observed value.
+
+# EPR Explainer: 0.3359, Verifier: 0.6766

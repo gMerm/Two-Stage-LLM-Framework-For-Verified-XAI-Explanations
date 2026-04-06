@@ -1,0 +1,42 @@
+{
+  "confidence": 0.92,
+  "verdict": "reject",
+  "justification": "The XAI Content specifies alcohol as the top-ranked feature (rank 1, importance 0.781). The explanation lists Total Sulfur Dioxide as rank 1 (importance 0.375) and places alcohol at rank 3. This swap of the top feature violates the required ranking order. The CoT does not provide a correct ranking either. No other errors (missing features, incorrect values, fabricated mechanisms) are present.",
+  "error type": "SwapTopFeature"
+}
+
+{
+  "confidence": 0.99,
+  "verdict": "reject",
+  "justification": "The explanation incorrectly orders features 13 and 14 relative to the XAI Content – it lists 'free sulfur dioxide' before 'total sulfur dioxide & density', whereas the XAI Content ranks 'total sulfur dioxide & density' higher. This violates the requirement that feature ranking in the explanation must match the XAI data exactly. No other critical errors (e.g., omission, incorrect values) are present.",
+  "error type": "SwapMinorFeature"
+}
+
+{
+  "confidence": 0.95,
+  "verdict": "reject",
+  "justification": "The explanation states that alcohol has an \"insignificant\" role in determining wine quality, while the XAI content shows alcohol has the highest importance score (0.781), indicating a strong influence. This reverses the correct directional relationship and misinterprets the feature importance. Additionally, the explanation introduces qualitative statements about alcohol and quality that are not derivable from the XAI data. Therefore the explanation is not faithful to the XAI content.",
+  "error type": "NegateRelation"
+}
+
+{
+  "confidence": 0.98,
+  "verdict": "reject",
+  "justification": "The explanation incorrectly ranks the features: it lists ‘sulphates’ as the top feature with the highest importance, whereas the XAI Content shows ‘alcohol’ as rank 1 with a higher importance score (0.781). This is a swap of the top feature. Additionally, the explanation omits the ‘alcohol’ feature entirely and starts its list at number 2, further indicating a misordering relative to the XAI data.",
+  "error type": "SwapTopFeature"
+}
+
+{
+  "confidence": 0.99,
+  "verdict": "reject",
+  "justification": "The explanation introduces the feature \"Chlorides & Sulphates & pH\" which does not appear in the XAI Content, and it omits the feature \"free sulfur dioxide & pH\" that is listed as the 15th most important. Additionally, the ordering of features in the explanation does not match the ranks provided in the XAI data. These discrepancies constitute a hallucinated feature and a missing feature, violating faithfulness and factual consistency requirements.",
+  "error type": "InsertHallucination"
+}
+
+{
+  "confidence": 0.9,
+  "verdict": "reject",
+  "justification": "The explanation correctly lists all 15 features in the same order and with matching importance scores as in the XAI Content. However, the CoT section is empty, violating the requirement that a non‑empty reasoning chain must be present. This omission prevents verification of the logical flow from CoT to explanation.",
+  "error type": "MissingCoT"
+}
+

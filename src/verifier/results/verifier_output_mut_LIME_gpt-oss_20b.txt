@@ -1,0 +1,42 @@
+{
+    "confidence": 0.95,
+    "verdict": "reject",
+    "justification": "The CoT and the final explanation incorrectly state that 'color' is the most important feature, whereas the XAI content shows that 'carat' has the highest importance score (rank 1). This constitutes a top‑feature ranking swap. Consequently, the explanation fails the verification criteria for a LIME global importance ranking.",
+    "error type": "SwapTopFeature"
+}
+
+{
+    "confidence": 0.92,
+    "verdict": "reject",
+    "justification": "The explanation omits several features that appear in the XAI Content (y, x, table, depth, z). Additionally, the CoT lists the features in an incorrect order (x before y), indicating a minor ranking swap. According to the verification rules, missing features must be flagged as an omission error.",
+    "error type": "OmitFeature"
+}
+
+{
+  "confidence": 0.78,
+  "verdict": "reject",
+  "justification": "The explanation and CoT do not provide the numeric importance (attribution) values for each feature as given in the XAI Content. While the qualitative ranking order and feature presence match, the absence of the required numeric values means the explanation fails to satisfy the verification criteria for a LIME global explanation.",
+  "error type": "IncorrectValue"
+}
+
+{
+    "confidence": 0.95,
+    "verdict": "reject",
+    "justification": "The explanation omits the ‘color’ feature, which is the second‑ranked global importance in the XAI content, and it fails to include any of the local contribution details that are present for both instance 676 and 737. The final explanation also incorrectly orders the top features (listing ‘clarity’ as second instead of ‘color’), violating the required feature ranking consistency. These omissions and mis‑rankings mean the explanation is not faithful to the XAI data.",
+    "error type": "OmitFeature"
+}
+
+{
+  "confidence": 0.92,
+  "verdict": "reject",
+  "justification": "The explanation and CoT add an explanation about a ‘crystal lattice compression effect’ influencing the y-dimension, which is not present in the XAI Content and cannot be derived from the provided data. This introduces fabricated reasoning that is not supported by the LIME output. No feature ranking swaps, omissions, or value mismatches are present, but the hallucinated mechanism violates the faithfulness requirement.",
+  "error type": "InsertHallucination"
+}
+
+{
+  "confidence": 0.95,
+  "verdict": "reject",
+  "justification": "The CoT section is empty, violating the requirement that it must be present and non‑empty. Additionally, the Explanation contains several fabricated values and statements that do not align with the LIME XAI content provided (e.g., incorrect local contributions, irrelevant feature values, and inconsistent predictions). Thus the explanation is not faithful, contains hallucinations, and fails to cover all features discussed in the XAI data.",
+  "error type": "MissingCoT"
+}
+

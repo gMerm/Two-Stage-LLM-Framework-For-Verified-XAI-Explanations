@@ -1,0 +1,30 @@
+<think>We need to explain each feature with context of importance. Use mean absolute SHAP values to rank importance. Provide explanation for each feature's contribution, with actionable insights. Only use given data.
+
+Need to convert the list into natural language. Provide for each feature: its importance relative to others, why it matters for income prediction. Maybe group into top, middle, low importance. Should be concise, clear. For both technical and non-technical.
+
+Let's craft.
+
+We'll mention that WKHP highest mean SHAP 0.904, etc.
+
+We should keep to data. Not invent new numbers.
+
+Ok.</think>
+**Feature importance (from highest to lowest)**  
+
+| Feature | Mean | Why it matters for predicting income |
+|---------|------|---------------------------------------|
+| **WKHP (usual hours worked per week)** | **0.904** | Working more hours is strongly linked to higher earnings. The model relies on this signal to separate above‑median earners from below‑median ones. |
+| **OCCP (occupation code)** | **0.630** | Certain jobs (e.g., professional, managerial) pay more than others (e.g., service, labor). Occupation is a direct indicator of salary potential, so it carries a lot of weight. |
+| **AGEP (age)** | **0.517** | Age reflects career stage: younger workers may have lower wages, while those in their 30s‑50s often earn more. Age helps the model gauge experience and progression. |
+| **SCHL (education level)** | **0.465** | Higher educational attainment typically leads to better‑paid positions. The model uses education as a proxy for skill level and earning power. |
+| **RELP (relationship to householder)** | **0.343** | Being a spouse or primary earner in the household often correlates with higher income. This feature helps capture family economic dynamics. |
+| **SEX (sex)** | **0.224** | Gender can reflect occupational segregation and wage gaps. The model notes that, on average, one sex may earn more than the other in the dataset. |
+| **POBP (place of birth)** | **0.172** | Origin (domestic vs. foreign born) can influence employment opportunities and income levels due to differences in education, experience, or discrimination. |
+| **COW (class of worker)** | **0.137** | Employment type—private, public, self‑employed—affects typical wages. For instance, private‑sector jobs may pay differently than public sector ones. |
+| **MAR (marital status)** | **0.102** | Married individuals sometimes earn more, possibly due to dual incomes or stability that attracts higher paying roles. |
+| **RAC1P (race)** | **0.053** | Racial background can impact income through systemic inequities or differential access to opportunities; the model captures this effect but it is the least influential among the ten features. |
+
+**Takeaway**  
+The model uses **working hours** and **job type** as its strongest signals for whether someone earns above or below the median. Education, age, and family role also play meaningful roles, while gender, origin, employment class, marital status, and race have progressively smaller influences in the current model. This ranking helps you understand which aspects of a person's profile most shape the income prediction.
+
+# EPR Explainer: 0.8955, Verifier: 0.6150

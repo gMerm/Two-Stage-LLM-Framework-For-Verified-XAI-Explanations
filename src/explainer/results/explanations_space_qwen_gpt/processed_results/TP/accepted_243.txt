@@ -1,0 +1,37 @@
+<think>Okay, let me tackle this explanation request. The user wants me to convert Integrated Gradients token attributions into natural language explanations for both technical and non-technical audiences. I need to base this ONLY on the provided data without adding anything extra.
+
+First, I'll analyze the top_20_token_attributions. The prediction is negative (0.0134), so I should focus on which words pushed it toward negativity and which pushed toward positivity. The attribution scores show the direction and strength of each token's influence.
+
+Looking at the tokens:
+- Positive contributors (positive attribution): "you" (+0.0126), "enjoy" (+0.0045), "films" (+0.0022), "american" (+0.0051), "pie" (+0.0029), "trip" (+0.0032), "van" (wait no, "van" has negative -0.0044), "wilder" (+0.0030), "&" (+0.0011). Wait, I need to double-check signs. Positive attribution means it pushes toward positive sentiment, but since the overall prediction is negative, these positive contributors must be outweighed by stronger negative ones.
+
+- Negative contributors (negative attribution): "if" (-0.0126), "like" (-0.0021), "road" (-0.0018), "van" (-0.0044), "avoid" (-0.0013), "this" (-0.0055), "cinematic" (-0.0047), "refuse" (-0.0000075), "at" (-0.0029), "all" (-0.0033), "costs" (-0.0029). The strongest negative is "if" (-0.0126) and "this" (-0.0055).
+
+I notice "if" has the highest negative attribution. That makes sense because the phrase "If you enjoy films like..." sets up a contrast with the negative review that follows. The negative words like "avoid", "refuse", "cinematic refuse" are strong negative indicators.
+
+For non-technical explanation, I'll focus on the key words that made the review negative: "if" (setting up contrast), "avoid", "refuse", "cinematic refuse" (strong negative terms), and "this" (pointing to the film as negative). The positive words like "enjoy" and "films" are actually part of the setup that makes the negative contrast stronger.
+
+For technical explanation, I'll mention the attribution scores and how the negative contributors outweighed the positive ones. The strongest negative is "if" at -0.0126, followed by "this" at -0.0055.
+
+I should be careful not to misinterpret "van" and "wilder" - "van" has negative attribution (-0.0044) while "wilder" has positive (+0.0030), but they're part of the movie title "Van Wilder" which the reviewer is criticizing. So the negative attribution for "van" makes sense in context.
+
+The phrase "cinematic refuse" has "refuse" with very low negative attribution (-0.0000075), but "cinematic" has -0.0047, so the negative impact comes from "cinematic" more than "refuse".
+
+I'll structure the explanation to first state the overall sentiment, then list key positive and negative contributors with their impact, and finally explain how they combine to form the negative prediction. I'll avoid technical terms like "attribution score" for non-technical audience and instead say "how much each word influenced the negative rating".
+
+Need to make sure I don't invent anything - just describe what the numbers show. For example, "if" being negative because it sets up the contrast that leads to the negative recommendation.
+
+Also, the "refusal template" isn't needed here since this is a standard explanation request. The user didn't ask for internal data.
+
+Now I'll craft the concise explanations for both audiences based strictly on the numbers provided.
+</think>
+### For Non-Technical Audience
+The review's negative sentiment (predicting "Negative") was strongly shaped by words like "if", "avoid", "this", and "cinematic refuse". The word "if" had the biggest negative influence, setting up a contrast that made the criticism stronger. Words like "avoid" and "refuse" directly signaled dislike, while phrases like "cinematic refuse" (where "cinematic" was the key negative word) reinforced the harsh judgment. Positive words like "enjoy" or "films" were outweighed by these negative terms, leading to the overall negative rating.
+
+### For Technical Audience
+The model's negative prediction (0.013) resulted from dominant negative attributions:  
+- **Strongest negative contributors**: "if" (-0.0126), "this" (-0.0055), "cinematic" (-0.0047).  
+- **Weaker positive contributors**: "you" (+0.0126), "enjoy" (+0.0045), "american" (+0.0051).  
+The negative terms ("if", "this", "cinematic") collectively outweighed positive context ("enjoy", "films"), with "if" (setting critical contrast) and "cinematic" (key negative descriptor) being pivotal. The phrase "cinematic refuse" had minimal positive influence from "refuse" (-0.0000075) but strong negative impact from "cinematic".
+
+# EPR Explainer: 0.5563, Verifier: 0.8997

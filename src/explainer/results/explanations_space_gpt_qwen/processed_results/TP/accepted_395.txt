@@ -1,0 +1,25 @@
+<think>We need to explain each feature, with context. Use SHAP values only. Provide natural language explanations for technical and non-technical. Concise. We must list features sorted as given. Provide reasoning: higher mean_abs_shap means more important.
+
+Need to say that WKHP highest importance: usual hours worked per week influences income strongly. OCCP second. etc. Provide context for each. Use data values to support ranking.
+
+Make sure no extra invented info. Only refer to provided data: list and mean values. Provide explanation that these numbers represent average impact.
+
+Let's produce answer.</think>
+**How the model thinks about each feature (in order of importance)**  
+
+| Feature | Mean | SHAP | What it tells the model | Why it matters for income |
+|---------|------|------|------------------------|---------------------------|
+| **WKHP** | **0.904** | Highest | How many hours a person usually works per week. | Working more hours is strongly linked to higher earnings, so the model gives this feature the biggest boost (or penalty) when deciding if income is above or below the median. |
+| **OCCP** | **0.630** | Second highest | The type of job or occupation code. | Different occupations have widely varying pay scales; the model uses this to capture those differences. |
+| **AGEP** | **0.517** | Third | Age of the individual. | Age can indicate experience or career stage, both of which influence earnings. |
+| **SCHL** | **0.465** | Fourth | Highest level of education completed. | More education generally leads to higher-paying jobs; the model weighs this factor heavily. |
+| **RELP** | **0.343** | Fifth | Relationship to the householder (e.g., spouse, child, roommate). | This can reflect household dynamics that affect an individual’s earning capacity (e.g., dependents vs. shared responsibilities). |
+| **SEX** | **0.224** | Sixth | Sex of the individual. | The model considers gender as a factor because earnings can differ across genders due to various societal and workplace factors. |
+| **POBP** | **0.172** | Seventh | Place of birth. | Geographic origin can influence opportunities and earnings; the model captures any patterns it learned from the data. |
+| **COW** | **0.137** | Eighth | Class of worker (e.g., private, government, self‑employed). | Different employment sectors often have different pay structures; this feature helps the model adjust its prediction accordingly. |
+| **MAR** | **0.102** | Ninth | Marital status. | Marital status can affect earning power through shared resources or support, so the model accounts for it modestly. |
+| **RAC1P** | **0.053** | Least | Race. | The model detects small but present signals related to race that affect earnings, but this is the weakest influence among all features. |
+
+**Bottom line:** The model relies most on how many hours a person works and what job they have. Education, age, and the nature of the relationship to the householder also play key roles. Gender, birthplace, worker class, marital status, and race contribute smaller adjustments to the final prediction.
+
+# EPR Explainer: 0.8590, Verifier: 0.4571

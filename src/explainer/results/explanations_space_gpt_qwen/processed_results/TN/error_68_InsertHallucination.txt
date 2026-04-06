@@ -1,0 +1,55 @@
+<think>We need to explain how each word influenced model sentiment prediction based on attributions. The top 20 tokens with their attributions. Negative attribution pushes toward negative sentiment, positive pushes toward positive. The overall prediction is negative (0.0134? Actually prediction close to 0 maybe representing probability of positive? It's 0.0134 so low => negative). We need to explain each token influence and collectively shape final prediction.
+
+We must not invent details beyond data. Provide concise explanations. For technical audience also but general. Provide actionable insights. So we describe each token's contribution magnitude and direction, and how collectively these led to negative prediction. Also maybe mention that some positive tokens but overall negative sum.
+
+Also mention tokens with small positive like "you" and "enjoy" etc. Some negative tokens "if" etc. Also note that punctuation has small negative.
+
+We should mention that the largest negative contributors: "this" (-0.00554), "cinematic" (-0.00470), "van" (-0.00442), "at" (-0.00292), "all" (-0.00328), "costs" (-0.00288), "road" (-0.00180), "avoid" (-0.00128), "like" (-0.00207), "comma" -0.00039. Positive: "you" (0.0126), "american" (0.00510), "pie" (0.00290), "trip" (0.00316), "van wilder" etc? Actually "van" negative but "wilder" positive 0.00298, "&" 0.00112, "enjoy" 0.00452, "films" 0.00217, "if" negative. Provide summarization.
+
+Also note that "you" has biggest positive contribution; "if" negative; but overall negative due to many negative tokens.
+
+Also mention that the overall sum of top 20 attributions probably negative leading to negative sentiment.
+
+Also talk about each token. Provide short sentences. Avoid technical details. Provide actionable insights: to change sentiment, adjust words etc.
+
+Let's produce explanation.</think>
+**How the top 20 words shaped the negative prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **you** | +0.0126 | Pushes the model toward a positive view, but only slightly. |
+| **enjoy** | +0.0045 | Adds a small positive vibe. |
+| **films** | +0.0022 | Lightly favors positivity. |
+| **american** | +0.0051 | Strengthens the positive signal. |
+| **pie** | +0.0029 | Contributes a tiny positive cue. |
+| **trip** | +0.0032 | Slightly positive. |
+| **wilder** | +0.0030 | Adds a modest positive nudge. |
+| **&** | +0.0011 | Very small positive carry‑over. |
+| **van** | –0.0044 | Pushes strongly toward a negative assessment. |
+| **avoid** | –0.0013 | Negative cue, discouraging the film. |
+| **this** | –0.0055 | Strong negative signal – “this” signals the specific film being critiqued. |
+| **cinematic** | –0.0047 | Negative word about the film’s quality. |
+| **at** | –0.0029 | Negative contextual marker (“at all costs”). |
+| **all** | –0.0033 | Negative emphasis. |
+| **costs** | –0.0029 | Negative, reinforcing the “at all costs” phrase. |
+| **road** | –0.0018 | Negative, part of the “Road Trip” reference that the reviewer disapproves of. |
+| **like** | –0.0021 | Negative, counteracts the “enjoy” sentiment. |
+| **if** | –0.0126 | Strong negative start that frames the entire statement in caution. |
+| **,** (comma) | –0.0004 | Minor negative punctuation effect. |
+| **refuse** | –0.0000 | Negligible negative token. |
+
+**What this means in practice**
+
+1. **Dominant negatives** – Tokens such as *“this,” “cinematic,” “van,”* and *“avoid”* pull the model strongly toward a negative prediction. Their combined weight outweighs the positive words.
+
+2. **Moderate positives** – Words like *“you,” “american,”* and *“enjoy”* give a hint of positivity, but they are not enough to offset the negatives.
+
+3. **Contextual framing** – The opening *“if you enjoy”* sets a conditional expectation, and the following negative descriptors (*“avoid this cinematic refuse at all costs”*) dominate the sentence’s overall tone.
+
+4. **Resulting sentiment** – Because the summed influence of the top 20 tokens leans negative, the model outputs a very low probability for positive sentiment (≈ 0.013), classifying the review as negative.
+
+**Actionable insight**
+
+If the goal were to change the sentiment to positive, the reviewer would need to replace or soften key negative tokens (e.g., *“avoid,” “this,” “cinematic,” “refuse”*) with neutral or positive alternatives, while maintaining or strengthening the positive words that already exist.
+
+# EPR Explainer: 0.8441, Verifier: 0.5217

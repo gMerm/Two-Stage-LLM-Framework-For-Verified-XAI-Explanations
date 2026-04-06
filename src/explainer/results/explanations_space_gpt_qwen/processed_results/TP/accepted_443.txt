@@ -1,0 +1,48 @@
+<think>We need to explain each word's influence based on attribution scores. Provide natural language explanations for both positive and negative tokens. Keep concise, actionable insights. Use only provided data. Ensure not to mention internal system stuff. We'll list each token with its effect: positive contribution (pushing toward positive sentiment) vs negative contribution (pushing toward negative). Magnitude indicates strength. Provide overall picture: model strongly negative due to many negative tokens outweighing positive tokens. Provide summary: tokens like "avoid", "this", "cinematic", "at", "all", "costs" strongly negative; "you", "enjoy", "american", "pie", "trip", "van", "wilder", "&" positive but weaker. Also "if" and "like" negative small. Provide actionable insight: if editing review for positive sentiment, remove negative words and add more positive ones. Provide explanation for each token.
+
+We need to not invent. Just explain.
+
+Let's craft.</think>
+**How the top 20 words drove the model’s “Negative” prediction**
+
+| Token | Attribution | Effect on prediction | How it shaped the final score |
+|-------|-------------|----------------------|-------------------------------|
+| **if** | –0.0126 | pushes the prediction toward negative sentiment | Although a simple conjunction, its negative value indicates that the model treats this context as a cue for a negative stance. |
+| **you** | +0.0126 | pushes the prediction toward positive sentiment | The word “you” is a friendly, inclusive cue that the model interprets as supportive of a positive tone. |
+| **enjoy** | +0.0045 | mild positive push | A clear positive verb; the model rewards it with a small positive attribution. |
+| **films** | +0.0022 | mild positive push | Indicates a general discussion about movies, slightly raising the sentiment score. |
+| **like** | –0.0021 | mild negative push | In this context “like” pairs with a negative phrase (“American Pie, Road Trip & Van Wilder”), so the model views it as leaning toward a negative comparison. |
+| **american** | +0.0051 | positive push | The adjective “American” is neutral, but the model associates it with the specific film “American Pie,” which is viewed positively in this snippet. |
+| **pie** | +0.0029 | positive push | The noun “pie” completes the movie title “American Pie,” adding a small positive signal. |
+| **,** | –0.0004 | negligible negative | Punctuation alone has almost no effect, but the model gives a tiny negative attribution. |
+| **road** | –0.0018 | negative push | Part of “Road Trip”; the model treats it as part of a negative comparison. |
+| **trip** | +0.0032 | positive push | The noun “trip” gives a mild positive signal in the film title “Road Trip.” |
+| **&** | +0.0011 | small positive | The ampersand connects two film titles; the model interprets it as a mild positive cue. |
+| **van** | –0.0044 | strong negative push | “Van” is part of “Van Wilder”; the model associates it with a negative comparison, producing a notable negative attribution. |
+| **wilder** | +0.0030 | positive push | The name “Wilder” (in “Van Wilder”) adds a small positive signal. |
+| **avoid** | –0.0013 | negative push | Explicitly telling readers to steer clear of the movie, so it strongly lowers sentiment. |
+| **this** | –0.0055 | strong negative push | The demonstrative “this” precedes a negative clause (“cinematic refuse”), giving it a large negative weight. |
+| **cinematic** | –0.0047 | strong negative push | The adjective “cinematic” is paired with “refuse,” giving it a heavy negative influence. |
+| **refuse** | –0.0000076 | essentially neutral | The word “refuse” is almost neutral in magnitude; the model barely counts it. |
+| **at** | –0.0029 | negative push | Preposition in the phrase “at all costs” reinforces the negative sentiment. |
+| **all** | –0.0033 | negative push | The quantifier “all” adds to the strong negative phrase. |
+| **costs** | –0.0029 | negative push | Concludes the negative clause “at all costs,” reinforcing the negative contribution. |
+
+### Overall picture
+
+The model’s prediction of **0.013** (negative) is the result of a net negative balance:
+
+* **Strong negative contributors**: *if*, *this*, *cinematic*, *at*, *all*, *costs*, *van*, *avoid* (and to a lesser extent *road*, *like*). These words collectively outweigh the positives.
+* **Positive contributors**: *you*, *enjoy*, *american*, *pie*, *trip*, *wilder*, *&*, *films* provide mild boosts, but their combined effect is insufficient to overturn the dominant negatives.
+
+### Actionable insight
+
+If the goal is to shift the model’s sentiment toward positive, the most impactful changes would be:
+
+1. **Remove or replace the strong negative tokens**: *avoid*, *this*, *cinematic*, *at*, *all*, *costs*, *van*, *road*, *like*.
+2. **Increase the presence of positive tokens**: add more explicit positive adjectives or verbs such as *love*, *great*, *fantastic*.
+3. **Reframe the sentence structure**: changing “avoid this cinematic refuse at all costs” to a more positive phrasing would markedly raise the prediction score.
+
+These adjustments would alter the weighted sum of attributions, nudging the model’s final sentiment from negative toward positive.
+
+# EPR Explainer: 0.8184, Verifier: 0.5235

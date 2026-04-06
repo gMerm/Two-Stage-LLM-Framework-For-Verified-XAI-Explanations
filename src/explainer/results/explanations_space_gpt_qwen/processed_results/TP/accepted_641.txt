@@ -1,0 +1,80 @@
+<think>We need to provide explanation as per guidelines. No speculation. Provide global explanation: list top features with direction? The global importance only gives importance scores; need to describe direction? We can infer direction from domain: higher carat increases price, etc. But we must base on quantitative data only. The global explanations don't include direction. Should we infer direction? That would be speculation. The guidelines say base only on provided quantitative data; we cannot assume direction if not given. But we can provide context: features are important because they contribute to prediction. We can state direction as positive if typical? But that may be beyond data. So we can state "carat has highest importance; higher carat likely increases price." But that's domain knowledge; may be allowed? The instruction: "Do not invent data, attributes, or assumptions beyond what is explicitly provided." So we should not assume direction unless given. So we will just describe relative importance and note they are top features. We can say they positively influence price by typical domain expectation? Hmm. Might be considered assumption. To be safe, say that feature importance scores indicate their influence magnitude, but direction not specified. Provide context: e.g., carat size is key. Good.
+
+Local explanations: we have contributions and direction, weight, etc. Provide explanation per instance. Provide actual vs predicted, error. Provide feature values ranges. Provide weight fractions. Also mention local interpretability confidence.
+
+We must use concise and actionable.
+
+Let's craft final answer.</think>
+**Global Feature Importance (LIME, top 9)**  
+| Rank | Feature | Importance Score | Observation |
+|------|---------|-----------------|-------------|
+| 1 | carat | 124.44 | Largest influence on the predicted price |
+| 2 | color | 102.26 | Strong influence |
+| 3 | clarity | 75.55 | Strong influence |
+| 4 | cut | 53.20 | Moderate influence |
+| 5 | y | 32.99 | Influential |
+| 6 | x | 10.05 | Small influence |
+| 7 | table | 9.62 | Small influence |
+| 8 | depth | 6.41 | Small influence |
+| 9 | z | 0.13 | Minimal influence |
+
+*Interpretation:*  
+The model uses nine geometric and quality attributes to estimate price. “carat” dominates, followed by “color” and “clarity”. These features explain most of the variation in price across the dataset, whereas “x”, “table”, “depth”, and “z” contribute little individually. No directional sign is supplied in the global output, so we report only the relative magnitude of each feature’s influence.
+
+---
+
+## Local Explanations
+
+### Instance #676  
+| Feature | Value Range | Contribution | Direction | Weight |
+|---------|-------------|--------------|-----------|--------|
+| clarity | ≤ 2.0 | +2075.04 | positive | 0.423 |
+| y | ≤ 6.54 and > 5.71 | –817.87 | negative | 0.167 |
+| color | ≤ 4.0 and > 3.0 | –723.16 | negative | 0.148 |
+| x | ≤ 6.55 and > 5.70 | +537.18 | positive | 0.110 |
+| z | ≤ 4.04 and > 3.53 | +262.97 | positive | 0.054 |
+| carat | ≤ 1.05 and > 0.70 | –185.91 | negative | 0.038 |
+| cut | ≤ 2.0 | –109.84 | negative | 0.022 |
+| table | ≤ 57.0 and > 56.0 | +102.95 | positive | 0.021 |
+| depth | ≤ 61.8 and > 61.0 | –86.28 | negative | 0.018 |
+
+- **Actual price:** $3,172.00  
+- **Predicted price:** $3,601.51  
+- **Absolute error:** $429.51  
+
+The prediction is higher than the actual price. The dominant positive contributor is **clarity** (+2075), while **y** and **color** produce the largest negative offsets. The model attributes most of the price boost to the clarity level, then geometry (x, z) and table; the carat and cut reductions partially offset these gains.  
+
+**Interpretability confidence:** 0.0723 (low). 9 features used.
+
+---
+
+### Instance #737  
+| Feature | Value Range | Contribution | Direction | Weight |
+|---------|-------------|--------------|-----------|--------|
+| carat | ≤ 0.7 and > 0.4 | –2897.62 | negative | 0.487 |
+| clarity | > 5.0 | +902.91 | positive | 0.152 |
+| y | ≤ 5.71 and > 4.72 | –884.52 | negative | 0.149 |
+| table | ≤ 57.0 and > 56.0 | –485.01 | negative | 0.082 |
+| x | ≤ 5.7 and > 4.71 | +324.50 | positive | 0.055 |
+| cut | ≤ 2.0 | –311.06 | negative | 0.052 |
+| color | ≤ 3.0 and > 1.0 | +85.92 | positive | 0.014 |
+| depth | ≤ 62.5 and > 61.8 | –30.62 | negative | 0.005 |
+| z | ≤ 3.53 and > 2.91 | +22.67 | positive | 0.004 |
+
+- **Actual price:** $1,981.00  
+- **Predicted price:** $1,917.62  
+- **Absolute error:** $63.38  
+
+The prediction is slightly below the actual value. The largest negative impact comes from the **carat** range (–2898), far outweighing the positive contributions of clarity (+903), x (+325), and color (+86). Geometry (y, table, cut, depth) largely pulls the price downward.  
+
+**Interpretability confidence:** 0.1169 (moderate). 9 features used.
+
+---
+
+**Take‑away for stakeholders**
+
+* Globally, **carat**, **color**, and **clarity** drive most of the price variance in the model.  
+* Locally, the same attributes dominate, but their exact contribution depends on the specific measurements of each diamond.  
+* High confidence in the global ranking; local explanations have lower confidence scores, so predictions should be used with awareness of these uncertainties.
+
+# EPR Explainer: 0.6379, Verifier: 0.5808

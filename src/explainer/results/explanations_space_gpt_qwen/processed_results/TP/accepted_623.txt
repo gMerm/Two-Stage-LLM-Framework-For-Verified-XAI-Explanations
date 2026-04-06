@@ -1,0 +1,35 @@
+<think>We need to explain how each word influenced the sentiment prediction, positive or negative contributions, based on attribution. Provide clear natural language explanations for both technical and non-technical audiences. Should mention that the model's final prediction is negative (score 0.013). Each token's attribution magnitude indicates influence. Provide actions? It says "Identify and describe the impact of all tokens, detailing how each one collectively shaped the final prediction." So we explain each token: if negative attribution pushes towards negative, positive pushes towards positive. Provide context: the review is negative overall; negative tokens dominated. Provide that some positive tokens like "you", "enjoy", etc contributed slightly to positive but outweighed by negative tokens like "avoid", "cinematic refuse", etc. Also mention that some tokens have very small contributions like "refuse" or punctuation. Provide concise statements. Avoid extra technical. Let's craft.</think>
+**How each word nudged the model toward a negative verdict**
+
+| Token | Attribution | Effect on sentiment | Explanation |
+|-------|-------------|---------------------|-------------|
+| **if** | –0.0126 | Negative | The word “if” is treated as a conditional cue that often appears in complaints. It pulls the prediction toward the negative side. |
+| **you** | +0.0126 | Positive | “You” is a neutral‑to‑positive pronoun. It slightly encourages the model to think the reviewer is addressing the reader, adding a mild positive touch. |
+| **enjoy** | +0.0045 | Positive | “Enjoy” signals a positive attitude, giving the model a small boost toward positivity. |
+| **films** | +0.0022 | Positive | A general noun that, in this context, leans slightly positive because it references movies. |
+| **like** | –0.0021 | Negative | When paired with “American Pie” and “Road Trip,” “like” signals comparison to other movies, tipping the model toward negative. |
+| **american** | +0.0051 | Positive | The name “American” (as part of “American Pie”) carries a neutral‑to‑positive vibe, adding a small positive push. |
+| **pie** | +0.0029 | Positive | “Pie” (part of the movie title) contributes a mild positive signal. |
+| **,** | –0.0004 | Negative | The comma marks a pause; here it slightly nudges the model toward negativity, likely because it separates the clause from the negative sentiment that follows. |
+| **road** | –0.0018 | Negative | As part of “Road Trip,” it adds a faint negative weight. |
+| **trip** | +0.0032 | Positive | The noun “trip” itself is neutral‑positive; it counters the negative effect of “road” a little. |
+| **&** | +0.0011 | Positive | The ampersand, used to connect “Road Trip” and “Van Wilder,” adds a tiny positive cue. |
+| **van** | –0.0044 | Negative | “Van” (from “Van Wilder”) is interpreted negatively, pushing the score toward a bad review. |
+| **wilder** | +0.0030 | Positive | The name “Wilder” brings a small positive contribution. |
+| **avoid** | –0.0013 | Negative | “Avoid” is a strong warning word that pulls the prediction toward negativity. |
+| **this** | –0.0055 | Negative | The demonstrative “this” here is linked to the film itself; it reinforces the negative stance. |
+| **cinematic** | –0.0047 | Negative | “Cinematic” in this sentence is tied to “refuse,” so it adds a negative bias. |
+| **refuse** | –0.0000 | Negative | The word “refuse” carries a strongly negative meaning, giving a very small but clear negative push. |
+| **at** | –0.0029 | Negative | “At” is part of the phrase “at all costs”; it contributes to the negative tone. |
+| **all** | –0.0033 | Negative | “All” in the phrase “all costs” strengthens the negative warning. |
+| **costs** | –0.0029 | Negative | The word “costs” is tied to “at all costs,” adding to the negative message. |
+
+**Collective picture**
+
+- The strongest negative signals come from words such as *if, this, cinematic, avoid,* and *van.*  
+- Positive signals (*you, enjoy, films, american, pie, trip, wilder*) are smaller and cannot offset the negative weight.  
+- Even the punctuation (comma) and very small‑attribution words (*refuse*) help tip the balance toward a negative outcome.
+
+Overall, the negative tokens dominate, steering the model’s prediction toward a low sentiment score (≈ 0.013) and labeling the review as **Negative**.
+
+# EPR Explainer: 0.8378, Verifier: 0.4820

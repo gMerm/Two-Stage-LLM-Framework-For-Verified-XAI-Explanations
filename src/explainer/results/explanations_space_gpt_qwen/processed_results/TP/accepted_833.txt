@@ -1,0 +1,54 @@
+<think>We need to explain each token's contribution to model's sentiment prediction based on given attribution scores. Provide for both positive and negative contributions. Show collective shape. Need concise, actionable insights, avoid excessive technical language. Use natural language. No assumptions beyond data. Provide explanation for each token. Also mention final prediction is negative, score 0.0134 (close to zero but negative?). Actually prediction probability? 0.0134 probably probability of positive? predicted sentiment Negative. So attributions sum? Provide insight: tokens with negative attribution push negative, positive push positive. Provide overall effect: negative tokens dominate.
+
+We'll explain each token: "if" negative -0.0126 strong negative, etc. Note that "you" positive +0.0126 strong positive but still net negative because negative tokens more. Provide mention that overall sum of top 20 negative contributions outweigh positives, leading to negative prediction. Provide actionable: review is strongly negative due to negative words like "avoid", "cinematic", "refuse", "costs", etc. Positive words like "enjoy", "American", "pie" countered but insufficient.
+
+Also need mention that some tokens have small contributions like comma. Provide note that tokens like "like" negative small. Provide mention that overall shape: negative tokens cumulatively ~ -0.041, positives ~ +0.025, net negative.
+
+We can give summary table.
+
+Let's compute approximate totals: Sum positives: if none? Let's sum: you 0.0125961 + enjoy 0.0045203 + films 0.0021745 + american 0.0051003 + pie 0.002899 + trip 0.0031643 + & 0.0011231 + wilder 0.0029774 = sum? 0.0125961+0.0045203=0.0171164; +0.0021745=0.0192909; +0.0051003=0.0243912; +0.002899=0.0272902; +0.0031643=0.0304545; +0.0011231=0.0315776; +0.0029774=0.034555. Negative tokens: if -0.0126376 + like -0.0020755 + comma -0.0003935 + road -0.0018063 + &? no & positive. van -0.0044165 + avoid -0.0012794 + this -0.0055369 + cinematic -0.0047005 + at -0.0029249 + all -0.0032766 + costs -0.0028788 = sum: -0.0126376-0.0020755=-0.0147131; -0.0003935=-0.0151066; -0.0018063=-0.0169129; -0.0044165=-0.0213294; -0.0012794=-0.0226088; -0.0055369=-0.0281457; -0.0047005=-0.0328462; -0.0029249=-0.0357711; -0.0032766=-0.0390477; -0.0028788=-0.0419265. So negative dominates.
+
+Thus explain.
+
+Also note "refuse" negligible -7.55e-06.
+
+Provide natural language explanation.
+
+Let's produce.</think>
+**How each token nudged the model toward a negative verdict**
+
+| Token | Attribution | What it did for the model |
+|-------|-------------|---------------------------|
+| **if** | **–0.0126** | Strongly pulled the prediction toward *negative*. |
+| **you** | **+0.0126** | Counter‑balanced the “if” token with a strong push toward *positive*. |
+| **enjoy** | **+0.0045** | Mildly supported a *positive* sentiment. |
+| **films** | **+0.0022** | Small positive influence. |
+| **like** | **–0.0021** | Slightly nudged the model toward *negative*. |
+| **american** | **+0.0051** | Added a modest *positive* signal. |
+| **pie** | **+0.0029** | Positive but weak. |
+| **,** | **–0.0004** | Negligible negative push. |
+| **road** | **–0.0018** | Minor negative influence. |
+| **trip** | **+0.0032** | Small positive contribution. |
+| **&** | **+0.0011** | Very slight positive push. |
+| **van** | **–0.0044** | Substantial negative impact. |
+| **wilder** | **+0.0030** | Positive but not strong enough. |
+| **avoid** | **–0.0013** | Weak negative signal. |
+| **this** | **–0.0055** | Significant negative push. |
+| **cinematic** | **–0.0047** | Strong negative influence. |
+| **refuse** | **≈0** | Virtually no effect. |
+| **at** | **–0.0029** | Small negative contribution. |
+| **all** | **–0.0033** | Mild negative influence. |
+| **costs** | **–0.0029** | Slight negative push. |
+
+### Putting it together
+
+- **Negative tokens dominate**: the sum of all negative attributions in the top 20 is about **–0.042**, whereas the positive sum is only **+0.035**.  
+- This imbalance means the model concluded that the review is **negative**, reflected in the predicted sentiment label “Negative” and a low probability score (≈0.013).  
+- Tokens that might seem friendly (“you”, “enjoy”, “american”, “pie”) give a positive signal, but they are outweighed by harsher words like “avoid”, “this”, “cinematic”, and “van”.  
+- Even a very small contribution (e.g., “refuse”) can be noted, but it does not alter the overall outcome.
+
+### Take‑away for readers
+
+When the model looked at this review, the **negative language**—especially words that explicitly warn or criticize (“avoid”, “this”, “cinematic”)—overrode any mild positive remarks. The final prediction was a clear **negative** sentiment.
+
+# EPR Explainer: 0.6791, Verifier: 0.6046

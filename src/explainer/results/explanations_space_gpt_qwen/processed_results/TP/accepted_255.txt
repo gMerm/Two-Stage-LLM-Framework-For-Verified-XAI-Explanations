@@ -1,0 +1,34 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual, with context why it matters. Provide natural language, concise, actionable insights. Use the SHAP mean_abs_shap values to convey relative importance.
+
+We should follow guidelines: only based on data. No invented details. Provide explanation for each feature. Use the order maybe descending. They gave features order already. So we will list each feature, say its mean SHAP value and what it indicates, why important.
+
+The audience may be technical and non-technical, so we keep language simple.
+
+Also need to mention that these are mean absolute SHAP values: average contribution across many predictions. So we explain that higher mean implies stronger influence on predicting above median income.
+
+We also should note that for this particular individual, each feature had a certain contribution, but we only have mean values. But we can say that overall the model used these features.
+
+So output format: maybe bullet points for each feature.
+
+Ensure we adhere to guidelines: not mention quality, avoid extra remarks.
+
+Ok produce.</think>
+**How the model used each feature to decide if this person earns above or below the median income**
+
+| Feature | Mean absolute SHAP value | What it means for income prediction |
+|---------|--------------------------|-------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.90** | This is the strongest signal the model uses. Working more hours usually means a higher income, so the model heavily weighs how many hours a person works. |
+| **OCCP** (occupation code) | **0.63** | Different jobs pay different amounts. The model finds the person’s job type to be a very important cue for whether they are above the median salary. |
+| **AGEP** (age) | **0.52** | Age is closely tied to experience and career stage. The model considers age a solid predictor of income level. |
+| **SCHL** (education level) | **0.46** | Educational attainment strongly influences earning potential. The model uses the person’s highest degree to gauge income. |
+| **RELP** (relationship to householder) | **0.34** | Whether a person is a spouse, child, or other relative can affect their employment status and income. The model finds this relationship to matter. |
+| **SEX** | **0.22** | Gender is a weaker but still noticeable factor in earnings differences. |
+| **POBP** (place of birth) | **0.17** | Birthplace can reflect regional economic conditions that influence earnings. |
+| **COW** (class of worker) | **0.14** | Whether the person is in private, public, or self‑employment affects income patterns; the model sees this as a modest signal. |
+| **MAR** (marital status) | **0.10** | Marital status has a small but observable impact on income levels in the model. |
+| **RAC1P** (race) | **0.05** | Race contributes the least of all features, but the model still includes it as a tiny factor. |
+
+**Takeaway**  
+The model mainly relies on how many hours a person works, what job they have, how old they are, and their education level. Other factors—relationship, gender, birthplace, employment type, marital status, and race—add smaller adjustments to the final prediction of whether the individual earns above or below the median income.
+
+# EPR Explainer: 0.9199, Verifier: 0.5883

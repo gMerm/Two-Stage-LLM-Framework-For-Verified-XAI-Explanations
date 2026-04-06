@@ -1,0 +1,38 @@
+<think>We need to explain each word's contribution to sentiment. We have top_20 tokens with attribution values. Positive contributions push positive sentiment; negative push negative. Need to describe impact of all tokens, how collectively shaped prediction. Avoid assumptions beyond data. Provide for both technical and non-technical. The explanation should be concise, actionable.
+
+We must mention each token and its attribution magnitude and direction. Also describe how they together led to predicted negative sentiment with low score 0.013. Summarize that negative tokens outweigh positives. Provide maybe a brief list.
+
+Let's craft.</think>
+**How the top 20 words drove the model’s negative prediction**
+
+| # | Token | Attribution | Effect on prediction |
+|---|-------|-------------|----------------------|
+| 1 | **if** | –0.0126 | Strongly nudges the result toward “negative”. |
+| 2 | **you** | +0.0126 | Pushes toward “positive”, but is almost counter‑balanced by *if*. |
+| 3 | **enjoy** | +0.0045 | Slight positive push. |
+| 4 | **films** | +0.0022 | Small positive influence. |
+| 5 | **like** | –0.0021 | Weak negative contribution. |
+| 6 | **american** | +0.0051 | Positive boost. |
+| 7 | **pie** | +0.0029 | Small positive push. |
+| 8 | **,** | –0.0004 | Negligible negative effect. |
+| 9 | **road** | –0.0018 | Minor negative influence. |
+|10 | **trip** | +0.0032 | Small positive push. |
+|11 | **&** | +0.0011 | Minor positive effect. |
+|12 | **van** | –0.0044 | Substantial negative pull. |
+|13 | **wilder** | +0.0030 | Positive contribution. |
+|14 | **avoid** | –0.0013 | Slight negative influence. |
+|15 | **this** | –0.0055 | Strong negative effect. |
+|16 | **cinematic** | –0.0047 | Significant negative pull. |
+|17 | **refuse** | –0.0000076 | Negligible negative effect. |
+|18 | **at** | –0.0029 | Small negative contribution. |
+|19 | **all** | –0.0033 | Weak negative pull. |
+|20 | **costs** | –0.0029 | Small negative influence. |
+
+### Putting it together
+
+- **Positive tokens** (“you”, “enjoy”, “films”, “american”, “pie”, “trip”, “wilder”, “&”) add up to a total of about **+0.040**.  
+- **Negative tokens** (“if”, “like”, “road”, “van”, “avoid”, “this”, “cinematic”, “at”, “all”, “costs”, “,”, “refuse”) total roughly **–0.059**.
+
+Because the negative contributions outweigh the positive ones, the model’s final sentiment score is very low (≈ 0.013) and the prediction is “Negative”. The most influential words are *if*, *this*, *cinematic*, and *van*, each pulling strongly toward a negative assessment, while the only truly positive word that keeps the score from being even lower is *you*. The small positive tokens related to movie titles partially counterbalance the negatives but are insufficient to overcome the overall negative tone.
+
+# EPR Explainer: 0.5998, Verifier: 0.3961

@@ -1,0 +1,26 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual, providing context on why it matters for income prediction. The XAI Output lists features in order and mean absolute SHAP values. We need to convert to natural language, with concise explanation for each feature, maybe mention relative importance. Use the mean absolute SHAP values to indicate importance magnitude. Provide context. No extra invented info. Just use given data. Ensure it's understandable for both technical and non-technical audiences.
+
+Let's structure as list or table: Feature, Mean Absolute SHAP (importance), Explanation. Use simple language. Provide actionable insight: high importance means model heavily considers it.
+
+We should mention that higher mean SHAP indicates stronger overall impact.
+
+Let's craft final answer.</think>
+**How the model decided the income class for this person**
+
+| Feature | Mean Absolute SHAP | What it means for the model | Why it matters for income |
+|---------|--------------------|-----------------------------|---------------------------|
+| **WKHP** (usual hours worked per week) | **0.90** | The biggest driver in the prediction. The model strongly believes that how many hours someone works each week tells a lot about whether they earn above or below the median. | Generally, people who work longer hours tend to earn more; short hours or part‑time work often signal lower earnings. |
+| **OCCP** (occupation code) | **0.63** | The second most influential factor. The specific job category heavily sways the model’s income guess. | Some occupations (e.g., managers, tech professionals) pay much more than others (e.g., retail or hospitality). |
+| **AGEP** (age) | **0.52** | Age has a solid impact on the prediction. | Earnings usually increase with experience up to a point, so older workers are often expected to earn more. |
+| **SCHL** (education level) | **0.46** | Education level is a strong signal for the model. | Higher degrees (college, graduate school) are usually linked to better-paying jobs. |
+| **RELP** (relationship to householder) | **0.34** | The person’s household role matters, though less strongly. | Being a spouse or partner can affect income through household dynamics or shared employment. |
+| **SEX** (sex) | **0.22** | Gender has a moderate influence. | Historical and societal differences in earnings by gender can bias income predictions. |
+| **POBP** (place of birth) | **0.17** | Birthplace adds some context. | People born in certain regions may have different socioeconomic backgrounds affecting income. |
+| **COW** (class of worker) | **0.14** | Employment type (private, government, self‑employed) also plays a role. | Different sectors pay differently and offer varying opportunities for earning above the median. |
+| **MAR** (marital status) | **0.10** | Marital status contributes a little. | Married individuals may have more stable or higher incomes due to dual earners or support. |
+| **RAC1P** (race) | **0.05** | Race has the smallest effect in this model. | Racial disparities in income can exist, but the model weighs it least in this case. |
+
+**Take‑away:**  
+The model looks most closely at how many hours someone works each week and the type of job they have. Those two factors together explain about 70 % of the predictive power, while the remaining features add smaller but still meaningful signals. Understanding these priorities helps explain why the model labeled this individual as earning above (or below) the median.
+
+# EPR Explainer: 0.8849, Verifier: 0.4643

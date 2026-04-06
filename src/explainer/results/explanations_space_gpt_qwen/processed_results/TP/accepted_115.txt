@@ -1,0 +1,31 @@
+<think>We need to explain each feature and its SHAP mean absolute values. We need to do this in natural language for both technical and non-technical audiences. Should be concise, actionable. Should not add assumptions. So explain that WKHP has highest importance etc.
+
+We should explain each feature: its meaning and why matters for income prediction. Use the dataset context. Also mention that mean absolute SHAP indicates overall influence.
+
+Ok produce explanation.</think>
+**How the model decided on this person’s income**
+
+The table below lists each of the 10 variables that the model looked at, how strongly it used them on average (the *mean absolute SHAP* value), and why that variable is important for predicting whether a person earns above or below the median \$40 k.
+
+| Rank | Feature | Mean absolute SHAP | Why it matters for income |
+|------|---------|--------------------|---------------------------|
+| 1 | **WKHP** – usual hours worked per week | **0.904** | Working more hours usually means a higher salary. The model sees long‑time workers as more likely to earn above the median. |
+| 2 | **OCCP** – occupation code | **0.630** | Some jobs (e.g., engineers, executives) pay much more than others (e.g., retail clerks). Occupation is a strong income indicator. |
+| 3 | **AGEP** – age | **0.517** | Income tends to rise with experience. Younger people usually earn less, older people more. |
+| 4 | **SCHL** – education level | **0.465** | Higher degrees (college, advanced degrees) are linked to better jobs and higher wages. |
+| 5 | **RELP** – relationship to householder | **0.343** | Being a spouse or partner (often working together) or a child (likely non‑working) can influence household income. |
+| 6 | **SEX** – sex | **0.224** | Gender differences in pay gaps show up in the data; the model uses this to refine predictions. |
+| 7 | **POBP** – place of birth | **0.172** | Birthplace can correlate with region, language, and opportunities that affect earnings. |
+| 8 | **COW** – class of worker | **0.137** | Employment type (private, government, self‑employed) affects salary ranges and stability. |
+| 9 | **MAR** – marital status | **0.102** | Married individuals often have combined incomes or different spending patterns that the model can exploit. |
+|10 | **RAC1P** – race | **0.053** | Racial groups can differ in socioeconomic status; the model incorporates this small but non‑zero signal. |
+
+### Take‑away
+
+- **Hours worked (WKHP)** and **occupation (OCCP)** drive the model’s decision the most—if a person works long hours in a high‑paying job, the model is very confident they earn above the median.  
+- **Age, education, and relationship status** also matter but to a lesser extent.  
+- Demographic factors like gender, birthplace, class of worker, marital status, and race provide smaller but still relevant signals that help fine‑tune the prediction.  
+
+Understanding these relative influences helps you see why the model gave this particular prediction and where you might focus if you want to improve or challenge the result.
+
+# EPR Explainer: 0.7934, Verifier: 0.5167

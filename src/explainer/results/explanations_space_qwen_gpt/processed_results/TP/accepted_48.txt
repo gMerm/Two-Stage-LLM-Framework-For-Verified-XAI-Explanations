@@ -1,0 +1,52 @@
+<think>Okay, let me break this down. The user wants me to explain token attributions from an IMDB review analysis. First, I need to understand what Integrated Gradients does - it shows how much each word pushed the model toward positive or negative sentiment.
+
+Looking at the data, the prediction is 0.013 (strongly negative). The top 20 tokens show both positive and negative contributors. I should sort them by magnitude to see which words had the strongest influence.
+
+Hmm, the most negative contributors stand out: "this" (-0.0055), "cinematic" (-0.0047), "refuse" (-0.0000075) - wait, "refuse" has a tiny negative score but it's actually a strong negative word. The negative scores here are actually pushing toward negative sentiment since the model is predicting negative.
+
+For positive contributors, "you" (0.0126) is the strongest positive - that's interesting because it's part of a negative sentence. The model is picking up that "you" is used in a negative context ("avoid this..."). Similarly, "enjoy" (0.0045) and "films" (0.0022) are positive words but in a negative context.
+
+I notice "american" (0.0051) and "pie" (0.0029) are positive words but they're referencing other movies the reviewer dislikes. The model is correctly interpreting this as negative context.
+
+The punctuation like comma (negative) and ampersand (&) have very small scores, so they're not significant. The strongest negative words are "this", "cinematic", "refuse" - but "refuse" has such a tiny score that it's probably not meaningful.
+
+Wait, the attribution for "refuse" is -7.55e-6, which is almost zero. So it's not actually contributing much. The real heavy hitters are "this", "cinematic", "all", "costs" with negative scores.
+
+For the explanation, I should group them: the negative words ("this", "cinematic", "refuse", "avoid", etc.) collectively push the sentiment down, while the positive words ("you", "enjoy", "films") are actually part of the negative criticism.
+
+The strongest positive attribution is "you" (0.0126) - that's counterintuitive but makes sense because the model is seeing "if you enjoy..." as a setup for criticism. So "you" is a positive word but in a negative context.
+
+I should make sure not to say "positive words" - better to say "words that would typically be positive but were used negatively". Need to be precise.
+
+Also, "road trip" has negative attribution (-0.0018) which makes sense because it's part of the list of movies to avoid.
+
+The explanation should say: the negative words like "this", "cinematic refuse" and the negative context around "films like American Pie" all contributed to the negative score. The positive words were used in a negative context so they actually supported the negative sentiment.
+
+Let me check the numbers again: the sum of all attributions should roughly equal the prediction. But I don't need to calculate that - just describe the key influencers.
+
+For non-technical audience, I'll avoid terms like "attribution" and say "how much each word influenced the score". For technical, I can keep the terms but stay concise.
+
+The top negative contributors: "this" (-0.0055), "cinematic" (-0.0047), "all" (-0.0033), "costs" (-0.0029), "avoid" (-0.0013). These are the main words making the review seem negative.
+
+Top positive: "you" (0.0126), "enjoy" (0.0045), "american" (0.0051). But note that "american" and "pie" are part of the movie titles being criticized.
+
+I'll structure the explanation as:
+- Strongest negative words
+- Strongest positive words (with context)
+- Note that positive words were used negatively
+
+And keep it under 3-4 sentences for conciseness.
+</think>
+The model predicted a strongly negative sentiment (0.013) for this review. Key words influencing this prediction:
+
+**Strongest negative contributors** (pushing sentiment downward):  
+- "this" (-0.0055), "cinematic" (-0.0047), and "all" (-0.0033) form the core of the criticism ("avoid this cinematic refuse at all costs").  
+- "refuse" (-0.0000075) and "costs" (-0.0029) reinforce the harsh dismissal of the film as worthless.  
+
+**Strongest positive contributors** (pushing sentiment upward, but *in negative context*):  
+- "you" (+0.0126) and "enjoy" (+0.0045) appear in the phrase "If you enjoy films like American Pie," which the model interprets as *ironic setup for criticism* (not genuine praise).  
+- "American" (+0.0051) and "pie" (+0.0029) reference disliked movies, making these positive words *support negative sentiment*.  
+
+**Collective impact**: The model focused on words signaling rejection ("avoid," "refuse," "costs") and interpreted positive words as part of a critical context, leading to the final negative prediction.
+
+# EPR Explainer: 0.7275, Verifier: 0.9321

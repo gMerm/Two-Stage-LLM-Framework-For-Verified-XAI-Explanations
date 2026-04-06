@@ -1,0 +1,42 @@
+{
+  "confidence": 0.99,
+  "verdict": "reject",
+  "justification": "The explanation incorrectly ranks the most important feature: it lists OCCP as the top feature with a value of 0.904, whereas the XAI Content shows WKHP as the highest mean absolute SHAP value (0.9044633507728577) and OCCP as second (0.6295236349105835). Additionally, the numeric SHAP values for both WKHP and OCCP are swapped in the explanation (WKHP listed as 0.6295 and OCCP as 0.904). These discrepancies constitute a SwapTopFeature error (and also IncorrectValue).",
+  "error type": "SwapTopFeature"
+}
+
+{
+  "confidence": 0.99,
+  "verdict": "reject",
+  "justification": "The explanation and CoT list the features in an order that swaps MAR and RAC1P. In the XAI content, MAR has a higher mean absolute SHAP value (0.1020) than RAC1P (0.0526), so MAR should come before RAC1P. Both the CoT and Explanation incorrectly place RAC1P before MAR and assign the higher value to RAC1P while giving the lower value to MAR, violating the ranking and numeric accuracy required for SHAP explanations.",
+  "error type": "SwapMinorFeature"
+}
+
+{
+  "confidence": 0.95,
+  "verdict": "reject",
+  "justification": "The explanation (and CoT) list SHAP values rounded to four decimal places (e.g., 0.904, 0.6295) instead of the exact values from the XAI Content (0.9044633507728577, 0.6295236349105835, etc.). This constitutes a numerical discrepancy that violates the requirement for exact matches. Additionally, the explanation makes speculative claims about the direction of each feature’s influence (e.g., work hours reducing income) that are not supported by the provided mean‑absolute SHAP values, which contain no sign information. These are fabrications, but the primary error type is the incorrect values.",
+  "error type": "IncorrectValue"
+}
+
+{
+  "confidence": 0.95,
+  "verdict": "reject",
+  "justification": "The explanation and CoT omit the SCHL feature, which is present in the XAI Content with a mean absolute SHAP value of 0.4649447798728943. This omission violates the requirement that all features in the XAI Content must be discussed in both the CoT and the Explanation. No other errors (such as value mismatches or incorrect rankings) are detected, but the omission alone warrants rejection.",
+  "error type": "OmitFeature"
+}
+
+{
+  "confidence": 0.97,
+  "verdict": "reject",
+  "justification": "The CoT and Explanation faithfully present the feature ranking and approximate SHAP values, and all features from the XAI content are discussed. However, the CoT and Explanation introduce an unsupported causal mechanism: the claim that age interacts with shift timing and that older workers tend to work night shifts, which is not reflected in the provided SHAP data or any interaction values. This fabricated interaction violates the requirement that only mechanisms explicitly supported by the XAI content may be included.",
+  "error type": "FabricatedMechanism"
+}
+
+{
+  "confidence": 0.85,
+  "verdict": "reject",
+  "justification": "The CoT section is empty, violating the requirement that the chain of reasoning be present and align with the XAI content. Additionally, the explanation introduces a causal interpretation (e.g., \"working more hours leads to higher earnings\") that is not supported by the provided SHAP values, which only contain absolute magnitude information. These two issues render the explanation non‑faithful and not fully verifiable.",
+  "error type": "MissingCoT"
+}
+

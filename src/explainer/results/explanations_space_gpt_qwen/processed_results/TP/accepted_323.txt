@@ -1,0 +1,136 @@
+<think>We need to explain how each word of the top_20_token_attributions influenced the model's sentiment prediction. Provide impact for all tokens positive and negative, detailing how collectively shaped final prediction. Only use quantitative data. Provide natural language explanation for technical and non-technical audiences. Concise, actionable insights. Avoid unnecessary technical language. So we need to interpret each token's attribution. Positive tokens push toward positive sentiment; negative push toward negative. Magnitude indicates strength. Summarize.
+
+Also maybe give overall sum of attributions? Not provided but we can compute approximate? We have 20 tokens. Let's sum quickly:
+
+List:
+
+- if: -0.012637555599212646
+- you: 0.012596114538609982
+- enjoy: 0.0045203231275081635
+- films: 0.002174487803131342
+- like: -0.002075477968901396
+- american: 0.005100315436720848
+- pie: 0.0028989785350859165
+- ,: -0.0003934605047106743
+- road: -0.0018063271418213844
+- trip: 0.0031642871908843517
+- &: 0.0011230998206883669
+- van: -0.0044164941646158695
+- wilder: 0.002977431984618306
+- avoid: -0.0012793546775355935
+- this: -0.00553693575784564
+- cinematic: -0.004700512625277042
+- refuse: -7.555005140602589e-06 (negligible)
+- at: -0.0029249039944261312
+- all: -0.0032766032963991165
+- costs: -0.0028788314666599035
+
+Now sum positive values:
+
+you: 0.0125961
+enjoy: 0.0045203
+films: 0.0021745
+american: 0.0051003
+pie: 0.0028990
+trip: 0.0031643
+& (ampersand): 0.0011231
+wilder: 0.0029774
+
+Also maybe others? Check 'this' negative, 'cinematic' negative, 'avoid', etc.
+
+Sum positives: 0.0125961+0.0045203=0.0171164
++0.0021745=0.0192909
++0.0051003=0.0243912
++0.0028990=0.0272902
++0.0031643=0.0304545
++0.0011231=0.0315776
++0.0029774=0.0345550
+
+So positives sum ~0.0346.
+
+Sum negatives:
+
+if: -0.0126376
+like: -0.0020755
+,: -0.0003935
+road: -0.0018063
+van: -0.0044165
+avoid: -0.0012794
+this: -0.0055369
+cinematic: -0.0047005
+refuse: -7.55e-06
+at: -0.0029249
+all: -0.0032766
+costs: -0.0028788
+
+Add:
+
+-0.0126376-0.0020755 = -0.0147131
+-0.0147131-0.0003935 = -0.0151066
+-0.0151066-0.0018063 = -0.0169129
+-0.0169129-0.0044165 = -0.0213294
+-0.0213294-0.0012794 = -0.0226088
+-0.0226088-0.0055369 = -0.0281457
+-0.0281457-0.0047005 = -0.0328462
+-0.0328462-7.55e-06 = -0.0328538
+-0.0328538-0.0029249 = -0.0357787
+-0.0357787-0.0032766 = -0.0390553
+-0.0390553-0.0028788 = -0.0419341
+
+So negative sum ~ -0.04193.
+
+Net sum = positives 0.03456 + negatives -0.04193 = -0.00737. So net negative, aligning with negative prediction 0.013. So we can discuss that.
+
+Also note that tokens like "if" and "avoid" push strongly negative.
+
+"you" positive but small.
+
+Also tokens "american pie" positive contributions but "van" negative, etc.
+
+Explain in natural language.
+
+Also we need to identify impact of all tokens, describing how each one collectively shaped final prediction.
+
+We must not use unnecessary technical language; but we can use some explanation of "positive" and "negative".
+
+We need to consider non-technical audience: talk about words that help or hurt sentiment.
+
+Ok let's craft answer.</think>
+**How each word in the top 20 influenced the model’s sentiment prediction**
+
+| Token | Effect on sentiment | How it matters |
+|-------|---------------------|----------------|
+| **if** | *Negative* (‑0.0126) | Suggests a condition that the reviewer is skeptical about, pulling the sentiment toward “bad.” |
+| **you** | *Positive* (+0.0126) | Addresses the reader directly and encourages engagement, nudging the sentiment toward “good.” |
+| **enjoy** | *Positive* (+0.0045) | Indicates a favorable experience, giving the model a small boost toward a positive rating. |
+| **films** | *Positive* (+0.0022) | A neutral word that, in this context, leans the model toward a slightly positive view. |
+| **like** | *Negative* (‑0.0021) | Signals a comparison that turns out to be unfavorable, slightly pushing sentiment negative. |
+| **american** | *Positive* (+0.0051) | Part of a film title that the reviewer references favorably, giving a stronger positive push. |
+| **pie** | *Positive* (+0.0029) | Completes the film title “American Pie,” reinforcing the positive cue. |
+| **,** | *Negative* (‑0.0004) | The comma signals a pause before a strong negative clause, contributing a very small negative shift. |
+| **road** | *Negative* (‑0.0018) | Begins the title “Road Trip” that the reviewer dislikes, pulling sentiment negative. |
+| **trip** | *Positive* (+0.0032) | Completes “Road Trip,” slightly balancing the negative effect of “road.” |
+| **&** | *Positive* (+0.0011) | Connects two movie titles, mildly supporting the positive side. |
+| **van** | *Negative* (‑0.0044) | Starts “Van Wilder,” a film the reviewer finds terrible, adding a strong negative influence. |
+| **wilder** | *Positive* (+0.0030) | Completes “Van Wilder,” softening the negative cue from “van.” |
+| **avoid** | *Negative* (‑0.0013) | Directly commands readers to steer clear, pulling sentiment toward negative. |
+| **this** | *Negative* (‑0.0055) | Emphasizes the film in question, strongly reinforcing the negative stance. |
+| **cinematic** | *Negative* (‑0.0047) | Negative adjective describing the film, driving sentiment away from positive. |
+| **refuse** | *Negative* (‑0.0000) | Minor negative cue about the film, almost negligible on its own. |
+| **at** | *Negative* (‑0.0029) | Connects to “all costs,” adding a subtle negative tone. |
+| **all** | *Negative* (‑0.0033) | Reinforces the warning that everything is bad, pushing sentiment negative. |
+| **costs** | *Negative* (‑0.0029) | Concludes the warning phrase, adding a final negative push. |
+
+**What the numbers say**
+
+* The overall net attribution from these 20 tokens is slightly negative (≈ –0.007), matching the model’s predicted negative sentiment (probability ≈ 0.013).  
+* Positive tokens (e.g., “you,” “enjoy,” “american,” “pie”) collectively add about +0.035.  
+* Negative tokens (e.g., “if,” “van,” “this,” “cinematic,” “avoid,” “all,” “costs”) add about –0.042.  
+* The strongest negative pulls come from “if” and “this,” while the strongest positive pulls come from “you” and “american.”  
+* Some tokens counteract each other (e.g., “road” vs. “trip” or “van” vs. “wilder”), but the overall balance tips toward the negative side.
+
+**Take‑away**
+
+The model is mainly swayed by the reviewer’s explicit warnings (“avoid this,” “cinematic refuse,” “all costs”) and by negative descriptors of specific movies (“van,” “road”). Positive cues are present but weaker and are outweighed by the strong negative statements, resulting in the final negative prediction.
+
+# EPR Explainer: 0.5434, Verifier: 0.4410

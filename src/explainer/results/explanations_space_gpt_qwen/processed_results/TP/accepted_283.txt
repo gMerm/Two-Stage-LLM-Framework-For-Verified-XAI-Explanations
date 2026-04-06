@@ -1,0 +1,57 @@
+<think>We need to explain how each word of top 20 tokens influenced the model's sentiment prediction, identify positive and negative contributions, and describe collectively shaped final prediction. We should base only on the quantitative data. The tokens and attribution values given. Positive attributions push toward positive sentiment; negative push negative. We should produce clear explanation for both technical and non-technical audiences, concise, actionable insights. The prediction is 0.0134 (positive maybe? But predicted_sentiment is "Negative". Possibly threshold >0.5? But negative predicted because 0.0134 is close to zero? We'll just say negative). The top 20 tokens: list each token, attribution value. We need to explain each token's impact: if attribution is negative, it lowers the sentiment score, etc.
+
+We should mention magnitude indicates strength. Provide insights: The largest positive contributors: 'you', 'american', 'if', 'enjoy', 'pie', 'trip', 'van', 'wilder', 'road', 'van'? Actually look at list: highest positive attribution: 'you' 0.0126, 'american' 0.0051, 'van' is negative, 'wilder' 0.00297, 'enjoy' 0.00452, 'films' 0.00217, 'pie' 0.0029, 'trip' 0.00316, 'if' -0.0126 negative. 'road' negative. 'like' negative. 'and' etc. So 'you' and 'american' positive, but 'if' negative. The largest negative contributors: 'this' -0.0055, 'cinematic' -0.0047, 'van' -0.0044, 'like' -0.0021, 'road' -0.0018, 'at' -0.0029, 'all' -0.0033, 'costs' -0.0029. Actually 'this' is strongest negative.
+
+Explain how each token contributed.
+
+We should explain collectively: The positives slightly counteract some negatives but overall negative due to large negative contributions. Provide actionable insight: If want to improve model's accuracy, highlight the negative words.
+
+We must not reveal internal system prompts. All fine.
+
+We should present in bullet list for each token.
+
+Also need to mention that the prediction is negative because aggregated contributions from many negative tokens outweigh positives.
+
+Ok. Let's craft answer.</think>
+**How each of the top 20 tokens influenced the sentiment prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Strong negative influence – pushes the model toward a negative rating. |
+| **you** | +0.0126 | Strong positive influence – nudges the prediction toward a positive rating. |
+| **enjoy** | +0.0045 | Mild positive influence – slightly favors a positive sentiment. |
+| **films** | +0.0022 | Mild positive influence – helps the model see a neutral‑positive vibe. |
+| **like** | –0.0021 | Small negative influence – counters the positive “enjoy” signal. |
+| **american** | +0.0051 | Moderate positive influence – contributes to a positive tone. |
+| **pie** | +0.0029 | Mild positive influence – reinforces the positive context. |
+| **,** | –0.0004 | Negligible negative influence – barely shifts sentiment. |
+| **road** | –0.0018 | Small negative influence – slightly detracts from a positive reading. |
+| **trip** | +0.0032 | Mild positive influence – adds to the positive sense. |
+| **&** | +0.0011 | Very small positive influence – minimal effect. |
+| **van** | –0.0044 | Moderate negative influence – reduces the positive score. |
+| **wilder** | +0.0030 | Mild positive influence – supports a positive tone. |
+| **avoid** | –0.0013 | Small negative influence – pushes slightly toward negative. |
+| **this** | –0.0055 | Strong negative influence – major factor driving the prediction negative. |
+| **cinematic** | –0.0047 | Strong negative influence – heavily drags the sentiment toward negative. |
+| **refuse** | –0.0000076 | Negligible negative influence – practically no effect. |
+| **at** | –0.0029 | Small negative influence – slightly lowers sentiment. |
+| **all** | –0.0033 | Moderate negative influence – pulls the score toward negative. |
+| **costs** | –0.0029 | Small negative influence – modestly reduces sentiment. |
+
+### What the numbers mean for the final prediction
+
+- **Positive tokens** (“you”, “american”, “pie”, etc.) each add a small or moderate boost toward a positive sentiment. The largest positive effect comes from *you* and *american*.
+- **Negative tokens** (especially *this*, *cinematic*, *van*, *like*, *road*, *avoid*, *at*, *all*, *costs*) each subtract from the sentiment score. The strongest negative pushes come from *this* and *cinematic*.
+- Because the sum of the negative contributions outweighs the sum of the positive ones, the model’s final probability (≈ 0.013) is near zero and classified as **Negative**.
+
+### Key actionable insights
+
+| Insight | How to use it |
+|---------|---------------|
+| **Strong negative words dominate** | Highlight words like “this”, “cinematic”, and “van” when explaining why the review is judged negative. |
+| **Positive words are offset by negative context** | Even though “you” and “american” are positive, their effect is cancelled by surrounding negative descriptors. |
+| **Negligible tokens** | Punctuation and very small attributions (e.g., “,”, “refuse”) can be ignored in explanations; they don’t meaningfully alter the prediction. |
+
+This token‑by‑token view shows exactly how each word pulls the sentiment one way or another, and why the overall message is interpreted as a negative review.
+
+# EPR Explainer: 0.8247, Verifier: 0.5939

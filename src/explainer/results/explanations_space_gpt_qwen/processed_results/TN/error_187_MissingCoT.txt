@@ -1,0 +1,39 @@
+<think>We need to explain how each word influenced sentiment, positive or negative, with impact magnitude. Provide clear explanation for both technical and non-technical audiences. Use only provided data. Must show reasoning step by step inside <think> tags. Then output explanation.</think>
+We will produce final answer.<think>
+We need to describe each token’s contribution, indicating sign (positive pushes toward positive, negative pushes toward negative) and magnitude relative to others. Keep it concise, avoid technical jargon, but explain overall influence. Use the given attributions. Provide a short narrative that sums up how the tokens combined to give a negative prediction.**How the model read the review**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | A small negative cue that nudges the prediction toward *negative*. |
+| **you** | +0.0126 | A strong positive cue that pulls the prediction toward *positive*. |
+| **enjoy** | +0.0045 | A small positive cue. |
+| **films** | +0.0022 | A small positive cue. |
+| **like** | –0.0021 | A small negative cue. |
+| **american** | +0.0051 | A moderate positive cue. |
+| **pie** | +0.0029 | A small positive cue. |
+| **,** | –0.0004 | Negligible negative cue. |
+| **road** | –0.0018 | Small negative cue. |
+| **trip** | +0.0032 | Small positive cue. |
+| **&** | +0.0011 | Small positive cue. |
+| **van** | –0.0044 | Moderate negative cue. |
+| **wilder** | +0.0030 | Small positive cue. |
+| **avoid** | –0.0013 | Small negative cue. |
+| **this** | –0.0055 | Moderate negative cue. |
+| **cinematic** | –0.0047 | Moderate negative cue. |
+| **refuse** | –0.0000076 | Negligible negative cue. |
+| **at** | –0.0029 | Small negative cue. |
+| **all** | –0.0033 | Small negative cue. |
+| **costs** | –0.0029 | Small negative cue. |
+
+**Putting it together**
+
+- The tokens “you”, “enjoy”, “american”, “pie”, “trip”, “wilder” and the ampersand all give the model a *slight push toward a positive* prediction.  
+- However, the stronger negative tokens—**if**, **this**, **cinematic**, **van**, **avoid**, **at**, **all**, **costs**, **road**—overwhelm the positives.  
+- The net effect is a very small positive score overall, but because the model’s decision threshold is higher, it still ends up predicting a *negative* sentiment.  
+- In plain terms: the reviewer’s mention of popular movies (American Pie, Road Trip, Van Wilder) would normally make the model think the review could be positive, but the repeated warnings (“avoid”, “this”, “cinematic refuse”, “at all costs”) and negative descriptors (van, road, avoid, etc.) dominate, steering the final prediction toward *negative*.
+
+**Takeaway**
+
+Even though some words in the review are associated with positive content, the overall tone is heavily driven by the negative warnings and descriptors. This explains why the model concludes the review expresses a negative sentiment.
+
+# EPR Explainer: 0.6618, Verifier: 0.5343

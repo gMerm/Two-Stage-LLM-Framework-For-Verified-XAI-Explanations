@@ -1,0 +1,44 @@
+<think>We need to explain each feature with context. Provide natural language, concise, actionable insights, for technical and non-technical. Base only on provided quantitative data: feature order and mean_abs_shap values.
+
+We should rank by importance. Provide context: higher SHAP indicates more influence. Explain that WKHP strongest, OCCP second, etc. Provide reasoning: why work hours, occupation, age, education, relationship to household, sex, place of birth, class of worker, marital status, race.
+
+We need to be mindful: we cannot add details beyond given. We have dataset context. So we can say that these values indicate the model's reliance on these features.
+
+Make sure to refer to values: e.g., WKHP has mean absolute SHAP 0.904, meaning it explains 0.904 of prediction variance. Provide approximate ranking.
+
+Provide actionable: If you want to improve prediction or fairness, maybe examine WKHP. For policy: ensure accurate reporting of work hours.
+
+Let's write explanation: introduction: The SHAP values show how much each feature contributes.
+
+Then list features with value and interpretation.
+
+Also mention that higher SHAP means stronger influence regardless of direction.
+
+Let's produce concise but thorough explanation.</think>
+**How the model is making its income‑prediction**
+
+The SHAP values tell us how much each feature, on average, shifts the model’s prediction for whether a person earns above or below the median ($≈$ 40 000).  
+A larger *mean absolute SHAP* means that feature carries more weight in the decision, no matter whether it pushes the prediction up or down.
+
+| Rank | Feature | Mean |Abs SHAP | What it tells us | Why it matters for income |
+|------|---------|-------|---------|-------------------|---------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.904** | Most influential | Hours worked directly affect earnings potential. The model relies heavily on this number because a higher weekly workload usually signals a higher wage. |
+| 2 | **OCCP** (occupation code) | **0.630** | Second strongest | Job type strongly correlates with pay. Certain occupations command higher wages, so the model uses this to gauge likely income. |
+| 3 | **AGEP** (age) | **0.517** | Important | Age reflects experience and career stage; mid‑career individuals tend to earn more than very young or older workers. |
+| 4 | **SCHL** (educational attainment) | **0.465** | Strong influence | Education level is a key predictor of earning power; higher degrees usually lead to better pay. |
+| 5 | **RELP** (relationship to householder) | **0.343** | Moderately influential | Whether the person is a spouse, child, or roommate can affect income (e.g., spouses may share households, children may have lower earnings). |
+| 6 | **SEX** (sex) | **0.224** | Noticeable but less than the top four | The model recognizes sex differences in earnings, reflecting broader wage gaps. |
+| 7 | **POBP** (place of birth) | **0.172** | Smaller impact | Birthplace can be a proxy for cultural or regional factors that influence job opportunities and wages. |
+| 8 | **COW** (class of worker) | **0.137** | Least among the top five | Employment type (private, government, self‑employed) slightly shifts income expectations. |
+| 9 | **MAR** (marital status) | **0.102** | Minor influence | Marital status may affect earning capacity through household dynamics or dual incomes. |
+|10 | **RAC1P** (race) | **0.053** | Smallest effect | The model captures some racial patterns in earnings, though its influence is the weakest among the features. |
+
+**Take‑away for stakeholders**
+
+- **Work hours, occupation, age, and education** are the biggest drivers of the model’s income predictions.  
+- **Sex, place of birth, and race** still matter but to a much lesser extent; consider these when evaluating fairness or targeting interventions.  
+- **Relationship, class of worker, and marital status** have modest influence; they can be useful for contextualizing individual cases but are not primary decision factors.  
+
+This ranking guides you on which variables most strongly shape the model’s view of income and where you might focus data quality improvements or policy considerations.
+
+# EPR Explainer: 0.9537, Verifier: 0.4998

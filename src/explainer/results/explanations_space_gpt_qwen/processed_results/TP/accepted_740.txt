@@ -1,0 +1,30 @@
+<think>We need to explain each feature with its mean SHAP value, indicating its importance for predicting whether income > median. We need to keep it clear, actionable, avoid assumptions beyond data. Provide context on why matters. Use concise language. Provide explanation for technical and non-technical audiences.
+
+We need to list each feature with explanation: WKHP highest importance: usual hours worked per week strongly influences income. OCCP next: occupation type. Age, Education, Relationship, Sex, Place of Birth, Class of Worker, Marital status, Race. Provide explanation of why each matters. Possibly mention relative importance ranking.
+
+Let's produce output.
+
+</think>
+**What the numbers mean**
+
+- Each **mean |SHAP|** number shows how strongly that feature, on average, pulls the model’s prediction up or down.  
+- The larger the number, the more the feature matters for deciding whether a person’s income is above or below the median.
+
+| Rank | Feature | Mean |SHAP| | Why it matters for income |
+|------|---------|------|-----------------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.904** | Working more hours is strongly linked to higher earnings; the model sees it as the biggest cue for predicting a higher income. |
+| 2 | **OCCP** (occupation code) | **0.630** | Different jobs pay very differently. The model uses the occupation type as a strong signal of potential income level. |
+| 3 | **AGEP** (age) | **0.517** | Income tends to rise with experience and reach a peak before declining; age captures that trend. |
+| 4 | **SCHL** (education level) | **0.465** | Higher educational attainment usually leads to better‑paid positions; the model weighs education heavily. |
+| 5 | **RELP** (relationship to householder) | **0.343** | Being a spouse, partner, or child changes household responsibilities and income expectations, affecting the model’s prediction. |
+| 6 | **SEX** (gender) | **0.224** | Gender can reflect differences in wages and job types that the model considers. |
+| 7 | **POBP** (place of birth) | **0.172** | Origin may correlate with socioeconomic background, influencing earning potential. |
+| 8 | **COW** (class of worker) | **0.137** | Whether one works privately, for the government, or is self‑employed affects typical pay scales. |
+| 9 | **MAR** (marital status) | **0.102** | Marital status can affect household income dynamics and job choices. |
+|10 | **RAC1P** (race) | **0.053** | Race can be linked to systemic differences in wage opportunities; the model captures a small but present effect. |
+
+**Bottom line**
+
+The model relies most heavily on how many hours you work and what job you have. Education and age also play significant roles, while other factors like gender, birth location, and marital status contribute less but still help fine‑tune the income prediction.
+
+# EPR Explainer: 0.7739, Verifier: 0.6327

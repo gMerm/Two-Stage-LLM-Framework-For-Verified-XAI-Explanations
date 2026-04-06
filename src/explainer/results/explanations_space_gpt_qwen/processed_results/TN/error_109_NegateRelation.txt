@@ -1,0 +1,77 @@
+<think>We need to produce explanation: global and local. Must be factual. Use only given data. Provide ranks, direction of influence. For local, provide feature contributions, direction, weight, values ranges. Also mention prediction error. Use concise language. Let's produce.</think>
+**Global Model Insights**
+
+| Rank | Feature | Importance Score | Direction of Influence |
+|------|---------|------------------|------------------------|
+| 1 | **carat** | 124.44 | **Positive** – larger carat weight raises predicted price. |
+| 2 | **color** | 102.26 | **Positive** – higher color grade (closer to D) increases price. |
+| 3 | **clarity** | 75.55 | **Positive** – clearer diamonds (higher grade) command higher prices. |
+| 4 | **cut** | 53.20 | **Positive** – better cut quality adds value. |
+| 5 | **y** | 32.99 | **Positive** – longer depth dimension (y‑axis) slightly boosts price. |
+| 6 | **x** | 10.05 | **Positive** – wider width contributes modestly. |
+| 7 | **table** | 9.62 | **Positive** – larger table proportion raises price. |
+| 8 | **depth** | 6.41 | **Positive** – deeper cut slightly increases value. |
+| 9 | **z** | 0.13 | **Positive** – taller diamond adds a small effect. |
+
+**Interpretation**  
+The model consistently values physical size (carat, dimensions) and quality attributes (color, clarity, cut). A diamond with higher carat, a cleaner color/clarity grade, and a better cut will generally receive a higher price prediction. Smaller features such as z and depth play a minimal yet positive role.
+
+---
+
+### Local Explanation 1 – Instance 676
+
+| Feature | Observed Value | Contribution (USD) | Direction | Weight |
+|---------|----------------|--------------------|-----------|--------|
+| clarity | <= 2.0 | +2075.04 | Positive | 0.423 |
+| y | <= 6.54 & > 5.71 | –817.87 | Negative | 0.167 |
+| color | <= 4.0 & > 3.0 | –723.16 | Negative | 0.148 |
+| x | <= 6.55 & > 5.7 | +537.18 | Positive | 0.110 |
+| z | <= 4.04 & > 3.53 | +262.97 | Positive | 0.054 |
+| carat | <= 1.05 & > 0.7 | –185.91 | Negative | 0.038 |
+| cut | <= 2.0 | –109.84 | Negative | 0.022 |
+| table | <= 57.0 & > 56.0 | +102.95 | Positive | 0.021 |
+| depth | <= 61.8 & > 61.0 | –86.28 | Negative | 0.018 |
+
+**Prediction Context**  
+- **Actual price:** $3,172  
+- **Predicted price:** $3,601.51  
+- **Error:** $429.51 (over‑prediction)
+
+**Interpretability** – Confidence 0.072; uses all 9 features.
+
+*Key takeaway:* The strong positive impact of **clarity** (feature #1) dominates the prediction, while the negative influence of a moderate **y** dimension and relatively low **color** grade pulls the price down. The overall model overestimates this diamond’s value by roughly $430.
+
+---
+
+### Local Explanation 2 – Instance 737
+
+| Feature | Observed Value | Contribution (USD) | Direction | Weight |
+|---------|----------------|--------------------|-----------|--------|
+| carat | <= 0.7 & > 0.4 | –2,897.62 | Negative | 0.487 |
+| clarity | > 5.0 | +902.91 | Positive | 0.152 |
+| y | <= 5.71 & > 4.72 | –884.52 | Negative | 0.149 |
+| table | <= 57.0 & > 56.0 | –485.01 | Negative | 0.082 |
+| x | <= 5.7 & > 4.71 | +324.50 | Positive | 0.055 |
+| cut | <= 2.0 | –311.06 | Negative | 0.052 |
+| color | <= 3.0 & > 1.0 | +85.92 | Positive | 0.014 |
+| depth | <= 62.5 & > 61.8 | –30.62 | Negative | 0.005 |
+| z | <= 3.53 & > 2.91 | +22.67 | Positive | 0.004 |
+
+**Prediction Context**  
+- **Actual price:** $1,981  
+- **Predicted price:** $1,917.62  
+- **Error:** $63.38 (under‑prediction)
+
+**Interpretability** – Confidence 0.117; uses all 9 features.
+
+*Key takeaway:* The large negative contribution from **carat** (feature #1) dominates, causing the model to undervalue this smaller diamond. Positive effects from **clarity** and **x** partially offset the lower carat and cut penalties, resulting in a small under‑prediction.
+
+---
+
+**Overall Guidance**  
+- **Carat** is the single most influential feature; larger diamonds command higher prices.  
+- **Color, clarity, and cut** add value in a ranked order; improving these qualities boosts price.  
+- **Dimension features (x, y, z, depth, table)** provide smaller but consistent adjustments.  
+- Local explanations highlight that a diamond’s specific feature values can swing predictions significantly, especially when one high‑impact feature (e.g., carat) falls outside the typical range.
+
+# EPR Explainer: 0.4607, Verifier: 0.7502

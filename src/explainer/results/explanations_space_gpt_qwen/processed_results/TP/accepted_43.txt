@@ -1,0 +1,45 @@
+<think>We need to explain how each word of top 20 token attributions influenced the model's sentiment prediction. Provide natural language explanation, concise, actionable insights. We should not invent details beyond the data. We should explain positive and negative tokens. Use the attribution values to explain direction and magnitude. Provide overall influence. We need to mention how collectively shape final prediction. Should not include internal data. Just explain based on given numbers.
+
+Also note the model prediction 0.013... negative sentiment. So we explain contributions: negative tokens pushing negative, positive tokens pushing positive but overall negative because negatives dominate. Provide that each token's attribution indicates contribution magnitude.
+
+Let's craft explanation. Provide for each token: token, direction (positive/negative), magnitude relative to others. We can summarize.
+
+Also mention that top 20 tokens include both positive and negative; the negatives outweigh positives.
+
+Let's produce final answer.</think>
+**How the top 20 words shaped the model’s negative sentiment prediction**
+
+| Token | Attribution | Effect on prediction | Relative influence |
+|-------|-------------|----------------------|--------------------|
+| **if** | –0.0126 | Pushes the score down (negative). | **Largest negative influence** |
+| **you** | +0.0126 | Pushes the score up (positive). | Largest positive influence |
+| **enjoy** | +0.0045 | Mildly pushes the score up. | Small positive |
+| **films** | +0.0022 | Mildly pushes the score up. | Small positive |
+| **like** | –0.0021 | Slightly pushes the score down. | Small negative |
+| **american** | +0.0051 | Pushes the score up. | Medium positive |
+| **pie** | +0.0029 | Pushes the score up. | Small positive |
+| **,** | –0.0004 | Negligible downward push. | Tiny negative |
+| **road** | –0.0018 | Slightly pushes the score down. | Small negative |
+| **trip** | +0.0032 | Pushes the score up. | Small positive |
+| **&** | +0.0011 | Minor positive push. | Tiny positive |
+| **van** | –0.0044 | Substantial downward push. | Medium negative |
+| **wilder** | +0.0030 | Pushes the score up. | Small positive |
+| **avoid** | –0.0013 | Slightly pushes the score down. | Small negative |
+| **this** | –0.0055 | Strong downward push. | **Large negative** |
+| **cinematic** | –0.0047 | Strong downward push. | **Large negative** |
+| **refuse** | –0.0000076 | Virtually no effect; still negative. | Negligible |
+| **at** | –0.0029 | Slightly pushes the score down. | Small negative |
+| **all** | –0.0033 | Slightly pushes the score down. | Small negative |
+| **costs** | –0.0029 | Slightly pushes the score down. | Small negative |
+
+### Key take‑aways
+
+1. **Negative tokens dominate** – the sum of negative attributions (~–0.045) outweighs the positive sum (~+0.036), leading the model to classify the review as *negative* (prediction ≈ 0.013).
+2. **Strong negative drivers** – “if”, “this”, “cinematic”, and “van” provide the biggest downward pulls, strongly steering the score toward negativity.
+3. **Positive signals** – “you”, “american”, “pie”, and “wilder” offer the largest positive pushes, but they are not enough to counter the stronger negatives.
+4. **Context matters** – words that describe the movie’s poor quality (“cinematic refuse”, “avoid”, “at all costs”) are the main reasons the model sees the review as negative.
+5. **Overall balance** – the model’s final sentiment is a weighted average of these token influences; because the negative contributions are heavier, the overall prediction leans negative, even though some words (“enjoy”, “american”, “pie”) hint at a more positive tone.
+
+By focusing on the words with the largest negative attributions (“if”, “this”, “cinematic”, “van”) and mitigating their impact (e.g., rephrasing or removing them), the sentiment could shift toward a more neutral or positive prediction.
+
+# EPR Explainer: 0.7300, Verifier: 0.4165

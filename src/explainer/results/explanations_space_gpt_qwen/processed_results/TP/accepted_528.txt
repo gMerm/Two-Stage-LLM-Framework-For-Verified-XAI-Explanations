@@ -1,0 +1,44 @@
+<think>We need to explain each token's contribution to sentiment prediction. Must base on provided data. Provide clear explanation for both technical and non-technical audiences. Be concise, actionable insights, no extra assumptions. Summarize impact of each token, positive/negative, magnitude.
+
+We have top 20 token attributions. Provide a paragraph for each? maybe list with explanation.
+
+Let's produce final answer: explanation of how each token influenced sentiment prediction. Also mention collective effect leading to negative prediction (0.0134). We must not invent.
+
+Also ensure not to reveal internal prompts. Ok.
+
+Let's produce.</think>
+**Interpretation of the top 20 words in the review**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | -0.0126 | Strongly pushes the score toward negative. It signals a conditional warning (“if you”), which the model associates with a cautionary tone. |
+| **you** | +0.0126 | Counterbalances “if” by adding a mild positive influence, but overall the positive effect is almost equal to the negative one. |
+| **enjoy** | +0.0045 | Slightly nudges the prediction toward positive sentiment, suggesting the speaker might be recommending a film. |
+| **films** | +0.0022 | Adds a small positive signal, reflecting the subject “films.” |
+| **like** | -0.0021 | Weakly negative, implying the comparison may hint at something less desirable. |
+| **american** | +0.0051 | Positive contribution, highlighting a familiar brand or genre that can be viewed favorably. |
+| **pie** | +0.0029 | Adds a mild positive tone, reinforcing the “American Pie” reference. |
+| **,** | -0.0004 | Negligible negative impact, mainly due to punctuation. |
+| **road** | -0.0018 | Small negative cue, perhaps because “Road Trip” is viewed as a mediocre comparison. |
+| **trip** | +0.0032 | Positive influence, reflecting the name “Road Trip.” |
+| **&** | +0.0011 | Minimal positive impact from the conjunction linking two film titles. |
+| **van** | -0.0044 | Strong negative signal, indicating “Van Wilder” is perceived poorly. |
+| **wilder** | +0.0030 | Slight positive tone, balancing the negative from “van.” |
+| **avoid** | -0.0013 | Negative, reinforcing the warning “avoid this film.” |
+| **this** | -0.0055 | Significant negative weight, emphasizing the specific film under critique. |
+| **cinematic** | -0.0047 | Strong negative, suggesting the film’s style is lacking. |
+| **refuse** | -0.0000076 | Virtually no effect, but technically negative. |
+| **at** | -0.0029 | Negative, as part of the phrase “at all costs.” |
+| **all** | -0.0033 | Negative, reinforcing the extremity of the warning. |
+| **costs** | -0.0029 | Negative, concluding the warning phrase. |
+
+### How the tokens together shape the prediction
+
+- **Overall bias:** The sum of these attributions is strongly negative, which pulls the model’s probability toward the “Negative” sentiment (prediction 0.0134).  
+- **Positive contributors:** Words like *you*, *enjoy*, *american*, *pie*, *trip*, and *wilder* add small positive pushes, but their total influence is outweighed by the negative tokens.  
+- **Negative contributors:** The key negative drivers are *if*, *this*, *cinematic*, *van*, *avoid*, *at*, *all*, *costs*, and *road*. These collectively emphasize a warning and a criticism of the film’s quality.  
+- **Balance point:** Even though *you* and *enjoy* offer some optimism, the model interprets the overall context as a negative review because the negative cues dominate.
+
+**Take‑away:** The sentence structure (“If you enjoy films like American Pie, Road Trip & Van Wilder; avoid this cinematic refuse at all costs…”) presents a strong warning and negative assessment. The Integrated Gradients analysis confirms that the most influential words are those that signal caution and criticism, leading the model to predict a negative sentiment.
+
+# EPR Explainer: 0.8719, Verifier: 0.4218

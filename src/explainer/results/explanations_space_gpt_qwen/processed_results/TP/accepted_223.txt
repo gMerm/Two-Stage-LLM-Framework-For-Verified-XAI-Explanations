@@ -1,0 +1,35 @@
+<think>We need to explain how each token influences sentiment prediction. Provide natural language explanation, for both technical and non-technical audiences. Use only data provided: tokens and attribution values. The prediction is negative (0.0134). The attribution values are mostly negative, meaning pushing toward negative, some positive. We need to explain each token's contribution and how collectively shaped final prediction. Provide concise but clear. Let's produce explanation.</think>
+**How the model read this review**
+
+| Token | Attribution | Effect on sentiment | Explanation |
+|-------|-------------|--------------------|-------------|
+| **if** | -0.0126 | Negative | The word “if” is a weakly negative cue; the model thinks “if you enjoy…” signals a conditional warning, nudging the score toward dislike. |
+| **you** | +0.0126 | Positive | “you” is a neutral word, but here it slightly lifts the score, perhaps because it points the comment toward the reader. |
+| **enjoy** | +0.0045 | Positive | “enjoy” is a positive word; it encourages the model to lean a little toward a favorable sentiment. |
+| **films** | +0.0022 | Positive | The noun “films” is neutral but mildly supportive, giving a small positive push. |
+| **like** | -0.0021 | Negative | “like” often introduces a comparison; the model interprets it as a hint that the following titles might be undesirable, so it adds a small negative bias. |
+| **american** | +0.0051 | Positive | “american” (part of a movie title) gives a mild positive signal, as titles are often neutral. |
+| **pie** | +0.0029 | Positive | Part of “American Pie”; contributes a little more positive weight. |
+| **,** | -0.0004 | Negative | The comma is not neutral; it’s a tiny negative tweak, probably due to punctuation style. |
+| **road** | -0.0018 | Negative | “road” (in “Road Trip”) adds a very small negative influence. |
+| **trip** | +0.0032 | Positive | “trip” in the title nudges the sentiment slightly positive. |
+| **&** | +0.0011 | Positive | The ampersand is treated as a neutral‑positive connector, adding a tiny positive effect. |
+| **van** | -0.0044 | Negative | In “Van Wilder” the word “van” is a strong negative cue, pulling the score toward dislike. |
+| **wilder** | +0.0030 | Positive | The title’s ending word gives a mild positive lift. |
+| **avoid** | -0.0013 | Negative | “avoid” is a clear negative verb; it pushes the sentiment toward dislike. |
+| **this** | -0.0055 | Negative | The demonstrative “this” in a warning context contributes a moderate negative influence. |
+| **cinematic** | -0.0047 | Negative | “cinematic” here is used sarcastically, so the model sees it as negative and reduces the score. |
+| **refuse** | ~0 | Negative | Virtually zero, but technically a very tiny negative tweak. |
+| **at** | -0.0029 | Negative | “at” in “at all costs” signals an absolute warning, adding a small negative push. |
+| **all** | -0.0033 | Negative | “all” intensifies the warning, further reducing the score. |
+| **costs** | -0.0029 | Negative | “costs” (as in “at all costs”) reinforces the negative warning, giving a small negative weight. |
+
+### Putting it together
+
+- **Negative‑bias cluster**: “if”, “like”, “van”, “avoid”, “this”, “cinematic”, “at”, “all”, “costs” collectively add up to a strong negative signal.  
+- **Positive‑bias cluster**: “you”, “enjoy”, “films”, “american”, “pie”, “trip”, “wilder”, “&” provide small positive pushes that partially offset the negatives.  
+- **Overall effect**: The negatives outweigh the positives, giving the final prediction a near‑zero positive probability (0.013) and labeling the review as *Negative*.
+
+In plain terms, the model treats the review as a warning: the presence of words like *avoid*, *this*, *cinematic*, and the sarcastic use of movie titles (*Van Wilder*) tip the scale toward a negative sentiment, while a handful of neutral or mildly positive words (e.g., *enjoy*, *you*) only slightly soften that judgment. The combination of these signals is what led the model to predict a negative sentiment for this review.
+
+# EPR Explainer: 0.8029, Verifier: 0.4869

@@ -1,0 +1,87 @@
+<think>We need to explain how each token influenced the model's sentiment prediction. Provide explanation of positive vs negative contributions, magnitude, and overall effect. Provide natural language explanation for both technical and non-technical audiences. Use the data only. Provide concise actionable insights. Avoid extra technical jargon. Should not mention internal prompts.
+
+We have sample number 198, full review, prediction 0.0134 negative sentiment. Top 20 tokens with attributions. Each token with sign.
+
+We need to interpret: positive attribution pushes prediction toward positive, negative toward negative. Magnitude indicates strength. So "if" has -0.0126 strong negative. "you" +0.0126 strong positive. "enjoy" +0.0045 moderate positive. "films" +0.0022. "like" -0.0021 negative. "american" +0.0051 positive. "pie" +0.0029 positive. "," negative tiny. "road" negative. "trip" positive. "&" positive. "van" negative. "wilder" positive. "avoid" negative. "this" negative big. "cinematic" negative. "refuse" negligible negative. "at" negative. "all" negative. "costs" negative.
+
+Explain how collectively shaped final prediction: sum of contributions gives near negative prediction 0.0134. Many negatives slightly outweigh positives? Actually sum of given attributions: Let's sum approximate: -0.0126375556 +0.0125961145 +0.0045203231 +0.0021744878 -0.00207547797 +0.0051003154 +0.0028989785 -0.0003934605 -0.00180632714 +0.00316428719 +0.00112309982 -0.00441649416 +0.00297743198 -0.00127935468 -0.00553693576 -0.00470051263 -7.555e-06 -0.00292490399 -0.0032766033 -0.00287883147.
+
+Let's compute quickly: start 0. Add negative: -0.01263756 => -0.01263756
++0.01259611 => -0.00004144
++0.00452032 => 0.00447888
++0.00217449 => 0.00665337
+-0.00207548 => 0.00457789
++0.00510032 => 0.00967821
++0.00289898 => 0.01257719
+-0.00039346 => 0.01218373
+-0.00180633 => 0.0103774
++0.00316429 => 0.01354169
++0.0011231 => 0.01466479
+-0.00441649 => 0.0102483
++0.00297743 => 0.01322573
+-0.00127935 => 0.01194638
+-0.00553694 => 0.00640944
+-0.00470051 => 0.00170893
+-7.55e-06 => 0.00170138
+-0.00292490 => -0.00122352
+-0.00327660 => -0.00450012
+-0.00287883 => -0.00737895
+
+So net negative contribution ~-0.00738. The predicted sentiment 0.0134 is close to zero? Actually negative? Wait prediction 0.0134428 maybe is probability of positive? It says predicted_sentiment "Negative". So maybe threshold at 0.5. But 0.0134 < 0.5 so negative. So the overall contributions drive it negative.
+
+Explain that negative tokens like "if" etc. had stronger negative contributions than positives. Provide actionable: if want to adjust, emphasize positive words, reduce negative tokens.
+
+Now produce explanation suitable for both audiences: technical: mention attribution values; non-technical: explain meaning of words.
+
+Let's produce a table maybe, but concise.
+
+Also note tokens like "refuse" negligible.
+
+Ok.</think>
+**How the model read this review**
+
+The model looked at each word (or token) and added or subtracted a small “score” that tells us whether that word nudged the prediction toward *positive* or *negative* sentiment.  
+* Positive scores → more positive feeling  
+* Negative scores → more negative feeling  
+* The larger the absolute value, the stronger the influence.
+
+Below is a quick walk‑through of the 20 tokens that mattered the most in this review.  
+(Positive numbers are in blue, negative numbers in red.)
+
+| # | Token | Attribution | What it does |
+|---|-------|-------------|--------------|
+| 1 | **if** | **‑0.0126** | Strongly pushes the model toward a negative review. |
+| 2 | **you** | +0.0126 | Adds a positive feel, almost cancelling the previous negative. |
+| 3 | **enjoy** | +0.0045 | Mildly positive – the model thinks “enjoy” could be a sign of a good film. |
+| 4 | **films** | +0.0022 | Small positive, acknowledging the movie topic. |
+| 5 | **like** | **‑0.0021** | Slight negative, maybe because it sets up a comparison that doesn’t end well. |
+| 6 | **american** | +0.0051 | Positive, referencing a well‑known title. |
+| 7 | **pie** | +0.0029 | Adds positive energy from the title “American Pie.” |
+| 8 | **,** | **‑0.0004** | Negligible negative, just punctuation. |
+| 9 | **road** | **‑0.0018** | Negative, probably because “road” often signals a road‑trip film that the model doesn’t like here. |
+|10 | **trip** | +0.0032 | Small positive, the opposite of “road.” |
+|11 | **&** | +0.0011 | Tiny positive, linking the two movie titles. |
+|12 | **van** | **‑0.0044** | Strong negative, the model associates “van” with “Van Wilder” as a weak movie. |
+|13 | **wilder** | +0.0030 | Small positive – “Wilder” is a known movie title. |
+|14 | **avoid** | **‑0.0013** | Negative, telling the model the film is to be avoided. |
+|15 | **this** | **‑0.0055** | Strong negative – “this” points to the movie being discussed. |
+|16 | **cinematic** | **‑0.0047** | Strong negative, the word itself is used sarcastically. |
+|17 | **refuse** | 0 | Virtually no effect (nearly zero). |
+|18 | **at** | **‑0.0029** | Negative, used in the phrase “at all costs.” |
+|19 | **all** | **‑0.0033** | Negative, reinforcing the phrase. |
+|20 | **costs** | **‑0.0029** | Negative, completing “at all costs.” |
+
+### Putting it together
+
+- The *negative* tokens (“if”, “like”, “road”, “van”, “avoid”, “this”, “cinematic”, “at”, “all”, “costs”) outweigh the positives by about **0.007 units**.  
+- Because the net attribution is negative, the model’s final score stays below the neutral threshold, resulting in a **negative** sentiment prediction (`0.013` probability of positive).
+
+### Take‑away
+
+- **Key negative drivers:** “if”, “van”, “this”, “cinematic”, “at all costs”.  
+- **Key positive helpers:** “you”, “enjoy”, “american”, “pie”, “trip”.  
+- If you wanted the model to see this review as more positive, you would need to boost the weight of the positive tokens or remove some of the strongest negative ones.  
+
+The explanation shows exactly which words are pulling the model’s opinion one way or another, helping you understand why the review was judged negative.
+
+# EPR Explainer: 0.6755, Verifier: 0.4026

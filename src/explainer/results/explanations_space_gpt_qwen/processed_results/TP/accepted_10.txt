@@ -1,0 +1,30 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual, with context on why it matters for income prediction. Use the given mean absolute SHAP values to rank importance. Provide explanation in natural language, for both technical and non-technical audiences. Avoid making assumptions beyond data. Should mention that WKHP highest mean SHAP, etc.
+
+We should mention that mean absolute SHAP values are average across many predictions; here they indicate importance for this individual as well. Provide context: e.g., hours worked per week influences income because more hours can lead to higher earnings. Occupation code: job type often associated with pay scales. Age: experience, etc. Education level: usually higher education leads to higher income. Relationship to householder: maybe indicates dependents, single vs spouse, etc. Sex: gender pay gap. Place of birth: maybe immigration status or location. Class of worker: employment type. Marital status: can impact income. Race: could reflect socioeconomic disparities.
+
+We should not invent values. Just use numbers to show ranking: WKHP 0.904, OCCP 0.629, etc. Provide context: features with higher mean absolute SHAP values have stronger influence. Provide actionable insights: if wanting to improve income, focus on increasing hours or education, etc.
+
+We need to keep concise. We'll present in bullet or paragraph form. Provide clear explanation for each feature.
+
+Let's output accordingly.</think>
+**How the model thinks about this person’s income**
+
+Below is a quick, feature‑by‑feature snapshot of what the model considered most important for deciding whether this individual’s income is above or below the median. The numbers are *mean absolute SHAP values* – higher numbers mean a stronger influence on the model’s prediction.
+
+| Rank | Feature | Mean | Why it matters for income |
+|------|---------|------|---------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.904** | Working more hours is a direct proxy for earning potential. The model strongly weighs weekly hours because higher‑hour jobs tend to pay more. |
+| 2 | **OCCP** (occupation code) | **0.630** | Job type is one of the biggest pay drivers. Certain occupations (e.g., management, professional) are associated with higher wages, while others (e.g., service, labor) tend to earn less. |
+| 3 | **AGEP** (age) | **0.517** | Age captures career stage and experience. Mid‑career adults usually earn more than very young or older workers, so the model uses age to gauge typical earnings. |
+| 4 | **SCHL** (education level) | **0.465** | Education is a key determinant of skill and market value. Higher degrees or certifications generally lead to better pay, so the model rewards higher educational attainment. |
+| 5 | **RELP** (relationship to householder) | **0.343** | Being a spouse or partner often signals a dual‑income household or shared economic responsibilities, which can boost overall earnings. |
+| 6 | **SEX** (gender) | **0.224** | Gender can reflect systemic wage gaps. The model includes sex because, on average, men and women sometimes earn different amounts in similar roles. |
+| 7 | **POBP** (place of birth) | **0.172** | Birthplace can proxy for cultural background, immigration status, or regional economic conditions that influence earning power. |
+| 8 | **COW** (class of worker) | **0.137** | Employment type (private, public, self‑employed) affects salary structure, benefits, and stability, so the model weighs this factor. |
+| 9 | **MAR** (marital status) | **0.102** | Married status can correlate with dual incomes or household resources that affect disposable income. |
+| 10 | **RAC1P** (race) | **0.053** | Race is included because demographic studies show persistent income disparities across racial groups; the model takes it into account but its influence is smallest among the features. |
+
+**Takeaway**  
+The strongest signals for this individual’s income level are how many hours they work per week and what type of job they hold, followed by age and education. The model’s decision is a blend of these factors, with gender, birthplace, employment type, marital status, and race adding smaller adjustments. This ranking helps you see which aspects of the data most shape the prediction and where interventions (e.g., gaining more work hours or pursuing higher education) might have the biggest impact on earnings.
+
+# EPR Explainer: 0.9266, Verifier: 0.5677

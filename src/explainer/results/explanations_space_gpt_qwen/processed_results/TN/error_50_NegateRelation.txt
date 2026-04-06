@@ -1,0 +1,60 @@
+<think>We need to explain how each word of the top 20 tokens influenced the model's sentiment prediction. Provide explanation for each token: positive or negative contribution, magnitude. We should describe collectively shaping final prediction (negative sentiment). The explanation should be concise and understandable to both technical and non-technical audiences. Avoid extra technical language.
+
+Make sure to base only on data. Should mention that higher positive attribution pushes toward positive, negative pushes toward negative. Provide context: model predicted 0.013 (close to 0) but negative. Provide explanation: tokens like "avoid" etc heavily negative.
+
+We should explain each token: e.g., "if" negative -0.0126 strongly negative. "you" positive +0.0126 etc. Provide maybe relative influence. Also note that some tokens like "," negligible.
+
+Collective shape: sum of contributions leads to slight negative prediction.
+
+Also explain magnitude: e.g., the largest negative is "this" (-0.0055) and "cinematic" (-0.0047) etc. Largest positive are "you" and "if" equal magnitude but opposite sign; "american" etc.
+
+Also mention that some tokens contribute little.
+
+Make sure to not invent details beyond given.
+
+Let's produce final explanation.</think>
+**How the 20 most influential words shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment | Why it matters |
+|-------|-------------|---------------------|----------------|
+| **if** | **‑0.0126** | Strongly pushes the prediction toward *negative* | It signals a conditional warning that hints at trouble. |
+| **you** | **+0.0126** | Strongly pushes the prediction toward *positive* | Direct address that can create a friendly tone, but its weight is balanced by “if.” |
+| **enjoy** | +0.0045 | Slight positive influence | A verb that hints at pleasure, but only weakly. |
+| **films** | +0.0022 | Slight positive influence | Generic noun that slightly lifts the mood. |
+| **like** | **‑0.0021** | Slight negative influence | Contextualizes the next words as comparison, which here is negative. |
+| **american** | +0.0051 | Positive influence | A proper noun that adds a bit of positive context. |
+| **pie** | +0.0029 | Positive influence | The movie “American Pie” is often seen as a light‑hearted film. |
+| **,** | ‑0.0004 | Negligible negative | The comma itself has almost no effect. |
+| **road** | **‑0.0018** | Minor negative influence | Part of “Road Trip,” another teen comedy that the reviewer mocks. |
+| **trip** | +0.0032 | Positive influence | The word “trip” slightly lifts the tone. |
+| **&** | +0.0011 | Minor positive | The ampersand is neutral, slightly positive by accident. |
+| **van** | **‑0.0044** | Strong negative influence | “Van Wilder” is another teen comedy the reviewer dislikes. |
+| **wilder** | +0.0030 | Positive influence | The surname softens the negative weight of “van.” |
+| **avoid** | **‑0.0013** | Minor negative influence | A direct command to stay away from the film. |
+| **this** | **‑0.0055** | Strong negative influence | Signals the specific film being criticized. |
+| **cinematic** | **‑0.0047** | Strong negative influence | Describes the film’s poor quality. |
+| **refuse** | ‑0.0000076 | Virtually no effect | A tiny negative value that is essentially noise. |
+| **at** | **‑0.0029** | Minor negative influence | Preposition that ties the negative clause together. |
+| **all** | **‑0.0033** | Minor negative influence | Intensifies the warning. |
+| **costs** | **‑0.0029** | Minor negative influence | Completes the phrase “at all costs” reinforcing the warning. |
+
+### What this tells us
+
+1. **Positive vs. Negative Pull**  
+   The tokens that push the prediction toward positive (e.g., “you,” “enjoy,” “american,” “pie”) are counterbalanced by a larger set of negative‑pull tokens (“if,” “like,” “van,” “avoid,” “this,” “cinematic,” “at,” “all,” “costs”). The net effect is a slight tilt toward a *negative* sentiment, reflected in the prediction score of 0.013 (very close to the neutral threshold but labeled negative).
+
+2. **Strongest Contributors**  
+   The most influential words for the negative outcome are **“this”**, **“cinematic”**, and **“if.”** These words carry the message that the film is a “cinematic refuse” and should be avoided, giving the model a clear negative signal.  
+   The strongest positive contributors are the balanced tokens **“you”** and **“if,”** but their effect is neutralized by the heavier negative weights.
+
+3. **Minor Effects**  
+   Tokens such as commas, the ampersand, and “refuse” have negligible influence. They do not sway the sentiment in either direction.
+
+4. **Overall Story**  
+   The reviewer starts with a conditional warning (“if you enjoy…”), mixes in a few positive references to known teen comedies, but then layers several negative qualifiers (“avoid,” “this cinematic refuse,” “at all costs”). The cumulative effect is a weak but clear negative verdict.
+
+### Takeaway
+
+The model’s sentiment prediction is largely driven by the words that flag the film as undesirable. While a few positive words are present, their influence is outweighed by stronger negative terms that together guide the model to label the review as negative.
+
+# EPR Explainer: 0.8751, Verifier: 0.5688

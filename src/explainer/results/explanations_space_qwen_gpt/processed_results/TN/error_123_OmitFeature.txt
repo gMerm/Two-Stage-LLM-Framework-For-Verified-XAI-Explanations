@@ -1,0 +1,55 @@
+<think>Okay, let me tackle this explanation request step by step. The user wants natural language explanations of token attributions for an IMDB negative sentiment review. 
+
+First, I need to understand the core data: we have 20 tokens with their attribution scores, and the model predicted "Negative" sentiment. The key is to map each token's score to its influence direction (positive/negative) without adding external knowledge.
+
+Hmm, looking at the top contributors:
+- The strongest negative attribution is "if" (-0.0126), which makes sense because the review starts with a conditional that sets up criticism
+- "you" has the strongest positive attribution (0.0126) - interesting, but since the overall sentiment is negative, this must be part of the negative framing ("if you enjoy X, avoid Y")
+- "american" and "pie" (positive contributors) are actually part of the negative comparison ("avoid this if you enjoy American Pie")
+
+Wait, I should verify the pattern: all positive attributions (like "you", "enjoy") are used in the negative context. The model is learning that when "you" and "enjoy" appear alongside negative comparisons, they amplify the negative sentiment. 
+
+For negative attributions:
+- "american" has positive attribution but it's actually being used negatively - need to clarify this isn't about the film's quality but the comparison
+- "refuse" has near-zero negative score (-7.55e-6) so it's negligible
+- Most strong negatives are prepositions ("at", "all", "costs") and the word "avoid" (-0.0013)
+
+*Double-checking scores*: 
+- "this" (-0.0055) and "cinematic" (-0.0047) are significant negative contributors
+- "van wilder" has negative attribution (-0.0044) but "wilder" itself is positive (0.0030) - important to note this contrast
+
+*Potential pitfall*: Must not say "American Pie is bad" - the attribution is about how the comparison structure affects sentiment, not the film's actual quality. The model sees "if you enjoy American Pie" as a negative trigger.
+
+*Structuring the explanation*:
+1. Group tokens by influence direction
+2. Explain how positive contributors are used negatively (e.g., "you" in "if you enjoy...")
+3. Note negligible tokens (like "refuse")
+4. Emphasize collective impact: the negative words dominate the sentence structure
+
+*Avoiding errors*:
+- Don't say "refuse" is negative - its score is almost zero
+- Don't claim "van" is negative by itself - the attribution is for the phrase "Van Wilder" in context
+- Keep all explanations tied to the given scores
+
+*Final check*: The strongest negative words ("this", "cinematic", "avoid") form the core criticism, while the positive-sounding words ("enjoy", "like") are actually part of the negative comparison structure. The explanation must reflect this nuance without overcomplicating.
+</think>
+The model's negative prediction (0.013) is driven by the following key words, based solely on their attribution scores:
+
+**Strong negative contributors (pushing sentiment negative):**  
+- **"if"** (-0.0126): Sets up the critical comparison ("if you enjoy X, avoid Y").  
+- **"this"** (-0.0055): Directly refers to the film as negative.  
+- **"cinematic"** (-0.0047) & **"refuse"** (-0.0000075): Reinforce the film's poor quality.  
+- **"avoid"** (-0.0013), **"at all costs"** (-0.0033), **"costs"** (-0.0029): Emphasize strong rejection.  
+
+**Contextual positive contributors (used negatively):**  
+- **"you"** (+0.0126) & **"enjoy"** (+0.0045): Highlight the *contrast* ("if you enjoy *good* films like American Pie, avoid this").  
+- **"american"** (+0.0051), **"pie"** (+0.0029): Refer to *positive* films *being contrasted* with the negative review.  
+- **"road"** (-0.0018), **"trip"** (+0.0032): Part of the negative comparison ("Road Trip" is a *positive* reference).  
+
+**Neutral/negligible:**  
+- **"like"** (-0.0021), **"van"** (-0.0044), **"wilder"** (+0.0030): Used in the negative comparison context ("Van Wilder" is a *positive* reference being rejected).  
+- **"refuse"** has near-zero impact (-0.0000075).  
+
+**Summary**: The review’s negativity comes from *rejecting* comparisons to popular films (e.g., "if you enjoy American Pie, avoid this"), with strong negative words ("this," "cinematic refuse," "avoid at all costs") dominating the structure. Positive-sounding words ("enjoy," "American Pie") are used *ironically* to amplify the criticism.
+
+# EPR Explainer: 0.7044, Verifier: 1.0537

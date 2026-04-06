@@ -1,0 +1,39 @@
+<think>We need to provide explanations for each feature, using the mean absolute SHAP values. Must be clear, actionable insights, concise. For each feature we should explain why it matters for income prediction, based on given data. Also note that higher mean SHAP indicates stronger influence. Provide context for each feature, maybe ranking. Provide both technical and non-technical. No extra assumptions.
+
+We have 10 features in order with their mean_abs_shap. We need to explain each feature's influence. Should mention order by importance: WKHP highest, OCCP second, etc.
+
+We should keep language understandable. Provide maybe a short sentence per feature: what it represents, why it influences income, how the model might use it, maybe note that the magnitude shows relative importance.
+
+Also mention that SHAP values indicate average contribution magnitude, not sign. So we might say "This feature has a strong overall influence" etc.
+
+We should not mention negative vs positive because mean abs doesn't give sign. Provide that.
+
+Also note that for the individual, these features influenced prediction, but we are not giving specific contributions, just general importance. But the instruction: "Explain every feature that influenced the model's prediction for this individual. For every feature provide context on why it matters for income prediction." So for each feature, explain why it's important for income.
+
+Let's produce a bullet list with each feature, its mean SHAP value, its importance ranking, and explanation.
+
+Let's proceed.</think>
+**Key drivers of the model’s prediction (from most to least influential)**  
+
+| Rank | Feature | Mean |Absolute SHAP | Why it matters for income prediction |
+|------|---------|------|---------------|-------------------------------------|
+| 1 | **WKHP** – usual hours worked per week | 0.904 | 0.904 | Working more hours is a strong signal of higher earnings; the model learns that people who put in many hours per week tend to earn above the median. |
+| 2 | **OCCP** – occupation code | 0.629 | 0.630 | Different occupations carry very different pay scales. The model uses job type to gauge expected income, making this a top predictor. |
+| 3 | **AGEP** – age | 0.517 | 0.517 | Age captures career stage: younger workers are often early in their careers (lower pay), while older workers may have more experience or seniority (higher pay). |
+| 4 | **SCHL** – educational attainment | 0.465 | 0.465 | Higher education usually opens doors to better-paying jobs. The model reflects this typical relationship. |
+| 5 | **RELP** – relationship to householder | 0.343 | 0.343 | Being a spouse, child, or roommate can indicate life stage and responsibilities, which the model interprets as affecting earning potential. |
+| 6 | **SEX** – sex | 0.224 | 0.224 | Historical wage gaps exist by gender; the model incorporates this demographic signal. |
+| 7 | **POBP** – place of birth | 0.172 | 0.172 | Birthplace can proxy for socioeconomic background or migration patterns that influence career opportunities. |
+| 8 | **COW** – class of worker | 0.137 | 0.137 | Whether one works in private, government, or is self‑employed affects salary levels; the model uses this distinction. |
+| 9 | **MAR** – marital status | 0.102 | 0.102 | Marital status can correlate with household income dynamics and stability, influencing individual earnings. |
+|10 | **RAC1P** – race | 0.053 | 0.053 | Racial background may capture systemic disparities in pay; the model assigns a modest influence. |
+
+**Takeaway for the individual prediction**
+
+- The model bases its decision largely on how many hours the person works per week and what job they hold.  
+- Age, education, and marital/relationship status add additional context about career stage and responsibilities.  
+- Gender, birthplace, employment type, and race provide finer‑grained demographic adjustments that fine‑tune the final prediction.  
+
+These insights show which aspects of a person’s profile most strongly shape the model’s view of whether their income is above or below the median.
+
+# EPR Explainer: 0.9399, Verifier: 0.5536

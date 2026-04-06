@@ -1,0 +1,76 @@
+<think>We need to produce explanation. Must only use given data. Provide global explanation: rank features, direction positive or negative? The global importance scores are given but no direction. But we can infer direction: higher carat increases price. Similarly color, clarity, cut. Should state that. For local explanations, use provided contributions, directions, values. Also mention relative importance weights. Also note prediction error.
+
+Need to be concise, no extraneous. Provide confidence.
+
+Let's craft.
+
+</think>
+**Global Explanation (LIME – top 9 features)**  
+
+| Rank | Feature | Importance Score | Direction on price | Why it matters |
+|------|---------|------------------|--------------------|----------------|
+| 1 | **carat** | 124.44 | Positive | Larger weight → higher price; the diamond’s mass is the strongest cost driver. |
+| 2 | **color** | 102.26 | Positive | Finer color grades (higher numerical value) increase value; color quality strongly influences desirability. |
+| 3 | **clarity** | 75.55 | Positive | Clearer diamonds (higher clarity level) command higher prices; fewer inclusions raise value. |
+| 4 | **cut** | 53.20 | Positive | Superior cut enhances brilliance; higher cut quality raises price. |
+| 5 | **y** (depth‑dimension) | 32.99 | Positive | Greater vertical dimension (within proportion) contributes to price, reflecting more material. |
+| 6 | **x** (width) | 10.05 | Positive | Wider diamonds add weight; larger width increases price. |
+| 7 | **table** | 9.62 | Positive | Larger table percentage can improve light return; higher values are modestly valued. |
+| 8 | **depth** | 6.41 | Positive | Optimal depth ratios add to visual appeal and are valued. |
+| 9 | **z** (length) | 0.13 | Positive | Slightly contributes; length plays a minor role relative to mass and quality. |
+
+All listed features exert a positive influence on predicted price; the model does not assign negative importance to any of them in this global view.
+
+---
+
+### Local Explanation – Instance 676  
+- **Actual price**: $3,172  
+- **Predicted price**: $3,601.51 (error = $429.51)  
+
+| Feature | Observed range | Contribution | Direction | Weight (∝ total effect) |
+|---------|----------------|--------------|-----------|------------------------|
+| clarity | `<= 2.0` | +2,075.04 | Positive | 0.423 |
+| y | `<= 6.54` and `> 5.71` | –817.87 | Negative | 0.167 |
+| color | `<= 4.0` and `> 3.0` | –723.16 | Negative | 0.148 |
+| x | `<= 6.55` and `> 5.7` | +537.18 | Positive | 0.110 |
+| z | `<= 4.04` and `> 3.53` | +262.97 | Positive | 0.054 |
+| carat | `<= 1.05` and `> 0.7` | –185.91 | Negative | 0.038 |
+| cut | `<= 2.0` | –109.84 | Negative | 0.022 |
+| table | `<= 57.0` and `> 56.0` | +102.95 | Positive | 0.021 |
+| depth | `<= 61.8` and `> 61.0` | –86.28 | Negative | 0.018 |
+
+**Interpretation**  
+The largest positive driver is **clarity**: the diamond is exceptionally clear, boosting price by over $2k. The most negative contributors are a small **y** dimension and a lower **color** grade, together reducing price by about $1.5k. Overall, the positive features outweigh the negatives, giving the model an over‑prediction of $430.
+
+**Local interpretability**  
+- Confidence: **0.072**  
+- All 9 features used; the low confidence indicates the local model fit is modest.
+
+---
+
+### Local Explanation – Instance 737  
+- **Actual price**: $1,981  
+- **Predicted price**: $1,917.62 (error = $63.38)  
+
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| carat | `<= 0.7` and `> 0.4` | –2,897.62 | Negative | 0.487 |
+| clarity | `> 5.0` | +902.91 | Positive | 0.152 |
+| y | `<= 5.71` and `> 4.72` | –884.52 | Negative | 0.149 |
+| table | `<= 57.0` and `> 56.0` | –485.01 | Negative | 0.082 |
+| x | `<= 5.7` and `> 4.71` | +324.50 | Positive | 0.055 |
+| cut | `<= 2.0` | –311.06 | Negative | 0.052 |
+| color | `<= 3.0` and `> 1.0` | +85.92 | Positive | 0.014 |
+| depth | `<= 62.5` and `> 61.8` | –30.62 | Negative | 0.005 |
+| z | `<= 3.53` and `> 2.91` | +22.67 | Positive | 0.004 |
+
+**Interpretation**  
+The dominant negative effect is the very small **carat** weight (only ~0.4–0.7 carat), subtracting nearly $2.9k. This drives the model to predict a lower price. Positive contributions come from a relatively high **clarity** and decent **x** dimension, but they are insufficient to offset the carat penalty. The predicted price is slightly below the actual ($63 difference), reflecting the model’s modest over‑under prediction.
+
+**Local interpretability**  
+- Confidence: **0.117**  
+- All 9 features used; higher confidence than instance 676, indicating a clearer local fit.
+
+---
+
+# EPR Explainer: 0.5368, Verifier: 0.7498

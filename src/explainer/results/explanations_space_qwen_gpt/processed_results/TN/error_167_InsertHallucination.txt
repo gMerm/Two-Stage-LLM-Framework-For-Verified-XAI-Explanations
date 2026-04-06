@@ -1,0 +1,55 @@
+<think>Okay, let me approach this step by step. The user wants me to explain token attributions from an IMDB review analysis. First, I need to understand what the data shows.
+
+Looking at the top_20_token_attributions, I notice some tokens have positive attributions (pushing toward positive sentiment) while others have negative ones (pushing toward negative sentiment). The prediction is negative (0.013), so negative contributors should dominate.
+
+Let me categorize the tokens:
+- Strong negative contributors: "if" (-0.0126), "this" (-0.0055), "cinematic" (-0.0047), "refuse" (-0.0000075), "all" (-0.0033), "costs" (-0.0029)
+- Strong positive contributors: "you" (0.0126), "enjoy" (0.0045), "american" (0.0051), "pie" (0.0029), "trip" (0.0032), "wilder" (0.0030)
+
+Hmm, interesting that "if" has a strong negative attribution despite being a conditional word. The review starts with "If you enjoy films like American Pie..." which is setting up a contrast for why this movie is bad. So "if" is actually part of the negative framing.
+
+The most negative tokens make sense: "this cinematic refuse" is clearly negative language. "Refuse" has a tiny negative score but is part of the strong negative phrase.
+
+For positive contributors: "you" and "enjoy" seem to be part of the setup that gets contrasted with the negative review. The model notices that the reviewer is saying "if you enjoy these good movies, avoid this bad one" - so the positive words are actually being used to highlight the negative contrast.
+
+I should explain that the positive tokens aren't indicating positive sentiment, but rather being part of the contrast that makes the negative sentiment stronger. The strongest negative words are the ones describing the movie ("refuse", "waste", "bad") but in the top 20, some are less obvious like "if" and "all".
+
+Let me check the magnitudes: "if" at -0.0126 is the strongest contributor, followed by "this" at -0.0055. The positive "you" at +0.0126 is almost equally strong but opposite direction.
+
+For the explanation, I'll need to:
+- Note the overall negative prediction
+- Group tokens by their contribution direction
+- Explain why positive words like "you" and "enjoy" are actually contributing to negative sentiment (because they're part of the contrast)
+- Mention that the strongest negative words are the movie descriptors
+
+I should avoid saying "the model thinks 'you' is positive" - instead say "the words 'you' and 'enjoy' were part of a phrase that the model interpreted as setting up a negative contrast".
+
+Also need to be careful with the tiny negative attribution for "refuse" - it's negligible compared to others, so I'll just mention it as part of the negative phrase.
+
+For non-technical audience, I'll say "words that made the model think the review was negative" rather than "negative attributions".
+
+Let me structure it:
+1. Overall sentiment: negative
+2. Key negative words: "if", "this", "cinematic", "avoid", "refuse" etc.
+3. Key positive words but explain they're part of the negative contrast
+4. Note that the strongest influences are the negative words
+
+Wait, "avoid" has negative attribution (-0.0013) but it's not in top 5. The top 5 negative are "if", "this", "cinematic", "all", "costs" - but "refuse" is also negative though small.
+
+I think I have it. Now to phrase it clearly without jargon.
+</think>
+The model predicted a negative sentiment (0.013) for this review. Here's how the top words influenced that decision:
+
+**Strongest negative contributors** (pushing toward negative sentiment):  
+- "if" (most influential negative word) – sets up the contrast that this movie is *not* like enjoyable films.  
+- "this" and "cinematic refuse" – directly label the movie as worthless.  
+- "all costs" and "avoid" – emphasize the review's strong warning against watching it.  
+*(These words collectively dominate the negative prediction.)*
+
+**Strongest positive contributors** (pushing toward positive sentiment, but *contrasted* with the negative message):  
+- "you" and "enjoy" – part of the phrase "If you enjoy films like American Pie," which the model interprets as *setting up a negative contrast* (i.e., "you *shouldn’t* enjoy this movie").  
+- "American Pie" and "Road Trip" – referenced as *positive examples* the movie fails to match.  
+
+**Key insight**: The words "you," "enjoy," "American," and "Pie" are *not* positive in context—they highlight how this movie *misses* the mark of enjoyable films, making the negative sentiment stronger. The model focused on phrases like "cinematic refuse" and "avoid at all costs" to conclude the review was negative.
+
+# EPR Explainer: 0.7182, Verifier: 1.0921

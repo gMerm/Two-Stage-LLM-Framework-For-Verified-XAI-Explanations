@@ -1,0 +1,83 @@
+<think>Alright, let me try to figure out how to explain the impact of each token on the model's sentiment prediction based on the Integrated Gradients scores provided.
+
+First, I'll start by looking at the overall context. The review is negative, with a low prediction score, so it makes sense that the words are pushing the sentiment towards negative.
+
+I notice "you" has a positive attribution, which might be a bit confusing because the overall sentiment is negative. Maybe the model associates "you" in a way that's not directly negative but needs to be considered alongside other tokens.
+
+Next, looking at "enjoy," "films," and "like," they have positive scores except for "like." This suggests that when talking about enjoying films or liking specific ones (like American Pie), it might contribute positively. However, the use of "like" here seems contradictory because the overall message is negative.
+
+Then, there are several negative attributions: "if," "avoid," "this," "cinematic," "refuse," "at," "all," and "costs." These words clearly indicate a negative sentiment, reinforcing why the model predicts a negative review.
+
+The presence of positive tokens like "american," "pie," "road," etc., is interesting because they are part of popular movie titles. The model might have learned that these words in this context signal positive reviews, but combined with stronger negatives, they don't outweigh them.
+
+I should also consider the magnitude of each attribution. Words like "cinematic" and "refuse" have more significant impacts compared to others. Their negative scores are substantial enough to pull the sentiment down.
+
+It's important to highlight how these tokens collectively work together. Even though some positive words are present, the stronger negatives dominate, leading to an overall negative prediction.
+
+I should structure the explanation by first categorizing positive and negative contributors, then explaining their impact, and finally tying it all together to show why the model made that prediction.
+</think>
+Let's break down how each word in the top 20 token attributions influenced the sentiment prediction for this review:
+
+### Positive Contributors:
+1. **you** (+0.0126)
+   - The word "you" slightly contributed to a positive sentiment, possibly by addressing the reader directly.
+
+2. **enjoy** (+0.0045)
+   - The use of "enjoy" suggests a positive tone when discussing films.
+
+3. **films** (+0.0022)
+   - Mentioning "films" adds context that relates to movie enjoyment, slightly supporting positive sentiment.
+
+### Negative Contributors:
+1. **if** (-0.0126)
+   - The word "if" has a notably negative impact, possibly implying doubt or conditionality in the review.
+
+2. **like** (-0.0021)
+   - Using "like" negatively affects the sentiment, likely due to context of comparison.
+
+3. **american** (+0.0051) [though positive, used in a negative context]
+   - Despite a positive score, "american" is part of a negative review about a disliked film genre.
+
+4. **pie** (+0.0029)
+   - Positive score but in the context of a disliked film, it doesn't override the negative sentiment.
+
+5. **road** (-0.0018)
+   - Negative impact, possibly related to negative experiences with road trip movies.
+
+6. **trip** (+0.0032) [positive but part of a negative context]
+   - Positive score but used in a negative way, indicating frustration.
+
+7. **&** (+0.0011)
+   - Slightly positive, possibly for listing but overwhelmed by negatives.
+
+8. **van** (-0.0044)
+   - Negative impact, likely due to association with disliked genres or movies.
+
+9. **wilder** (+0.0030) [positive but in negative context]
+   - Positive score but part of a series the reviewer dislikes.
+
+10. **avoid** (-0.0013)
+    - Strongly negative, clearly advising others to avoid the film.
+
+11. **this** (-0.0055)
+    - Negative impact on the sentiment, referring to the film itself.
+
+12. **cinematic** (-0.0047)
+    - Severe negative impact, indicating dissatisfaction with the filmmaking quality.
+
+13. **refuse** (-0.000076)
+    - Very slight negative impact but part of a strong negative statement.
+
+14. **at** (-0.0029)
+    - Negative context, likely referring to cost or inconvenience.
+
+15. **all** (-0.0033)
+    - Negative impact, suggesting universal negativity about the film.
+
+16. **costs** (-0.0029)
+    - Strong negative impact, indicating financial dissatisfaction.
+
+### Conclusion:
+The model predicts a strongly negative sentiment due to the overwhelming negative contributions from words like "avoid," "this," and "cinematic." While some positive terms are present, their impact is minimal compared to the negatives. The overall tone of disgust and frustration towards specific genres and the film's quality drives the sentiment prediction.
+
+# EPR Explainer: 0.6782, Verifier: 0.9932

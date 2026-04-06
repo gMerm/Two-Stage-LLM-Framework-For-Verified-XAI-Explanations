@@ -1,0 +1,42 @@
+<think>We must analyze the global feature importance list. Provide top 15, discuss importance scores, direction. Note direction: we don't have direction values; we can say "higher alcohol tends to increase probability of high quality" based on general knowledge but need to stay within given data. We can only infer direction from general domain knowledge? The instruction: "Base your explanation ONLY on the provided quantitative data. Do not invent details or make assumptions beyond what is given." We cannot say direction unless data gives it. But we might infer from feature importance sign? We only have importance scores positive. That doesn't give direction. So we should say "Insufficient evidence to conclude direction for each feature". However guidelines mention "clarify their direction of influence when applicable". But we don't have that. So we must say insufficient evidence. We can provide context on why features matter based on domain knowledge? That's an assumption. The guidelines forbid assumptions beyond what is provided. So we cannot state domain knowledge unless provided. But maybe domain knowledge is allowed because dataset context describes features but not their correlation. The dataset context states features like acidity, etc. But not correlation. So we can't say high alcohol correlates with high quality.
+
+Thus we must stay strictly on given quantitative data: feature importance scores and ranks. Provide the top 15. Maybe also mention that alcohol has highest importance etc. We cannot provide direction or reason beyond that. So the explanation will be limited: list features, importance scores, ranks, note that interaction terms also important.
+
+We might mention that interactions have lower scores.
+
+So answer: top 15 with importance scores and ranks. Mention that the top single features are alcohol, sulphates, total sulfur dioxide, volatile acidity, citric acid, density. Then interactions like citric acid & pH, etc.
+
+We should not include domain interpretation. So just factual.
+
+Ok.</think>
+**Global Feature Importance (EBM – Global Approximation)**  
+The model ranks the features (including pairwise interactions) that contribute most to distinguishing high‑quality (≥ 7) from low‑quality (< 7) wines.
+
+| Rank | Feature | Importance Score |
+|------|---------|-----------------|
+| 1 | **alcohol** | 0.7811 |
+| 2 | **sulphates** | 0.6131 |
+| 3 | **total sulfur dioxide** | 0.3748 |
+| 4 | **volatile acidity** | 0.3139 |
+| 5 | **citric acid** | 0.2542 |
+| 6 | **density** | 0.2155 |
+| 7 | **citric acid & pH** | 0.1651 |
+| 8 | **chlorides** | 0.1646 |
+| 9 | **residual sugar** | 0.1184 |
+| 10 | **residual sugar & chlorides** | 0.0831 |
+| 11 | **total sulfur dioxide & sulphates** | 0.0798 |
+| 12 | **pH & sulphates** | 0.0743 |
+| 13 | **total sulfur dioxide & density** | 0.0700 |
+| 14 | **free sulfur dioxide** | 0.0695 |
+| 15 | **free sulfur dioxide & pH** | 0.0665 |
+
+**Key take‑aways**
+
+1. **Single‑feature dominance** – The first six entries are single features; they collectively explain the bulk of the predictive signal.
+2. **Interaction terms** – The remaining nine entries are pairwise interactions, indicating that combined effects of certain attributes also help the model discriminate quality.
+3. **Relative scale** – Importance scores are on a common scale (0 to 1). A higher score means a larger marginal contribution to the model’s objective function when that feature (or interaction) is present.
+
+**Insufficient evidence to infer direction of influence**  
+The XAI output provides only importance magnitudes, not the direction (whether higher or lower values increase the likelihood of high quality). Therefore, we cannot state whether, for example, “higher alcohol increases quality” based on this output alone. Any discussion of direction would be speculative.
+
+# EPR Explainer: 0.8709, Verifier: 0.5879

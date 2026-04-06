@@ -1,0 +1,42 @@
+<think>We need to explain each feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Use only given data: feature order, mean_abs_shap. Should not invent. Should explain for technical and non-technical audiences. Should be concise, avoid unnecessary technical language, actionable insights.
+
+We need to describe relative importance: WKHP highest mean SHAP 0.904, OCCP 0.629, AGEP 0.517, SCHL 0.465, RELP 0.343, SEX 0.224, POBP 0.172, COW 0.137, MAR 0.102, RAC1P 0.053.
+
+Explain each: WKHP: usual hours worked per week – high importance because more hours usually correlate with higher earnings. OCCP: occupation code – specific job types drive pay. AGEP: age – experience and earning potential. SCHL: education – higher education often leads to higher income. RELP: relationship to householder – maybe indicates role, like spouse or child, affecting income patterns. SEX: gender – known differences in earnings. POBP: place of birth – could reflect migration patterns, access to opportunities. COW: class of worker – employment type, such as private, government, self-employed. MAR: marital status – can affect earning decisions. RAC1P: race – minority status may influence income.
+
+We should not mention internal system stuff. Provide explanation for each feature.
+
+Need to show that these mean_abs_shap values represent average strength. We can mention ranking.
+
+Also need to be clear that values show overall impact across predictions; for this individual, features with higher SHAP contributed more to prediction.
+
+Let's craft answer: start with brief intro: SHAP values show how each feature pushed the prediction toward high or low income. List features sorted by importance with explanation.
+
+Add actionable insights: e.g., to improve income, look at hours, job type, education.
+
+Make sure to not add extra content beyond the data.
+
+Let's write.</think>
+**What the SHAP output tells us**
+
+The numbers in the *mean_abs_shap* list are how strongly each feature, on average, pulls the model’s prediction toward “high income” or “low income.”  
+A larger value means that, across many people, that feature tends to have a bigger impact on the income decision.  
+Below is a quick walk‑through of each feature in the order the model sees them, with a short note on why that factor matters for predicting whether someone earns above or below the median.
+
+| Feature | Mean | Why it matters for income prediction |
+|---------|------|-------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.904** | Working more hours usually gives higher pay, so the model relies heavily on this indicator. |
+| **OCCP** (occupation code) | **0.630** | Different jobs have very different pay scales; knowing the job type tells the model a lot about expected earnings. |
+| **AGEP** (age) | **0.517** | Age reflects experience and career stage, both of which influence salary levels. |
+| **SCHL** (educational attainment) | **0.465** | Higher education is strongly correlated with higher income, so the model pays close attention to the degree level. |
+| **RELP** (relationship to householder) | **0.343** | Being a spouse, child, or other household member can affect earning patterns (e.g., dual‑income households vs. single earners). |
+| **SEX** (sex) | **0.224** | Gender gaps in earnings exist, so sex is a useful signal for the model. |
+| **POBP** (place of birth) | **0.172** | Birthplace can capture migration history and access to certain job markets. |
+| **COW** (class of worker) | **0.137** | Employment type—private, government, self‑employed—often comes with different wage structures. |
+| **MAR** (marital status) | **0.102** | Married or single status can influence labor force participation and income levels. |
+| **RAC1P** (race) | **0.053** | Racial background can reflect historical and systemic disparities that affect earnings. |
+
+**Take‑away for non‑technical readers**  
+If you’re looking to understand what drives the model’s decision for a specific person, the biggest influencers are the number of hours worked, the job itself, age, and education level. The remaining factors—family role, gender, birthplace, employment type, marital status, and race—have progressively smaller but still measurable effects on the prediction.
+
+# EPR Explainer: 0.8371, Verifier: 0.5299

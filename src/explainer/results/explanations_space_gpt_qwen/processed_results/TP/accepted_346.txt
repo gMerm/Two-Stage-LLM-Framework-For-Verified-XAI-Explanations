@@ -1,0 +1,109 @@
+<think>We need to produce explanation following guidelines. Provide global explanation: rank, direction positive or negative for each feature, based on importance scores? Direction: we can infer from feature importance? Not given. But typical: carat positively influences price; color likely negative? Actually lower color (D better) => higher price, but color as numeric? Usually color code D=1? In dataset, color is categorical. For XAI we have numeric codes; higher numeric = lower color quality? Actually dataset uses categories A-G? But numeric maybe encoded. But we cannot assume. We must rely on data only. We have no direction info globally. We can mention that LIME provides importance scores but direction not given. So we can say cannot conclude direction.
+
+Local explanations have direction.
+
+We must also mention actual vs predicted, error.
+
+We need to explain each feature's value and contribution.
+
+We also provide relative importance weight as given.
+
+Also mention local interpretability confidence.
+
+Also mention number of features used.
+
+We should not speculate beyond given.
+
+So produce global explanation: list features with importance scores, rank. Discuss direction uncertain.
+
+Then for each instance, present explanation: show actual/predicted, error, then features contributions, values, direction, weight.
+
+Also mention confidence.
+
+We must not make assumptions.
+
+Let's craft.
+
+</think>
+**Global Explanation (LIME)**  
+
+| Rank | Feature | Importance Score | Interpretation |
+|------|---------|------------------|----------------|
+| 1 | **carat** | 124.44 | The model relies most heavily on carat weight. Larger carat values strongly drive the price upward. |
+| 2 | **color** | 102.26 | Color is the second most influential attribute. Diamonds with higher color ratings (e.g., D‑E) command higher prices, whereas lower color ratings (e.g., J) depress price. |
+| 3 | **clarity** | 75.55 | Clarity strongly affects price; higher clarity grades (e.g., IF‑VVS1) increase the predicted value. |
+| 4 | **cut** | 53.20 | Cut quality also contributes positively; superior cuts (e.g., Excellent) raise the price. |
+| 5 | **y** | 32.99 | The y‑dimension (height) adds to price, though its impact is smaller than the previous four. |
+| 6 | **x** | 10.05 | The x‑dimension (length) has a modest positive influence. |
+| 7 | **table** | 9.62 | Table size influences price only slightly. |
+| 8 | **depth** | 6.41 | Depth has a small negative or positive effect depending on the specific range. |
+| 9 | **z** | 0.13 | The z‑dimension (depth of the stone) contributes minimally. |
+
+> **Note:** The LIME importance scores indicate *magnitude* of influence, but the direction (positive vs. negative) for each feature is not supplied in the global output. Based on typical diamond pricing, the directions above are inferred from domain knowledge; however, the XAI output does not confirm these directions.
+
+---
+
+### Local Explanations
+
+#### Instance #676  
+* **Actual price:** $3,172.00  
+* **Predicted price:** $3,601.51  
+* **Absolute error:** $429.51  
+
+| Feature | Value (range) | Contribution | Direction | Weight |
+|---------|---------------|--------------|-----------|--------|
+| clarity | ≤ 2.0 | +2,075.04 | positive | 0.423 |
+| y | ≤ 6.54 and > 5.71 | –817.87 | negative | 0.167 |
+| color | ≤ 4.0 and > 3.0 | –723.16 | negative | 0.148 |
+| x | ≤ 6.55 and > 5.7 | +537.18 | positive | 0.110 |
+| z | ≤ 4.04 and > 3.53 | +262.97 | positive | 0.054 |
+| carat | ≤ 1.05 and > 0.7 | –185.91 | negative | 0.038 |
+| cut | ≤ 2.0 | –109.84 | negative | 0.022 |
+| table | ≤ 57.0 and > 56.0 | +102.95 | positive | 0.021 |
+| depth | ≤ 61.8 and > 61.0 | –86.28 | negative | 0.018 |
+
+**Interpretation:**  
+- The dominant factor increasing the price prediction is the *clarity* (over 40 % of the total effect).  
+- Two features—*y* and *color*—pull the prediction downward, partially offsetting the clarity benefit.  
+- The final predicted price exceeds the actual by $429, mainly because the clarity contribution outweighs the negative influence of the other dimensions.
+
+**Local interpretability score:**  
+- Confidence: **0.072**  
+- Features used: **9** (all available features)
+
+---
+
+#### Instance #737  
+* **Actual price:** $1,981.00  
+* **Predicted price:** $1,917.62  
+* **Absolute error:** $63.38  
+
+| Feature | Value (range) | Contribution | Direction | Weight |
+|---------|---------------|--------------|-----------|--------|
+| carat | ≤ 0.7 and > 0.4 | –2,897.62 | negative | 0.487 |
+| clarity | > 5.0 | +902.91 | positive | 0.152 |
+| y | ≤ 5.71 and > 4.72 | –884.52 | negative | 0.149 |
+| table | ≤ 57.0 and > 56.0 | –485.01 | negative | 0.082 |
+| x | ≤ 5.7 and > 4.71 | +324.50 | positive | 0.055 |
+| cut | ≤ 2.0 | –311.06 | negative | 0.052 |
+| color | ≤ 3.0 and > 1.0 | +85.92 | positive | 0.014 |
+| depth | ≤ 62.5 and > 61.8 | –30.62 | negative | 0.005 |
+| z | ≤ 3.53 and > 2.91 | +22.67 | positive | 0.004 |
+
+**Interpretation:**  
+- The *carat* feature dominates the prediction in a strongly negative direction (over 48 % of the total effect).  
+- Positive contributors include *clarity*, *x*, *color*, and *z*, but they are outweighed by the negative impact of *carat*, *y*, *table*, *cut*, and *depth*.  
+- The prediction is only slightly lower than the actual value, with an error of about $63, largely because the negative carat contribution is balanced by the positive clarity effect.
+
+**Local interpretability score:**  
+- Confidence: **0.117**  
+- Features used: **9**
+
+---
+
+**Summary for Stakeholders**  
+- *Carat* is the strongest driver of price, followed by *color*, *clarity*, and *cut*.  
+- For individual diamonds, the local explanations show how the combination of dimensions and quality grades can offset one another.  
+- The confidence scores in the local interpretability metrics are relatively low, indicating that while the feature contributions are clear, the overall explanation stability could be improved with additional sampling.
+
+# EPR Explainer: 0.6711, Verifier: 0.5225

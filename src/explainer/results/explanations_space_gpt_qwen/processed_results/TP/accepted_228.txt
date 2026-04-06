@@ -1,0 +1,49 @@
+<think>We need to explain how each word of top_20 token attributions influenced the model's sentiment prediction. Must base solely on data provided. Provide for each token: positive or negative attribution, magnitude, influence direction. Also describe collectively shaped final prediction. Provide concise but understandable for both technical and non-technical audiences. Need to reference the prediction probability 0.0134 negative. The top 20 tokens are given with attribution values (positive or negative). The list is unsorted; but we can discuss each. We should note that higher positive attributions push toward positive sentiment; negative push toward negative. Summarize overall effect: many negative tokens outweigh positives, leading to low positive probability. Provide actionable insight: tokens like "avoid", "this", "cinematic" strongly negative; tokens like "you", "enjoy" positive but smaller.
+
+Also mention that tokens like "if" negative; "like" negative; etc.
+
+Need to not mention any hidden or private data. Just interpret.
+
+Also note that "refuse" attribution nearly zero. Also punctuation negative but small.
+
+We must be concise. Provide bullet list or table. But they ask "explain how each word influenced." We can explain each token's contribution. Then summarise.
+
+We should keep tone friendly, avoid unnecessary technical jargon.
+
+Ok produce explanation.</think>
+**How the top 20 words shaped the model’s prediction**
+
+| Token | Attribution (positive → more positive, negative → more negative) | How it nudged the score |
+|-------|------------------------------------------------------------------|--------------------------|
+| **if** | –0.0126 | A clear negative cue – the model treats conditional “if” as a hint that the following statement is skeptical, pulling the sentiment toward the negative side. |
+| **you** | +0.0126 | A slightly positive signal that addresses the reader, encouraging a friendly tone, which nudges the score upward. |
+| **enjoy** | +0.0045 | Adds a small positive vibe; the word “enjoy” is a direct positive cue. |
+| **films** | +0.0022 | Lightly reinforces a neutral‑to‑positive context about movies. |
+| **like** | –0.0021 | Negative because “like” here precedes a list of movies the reviewer dislikes, acting as a contrast marker. |
+| **american** | +0.0051 | A positive cue tied to the film “American Pie”; the model views the brand name positively. |
+| **pie** | +0.0029 | Completes the positive mention of “American Pie,” reinforcing the positive feel. |
+| **,** | –0.0004 | Tiny negative – punctuation often carries no weight but slightly pulls down the score. |
+| **road** | –0.0018 | Negative because “road” is part of “Road Trip,” a film the reviewer does not like. |
+| **trip** | +0.0032 | Slight positive, but outweighed by the preceding negative cue from “road.” |
+| **&** | +0.0011 | Minor positive, acting as a neutral connector that slightly benefits the sentiment. |
+| **van** | –0.0044 | Negative cue – “van” is part of “Van Wilder,” a movie the reviewer dislikes. |
+| **wilder** | +0.0030 | Slight positive, but the negative before it (van) dominates. |
+| **avoid** | –0.0013 | Directly signals the reviewer’s recommendation to skip the film; pushes toward negative. |
+| **this** | –0.0055 | A strong negative focus word; “this” signals the subject (“film”) the reviewer is criticizing. |
+| **cinematic** | –0.0047 | Negative adjective implying the film’s quality is bad; pulls the sentiment downward. |
+| **refuse** | –0.0000076 | Effectively neutral; practically no impact. |
+| **at** | –0.0029 | Small negative cue that adds a bit of criticism. |
+| **all** | –0.0033 | Negative because it extends the scope of the criticism (“all costs”). |
+| **costs** | –0.0029 | Negative; indicates the reviewer thinks the film is a waste of money. |
+
+### Overall impact
+
+The prediction probability is **0.0134**, meaning the model is strongly convinced the review is negative.  
+- **Negative contributors dominate**: Tokens such as *“if,” “like,” “road,” “van,” “avoid,” “this,” “cinematic,” “at,” “all,”* and *“costs”* together exert a sizeable downward pull.  
+- **Positive contributors are weaker**: *“you,” “enjoy,” “films,” “american,” “pie,” “trip,” “&,” “wilder”* provide only modest positive nudges.  
+- **Net effect**: The sum of all top‑20 attributions leans heavily negative, outweighing the positive signals. This imbalance explains why the model outputs a near‑zero probability for a positive sentiment.
+
+**Takeaway for reviewers or developers**  
+If you want a review to be judged more positively, focus on strengthening positive tokens (e.g., “enjoy,” “great,” “fun”) and reducing the weight of negative cues (e.g., “avoid,” “bad,” “waste”). The model is sensitive to words that directly call for criticism or praise, so balancing them can shift the sentiment prediction.
+
+# EPR Explainer: 0.9696, Verifier: 0.5960

@@ -1,0 +1,52 @@
+<think>We need to explain each word's influence based on the top 20 token attributions. Provide clear natural language for technical and non-technical audiences. Avoid invented details. Summarize how they shape final prediction. The sample prediction is 0.0134 negative (near zero but labeled negative). We have to mention both positive and negative contributions.
+
+We'll list tokens, their attribution, and what it means: positive pushes toward positive sentiment, negative pushes toward negative. Also mention magnitude relative to others.
+
+We should explain collectively how these tokens influenced the prediction. Provide actionable insight: e.g., negative tokens dominate; positives partially offset but still negative.
+
+Let's craft concise explanation.</think>
+**How the model used the words in this review**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | A strong negative signal – the model thinks “if” signals doubt or a conditional that tips the review toward negativity. |
+| **you** | +0.0126 | A strong positive signal – suggests the reviewer is addressing the reader, which the model interprets as a friendly tone. |
+| **enjoy** | +0.0045 | Mild positive – the word “enjoy” nudges the model toward a positive reading. |
+| **films** | +0.0022 | Mild positive – acknowledges the subject (films) but doesn’t change the overall sentiment much. |
+| **like** | –0.0021 | Slight negative – “like” in this context (paired with “American Pie”) is seen as a comparison that weakens the sentiment. |
+| **american** | +0.0051 | Positive – mentions a well‑known movie title, which the model treats as a positive cue. |
+| **pie** | +0.0029 | Positive – part of the title “American Pie,” reinforcing a positive tone. |
+| **,** | –0.0004 | Negligible negative – punctuation is barely considered. |
+| **road** | –0.0018 | Slight negative – “road” as part of “Road Trip” slightly drags the sentiment down. |
+| **trip** | +0.0032 | Positive – balances “road” a bit, pushing the sentiment upward. |
+| **&** | +0.0011 | Positive – small boost from the ampersand, treated as a linking word. |
+| **van** | –0.0044 | Strong negative – “van” (from “Van Wilder”) is a negative cue in the model’s view. |
+| **wilder** | +0.0030 | Positive – the name “Wilder” offsets the negative a little. |
+| **avoid** | –0.0013 | Negative – tells the model to steer away, contributing to a negative vibe. |
+| **this** | –0.0055 | Strong negative – signals the specific film being criticized. |
+| **cinematic** | –0.0047 | Strong negative – the word itself is interpreted as a negative descriptor. |
+| **refuse** | –0.0000076 | Virtually zero – negligible impact. |
+| **at** | –0.0029 | Negative – a preposition that slightly pushes toward negativity. |
+| **all** | –0.0033 | Negative – “all” amplifies the negative context. |
+| **costs** | –0.0029 | Negative – “costs” in this sentence signals a warning or expense, adding to the negative tone. |
+
+### What the numbers mean
+
+- **Positive attribution** (+) pushes the prediction toward **positive sentiment**.  
+- **Negative attribution** (–) pushes the prediction toward **negative sentiment**.  
+- The **magnitude** tells how strongly that word pulls the prediction in one direction. A larger absolute value means a stronger influence.
+
+### How the tokens worked together
+
+- The model’s final score (0.0134) is very close to the neutral line, but because the “predicted_sentiment” flag uses a 0.5 threshold, it is classified as **negative**.
+- **Negative words** dominate: “if”, “this”, “cinematic”, “van”, “avoid”, “at”, “all”, “costs” together provide a strong cumulative negative pull that outweighs the positive cues.
+- **Positive words** (“you”, “enjoy”, “american”, “pie”, “trip”, “&”, “wilder”) provide counter‑balancing signals but are smaller in total magnitude.
+- The interplay of a few very negative tokens (especially “if”, “this”, “cinematic”) sets the overall mood to negative, while the positive tokens only slightly dampen that negativity.
+
+### Take‑away for users
+
+- When the model sees a mix of *negative* descriptors (“cinematic”, “avoid”, “refuse”) and *positive* context words, it tends to lean negative if the negative words are larger in magnitude.  
+- Small punctuation marks or prepositions (comma, “at”) have minimal influence.  
+- Understanding which words carry the biggest positive or negative weight can help you rewrite or highlight parts of a review to shift the predicted sentiment.
+
+# EPR Explainer: 0.8433, Verifier: 0.5536

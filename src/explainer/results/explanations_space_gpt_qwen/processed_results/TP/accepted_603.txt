@@ -1,0 +1,52 @@
+<think>We need to explain how each token influenced the model's sentiment prediction. We have top 20 tokens with attribution values. Positive contributions push towards positive sentiment, negative push towards negative. Must base solely on data. Provide explanation for each token, describe impact, and collectively shape final prediction.
+
+We should be concise, avoid unnecessary technical language, focus on actionable insights. For both technical and non-technical audiences. Use plain language but can mention "positive contribution" etc. Provide context: prediction 0.0134 is near zero but negative predicted sentiment. The token attributions show most are negative, but there are a few positive. Explain that overall negative tokens outweigh positives.
+
+Let's craft explanation: start with overview: model predicts negative because negative tokens dominate. Then go through tokens: if (negative -0.0126) indicates conditional clause that lowers score; you (+0.0126) slightly positive but balanced; enjoy (+0.0045) positive but small; films (+0.00217) small positive; like (-0.00208) negative, meaning the word "like" reduces sentiment; american (+0.00510) positive; pie (+0.00290) positive; comma (-0.00039) minimal negative; road (-0.00181) negative; trip (+0.00316) positive; ampersand (+0.00112) positive; van (-0.00442) negative; wilder (+0.00298) positive; avoid (-0.00128) negative; this (-0.00554) negative; cinematic (-0.00470) negative; refuse (~0) negligible; at (-0.00292) negative; all (-0.00328) negative; costs (-0.00288) negative.
+
+We need to highlight that negative tokens like "if", "like", "road", "van", "avoid", "this", "cinematic", "at", "all", "costs" contributed to pushing the prediction toward negative sentiment, outweighing the few positive ones. The final prediction is close to zero but negative.
+
+Also mention that token contributions are relatively small, but collectively shape the prediction.
+
+Let's produce explanation.</think>
+**What the model learned from the words**
+
+| Token | Attribution | What it did for the score |
+|-------|-------------|---------------------------|
+| **if** | –0.0126 | A conditional word that pulled the score toward *negative* sentiment. |
+| **you** | +0.0126 | A neutral‑sounding pronoun that nudged the score toward *positive* by the same amount as “if” pulled it away. |
+| **enjoy** | +0.0045 | A mildly positive verb that added a little to the *positive* side. |
+| **films** | +0.0022 | A neutral noun that gave a tiny positive boost. |
+| **like** | –0.0021 | The word “like” reduced the score, moving it a bit toward *negative*. |
+| **american** | +0.0051 | A descriptive word that added a noticeable positive push. |
+| **pie** | +0.0029 | A food name that added a small positive contribution. |
+| **,** | –0.0004 | The comma had an almost negligible negative effect. |
+| **road** | –0.0018 | A word that slightly lowered the sentiment. |
+| **trip** | +0.0032 | A positive noun that nudged the score upward. |
+| **&** | +0.0011 | The ampersand contributed a very small positive boost. |
+| **van** | –0.0044 | A word that pushed the score toward *negative* more strongly. |
+| **wilder** | +0.0030 | A name that added a modest positive influence. |
+| **avoid** | –0.0013 | A warning word that lowered the sentiment. |
+| **this** | –0.0055 | The demonstrative “this” pulled strongly toward *negative*. |
+| **cinematic** | –0.0047 | An adjective that moved the score further toward *negative*. |
+| **refuse** | ~0 | Essentially no effect. |
+| **at** | –0.0029 | A preposition that nudged the sentiment to *negative*. |
+| **all** | –0.0033 | A quantifier that lowered the score. |
+| **costs** | –0.0029 | A noun that added a small negative push. |
+
+**How they combine to give the final result**
+
+- **Negative tokens dominate.**  
+  The large negative contributions from “if,” “this,” “cinematic,” “van,” “at,” “all,” and “costs” outweigh the few positive ones.  
+- **Balanced by a few positives.**  
+  “You,” “enjoy,” “american,” “pie,” “trip,” “wilder,” and the ampersand each add small positive signals, but none are strong enough to offset the negatives.  
+- **Resulting prediction.**  
+  The overall effect is a tiny positive margin (0.0134) that the classifier interprets as a *negative* sentiment. The score is very close to neutral, but the cumulative negative weight pushes the model to label the review as negative.
+
+**Take‑away**
+
+- The model treats words that signal caution or dislike (“avoid,” “this,” “cinematic,” “van”) as strong negative signals.  
+- Positive words (“enjoy,” “american,” “pie,” “trip,” “wilder”) give only modest boosts.  
+- When many negative tokens appear together, even a few small positives can’t change the overall negative assessment.
+
+# EPR Explainer: 0.7399, Verifier: 0.5644

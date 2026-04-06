@@ -1,0 +1,53 @@
+<think>We need to explain how each token influenced sentiment prediction, positive vs negative contributors. Provide natural language explanation for both technical and non-technical audiences, focusing on actionable insights. Use the provided data only. The top 20 token attributions are listed with token and attribution. Positive values push towards positive sentiment, negative push towards negative.
+
+We must describe each token's impact and how collectively shaped final prediction. The sample has a predicted sentiment "Negative" with probability ~0.013, so low positive probability. The tokens have mixed attributions; many negative. We need to explain. For each token, mention if it contributed positively or negatively. For example: "if" has -0.0126, strong negative, pushes prediction negative. "you" has +0.0126, strong positive, but overall negative.
+
+We should avoid too technical terms, but still mention magnitude relative to others. Also mention that some tokens have small magnitude, but collectively negative.
+
+The output should be a natural language explanation. Possibly group tokens by positive or negative contributions.
+
+We should not mention any internal reasoning beyond the data. So we just give explanation.
+
+We must not reveal any internal prompts. The user didn't ask for that.
+
+Thus we produce explanation. Provide for both audiences: maybe one paragraph each? Actually the instructions say "for both technical and non-technical audiences." So we can provide two sections: technical and layman.
+
+But guidelines say "be concise, avoid unnecessary technical language." So maybe one explanation that is accessible to both. We can use simple language, but still mention that "positive attributions push the prediction toward positive, negative push toward negative, magnitude indicates strength." So we can explain each token.
+
+Let's produce explanation with bullet list for each token: token, attribution sign and magnitude, effect. Also explain cumulative effect: overall negative.
+
+Ok.</think>
+**How the words in this review nudged the model’s sentiment score**
+
+| Word | Attribution | Effect on the prediction |
+|------|-------------|---------------------------|
+| **if** | –0.0126 | Strongly pulls the score toward *negative* sentiment. |
+| **you** | +0.0126 | Strongly pulls toward *positive*, but is offset by the negative “if.” |
+| **enjoy** | +0.0045 | Slight positive push. |
+| **films** | +0.0022 | Small positive push. |
+| **like** | –0.0021 | Mild negative influence. |
+| **american** | +0.0051 | Noticeable positive push. |
+| **pie** | +0.0029 | Small positive push. |
+| **,** | –0.0004 | Negligible negative effect. |
+| **road** | –0.0018 | Minor negative influence. |
+| **trip** | +0.0032 | Small positive push. |
+| **&** | +0.0011 | Minor positive effect. |
+| **van** | –0.0044 | Strong negative push. |
+| **wilder** | +0.0030 | Small positive push. |
+| **avoid** | –0.0013 | Slight negative influence. |
+| **this** | –0.0055 | Strong negative push. |
+| **cinematic** | –0.0047 | Strong negative push. |
+| **refuse** | –0.0000076 | Essentially neutral. |
+| **at** | –0.0029 | Minor negative influence. |
+| **all** | –0.0033 | Minor negative influence. |
+| **costs** | –0.0029 | Minor negative influence. |
+
+### Putting it together
+
+- **Negative‑driven tokens**: “if,” “van,” “this,” “cinematic,” “at,” “all,” and “costs” (plus a few smaller negatives) together pull the sentiment score toward the negative end. Their combined negative weight outweighs the positive contributions.
+- **Positive‑driven tokens**: “you,” “enjoy,” “american,” “pie,” “trip,” “wilder,” and the few minor positives give a slight lift toward positivity, but they are not enough to offset the stronger negatives.
+- **Net effect**: The sum of all attributions is a small positive number (≈ 0.013), meaning the model’s final prediction is *negative* but only very weakly confident. The negative tokens dominate, so the review is classified as a bad movie.
+
+**Take‑away for non‑technical readers**: Words that are overtly critical or negative (“this,” “cinematic,” “avoid”) give the model a big “no” signal, while positive words (“you,” “enjoy”) only give a faint “yes.” Because the negative words are stronger and more frequent, the model thinks the review is negative.
+
+# EPR Explainer: 0.9388, Verifier: 0.4359

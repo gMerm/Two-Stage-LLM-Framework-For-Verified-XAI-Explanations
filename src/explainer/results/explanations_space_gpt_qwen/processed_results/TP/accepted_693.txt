@@ -1,0 +1,42 @@
+<think>We need to explain how each word influenced the model's sentiment prediction, using the top 20 token attributions. Provide natural language explanation for technical and non-technical audiences, but concise, avoid unnecessary technical language. Need to describe each token, its contribution sign, magnitude. Collective shape: prediction negative (0.013) meaning likely negative? Wait prediction 0.0134428 maybe probability of positive? but predicted sentiment negative. So overall negative due to negative tokens outweighing positives. We'll mention cumulative effect. Also ensure we don't mention internal system prompts. We need to base explanation only on data.
+
+So for each token: "if" - negative contribution -0.0126. "you" positive 0.0126. etc. Provide explanation like: the token "if" slightly nudged model toward negative by X.
+
+Collectively, sum of attributions: we can compute? Not necessary but we can say that negative tokens sum more than positive. We can highlight key negative tokens: "this", "cinematic", "van", etc. Also mention "american pie" positive but still small.
+
+Let's craft explanation: start with overall context: review negative. Then explain token contributions. Use bullet or short paragraph per token.
+
+Let's produce final.</think>
+**How the 20 most influential words shaped the model’s negative sentiment prediction**
+
+| Token | Attribution | Effect on the model |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | The word *if* pulled the prediction toward a negative sentiment by a large amount. |
+| **you** | +0.0126 | *You* pushed the prediction toward positive sentiment, but its influence was nearly canceled by *if*. |
+| **enjoy** | +0.0045 | *Enjoy* gave a small positive boost, suggesting the reviewer might appreciate something. |
+| **films** | +0.0022 | *Films* added a modest positive signal, implying the review is about movies. |
+| **like** | –0.0021 | *Like* slightly nudged the prediction negative, perhaps because the context is “like American Pie” (a negative comparison). |
+| **american** | +0.0051 | *American* gave a small positive push, referencing a known film franchise. |
+| **pie** | +0.0029 | *Pie* added a small positive contribution. |
+| **,** | –0.0004 | The comma had an almost negligible negative effect. |
+| **road** | –0.0018 | *Road* contributed a small negative signal. |
+| **trip** | +0.0032 | *Trip* nudged the model toward positive sentiment slightly. |
+| **&** | +0.0011 | The ampersand added a tiny positive influence. |
+| **van** | –0.0044 | *Van* pushed the prediction strongly negative, likely because it refers to “Van Wilder” in a critical context. |
+| **wilder** | +0.0030 | *Wilder* gave a modest positive signal. |
+| **avoid** | –0.0013 | *Avoid* leaned the prediction toward negative. |
+| **this** | –0.0055 | *This* had a strong negative influence, labeling the film as problematic. |
+| **cinematic** | –0.0047 | *Cinematic* added a strong negative push, labeling the film’s style as poor. |
+| **refuse** | –0.0000076 | *Refuse* had a negligible negative effect. |
+| **at** | –0.0029 | *At* contributed a small negative signal. |
+| **all** | –0.0033 | *All* nudged the model toward negative. |
+| **costs** | –0.0029 | *Costs* added a small negative influence. |
+
+### Take‑away
+- **Negative tokens dominate.** The cumulative effect of the negative attributions (especially *if*, *this*, *cinematic*, *van*, *at*, *all*, and *costs*) outweighs the positive ones.  
+- **Key negative signals**: *if*, *this*, *cinematic*, and *van* together pull the sentiment strongly negative.  
+- **Positive signals**: *you*, *enjoy*, *american*, *pie*, *trip*, and *wilder* offer small positive pushes, but they are not enough to override the negatives.  
+
+Because the net attribution leans toward negative, the model predicts a negative sentiment for the review, which matches the labeled outcome.
+
+# EPR Explainer: 0.8205, Verifier: 0.5292

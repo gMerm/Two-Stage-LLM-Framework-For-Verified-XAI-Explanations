@@ -1,0 +1,71 @@
+<think>We need to provide explanations per guidelines: global and local. Use only provided data. Provide concise, factual. Provide ranks, importance scores. For local: include feature values, contributions, direction, weight. Also mention actual vs predicted, error. Also mention confidence. We must not invent data. Let's craft explanation.</think>
+**Global model behaviour (LIME)**  
+
+| Rank | Feature | Importance Score | Direction of influence on price |
+|------|---------|------------------|----------------------------------|
+| 1 | **carat** | 124.44 | positive – larger carat ⇒ higher price |
+| 2 | **color** | 102.26 | positive – darker colour grades (e.g., D‑E) ⇒ higher price |
+| 3 | **clarity** | 75.55 | positive – higher clarity (e.g., IF‑VVS) ⇒ higher price |
+| 4 | **cut** | 53.20 | positive – better cut grades (e.g., Excellent) ⇒ higher price |
+| 5 | **y** (vertical dimension) | 32.99 | positive – taller diamonds tend to be more expensive |
+| 6 | **x** (length) | 10.05 | positive – longer diamonds add value |
+| 7 | **table** | 9.62 | positive – a slightly larger table can increase price |
+| 8 | **depth** | 6.41 | positive – greater depth contributes to value |
+| 9 | **z** (depth dimension) | 0.13 | positive – very small effect on price |
+
+*Why these matter*:  
+- **Carat** dominates because it scales linearly with mass and perceived size.  
+- **Color, clarity, cut** are classic grading criteria in gemology; higher grades command premium prices.  
+- Physical dimensions (**x, y, z, table, depth**) influence perceived size and cut quality, and hence market value.
+
+---
+
+### Local explanations
+
+#### 1. Instance 676  
+- **Actual price**: $3,172.00  
+- **Predicted price**: $3,601.51  
+- **Absolute error**: $429.51  
+- **Confidence**: 0.0723 (low, suggesting the explanation is less reliable)
+
+| Feature | Observed range | Contribution (USD) | Direction | Weight |
+|---------|----------------|--------------------|-----------|--------|
+| clarity | ≤ 2.0 | +2,075.04 | positive | 0.423 |
+| y | ≤ 6.54 and > 5.71 | –817.87 | negative | 0.167 |
+| color | ≤ 4.0 and > 3.0 | –723.16 | negative | 0.148 |
+| x | ≤ 6.55 and > 5.7 | +537.18 | positive | 0.110 |
+| z | ≤ 4.04 and > 3.53 | +262.97 | positive | 0.054 |
+| carat | ≤ 1.05 and > 0.7 | –185.91 | negative | 0.038 |
+| cut | ≤ 2.0 | –109.84 | negative | 0.022 |
+| table | ≤ 57.0 and > 56.0 | +102.95 | positive | 0.021 |
+| depth | ≤ 61.8 and > 61.0 | –86.28 | negative | 0.018 |
+
+*Interpretation*:  
+The model largely over‑estimated the price because the diamond has **very high clarity** (strong positive influence) but **lower color, cut, and carat** (strong negative influences), with moderate positive contributions from its physical dimensions.
+
+---
+
+#### 2. Instance 737  
+- **Actual price**: $1,981.00  
+- **Predicted price**: $1,917.62  
+- **Absolute error**: $63.38  
+- **Confidence**: 0.1169 (moderate)
+
+| Feature | Observed range | Contribution (USD) | Direction | Weight |
+|---------|----------------|--------------------|-----------|--------|
+| carat | ≤ 0.7 and > 0.4 | –2,897.62 | negative | 0.487 |
+| clarity | > 5.0 | +902.91 | positive | 0.152 |
+| y | ≤ 5.71 and > 4.72 | –884.52 | negative | 0.149 |
+| table | ≤ 57.0 and > 56.0 | –485.01 | negative | 0.082 |
+| x | ≤ 5.7 and > 4.71 | +324.50 | positive | 0.055 |
+| cut | ≤ 2.0 | –311.06 | negative | 0.052 |
+| color | ≤ 3.0 and > 1.0 | +85.92 | positive | 0.014 |
+| depth | ≤ 62.5 and > 61.8 | –30.62 | negative | 0.005 |
+| z | ≤ 3.53 and > 2.91 | +22.67 | positive | 0.004 |
+
+*Interpretation*:  
+The prediction is close to the actual value. The large negative contribution from **carat** drives the price down, while **clarity** and **x** provide positive offsets. Small negative effects from **y, table, cut, and depth** slightly reduce the price, balanced by minor positives from **color** and **z**.
+
+---
+
+# EPR Explainer: 0.3988, Verifier: 0.7006

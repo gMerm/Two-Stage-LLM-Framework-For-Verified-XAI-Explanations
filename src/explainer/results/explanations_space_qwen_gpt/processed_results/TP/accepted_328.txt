@@ -1,0 +1,44 @@
+<think>Okay, let me tackle this explanation request. The user wants natural language explanations of token attributions for an IMDB negative sentiment prediction. 
+
+First, I need to carefully analyze the attribution scores. Positive attributions (positive numbers) push toward positive sentiment, negative attributions (negative numbers) push toward negative sentiment. The magnitude shows strength.
+
+Looking at the top 20 tokens:
+- Strong negative contributors: "if" (-0.0126), "this" (-0.0055), "cinematic" (-0.0047), "refuse" (very weak negative)
+- Strong positive contributors: "you" (+0.0126), "enjoy" (+0.0045), "american" (+0.0051)
+
+Hmm, interesting contradiction - "you" and "enjoy" are positive but the overall sentiment is negative. That makes sense because the review is sarcastic: "if you enjoy X, avoid this". So the positive words are actually part of the negative sentiment.
+
+I should explain this irony clearly. The strongest negative words are "if" and "this" - "if" sets up the sarcastic condition, "this" points to the negative subject. "cinematic refuse" is a key phrase where "refuse" has minimal impact but "cinematic" is strongly negative.
+
+For non-technical audiences, I'll avoid terms like "attribution" and say "how much each word influenced the score". For technical, I'll keep the numbers but focus on direction.
+
+Need to be careful not to invent anything - just explain what the numbers show. The review is clearly negative despite some positive words being present. The "avoid" and "refuse" words are negative but their scores are small compared to the strong negatives.
+
+Biggest insight: The sarcastic setup ("if you enjoy...") creates the negative sentiment, with "if" being the strongest contributor. The actual negative words like "refuse" have very small influence compared to the structural words.
+
+I'll structure it as:
+1. Overall sentiment context
+2. Explain the key negative contributors (with strongest first)
+3. Explain why positive words are actually negative in context
+4. Note that punctuation like commas have negligible effect
+
+Must avoid saying "the model thinks X" - just state what the attribution scores indicate about the word's influence on the prediction.
+</think>
+The model predicted a negative sentiment (0.013) for this review. Below is a clear explanation of how each top token influenced the prediction, based *only* on the provided attribution scores:
+
+**Strong negative contributors (pushing prediction toward negative):**  
+- **"if"** (attribution: -0.0126) – The strongest negative influence. Sets up the sarcastic condition ("if you enjoy...") that frames the entire negative sentiment.  
+- **"this"** (attribution: -0.0055) – Directly points to the negative subject ("this cinematic refuse"), amplifying the criticism.  
+- **"cinematic"** (attribution: -0.0047) – Combined with "refuse" to create the core insult ("cinematic refuse").  
+- **"refuse"** (attribution: -0.0000076) – Minor negative reinforcement of the "refuse" metaphor.  
+- **"avoid"** (attribution: -0.0013), **"all"** (attribution: -0.0033), **"costs"** (attribution: -0.0029) – Strengthen the urgency of the warning ("avoid at all costs").  
+
+**Positive contributors (pushing prediction toward positive, *but context makes them negative*):**  
+- **"you"** (attribution: +0.0126) – The strongest *positive* word, but used sarcastically ("if you *enjoy* films like...").  
+- **"enjoy"** (attribution: +0.0045), **"american"** (attribution: +0.0051), **"pie"** (attribution: +0.0029) – Positive words for other films, *not* this one. Their positive scores are overridden by the sarcastic context.  
+- **"road"** (attribution: -0.0018), **"trip"** (attribution: +0.0032), **"van"** (attribution: -0.0044) – Neutral/positive references to other films, but negative attributions here reflect their *contrast* to the negative review.  
+
+**Key insight:**  
+The negative sentiment dominates because the model identifies the sarcastic setup ("if you enjoy *positive* films, *avoid* this"). Words like "if" and "this" are the strongest negative drivers, while positive words (e.g., "enjoy") are used ironically. The phrase "cinematic refuse" (with negative scores for "cinematic" and "refuse") is central to the critique. Punctuation (e.g., ",") had negligible influence.
+
+# EPR Explainer: 0.6021, Verifier: 0.7982

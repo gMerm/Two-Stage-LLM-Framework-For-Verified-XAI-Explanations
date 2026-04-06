@@ -1,0 +1,47 @@
+<think>We need to explain how each word of top_20_token_attributions influenced the model's sentiment prediction, identify both positive and negative contributors, describe impact. We must base solely on data. So we have token and attribution values. Positive attributions push toward positive sentiment; negative push toward negative. We need to explain collectively shape final prediction (0.013). This is close to neutral but predicted negative. So negative contributions larger in magnitude? Let's see sum of top 20? But we don't need to sum. Just explain each token.
+
+We should also note context: review negative overall. Provide explanation of each token: e.g., "if" negative -0.0126, etc. Also we can mention magnitude relative. Also note that tokens like "refuse" has negligible attribution.
+
+Explain both groups: positive tokens include "you", "enjoy", "films", "american", "pie", "trip", "&", "wilder" (positive). Negative tokens include "if", "like", "road", "van", "avoid", "this", "cinematic", "at", "all", "costs". Provide insights: e.g., "if" strongly negative suggests model interprets conditional clause as negative sentiment? Actually "if" negative: might be because phrase "if you enjoy" is a suggestion that leads to negative? But we don't speculate beyond data. We can simply state that "if" had strongest negative influence, etc.
+
+Also mention that the overall prediction is slightly above zero, indicating near-neutral but leaning negative due to negative contributions outweighing positives.
+
+We should keep concise and avoid unnecessary technical language. Provide actionable insights: e.g., focus on negative tokens to improve sentiment, highlight positive tokens but still negative overall.
+
+Ok, produce explanation.</think>
+**How each highlighted word nudged the model toward a negative verdict**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Strongest negative signal – the word pulls the score down sharply. |
+| **you** | +0.0126 | Biggest positive boost – encourages a positive vibe. |
+| **enjoy** | +0.0045 | Adds a small positive touch. |
+| **films** | +0.0022 | Slightly positive, reinforcing a movie‑related context. |
+| **like** | –0.0021 | Weakly negative, counters the “enjoy” signal. |
+| **american** | +0.0051 | Positive, ties the review to a specific film series. |
+| **pie** | +0.0029 | Positive, completes the film reference. |
+| **,** | –0.0004 | Negligible negative effect (punctuation usually has tiny influence). |
+| **road** | –0.0018 | Small negative, part of the “Road Trip” title. |
+| **trip** | +0.0032 | Positive, balances the “road” token. |
+| **&** | +0.0011 | Minor positive, linking two film titles. |
+| **van** | –0.0044 | Strong negative, pulls the sentiment toward the “Van Wilder” title. |
+| **wilder** | +0.0030 | Positive, offsets part of the “van” token. |
+| **avoid** | –0.0013 | Negative – tells the model the reviewer recommends against the film. |
+| **this** | –0.0055 | Strong negative, labels the film itself as undesirable. |
+| **cinematic** | –0.0047 | Negative, criticizes the film’s quality. |
+| **refuse** | –0.0000 | Essentially no impact. |
+| **at** | –0.0029 | Negative, part of the warning phrase. |
+| **all** | –0.0033 | Negative, intensifies the warning. |
+| **costs** | –0.0029 | Negative, completes the “at all costs” clause. |
+
+**What the numbers tell us**
+
+- **Positive tokens** (“you”, “enjoy”, “american”, “pie”, “trip”, “wilder”, “&”) give the model a slight lift toward a positive sentiment, but none of them outweigh the negative ones.
+- **Negative tokens** (“if”, “like”, “road”, “van”, “avoid”, “this”, “cinematic”, “at”, “all”, “costs”) each pull the score toward the negative side. Tokens such as **“if”**, **“this”**, and **“cinematic”** have the largest negative pulls, while **“van”** also contributes a strong negative cue.
+- The overall prediction is **0.013** – almost neutral, but the negative tokens collectively give a slightly negative bias, leading the model to label the review as *Negative*.
+
+**Take‑away**
+
+If you’re looking to flip a review like this from negative to positive, you’d want to reduce or remove the strong negative words (“if”, “this”, “cinematic”, “van”) and boost the positive ones (“you”, “enjoy”, “american”, “pie”, “trip”). This balance shift would tip the integrated gradients in favor of a more positive prediction.
+
+# EPR Explainer: 0.8497, Verifier: 0.4029

@@ -1,0 +1,56 @@
+<think>We need to explain how each word of top 20 token attributions influenced the model's sentiment prediction. Provide natural language explanations, for both technical and non-technical audiences, but concise, focus on actionable insights, avoid technical jargon.
+
+We should not fabricate details. Use the given attribution values to say positive or negative influence. The prediction probability 0.0134 indicates negative sentiment. So explain each token's contribution: positive tokens push toward positive, negative push toward negative. Also mention magnitude. We need to cover all tokens.
+
+We need to identify and describe the impact of all tokens, both positive and negative contributors, detailing how each one collectively shaped the final prediction.
+
+We should produce explanation that is understandable to both audiences. Use simple language: "the word 'if' had a strong negative influence..." etc. Provide context: the sum of contributions leads to negative prediction.
+
+We can also explain that higher magnitude indicates stronger influence.
+
+We need to not mention internal or system prompts. All good.
+
+Let's produce a concise explanation, listing tokens with sign, magnitude, and role.
+
+We can group similar ones: e.g., 'if' negative; 'you', 'enjoy', 'films', 'american', 'pie', 'trip', '&', 'wilder' are positive. Negative ones: 'like', 'road', 'van', 'avoid', 'this', 'cinematic', 'at', 'all', 'costs', maybe ',' negligible. Also 'refuse' is almost zero.
+
+Also mention that the combined negative contributions outweigh positive, leading to negative sentiment.
+
+Let's produce.</think>
+**How the top 20 words shaped the model’s negative prediction**
+
+| # | Token | Attribution | Effect on sentiment | How it mattered |
+|---|-------|-------------|---------------------|-----------------|
+| 1 | **if** | –0.0126 | pushes toward *negative* | Strongest single negative influence |
+| 2 | **you** | +0.0126 | pushes toward *positive* | Biggest positive counterbalance |
+| 3 | **enjoy** | +0.0045 | slightly positive | Adds a mild “liking” tone |
+| 4 | **films** | +0.0022 | slight positive | Signals a movie context |
+| 5 | **like** | –0.0021 | negative | Weakly discourages enthusiasm |
+| 6 | **american** | +0.0051 | positive | Highlights a specific movie title |
+| 7 | **pie** | +0.0029 | positive | Another movie title, reinforcing |
+| 8 | **,** | –0.0004 | tiny negative | Minimal punctuation effect |
+| 9 | **road** | –0.0018 | negative | Part of a negative movie name |
+|10 | **trip** | +0.0032 | positive | Supports the “Road Trip” title |
+|11 | **&** | +0.0011 | slight positive | Connects two titles |
+|12 | **van** | –0.0044 | negative | Part of “Van Wilder” title |
+|13 | **wilder** | +0.0030 | positive | Completes that title, adds weight |
+|14 | **avoid** | –0.0013 | negative | Explicit negative recommendation |
+|15 | **this** | –0.0055 | negative | Directly marks the film as bad |
+|16 | **cinematic** | –0.0047 | negative | Softens the film’s description |
+|17 | **refuse** | –0.0000 | neutral | Virtually no influence |
+|18 | **at** | –0.0029 | negative | Phrases “at all costs” |
+|19 | **all** | –0.0033 | negative | Strengthens the negative call |
+|20 | **costs** | –0.0029 | negative | Completes the negative warning |
+
+### Key take‑aways
+
+- **Negative tokens dominate**: The sum of the negative attributions (≈ –0.043) outweighs the positive sum (≈ +0.039), tipping the overall score toward a *negative* sentiment.
+- **Title references cancel each other**: Some movie names (e.g., *American Pie*, *Road Trip*, *Van Wilder*) add positive value, but their accompanying words (*like*, *road*, *van*) introduce negative pull. The net effect of each title group is a small positive bias.
+- **Strong warnings drive the prediction**: Words like *if*, *avoid*, *this*, *cinematic*, *at*, *all*, and *costs* collectively generate a strong negative signal, telling the model that the film is “to be avoided at all costs.”
+- **Balance of sentiment words**: The model senses mild enthusiasm from *enjoy* and *you*, but it is outweighed by the stronger negative descriptors.
+
+### Bottom line
+
+The review’s overall feeling is negative because the negative cues (warnings, strong language, and negative parts of movie titles) are more powerful than the few positive words. This explains why the model’s predicted sentiment is “Negative” with a low probability of 0.013.
+
+# EPR Explainer: 0.8250, Verifier: 0.3785

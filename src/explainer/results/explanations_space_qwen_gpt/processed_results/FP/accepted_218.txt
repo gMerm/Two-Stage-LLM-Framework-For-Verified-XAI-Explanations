@@ -1,0 +1,88 @@
+<think>Okay, let me tackle this explanation request. The user wants natural language explanations of token attributions for a negative movie review prediction. 
+
+First, I need to carefully analyze the top_20 token attributions provided. The key is to map each token's attribution value to its directional impact (positive/negative) and magnitude. 
+
+Looking at the data:
+- Negative attributions (pushing toward negative sentiment) have negative values like "if" (-0.0126) and "american" (0.0051 is positive, wait no - "american" has positive attribution but the review is negative? Need to be careful here. Actually, positive attribution means it pushes toward positive sentiment, but since the prediction is negative, those tokens are actually working against the negative sentiment. Wait no - let me clarify the method: 
+
+Important clarification from method overview: "Positive attributions push the prediction toward positive sentiment, while negative attributions push toward negative sentiment." So for a negative prediction (0.013), tokens with negative attribution are reinforcing the negative sentiment.
+
+So:
+- Negative attribution values (like "if" at -0.0126) mean this token contributes to the negative prediction
+- Positive attribution values (like "you" at +0.0126) mean this token contributes to positive sentiment, but since the overall prediction is negative, these are "counteracting" the negative sentiment.
+
+Now I'll group them:
+Strong negative contributors (most negative values):
+- "if" (-0.0126) - strongest negative influence
+- "american" actually has positive attribution? Wait no: "american" is +0.0051, so it's pushing toward positive, but the review is negative so this is a counterpoint. Need to be precise.
+
+Let me list all with their signs:
+- "if": -0.0126 → strong negative
+- "you": +0.0126 → strong positive (but review is negative, so this is a positive word that's actually making the sentiment less negative? Wait no - the attribution is for the model's prediction. If "you" has positive attribution, it means the model thinks "you" makes the review seem more positive, but since the overall sentiment is negative, this token's positive influence is being outweighed by other negative tokens.
+
+But for explanation, I should say:
+- Tokens with negative attribution: directly contribute to the negative sentiment
+- Tokens with positive attribution: would make the review seem positive, but are overpowered by stronger negative tokens
+
+Now identifying the strongest influences:
+Most negative: "if" (-0.0126), "this" (-0.0055), "cinematic" (-0.0047), "van" (-0.0044) etc.
+Most positive: "you" (+0.0126), "enjoy" (+0.0045), "american" (+0.0051) etc.
+
+But note: the prediction is negative (0.013), so the negative tokens dominate.
+
+For the explanation, I'll:
+1. Start with the strongest negative influence ("if")
+2. Note the strong positive tokens that were overpowered
+3. Group similar negative contributors (like "cinematic refuse" as a phrase)
+4. Avoid technical terms like "attribution" - use "influence" or "contribution"
+
+Important to not invent context - just use the given tokens. For example, "american pie" is a movie title, but I shouldn't say "American Pie is a good movie" because that's not in the data. Just say "words like 'american' and 'pie' had positive influence but were outweighed."
+
+Wait - "american" is +0.0051 and "pie" is +0.0029, so they're positive tokens. But in the review, they're listing movies the reader should avoid, so the positive attribution for "american" is interesting - it's because the model sees "American Pie" as a positive reference point (since it's a popular comedy), but the reviewer is saying "if you enjoy those, avoid this." So the model's positive attribution for "american" is actually the model recognizing that "American Pie" is a positive reference, which makes the reviewer's contrast stronger.
+
+But I must not add this interpretation - only say "words like 'american' and 'pie' had positive influence" without explaining why.
+
+Now for the explanation structure:
+- Lead with the overall sentiment (negative)
+- Mention the strongest negative influencer ("if" is key because it starts the negative conditional)
+- Note the strong positive words that were overpowered ("you", "enjoy", "american", "pie")
+- Group the negative phrases ("cinematic refuse", "all costs")
+- Keep it concise - 3-4 sentences max
+
+Check for any tokens that might be misinterpreted:
+- "refuse" has very small negative attribution (-7.5e-6), so it's negligible - shouldn't mention
+- Punctuation like "," has tiny effect, skip
+
+Final check: All explanations must be based ONLY on the numbers provided. No adding "American Pie is a comedy" or similar.
+
+Now writing the explanation:
+- Start with "The model's negative prediction (0.01) was strongly influenced by words like 'if' and 'this', which contributed negatively to the sentiment."
+- Then note the positive words: "Words such as 'you' and 'enjoy' had positive influence but were outweighed by stronger negative terms."
+- Mention the key negative phrase: "Phrases like 'cinematic refuse' and 'all costs' added to the negative sentiment."
+
+Wait, "cinematic refuse" is two tokens: "cinematic" (-0.0047) and "refuse" (-7.5e-6), so together they form a negative phrase. Similarly "all costs" is "all" (-0.0033) and "costs" (-0.0029).
+
+So I'll group them as phrases in explanation.
+
+Now ensuring conciseness:
+"The negative prediction was driven by strong negative influences like 'if' (-0.0126) and 'this' (-0.0055), which set up a critical tone. Positive influences like 'you' (+0.0126) and 'enjoy' (+0.0045) were overpowered by negative terms such as 'cinematic refuse' and 'all costs'."
+
+But need to make it natural language without numbers. The user asked for natural language, so avoid listing numbers in the explanation.
+
+Final version without numbers:
+"The negative sentiment was primarily shaped by words like 'if' (setting up a critical condition) and 'this' (referring to the film negatively), which strongly pushed the prediction downward. Positive words like 'you' and 'enjoy' were present but overpowered by negative phrases such as 'cinematic refuse' and 'all costs', which reinforced the harsh judgment."
+
+Double-checking:
+- "if" is negative attribution → correct as "critical condition"
+- "cinematic refuse" is a phrase from tokens "cinematic" and "refuse", which together form the negative phrase in the review
+- "all costs" is a common phrase meaning "at any price", so "all costs" as a negative phrase makes sense
+
+Yes, this aligns with the review text: "avoid this cinematic refuse at all costs."
+
+Also confirming no invented details: I'm not adding that "cinematic refuse" means bad film, just stating the phrase as given in the tokens.
+
+This should meet all guidelines.
+</think>
+The model's negative prediction (0.01) was primarily driven by words that reinforced harsh criticism. The strongest negative influence came from "if" (setting up a critical conditional statement) and "this" (directly condemning the film), which pushed the sentiment toward negativity. Positive words like "you" and "enjoy" had counteracting influence but were overpowered by negative phrases such as "cinematic refuse" (combining "cinematic" and "refuse") and "all costs" (emphasizing extreme avoidance). Together, these tokens shaped the review's overall negative judgment by framing the film as unworthy of comparison to popular comedies and a waste of resources.
+
+# EPR Explainer: 0.8084, Verifier: 0.7127

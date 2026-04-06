@@ -1,0 +1,26 @@
+<think>We need to explain each feature that influenced the model's prediction for this individual, with context on why it matters for income prediction. Use the provided mean absolute SHAP values to rank importance. Provide concise, natural language explanation. Must base only on data provided. Provide context on each feature.
+
+We need to convert mean absolute SHAP values to language: higher importance indicates strong influence. Provide reasons: e.g., hours worked (WKHP) strongly influences income; occupation; age; education; relationship; sex; place of birth; worker class; marital status; race.
+
+Make sure to not add extraneous info. Keep it actionable. Maybe present as list with ordering by importance.
+
+Let's produce final answer.</think>
+**Feature importance (top‑to‑bottom)**  
+*(mean absolute SHAP value shows how strongly each factor pulls the model’s income prediction up or down)*
+
+| Rank | Feature | Mean | Why it matters for income |
+|------|---------|------|---------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.90** | Working more hours is the strongest driver of higher earnings in the model. It captures the direct link between labor supply and pay. |
+| 2 | **OCCP** (occupation code) | **0.63** | Different jobs pay very differently. The occupation signal tells the model which wage ranges are typical for that job title. |
+| 3 | **AGEP** (age) | **0.52** | Age reflects career stage and experience. Older workers tend to earn more, while very young workers usually earn less. |
+| 4 | **SCHL** (educational attainment) | **0.46** | Education level is a key predictor of earning potential; higher degrees often lead to higher wages. |
+| 5 | **RELP** (relationship to householder) | **0.34** | Relationship status can indicate adult status or household support, which the model links to income patterns. |
+| 6 | **SEX** | **0.22** | Gender influences earnings through both structural factors and job choice; the model uses it as an additional signal. |
+| 7 | **POBP** (place of birth) | **0.17** | Birthplace can proxy for cultural or regional factors that affect education and job opportunities. |
+| 8 | **COW** (class of worker) | **0.14** | Employment type (private, government, self‑employed, etc.) carries different pay expectations. |
+| 9 | **MAR** (marital status) | **0.10** | Married individuals often have different earning patterns than single ones, influencing the model’s estimate. |
+|10 | **RAC1P** (race) | **0.05** | Race is a demographic factor that the model considers, though its influence on this prediction is modest. |
+
+These explanations translate the SHAP scores into clear, actionable insight: the model bases its income prediction mainly on how many hours someone works, what they do, and their age and education, while other demographic factors play smaller but still measurable roles.
+
+# EPR Explainer: 0.8262, Verifier: 0.5782

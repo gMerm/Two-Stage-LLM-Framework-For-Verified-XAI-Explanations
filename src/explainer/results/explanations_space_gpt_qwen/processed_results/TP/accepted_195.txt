@@ -1,0 +1,36 @@
+<think>We need to explain each feature's importance based on mean absolute SHAP values. Provide context, actionable insights, no extra assumptions. Provide concise explanations. Use both technical and non-technical tone? The user said: "Explain every feature that influenced the model's prediction for this individual. For every feature provide context on why it matters for income prediction." So likely non-technical audience, but maybe technical too. We'll keep simple.
+
+We need to mention the ordering maybe. Provide bullet list or table.
+
+We'll note that higher mean absolute SHAP indicates stronger influence. Provide the values and relative importance.
+
+Explain each: WKHP (working hours), OCCP (occupation), AGEP (age), SCHL (education), RELP (relationship), SEX (gender), POBP (place of birth), COW (class of worker), MAR (marital status), RAC1P (race). Provide context: e.g., hours worked directly relates to earnings, occupation codes correlate with wage level, age correlates with experience and seniority, education indicates qualification, etc.
+
+Need to reference mean_abs_shap numbers. Could phrase: "WKHP has the highest mean absolute SHAP value (0.904), indicating it is the most influential feature." Then similar for others.
+
+Avoid making assumptions beyond data. Just state that high SHAP means strong impact. Provide actionable insights: If model is used for decisions, pay attention to those features.
+
+Let's produce answer.</think>
+**How each feature shaped the model’s prediction for this person**
+
+| Feature | Mean absolute SHAP value | What it tells the model | Why it matters for income prediction |
+|---------|--------------------------|------------------------|--------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.904** | This feature has the *largest* influence on the prediction. | The number of hours a person works is closely tied to their earnings: more hours generally mean more pay. The model therefore relies heavily on this variable when deciding if income is above or below the median. |
+| **OCCP** (occupation code) | 0.630 | The occupation’s job type is the second most important driver. | Different occupations pay very differently. Knowing a person’s job helps the model estimate likely earnings. |
+| **AGEP** (age) | 0.517 | Age is the third strongest factor. | Age correlates with experience, career stage, and possibly seniority, all of which influence wages. |
+| **SCHL** (educational attainment) | 0.465 | Education level is also highly influential. | Higher education often leads to better-paying jobs. The model uses this to adjust its income estimate. |
+| **RELP** (relationship to householder) | 0.343 | Relationship status matters. | Being a spouse, child, roommate, etc., can indicate household structure and potential economic support, affecting personal income. |
+| **SEX** (gender) | 0.224 | Gender is a moderate contributor. | Gender can be correlated with wage disparities in some contexts, so the model incorporates it when making predictions. |
+| **POBP** (place of birth) | 0.172 | Place of birth has a small but noticeable effect. | Birthplace can be a proxy for cultural or regional factors that influence job opportunities and earnings. |
+| **COW** (class of worker) | 0.137 | Employment type is a minor influence. | Whether a person works privately, in government, self‑employed, etc., affects expected wages. |
+| **MAR** (marital status) | 0.102 | Marital status has a small effect. | Being married or single can change financial responsibilities or household income composition. |
+| **RAC1P** (race) | 0.053 | Race is the least influential feature in this model. | Although it has the smallest impact, the model still considers it, perhaps reflecting broader socio‑economic patterns. |
+
+### Take‑away
+
+- The **most important signals** for predicting whether a person earns above or below the median are how many hours they work (**WKHP**), what job they have (**OCCP**), and their age (**AGEP**).  
+- **Education** and **relationship status** also carry significant weight, while **gender**, **place of birth**, **employment type**, **marital status**, and **race** play progressively smaller roles.  
+
+These insights tell you which aspects of a person’s profile the model is basing its income prediction on, and can guide you in interpreting, explaining, or refining the model’s behavior.
+
+# EPR Explainer: 0.8338, Verifier: 0.5531

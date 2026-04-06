@@ -1,0 +1,31 @@
+<think>We need to explain based on the data. We have sample idx 2, true and predicted label ship, high confidence 92.44. Activations: max 1.0, mean 0.4472, coverage 31.25%. Regions: middle-center: coverage 29.6875%, max activation 1.0, mean 0.7263. middle-left: coverage 1.5625%, max and mean 0.639. We need to describe spatial patterns, activation strengths, max, mean, coverage, identify most important region(s), and assess alignment with predicted class.
+
+We must not invent details beyond data. Provide explanation for both technical and non-technical audience? The guidelines: "Focus on spatial patterns and activation strengths." Should be concise. Possibly provide both brief technical and lay explanation.
+
+Let's produce a concise explanation:
+
+- Overall coverage 31% meaning model focused on about a third of image. 
+- Highest activation region: middle-center with max 1.0, mean 0.726, covering 29.7% of image. That is main focus.
+- Another region: middle-left with lower activation 0.639, covering small 1.6%. 
+- Mean across all image 0.447, typical.
+- Activation aligns with ship as the center likely shows hull or water etc.
+
+Let's produce final answer.</think>
+**Model focus (CIFAR‑10 ship example)**  
+
+| Metric | Value |
+|--------|-------|
+| Prediction | **Ship** (92 % confidence) |
+| Overall activation | max = 1.00, mean = 0.45, coverage = 31 % |
+| Main region | **Middle‑center** (29.7 % of image) – max = 1.00, mean = 0.73 |
+| Secondary region | **Middle‑left** (1.6 % of image) – max = 0.64, mean = 0.64 |
+
+**Interpretation**
+
+- The heatmap shows that the model “looked” mainly at the middle‑center part of the image, where the ship’s hull or deck would typically be located. This region carries the strongest evidence (maximum activation of 1.0 and a high average of 0.73).  
+- A smaller, but still noticeable, activation appears on the middle‑left side, suggesting the model also paid attention to a secondary feature (perhaps a side view of the ship).  
+- The overall mean activation (0.45) reflects moderate confidence across the image, but the high concentration in the central region explains the strong, correct prediction.  
+
+In short, the model’s attention aligns well with the expected visual cues for a ship, focusing primarily on the central area that most strongly represents the target class.
+
+# EPR Explainer: 0.8867, Verifier: 0.5125

@@ -1,0 +1,45 @@
+<think>We need to explain how each word influenced the model prediction, identify positive and negative contributors, and how collectively shaped final prediction. Must base only on provided data. The prediction is 0.0134, negative sentiment. Attributions show negative values push toward negative. Provide natural language explanation for technical and non-technical audiences. concise. Provide for each token.
+
+Also need to mention that overall negative due to sum of negative contributions > positives. Provide actionable insight: key negative tokens like "this", "cinematic", "avoid", etc.
+
+Let's craft.
+
+</think>
+**How the model “read” this review**
+
+The Integrated‑Gradients scores show how much each word nudged the model toward a *negative* rating (negative score) or a *positive* rating (positive score).  
+When we add up all 20 tokens’ attributions, the negative influence outweighs the positive ones, giving the final prediction of **0.013 → Negative**.
+
+| Token | Attribution | How it swayed the prediction |
+|-------|-------------|--------------------------------|
+| **if** | –0.0126 | A small negative cue that dampens optimism. |
+| **you** | +0.0126 | A mildly positive sign‑post, encouraging a friendly tone. |
+| **enjoy** | +0.0045 | A positive verb that hints at enjoyment. |
+| **films** | +0.0022 | Neutral‑positive, supports the idea of film appreciation. |
+| **like** | –0.0021 | Slightly negative, as it introduces a comparison to less‑liked movies. |
+| **american** | +0.0051 | Positive, linking to a familiar, upbeat title. |
+| **pie** | +0.0029 | Positive, reinforces the “American Pie” reference. |
+| **,** | –0.0004 | Negligible punctuation effect, slightly negative. |
+| **road** | –0.0018 | Minor negative cue, part of the “Road Trip” comparison. |
+| **trip** | +0.0032 | Positive, helps paint a hopeful image of a road trip. |
+| **&** | +0.0011 | Minor positive connector. |
+| **van** | –0.0044 | Negative, part of “Van Wilder” which the model associates with low quality. |
+| **wilder** | +0.0030 | Slight positive, but outweighed by “van”. |
+| **avoid** | –0.0013 | Negative, a direct warning. |
+| **this** | –0.0055 | Strong negative focus on the target movie. |
+| **cinematic** | –0.0047 | Negative, implying poor filmmaking. |
+| **refuse** | –0.0000 | Essentially neutral, slight negative. |
+| **at** | –0.0029 | Minor negative, part of the phrase “at all costs”. |
+| **all** | –0.0033 | Slightly negative, broadening the negative warning. |
+| **costs** | –0.0029 | Negative, completing the warning “at all costs”. |
+
+**Key take‑aways**
+
+- **Strong negative tokens**: “this”, “cinematic”, “avoid”, “van”, and the phrase “at all costs” together push the model strongly toward a negative sentiment.  
+- **Positive tokens**: “you”, “enjoy”, “american”, “pie”, “trip” give small boosts, but they are outweighed by the negatives.  
+- **Balance of influence**: The sum of the negative attributions (~ –0.04) exceeds the positive (~ +0.04), leading to the overall negative prediction.
+
+**Actionable insight**  
+If you want to *change* the model’s prediction to positive, you’d need to counterbalance the heavy negative tokens with stronger positive cues (e.g., “great”, “captivating”, “excellent”) or remove the most negative terms such as “avoid”, “this”, and “cinematic”.
+
+# EPR Explainer: 0.7776, Verifier: 0.5229

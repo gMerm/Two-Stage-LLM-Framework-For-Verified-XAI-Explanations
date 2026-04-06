@@ -1,0 +1,51 @@
+<think>We need to explain how each token influenced sentiment prediction, based on their attribution scores. Provide natural language explanation for both positive and negative contributors. The model prediction is negative, with low probability 0.0134. The attributions sum to something maybe close to prediction? Actually not.
+
+We have to base explanation solely on given data. So we should explain that tokens with positive attributions push towards positive, negative push towards negative. Provide summary of each token.
+
+Also note that tokens with negative attribution, especially "this", "cinematic", "avoid", etc.
+
+We should also mention relative magnitude: e.g., "if" has -0.0126, the largest negative, indicating strong negative influence; "you" has 0.0126 positive, balanced.
+
+Need to avoid invented details; use tokens and attributions. Provide concise.
+
+We can mention that the net effect: negative contributions outweigh positives leading to negative sentiment.
+
+Also can mention that tokens like "van" are negative strongly -0.0044; "american" positive 0.0051.
+
+Ok craft explanation.
+
+Let's produce final answer.</think>
+**How each word in the review shaped the model’s negative sentiment prediction**
+
+| Token | Attribution | What it did |
+|-------|-------------|-------------|
+| **“if”** | –0.0126 | The largest negative signal. The model treats the word “if” as strongly pulling the prediction toward a negative mood. |
+| **“you”** | +0.0126 | A very strong positive push, but it is countered by the larger negative from “if.” |
+| **“enjoy”** | +0.0045 | Adds a slight positive feeling, hinting that the sentence might be supportive. |
+| **“films”** | +0.0022 | Gives a small positive boost by indicating the topic is movies. |
+| **“like”** | –0.0021 | Slightly discourages a positive tone, making the comparison feel less enthusiastic. |
+| **“american”** | +0.0051 | A notable positive contribution, as the word is associated with a well‑known movie title. |
+| **“pie”** | +0.0029 | Keeps the positive tilt from “american pie” a bit stronger. |
+| **“,”** | –0.0004 | Negligible negative effect. |
+| **“road”** | –0.0018 | Weakly discourages a positive mood. |
+| **“trip”** | +0.0032 | Slightly lifts the sentiment toward positivity. |
+| **“&”** | +0.0011 | Minor positive push. |
+| **“van”** | –0.0044 | A fairly strong negative influence; the word “van” carries a negative connotation here. |
+| **“wilder”** | +0.0030 | Adds a small positive weight, partially offsetting “van.” |
+| **“avoid”** | –0.0013 | Weak negative cue that the movie should be skipped. |
+| **“this”** | –0.0055 | A significant negative signal; “this” helps identify the film as a target for criticism. |
+| **“cinematic”** | –0.0047 | Strongly negative, labeling the movie in a bad way. |
+| **“refuse”** | –0.0000 | Virtually neutral, but technically negative. |
+| **“at”** | –0.0029 | Weak negative contribution. |
+| **“all”** | –0.0033 | Mild negative push. |
+| **“costs”** | –0.0029 | Slightly negative, reinforcing that the film is worth avoiding. |
+
+### Putting it together
+
+- **Positive tokens** (e.g., *you, enjoy, films, american, pie, trip, wilder*) give the model a gentle lift toward a positive sentiment, but none are strong enough to overcome the large negative signals.
+- **Negative tokens** (*if, like, road, van, avoid, this, cinematic, at, all, costs*) cumulatively provide a powerful pull toward a negative outcome. The most influential negative words are **“if,” “this,” “cinematic,”** and **“van.”**
+- Because the total negative influence outweighs the positives, the model’s final prediction is a low probability of a positive rating (≈ 0.013), classifying the review as **negative.**
+
+Thus, the sentence’s mix of negative cues (especially *this*, *cinematic*, and *if*) outweighs the few mild positive hints, leading the model to interpret the review as a strongly negative sentiment.
+
+# EPR Explainer: 0.8628, Verifier: 0.4633

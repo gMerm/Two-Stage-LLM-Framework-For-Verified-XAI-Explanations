@@ -1,0 +1,71 @@
+<think>We need to produce explanation for global and local. Must base only on data. Provide concise actionable insights. Provide direction. For local, include feature values ranges, contribution, weight, direction. Also mention actual vs predicted, error, confidence. Must not add assumptions. Use wording accordingly.
+
+Let's craft.</think>
+**Global View (LIME, top 9 features)**  
+
+| Rank | Feature | Importance Score | Direction on Price | Why it matters |
+|------|---------|------------------|--------------------|----------------|
+| 1 | `carat` | 124.44 | positive | Larger weight correlates strongly with higher price. |
+| 2 | `color` | 102.26 | positive | Better color (lower numeric code) increases value. |
+| 3 | `clarity` | 75.55 | positive | Higher clarity (lower numeric code) boosts price. |
+| 4 | `cut` | 53.20 | positive | Superior cut grades add value. |
+| 5 | `y` | 32.99 | positive | Greater height (y‑dimension) raises price. |
+| 6 | `x` | 10.05 | positive | Wider diamond (x‑dimension) contributes modestly. |
+| 7 | `table` | 9.62 | positive | Larger table percentage slightly increases price. |
+| 8 | `depth` | 6.41 | positive | Deeper cut adds a small value increment. |
+| 9 | `z` | 0.13 | positive | Height dimension has the smallest effect. |
+
+*Interpretation*: The model prioritizes size (`carat`, `y`) and quality descriptors (`color`, `clarity`, `cut`) for pricing. Smaller effects come from dimensional ratios and depth.
+
+---
+
+**Local Explanations**
+
+---
+
+### Instance #676  
+- **Actual price**: $3,172.00  
+- **Predicted price**: $3,601.51  → **Error**: $429.51 (over‑prediction).  
+- **Confidence**: 0.0723 (low).  
+
+| Feature | Value Range | Contribution (Δ $) | Direction | Weight |
+|---------|-------------|--------------------|-----------|--------|
+| `clarity` | `<= 2.0` | +2,075.04 | positive | 0.4234 |
+| `y` | `<= 6.54` and `> 5.71` | –817.87 | negative | 0.1669 |
+| `color` | `<= 4.0` and `> 3.0` | –723.16 | negative | 0.1475 |
+| `x` | `<= 6.55` and `> 5.7` | +537.18 | positive | 0.1096 |
+| `z` | `<= 4.04` and `> 3.53` | +262.97 | positive | 0.0537 |
+| `carat` | `<= 1.05` and `> 0.7` | –185.91 | negative | 0.0379 |
+| `cut` | `<= 2.0` | –109.84 | negative | 0.0224 |
+| `table` | `<= 57.0` and `> 56.0` | +102.95 | positive | 0.0210 |
+| `depth` | `<= 61.8` and `> 61.0` | –86.28 | negative | 0.0176 |
+
+**Key takeaway**: The large positive effect of `clarity` drives the high prediction. Negative contributions from `y`, `color`, `carat`, `cut`, and `depth` partially offset it, but not enough to match the actual price. The low confidence suggests that the local linear surrogate may not fully capture the model’s behavior for this instance.
+
+---
+
+### Instance #737  
+- **Actual price**: $1,981.00  
+- **Predicted price**: $1,917.62  → **Error**: $63.38 (under‑prediction).  
+- **Confidence**: 0.1169 (moderate).  
+
+| Feature | Value Range | Contribution (Δ $) | Direction | Weight |
+|---------|-------------|--------------------|-----------|--------|
+| `carat` | `<= 0.7` and `> 0.4` | –2,897.62 | negative | 0.4874 |
+| `clarity` | `> 5.0` | +902.91 | positive | 0.1519 |
+| `y` | `<= 5.71` and `> 4.72` | –884.52 | negative | 0.1488 |
+| `table` | `<= 57.0` and `> 56.0` | –485.01 | negative | 0.0816 |
+| `x` | `<= 5.7` and `> 4.71` | +324.50 | positive | 0.0546 |
+| `cut` | `<= 2.0` | –311.06 | negative | 0.0523 |
+| `color` | `<= 3.0` and `> 1.0` | +85.92 | positive | 0.0145 |
+| `depth` | `<= 62.5` and `> 61.8` | –30.62 | negative | 0.0052 |
+| `z` | `<= 3.53` and `> 2.91` | +22.67 | positive | 0.0038 |
+
+**Key takeaway**: The dominant negative effect of `carat` pulls the prediction below the actual price. Smaller positive contributions from `clarity`, `x`, `color`, and `z` help offset this but are insufficient. The moderate confidence indicates reasonable reliability of the local explanation for this instance.
+
+---
+
+**Overall Insight**  
+Both instances show that **size (carat, dimensions)** and **quality attributes (color, clarity, cut)** are the primary drivers of price in the XGBRegressor, confirming the global feature importance. Local explanations also highlight that even within the same feature set, the direction and magnitude of each contribution can vary substantially, influencing whether the model over‑ or under‑predicts for a particular diamond.
+
+# EPR Explainer: 0.3923, Verifier: 0.7308

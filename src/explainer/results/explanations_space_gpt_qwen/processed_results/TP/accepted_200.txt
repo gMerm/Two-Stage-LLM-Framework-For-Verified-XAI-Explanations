@@ -1,0 +1,38 @@
+<think>We need to explain every feature influenced the model's prediction for this individual, with context on why it matters for income prediction. Use the mean absolute SHAP values to rank importance. We should explain for each feature: its role, how its value could influence the prediction, mention higher value implies strong influence, lower less.
+
+We should not make assumptions about specific values of the individual's feature, but we can say e.g., "This feature was one of the top drivers" etc.
+
+Be concise, avoid technical terms. Provide actionable insights. For technical vs non-technical? The prompt: explain in clear, accurate natural language for both technical and non-technical audiences. So we should give a simple explanation that non-technical can understand, but also mention some nuance.
+
+So for each feature in the list, in order: WKHP, OCCP, etc. For each: mention the mean absolute SHAP value, ranking importance, what it represents, why it matters.
+
+Let's craft.
+
+We also should mention that SHAP values show contribution regardless of direction. So for each we can say "a high mean SHAP value means the feature is usually influential; a low value means less influence".
+
+Let's produce.</think>
+**How the model decided if this person earns above or below the median income**
+
+The SHAP analysis tells us which of the ten variables the model found most useful in making its decision, and how strongly each one pulls the prediction up or down.  Below is a feature‑by‑feature summary, ordered from the strongest influence to the weakest, along with why that feature is important for income prediction.
+
+| Feature | Mean absolute SHAP value | What it means | Why it matters for income |
+|---------|--------------------------|---------------|---------------------------|
+| **WKHP** (usual hours worked per week) | **0.90** | This is the biggest driver. The model relies heavily on how many hours a person works. | More hours usually mean higher wages or the opportunity to earn overtime, so the model treats this as a strong indicator of higher income. |
+| **OCCP** (occupation code) | **0.63** | Occupation is the second most important factor. | Different jobs carry very different pay scales; knowing the job type lets the model estimate typical earnings for that role. |
+| **AGEP** (age) | **0.52** | Age is the third key contributor. | Earnings tend to rise with experience up to a point, then may level off or decline. Age captures that career‑earning trajectory. |
+| **SCHL** (education level) | **0.46** | Education is also strongly influential. | Higher educational attainment usually opens doors to higher‑paying jobs and promotes career advancement. |
+| **RELP** (relationship to householder) | **0.34** | Relationship status is a moderate factor. | Being the primary earner (e.g., spouse or head of household) often correlates with higher reported income compared to, say, a child or roommate. |
+| **SEX** (gender) | **0.22** | Gender has a smaller, but still noticeable, influence. | Gender can reflect wage disparities in certain industries and positions; the model has learned these patterns. |
+| **POBP** (place of birth) | **0.17** | Place of birth is a weak driver. | It can proxy for migration background, which sometimes correlates with job type or industry exposure. |
+| **COW** (class of worker) | **0.14** | Employment type (private, government, self‑employed, etc.) adds modest insight. | Different employment classes come with varying pay structures, benefits, and stability. |
+| **MAR** (marital status) | **0.10** | Marital status has a very small impact. | Married individuals sometimes have higher combined incomes, but the effect is minor compared to other factors. |
+| **RAC1P** (race) | **0.05** | Race has the least influence in this model. | While it may correlate with occupational and educational disparities, its predictive power for income in this dataset is minimal. |
+
+### Bottom line
+
+- **Hours worked (WKHP), occupation (OCCP), age (AGEP), and education (SCHL)** are the primary levers the model uses to gauge whether someone earns above or below the median.  
+- **Other factors—relationship status, gender, place of birth, employment class, marital status, and race—add smaller refinements** to the prediction.  
+
+By knowing which features drive the model’s decision, stakeholders can focus on the most impactful areas (e.g., encouraging education, job training, or workforce participation) to help lift income levels.
+
+# EPR Explainer: 0.9219, Verifier: 0.5168

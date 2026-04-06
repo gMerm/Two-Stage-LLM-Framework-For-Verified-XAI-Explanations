@@ -1,0 +1,56 @@
+<think>We need to explain each word of top 20 token attributions and how they influenced sentiment prediction. We must base only on data: token, attribution. Negative contributions push negative, positive push positive. Also magnitude indicates strength.
+
+We should explain collectively shape final prediction: overall prediction is 0.0134 positive? Actually predicted_sentiment is "Negative", but prediction value is 0.013, maybe threshold at 0.5. They might interpret probability 0.013 means strongly negative.
+
+Explain each token: "if" negative -0.0126 (strong negative influence). "you" positive 0.0126 (strong positive). etc. Need concise, actionable insights, both technical and non-technical.
+
+We should list each token and description: token, direction, magnitude. Explain how each contributes.
+
+Also note interplay: some words cancel out. Provide overall summary: despite "you" and "enjoy" etc, negative tokens like "if", "avoid", "this", "cinematic" dominate, resulting in negative sentiment.
+
+We must not invent. Provide explanation.
+
+We need to keep within guidelines: no technical language too much.
+
+Let's produce a bullet list, maybe table. Also mention total sum of attributions? We can compute sum: let's approximate: sum of top20 = sum of attributions: We'll sum quickly approximate: -0.0126375556 + 0.0125961145 = -4.14e-05. Add +0.0045203231 => 0.004476. Add +0.0021744878 => 0.0066505. Add -0.00207547797 => 0.0045750. +0.00510031544 => 0.0096753. +0.00289897854 => 0.0125743. + -0.0003934605 => 0.0121808. + -0.00180632714 => 0.0103745. +0.00316428719 => 0.0135388. +0.00112309982 => 0.0146619. + -0.00441649416 => 0.0102454. +0.00297743198 => 0.0132228. + -0.00127935468 => 0.0119435. + -0.00553693576 => 0.0064066. + -0.00470051263 => 0.0017061. + -7.555e-06 => 0.0016986. + -0.00292490399 => -0.0012263. + -0.00327660330 => -0.0045029. + -0.00287883147 => -0.0073818.
+
+So sum is around -0.0074 meaning net negative. That aligns with negative sentiment.
+
+We'll mention that.
+
+Let's produce final explanation.</think>
+**How the top 20 words guided the model’s negative prediction**
+
+| # | Token | Attribution | Effect on sentiment | Notes |
+|---|-------|-------------|---------------------|-------|
+| 1 | **if** | –0.0126 | Strong push toward *negative* | The word “if” gives the largest negative contribution, indicating the model sees it as a cue for doubt or warning. |
+| 2 | **you** | +0.0126 | Strong push toward *positive* | “You” balances the previous negative score; it signals the reviewer’s personal viewpoint, which the model interprets positively. |
+| 3 | **enjoy** | +0.0045 | Mild positive | Suggests a hopeful sentiment, but its weight is small. |
+| 4 | **films** | +0.0022 | Mild positive | Neutral word that slightly nudges the prediction toward positive. |
+| 5 | **like** | –0.0021 | Mild negative | The word “like” is interpreted as a mild warning or contrast, slightly negative. |
+| 6 | **american** | +0.0051 | Moderate positive | Brand‑specific mention that the model views positively. |
+| 7 | **pie** | +0.0029 | Mild positive | The movie title “American Pie” reinforces the positive influence. |
+| 8 | **,** | –0.0004 | Negligible negative | Punctuation is given a tiny negative weight. |
+| 9 | **road** | –0.0018 | Small negative | Part of the phrase “Road Trip,” which the model slightly dislikes. |
+|10 | **trip** | +0.0032 | Small positive | The word “trip” offsets the previous negative to a modest degree. |
+|11 | **&** | +0.0011 | Tiny positive | The ampersand is interpreted as a neutral connector with a slight positive tilt. |
+|12 | **van** | –0.0044 | Moderate negative | “Van Wilder” is judged negatively; the word “van” carries a strong negative weight. |
+|13 | **wilder** | +0.0030 | Small positive | The second part of the title slightly counteracts the negative of “van.” |
+|14 | **avoid** | –0.0013 | Small negative | Direct instruction to steer clear of the movie, a clear negative cue. |
+|15 | **this** | –0.0055 | Moderate negative | The pronoun “this” in context emphasizes the specific film, adding a negative tone. |
+|16 | **cinematic** | –0.0047 | Moderate negative | The word “cinematic” is used sarcastically, so it carries a negative score. |
+|17 | **refuse** | –0.0000076 | Negligible negative | “Refuse” has an almost zero effect but is still negative. |
+|18 | **at** | –0.0029 | Small negative | Preposition “at” is slightly negative in this context. |
+|19 | **all** | –0.0033 | Small negative | The modifier “all” strengthens the negative sentiment. |
+|20 | **costs** | –0.0029 | Small negative | Final word “costs” reinforces the negative verdict. |
+
+### Key take‑aways
+
+- **Net effect:** Adding up the top 20 scores gives a total of about –0.0074, a clear negative drift.  
+- **Balance of forces:** The strongest positive contributions come from the pronoun “you” and the movie title (“american pie”).  
+- **Dominant negatives:** The most influential negative tokens are “if,” “this,” “cinematic,” “van,” and “refuse.” These words signal warning, sarcasm, or direct criticism.  
+- **Collective impact:** Although some positive words appear, the cumulative negative weight outweighs them, leading the model to classify the review as *negative* (prediction probability 0.013).  
+
+In plain terms, the model interprets the reviewer’s overall tone as cautionary and critical, despite occasional positive wording, and therefore predicts a negative sentiment.
+
+# EPR Explainer: 0.7381, Verifier: 0.5030

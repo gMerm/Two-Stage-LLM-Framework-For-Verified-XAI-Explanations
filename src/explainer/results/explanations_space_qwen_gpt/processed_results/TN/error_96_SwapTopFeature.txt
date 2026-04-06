@@ -1,0 +1,56 @@
+<think>Okay, let me approach this systematically. The user wants me to explain token attributions for an IMDB review sentiment analysis, based strictly on the provided data. 
+
+First, I need to understand the core task: converting quantitative attribution scores into natural language explanations. The key is to focus only on the given numbers without adding external knowledge. 
+
+Looking at the data, I notice the prediction is negative (0.013), so I'll highlight how the tokens collectively pushed toward negative sentiment. The top contributors are:
+- Strong negative: "this" (-0.0055), "cinematic" (-0.0047), "refuse" (-0.0000075) - though "refuse" is very weak
+- Strong positive: "you" (0.0126), "enjoy" (0.0045), "american" (0.0051)
+
+Hmm, interesting tension here. The phrase "If you enjoy films like American Pie..." initially seems positive, but the model's negative prediction comes from the subsequent rejection ("avoid this cinematic refuse..."). The attribution scores show this shift clearly.
+
+I should structure the explanation by:
+1. Noting the overall negative prediction
+2. Grouping tokens by their contribution direction
+3. Explaining the narrative flow: the positive setup vs negative conclusion
+4. Emphasizing that weak negative tokens (like "refuse") are overshadowed by stronger negative terms
+
+Important to avoid saying "refuse" is negative - the attribution is barely negative (-7.5e-6), so I'll clarify it's negligible. Also must not mention "American Pie" as a movie title since that's external knowledge.
+
+Wait, the token "van" has negative attribution (-0.0044) but it's part of "Van Wilder" which is a movie title. But I can't reference that - must stick to the token's score alone. So I'll just say "van" contributed slightly to negativity.
+
+For the explanation, I'll:
+- Start with the strongest negative tokens
+- Note the positive tokens were overridden
+- Explain the "if you enjoy..." setup that got negated
+- Mention that punctuation (comma) had minimal effect
+
+Must be careful with numbers: "0.0055" is stronger than "0.0028" so "this" and "cinematic" are more influential than "road trip" etc.
+
+Also checking: all negative-attribution tokens have negative values, positive ones positive. No need to explain sign conventions since the method overview already defined it.
+
+Finally, I'll avoid words like "because" - just state what the scores indicate. For example: "The word 'this' had a negative attribution, meaning it pulled the prediction toward negative sentiment."
+
+*Double-checking*: 
+- Not adding movie title context? Correct, only using token scores.
+- Not inventing why "van" is negative? Correct, just reporting the score.
+- Keeping all explanations tied to the given numbers? Yes.
+
+This should cover it concisely for both technical and non-technical readers.
+</think>
+The model predicted a negative sentiment (0.013) for this review. Here's how the top tokens influenced the prediction based solely on their attribution scores:
+
+**Strong negative contributors** (pushing prediction toward negative):  
+- `"this"` (-0.0055): Strongest negative influence, signaling rejection of the film.  
+- `"cinematic"` (-0.0047): Reinforced the negative judgment of the film's quality.  
+- `"avoid"` (-0.0013), `"all"` (-0.0033), `"costs"` (-0.0029): Combined to emphasize the reviewer's warning against watching.  
+
+**Weak negative contributors** (minimal negative influence):  
+- `"van"` (-0.0044), `"road"` (-0.0018), `"refuse"` (-0.000008): Slightly reinforced negativity but had negligible impact.  
+
+**Positive contributors** (initially pulling toward positive, but overridden by stronger negatives):  
+- `"you"` (+0.0126): Strongest positive signal (likely from "If you enjoy...").  
+- `"enjoy"` (+0.0045), `"american"` (+0.0051), `"pie"` (+0.0029): Supported the initial positive setup ("films like American Pie").  
+
+**Key insight**: The review starts with a positive comparison ("If you enjoy films like American Pie..."), but the model prioritized the overwhelming negative conclusion ("avoid this cinematic refuse...") over the initial positive phrasing. The strongest negative tokens (`"this"`, `"cinematic"`) dominated the prediction, overriding the weaker positive signals.
+
+# EPR Explainer: 0.7309, Verifier: 1.1188

@@ -1,0 +1,45 @@
+<think>We need to explain each token's impact based on attribution. Positive pushes toward positive sentiment, negative pushes negative. Provide explanation for each token. Must be concise. Avoid extra. Provide impact magnitude. Also how collectively shaped prediction: overall negative prediction 0.0134. Sum of top 20 likely negative? Let's quickly sum: compute approximate: -0.0126376 +0.0125961+0.0045203+0.0021745-0.0020755+0.0051003+0.002899-0.0003935-0.0018063+0.0031643+0.0011231-0.0044165+0.0029774-0.0012794-0.0055369-0.0047005-0.00000756-0.0029249-0.0032766-0.0028788.
+
+Sum positives: 0.0125961+0.0045203+0.0021745+0.0051003+0.002899+0.0031643+0.0011231+0.0029774 = 0.032? Let's sum: 0.0125961+0.0045203=0.0171164; +0.0021745=0.0192909; +0.0051003=0.0243912; +0.002899=0.0272902; +0.0031643=0.0304545; +0.0011231=0.0315776; +0.0029774=0.034555.
+
+Negatives: -0.0126376-0.0020755-0.0003935-0.0018063-0.0044165-0.0012794-0.0055369-0.0047005-0.00000756-0.0029249-0.0032766-0.0028788 = sum negative: let's add magnitudes: 0.0126376+0.0020755=0.0147131; +0.0003935=0.0151066; +0.0018063=0.0169129; +0.0044165=0.0213294; +0.0012794=0.0226088; +0.0055369=0.0281457; +0.0047005=0.0328462; +0.00000756=0.0328538; +0.0029249=0.0357787; +0.0032766=0.0390553; +0.0028788=0.0419341.
+
+Net sum = 0.034555 - 0.0419341 = -0.0073791. So top 20 gives negative contribution overall. Model predicted negative with score 0.0134 (maybe probability of positive? unclear). Provide explanation that negative tokens outweighed positive, leading to negative sentiment.
+
+Also mention each token: e.g., "if" strongly negative, "you" positive, etc.
+
+We should explain each token's impact concisely: mention sign and magnitude relative to others.
+
+Also mention collectively: strong negatives like "this", "cinematic", "van" etc. Positive tokens less strong.
+
+Let's craft.</think>
+**How each token nudged the sentiment decision**
+
+| Token | Attribution | Effect on prediction | Why it matters |
+|-------|-------------|---------------------|----------------|
+| **if** | –0.0126 | Strong negative push | This conditional word is treated as a cue for doubt or caution, pulling the model toward a negative outcome. |
+| **you** | +0.0126 | Strong positive push | Personal pronouns can signal a direct appeal; here it gives a slight boost toward positivity. |
+| **enjoy** | +0.0045 | Small positive push | Indicates a positive feeling about something, nudging the model a little toward positive. |
+| **films** | +0.0022 | Small positive push | Generic noun that carries mild positivity. |
+| **like** | –0.0021 | Small negative push | In this context the word “like” is part of a negative comparison (“like American Pie”), which the model learns as a negative cue. |
+| **american** | +0.0051 | Moderate positive push | The adjective “American” is associated with familiar, upbeat movie references, slightly favoring positivity. |
+| **pie** | +0.0029 | Small positive push | A film title that the model has learned to associate with a positive sentiment. |
+| **,** | –0.0004 | Negligible negative | The comma signals a pause; its slight negative attribution likely comes from the surrounding negative clause. |
+| **road** | –0.0018 | Small negative push | Paired with “trip”, it is part of a negative suggestion (“Road Trip”) that the model weighs negatively. |
+| **trip** | +0.0032 | Small positive push | The noun “trip” itself carries mild positivity but is offset by “road”. |
+| **&** | +0.0011 | Small positive push | Acts as a connector; the model gives it a minimal positive credit. |
+| **van** | –0.0044 | Moderate negative push | The word “van” is tied to “Van Wilder”, a movie the model associates with negative sentiment. |
+| **wilder** | +0.0030 | Small positive push | The surname is a mild positive contributor in isolation. |
+| **avoid** | –0.0013 | Small negative push | Explicitly a negative verb (“avoid”) that pushes the prediction toward negative. |
+| **this** | –0.0055 | Strong negative push | Indicates a specific reference to the film, strongly aligning with the overall negative sentiment. |
+| **cinematic** | –0.0047 | Strong negative push | The adjective “cinematic” is surprisingly negative here, likely because the surrounding context frames the film poorly. |
+| **refuse** | –0.0000076 | Negligible negative | Essentially neutral; its negative attribution is minuscule. |
+| **at** | –0.0029 | Small negative push | Part of the phrase “at all costs”; the model interprets it as a negative cue. |
+| **all** | –0.0033 | Moderate negative push | Emphasizes “all costs”, reinforcing the negative stance. |
+| **costs** | –0.0029 | Small negative push | Contributes to the negative “at all costs” phrase. |
+
+**Collective picture**
+
+The top 20 tokens together produce a net negative influence (~ –0.0074). Strong negative contributors such as **“if,” “this,” “cinematic,”** and **“van”** outweigh the moderate positives (**“you,” “enjoy,” “american,”** etc.). Consequently, the model’s final sentiment score is negative (0.0134), reflecting a clear bias toward labeling the review as unfavorable.
+
+# EPR Explainer: 0.6100, Verifier: 0.5865

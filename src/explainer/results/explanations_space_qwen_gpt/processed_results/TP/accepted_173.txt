@@ -1,0 +1,61 @@
+<think>Okay, let me tackle this explanation request. The user wants me to convert Integrated Gradients token attributions into clear natural language explanations for both technical and non-technical audiences. 
+
+First, I need to carefully analyze the provided data. The top_20 token attributions show which words most influenced the model's negative sentiment prediction (since prediction is 0.013, very close to 0 meaning negative). 
+
+Hmm, I notice the attribution scores have both positive and negative values. Positive attributions (like "you" at +0.0126) push toward positive sentiment, but in this case, they're actually contributing to the negative prediction because... wait no, I need to be careful here. Actually, in sentiment analysis, positive attributions mean the word makes the model think "more positive", but since the final prediction is negative, the negative attributions (pushing toward negative) must dominate.
+
+Let me sort the tokens by attribution magnitude to see the strongest influences:
+- Most negative: "this" (-0.0055), "cinematic" (-0.0047), "van" (-0.0044)
+- Most positive: "you" (+0.0126), "enjoy" (+0.0045)
+
+But wait - the model predicted negative sentiment, so the negative attributions (pulling toward negative) are the dominant force. The positive ones like "you" are actually pulling toward positive but not enough to overcome the negative words.
+
+I should explain this clearly without jargon. For non-technical people, I'll avoid terms like "attribution" and just say "which words made the model think this was negative".
+
+Important to note: "you" has the highest positive attribution, but since the overall sentiment is negative, I should clarify that this positive word was outweighed by stronger negative words. The phrase "if you enjoy films like American Pie..." is setting up a contrast with "avoid this", so the "you" is part of the negative context.
+
+For the negative words: 
+- "this" and "cinematic refuse" are key - "refuse" has near-zero negative score but "cinematic" and "this" are strong
+- "van" (from "Van Wilder") has negative attribution, which makes sense because the reviewer is saying to avoid movies like that
+
+I should group related words: 
+- The negative cluster: "this cinematic refuse at all costs" (all negative attributions)
+- The positive setup: "if you enjoy films like American Pie, Road Trip & Van Wilder" (but note "like" and "road trip" have negative scores too? Wait "road" is -0.0018, "trip" is +0.0032 - so mixed)
+
+Wait, let me double-check the scores:
+- "road" is negative (-0.0018), "trip" is positive (+0.0032) - so the movie titles have mixed influence, but the overall phrase is negative because the "avoid" part dominates.
+
+Biggest mistake I could make: saying "positive words made it negative" - no, it's that the negative words were stronger. Must be precise.
+
+For the explanation structure:
+1. Start with overall sentiment (negative)
+2. Highlight strongest negative contributors (this, cinematic, van)
+3. Note the contrasting positive words but explain why they didn't change the outcome
+4. Keep it under 150 words as per "concise" guideline
+
+Also must avoid:
+- Inventing that "American Pie" is positive (it's part of the negative context)
+- Saying "refuse" is strongly negative (it has near-zero score)
+- Mentioning the review length (86 minutes) since it's not in top tokens
+
+Finally, verify all numbers match the data:
+- "you" is +0.0126 (highest positive)
+- "this" is -0.0055 (most negative)
+- "van" is -0.0044 (next strongest negative)
+
+Okay, ready to write the explanation now.
+</think>
+The model predicted a negative sentiment (0.013) for this review. The top tokens influencing this decision are:
+
+**Strong negative contributors** (pulling toward negative sentiment):  
+- "this" (-0.0055), "cinematic" (-0.0047), and "van" (-0.0044) form a critical negative phrase ("cinematic refuse"), with "van" referencing the disliked movie "Van Wilder."  
+- "avoid" (-0.0013) and "refuse" (-0.000007) directly reinforce the negative recommendation.  
+- "all costs" (-0.0033) and "at" (-0.0029) strengthen the warning tone.
+
+**Weaker positive contributors** (pulling toward positive, but overpowered):  
+- "you" (+0.0126) and "enjoy" (+0.0045) appear in the setup ("if you enjoy films..."), but the negative context ("avoid this") dominates.  
+- "American" (+0.0051) and "pie" (+0.0029) reference disliked films but lack sufficient weight to counter the negative words.
+
+**In summary**: The review’s strongest negative words ("this," "cinematic," "van," "avoid") collectively outweighed the weaker positive setup, confirming the negative prediction.
+
+# EPR Explainer: 0.6880, Verifier: 1.0678

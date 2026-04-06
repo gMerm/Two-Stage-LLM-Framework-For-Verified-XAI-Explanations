@@ -1,0 +1,41 @@
+<think>Okay, let me break this down step by step. The user wants me to explain token attributions for a negative movie review using Integrated Gradients scores. First, I need to understand what each attribution means: positive numbers push toward positive sentiment, negative numbers toward negative.
+
+Looking at the top 20 tokens, I notice most are negative contributors (negative attribution scores) which makes sense since the prediction is negative. But there are some positive ones too - like "you" (0.0126) and "enjoy" (0.0045). 
+
+Hmm, interesting how "you" has the strongest positive attribution. That's counterintuitive at first glance because the review is negative. But I recall that in negative reviews, words like "you" might be part of phrases that set up contrast - like "if you enjoy X, avoid Y". So "you" is actually helping the model recognize the negative comparison.
+
+Let me check the magnitudes: "if" is -0.0126 (strong negative), "you" is +0.0126 (strong positive), "american" is +0.0051, "pie" is +0.0029. The negative tokens like "avoid" (-0.0013), "this" (-0.0055), "cinematic refuse" (-0.0047) are the main drivers of the negative sentiment.
+
+Wait, "refuse" has a tiny negative score (-7.5e-6) - almost negligible. I should note that but not overemphasize it. The real heavy hitters are "this" and "cinematic" with -0.0055 and -0.0047.
+
+For the explanation, I'll need to group these: 
+- The positive tokens are mostly setting up the contrast ("if you enjoy films like...") 
+- The negative tokens are the actual criticism ("avoid this cinematic refuse")
+
+Important to clarify that "you" being positive doesn't mean the review is positive - it's about the structure. The model uses that contrast to identify the negative sentiment.
+
+Also must remember: no invented details. Just state what the numbers show. And keep it simple for non-tech people - no "attribution scores" jargon, just "words that made the model think negative".
+
+Double-checking the prediction: 0.0134 is very close to 0 (negative), so the negative tokens dominate. The positive ones are minor compared to the strong negatives.
+
+For the explanation structure:
+1. Start with overall sentiment (negative)
+2. Explain the key negative words driving it
+3. Note the positive words are just part of the setup, not the sentiment
+4. Keep it to the top 20 tokens only as given
+
+Making sure not to mention "American Pie" as a film title since that's outside the data - just say "reference to films like American Pie" as per the review text.
+</think>
+The model predicted a negative sentiment (0.013, near 0) for this review. Here's how the top words influenced that prediction:
+
+**Strong negative drivers (pushing sentiment down):**  
+- "if" (−0.0126) and "you" (+0.0126) form a critical contrast: The model recognizes that the reviewer is *warning* the reader ("if you enjoy [positive films]...") to set up the negative judgment.  
+- "this" (−0.0055), "cinematic" (−0.0047), and "refuse" (−0.0000075) directly condemn the film as worthless.  
+- "avoid" (−0.0013), "all costs" (−0.0033), and "waste" (implied by "refuse") reinforce strong disapproval.  
+
+**Minor positive words (setting up contrast, not indicating positivity):**  
+- "enjoy" (+0.0045), "films" (+0.0022), "american" (+0.0051), and "pie" (+0.0029) reference *positive* films (like *American Pie*) to highlight the reviewer’s disappointment with the current film. These words alone wouldn’t make the review positive—they signal the *comparison* that makes the current film seem worse.  
+
+**Key insight:** The negative words ("this," "cinematic refuse," "avoid") dominate the prediction, while positive words like "enjoy" are used *to contrast* and emphasize the film’s failure. The model interprets the entire phrase ("if you enjoy X, avoid Y") as a strong negative statement.
+
+# EPR Explainer: 0.6775, Verifier: 1.0581

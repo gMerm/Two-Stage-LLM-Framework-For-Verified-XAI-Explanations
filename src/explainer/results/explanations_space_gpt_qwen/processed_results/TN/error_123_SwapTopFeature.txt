@@ -1,0 +1,68 @@
+<think>We need to explain how each word of the top 20 token attributions influenced the model's sentiment prediction. Need to describe impact of all tokens positive and negative, how they shape final prediction. Use only provided quantitative data.
+
+We have tokens with attributions (positive or negative). Should explain that positive tokens push toward positive sentiment, negative tokens push toward negative sentiment. Provide context: each token's attribution magnitude relative to others.
+
+We need to be concise, but also explain collective effect. Provide actionable insights: how each token contributed.
+
+Also we must adhere to guidelines: no extra info beyond given data. No speculation.
+
+We should mention that the model predicted negative sentiment with probability ~0.0134. The tokens with largest negative contributions: "this" (-0.0055), "cinematic" (-0.0047), "van" (-0.0044), "avoid" (-0.0013), etc. Positive: "you" 0.0126, "american" 0.0051, etc.
+
+Explain that the highest positive attribution is "you" (0.0126) followed by "american" (0.0051), "this" negative etc.
+
+Explain that overall the negative attributions outweigh positives leading to negative prediction.
+
+Also explain that token like "if" negative small but still negative.
+
+Ok produce final answer.</think>
+**How each of the 20 most influential words shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **you** | +0.0126 | Strongly pushes the model toward a positive view. |
+| **american** | +0.0051 | Adds a small positive bias. |
+| **pie** | +0.0029 | Minor positive push. |
+| **you** (again) | +0.0045 (enjoy) | Positive contribution, but smaller than “you”. |
+| **trip** | +0.0032 | Slight positive influence. |
+| **van** | –0.0044 | Pulls the sentiment more negative. |
+| **wilder** | +0.0030 | Small positive lift. |
+| **if** | –0.0126 | Substantial negative tilt. |
+| **like** | –0.0021 | Negative bias. |
+| **road** | –0.0018 | Negative influence. |
+| **&** | +0.0011 | Tiny positive lift. |
+| **avoid** | –0.0013 | Minor negative push. |
+| **this** | –0.0055 | Strong negative pull. |
+| **cinematic** | –0.0047 | Significant negative influence. |
+| **at** | –0.0029 | Negative bias. |
+| **all** | –0.0033 | Negative impact. |
+| **costs** | –0.0029 | Negative contribution. |
+| **refuse** | –0.0000076 | Negligible negative effect. |
+| **,** | –0.0004 | Slight negative tilt. |
+
+### What the numbers tell us
+
+1. **Positive vs. negative forces**  
+   - The top three positive tokens (“you”, “american”, “pie”) collectively add about +0.020.  
+   - The top four negative tokens (“if”, “this”, “cinematic”, “van”) subtract roughly –0.025.  
+   - Because the negative contributions outweigh the positives, the model settles on a **negative** sentiment (probability 0.013).
+
+2. **Key drivers**  
+   - **“you”** is by far the single biggest positive signal, suggesting the model associates the word “you” with a more favorable tone.  
+   - **“if”** is the largest single negative influence; the conditional “if” may be interpreted as a hedge that lowers confidence in positivity.  
+   - **“this”, “cinematic”, and “van”** together form a strong negative cluster, pointing the model toward a harsh critique.
+
+3. **Subtle effects**  
+   - Very small contributions (e.g., “refuse”, “,”) barely shift the outcome but illustrate the model’s sensitivity to even minor tokens.  
+   - The punctuation token “,” shows a tiny negative tilt, indicating that commas in this context are associated with more critical phrasing.
+
+4. **Overall prediction**  
+   - Despite a few positive words, the aggregate of the top 20 tokens drives the sentiment toward the negative side.  
+   - The final probability (≈ 0.013) reflects a clear preference for “Negative” given the dominant negative attributions.
+
+### Take‑away
+
+- **Positive words** (“you”, “american”, etc.) *soften* the negative verdict but cannot overcome the larger negative signals.  
+- **Negative words** (“if”, “this”, “cinematic”, “van”) *steer* the prediction toward a negative assessment.  
+- Understanding these token impacts helps explain why the model flags this review as negative, even when some individual words seem neutral or mildly positive.
+
+# EPR Explainer: 0.8032, Verifier: 0.5252

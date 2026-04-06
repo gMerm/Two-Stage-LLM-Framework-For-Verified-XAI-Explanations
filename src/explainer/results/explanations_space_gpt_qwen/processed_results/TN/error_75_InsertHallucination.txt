@@ -1,0 +1,49 @@
+<think>We need to explain how each word influenced sentiment prediction. Provide clear explanation for technical and non-technical audiences. Use data only, no extra assumptions. We should note positive or negative contributions, magnitude. The prediction is 0.0134 positive probability? predicted sentiment negative. Explanation: tokens with positive attribution push toward positive, negative push toward negative. Provide concise. Use token list.
+
+Let's craft explanation.</think>
+**Model’s Sentiment Decision (Review #198)**  
+- The model predicted a very weak positive probability (0.013 ≈ 1.3 %) → overall **negative** sentiment.  
+- The 20 most influential words are listed below.  Positive attributions nudged the model toward “positive”; negative attributions nudged it toward “negative.”  The absolute size shows how strongly each word pushed the decision.
+
+| # | Token | Attribution | Effect on Prediction |
+|---|-------|-------------|----------------------|
+| 1 | **if** | –0.0126 | Strongly pushed the model toward negative. |
+| 2 | **you** | +0.0126 | Strongly pushed the model toward positive. |
+| 3 | **enjoy** | +0.0045 | Slight positive push. |
+| 4 | **films** | +0.0022 | Slight positive push. |
+| 5 | **like** | –0.0021 | Small negative push. |
+| 6 | **american** | +0.0051 | Positive push. |
+| 7 | **pie** | +0.0029 | Positive push. |
+| 8 | **,** | –0.0004 | Negligible negative push. |
+| 9 | **road** | –0.0018 | Small negative push. |
+|10 | **trip** | +0.0032 | Positive push. |
+|11 | **&** | +0.0011 | Positive push. |
+|12 | **van** | –0.0044 | Negative push. |
+|13 | **wilder** | +0.0030 | Positive push. |
+|14 | **avoid** | –0.0013 | Negative push. |
+|15 | **this** | –0.0055 | Negative push. |
+|16 | **cinematic** | –0.0047 | Negative push. |
+|17 | **refuse** | –0.0000076 | Virtually no effect. |
+|18 | **at** | –0.0029 | Negative push. |
+|19 | **all** | –0.0033 | Negative push. |
+|20 | **costs** | –0.0029 | Negative push. |
+
+### How the tokens shaped the final prediction
+
+1. **Strong opposing forces**  
+   - The biggest positive contributors are *you*, *american*, *pie*, *trip*, *wilder*, and *enjoy*.  
+   - The biggest negative contributors are *if*, *this*, *cinematic*, *van*, *all*, and *at*.  
+   - When these high‑magnitude words are combined, the negative tokens slightly outweigh the positive ones, giving the model a very low overall positive probability.
+
+2. **Cumulative influence**  
+   - Adding up all 20 attributions gives a net contribution of roughly –0.015, matching the final negative prediction.  
+   - Even though some positive words (“american pie”, “trip”, “wilder”) signal enjoyment, the model treats the surrounding negative framing (“if you enjoy… avoid this cinematic refuse… at all costs”) as a stronger cue for dislike.
+
+3. **Contextual nuance**  
+   - Words like *you* and *enjoy* are positive in isolation but appear early in a conditional clause that ultimately leads to a warning, diluting their effect.  
+   - Negative tokens that directly describe the film (*cinematic refuse*, *avoid*, *this*) have a higher weight because they are tied to the film’s evaluation rather than a generic statement.
+
+### Take‑away for non‑technical readers  
+The model “reads” this review as a warning: it highlights a few enjoyable movie titles, but the overall tone is strongly negative because the reviewer explicitly advises against watching the film. The strongest negative words—*if*, *this*, *cinematic*, *van*, *all*, *at*—tipped the decision toward a negative sentiment, even though some positive words were present.
+
+# EPR Explainer: 0.6685, Verifier: 0.2400

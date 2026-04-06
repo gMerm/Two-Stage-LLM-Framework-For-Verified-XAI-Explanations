@@ -1,0 +1,81 @@
+<think>We need to produce explanation. Provide global explanation: rank features with direction? The LIME output shows importance scores but direction not given. We can infer direction: higher carat -> higher price, etc. Provide context.
+
+Local explanations: Provide details for each instance: contributions, direction, value ranges, weight. Also mention error. Provide interpretability confidence.
+
+Ensure we only use data given. No speculation. Provide concise.</think>
+**Global (dataset‑wide) explanation – LIME**
+
+| Rank | Feature | Importance (LIME score) | Typical influence on price |
+|------|---------|------------------------|----------------------------|
+| 1 | **carat** | 124.44 | Strongly positive – larger diamonds command higher prices. |
+| 2 | **color** | 102.26 | Positive – better color grades (closer to “D”) raise price. |
+| 3 | **clarity** | 75.55 | Positive – higher clarity grades increase value. |
+| 4 | **cut** | 53.20 | Positive – better cut quality raises price. |
+| 5 | **y** (depth of the diamond) | 32.99 | Positive – deeper diamonds tend to be more valuable. |
+| 6 | **x** (length) | 10.05 | Positive – longer diamonds add value, but to a smaller extent. |
+| 7 | **table** | 9.62 | Slightly positive – larger table can increase price. |
+| 8 | **depth** (overall percentage) | 6.41 | Slightly positive – optimal depth adds value. |
+| 9 | **z** (height) | 0.13 | Minor positive effect. |
+
+*Why these features matter:*  
+- **Carat** captures the overall mass; price scales roughly linearly with mass.  
+- **Color, clarity, and cut** are the classic “four Cs” that describe a diamond’s quality, directly influencing desirability.  
+- **y, x, z, table, depth** describe shape and proportion; while they influence aesthetics, their effect on price is smaller than the core quality attributes.
+
+---
+
+## Local explanations
+
+### Instance #676
+| Feature | Observed range | Contribution to prediction | Direction | Weight |
+|---------|----------------|----------------------------|-----------|--------|
+| **clarity** | `<= 2.0` | +2075.04 | + | 0.423 |
+| **y** | `<= 6.54` & `> 5.71` | –817.87 | – | 0.167 |
+| **color** | `<= 4.0` & `> 3.0` | –723.16 | – | 0.148 |
+| **x** | `<= 6.55` & `> 5.7` | +537.18 | + | 0.110 |
+| **z** | `<= 4.04` & `> 3.53` | +262.97 | + | 0.054 |
+| **carat** | `<= 1.05` & `> 0.7` | –185.91 | – | 0.038 |
+| **cut** | `<= 2.0` | –109.84 | – | 0.022 |
+| **table** | `<= 57.0` & `> 56.0` | +102.95 | + | 0.021 |
+| **depth** | `<= 61.8` & `> 61.0` | –86.28 | – | 0.018 |
+
+*Prediction details*  
+- **Actual price:** \$3,172  
+- **Predicted price:** \$3,601.51  
+- **Absolute error:** \$429.51  
+
+*Interpretability confidence* – **0.072** (lower confidence; the local linear model explains a modest fraction of the total prediction).  
+*Relative influence*: The largest share comes from **clarity** (≈42 % of the total effect), followed by the negative contribution of **y** and **color**. Positive shape features (**x, z, table**) offset some of the negative contributions.
+
+---
+
+### Instance #737
+| Feature | Observed range | Contribution to prediction | Direction | Weight |
+|---------|----------------|----------------------------|-----------|--------|
+| **carat** | `<= 0.7` & `> 0.4` | –2897.62 | – | 0.487 |
+| **clarity** | `> 5.0` | +902.91 | + | 0.152 |
+| **y** | `<= 5.71` & `> 4.72` | –884.52 | – | 0.149 |
+| **table** | `<= 57.0` & `> 56.0` | –485.01 | – | 0.082 |
+| **x** | `<= 5.7` & `> 4.71` | +324.50 | + | 0.055 |
+| **cut** | `<= 2.0` | –311.06 | – | 0.052 |
+| **color** | `<= 3.0` & `> 1.0` | +85.92 | + | 0.014 |
+| **depth** | `<= 62.5` & `> 61.8` | –30.62 | – | 0.005 |
+| **z** | `<= 3.53` & `> 2.91` | +22.67 | + | 0.004 |
+
+*Prediction details*  
+- **Actual price:** \$1,981  
+- **Predicted price:** \$1,917.62  
+- **Absolute error:** \$63.38  
+
+*Interpretability confidence* – **0.117** (higher than instance 676, indicating a more reliable local linear fit).  
+*Relative influence*: The largest single effect is the negative contribution of **carat** (≈49 % of the total effect). Positive terms come mainly from **clarity** and **x**; the negative shape contributions (**y, table, cut**) largely counterbalance them, yielding a prediction close to the true price.
+
+---
+
+**Take‑away**
+
+- Across the whole dataset, **carat** is the dominant driver of price, followed by the core quality attributes (**color, clarity, cut**).  
+- In local instances, the model highlights which specific attribute ranges are pushing the prediction up or down, allowing a buyer or seller to see exactly why a particular diamond is valued the way it is.  
+- The confidence scores signal how trustworthy each local explanation is; higher values mean the linear approximation aligns more closely with the complex XGB model’s behavior.
+
+# EPR Explainer: 0.4632, Verifier: 0.6704

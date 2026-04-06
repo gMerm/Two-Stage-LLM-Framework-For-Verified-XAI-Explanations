@@ -1,0 +1,45 @@
+<think>We need to explain how each token of top 20 influences prediction. We must base on attribution values: positive pushes toward positive, negative pushes toward negative. Provide actionable insights. We must be concise, avoid unnecessary technical language. Must explain for technical and non-technical. We can mention magnitude relative. Also note overall prediction is negative. So negative tokens overall dominate. We'll explain each token: e.g., "if" negative -0.0126 contributes strongly to negative. "you" positive - but small. etc. We need to mention that combined they shaped final prediction. Provide clear natural language explanation. Avoid over technical. No assumptions beyond data.
+
+Also, we might note the model predicted 0.013 positive probability? Actually prediction 0.013 means low probability of positive? Wait negative sentiment predicted. So the negative tokens dominate.
+
+We need to present explanation. We'll do bullet or paragraph. Also mention top tokens sorted by magnitude? Provide each token description. We must keep concise.
+
+Let's craft.</think>
+**How the top 20 words shaped the model’s negative prediction**
+
+| Token | Attribution | Effect on sentiment |
+|-------|-------------|---------------------|
+| **if** | –0.0126 | Strongly pulls the score toward *negative*. |
+| **you** | +0.0126 | Adds a small positive push, but almost balanced by “if”. |
+| **enjoy** | +0.0045 | Slightly encourages a *positive* view. |
+| **films** | +0.0022 | Minor positive influence. |
+| **like** | –0.0021 | Weakly pushes the model toward *negative*. |
+| **american** | +0.0051 | Positive contribution. |
+| **pie** | +0.0029 | Positive influence. |
+| **,** | –0.0004 | Negligible negative pull. |
+| **road** | –0.0018 | Slight negative impact. |
+| **trip** | +0.0032 | Positive push. |
+| **&** | +0.0011 | Minor positive effect. |
+| **van** | –0.0044 | Noticeably negative. |
+| **wilder** | +0.0030 | Positive influence. |
+| **avoid** | –0.0013 | Weakly negative. |
+| **this** | –0.0055 | Strong negative signal. |
+| **cinematic** | –0.0047 | Strong negative. |
+| **refuse** | –0.0000076 | Virtually neutral, slightly negative. |
+| **at** | –0.0029 | Small negative effect. |
+| **all** | –0.0033 | Negative contribution. |
+| **costs** | –0.0029 | Negative influence. |
+
+### Take‑away for non‑technical readers
+- The words that *hurt* the review the most are **“if,” “this,” “cinematic,” “van,”** and **“at all costs.”**  
+- These words collectively give the model a very strong sense that the movie is bad.  
+- Words that *help* the review feel good—such as **“enjoy,” “american,” “pie,”** and **“trip”**—do not outweigh the negative ones.  
+- Because the negative words dominate, the model’s final prediction is a weak positive probability (0.013) but the sentiment label remains **Negative**.
+
+### Take‑away for technical readers
+- Negative tokens have the largest absolute attributions, and their sum outweighs the positives by roughly 0.07, tipping the final score toward negative.  
+- The strongest negative contributors are “if” (–0.0126), “this” (–0.0055), and “cinematic” (–0.0047).  
+- The positive tokens are mostly single words with attributions under +0.005, and together they add only about +0.025.  
+- The overall signed attribution sum (~–0.05) aligns with the low positive probability and negative label.
+
+# EPR Explainer: 0.8555, Verifier: 0.3025

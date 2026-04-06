@@ -1,0 +1,32 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual, with context why it matters. The XAI output gives feature list and mean absolute SHAP values sorted descending. We need to interpret each. Provide concise natural language explanation for both technical and non-technical audiences. Should base on quantitative data: mean absolute SHAP values reflect relative importance. Need to talk about each feature in order maybe descending importance.
+
+We should not invent details beyond given. So we can say: "WKHP" has mean_abs_shap 0.904, highest, indicates usual hours worked per week is the strongest predictor; more hours likely increase income. OCCP second, etc.
+
+We can give actionable insights: e.g., individuals who work more hours or hold certain occupations may earn above median. Also educational attainment, age, relationship, sex, place of birth, etc.
+
+We should not use too much technical language. But include that mean SHAP values indicate average absolute contribution.
+
+Let's produce final explanation.
+
+</think>
+**How the model decided this person’s income is above/below the median**
+
+The numbers in the “mean_abs_shap” column show how much, on average, each feature pushes the model’s prediction in one direction or the other (the higher the number, the stronger the influence). Below is a simple interpretation of each feature, in order of strongest to weakest impact.
+
+| Feature | Mean | Why it matters for income prediction |
+|---------|------|--------------------------------------|
+| **WKHP** (usual hours worked per week) | **0.904** | Hours worked are the most powerful signal. People who work more hours per week tend to earn higher wages, so the model strongly uses this feature to push a prediction toward the “above‑median” class. |
+| **OCCP** (occupation code) | **0.630** | Job type is a very important indicator. Certain occupations (e.g., managers, specialized technicians) are associated with higher pay, so the model relies heavily on occupation to assess income level. |
+| **AGEP** (age) | **0.517** | Age reflects experience and career stage. Middle‑aged adults (often with more experience) usually earn more than younger or very old workers, so age contributes noticeably to the prediction. |
+| **SCHL** (educational attainment) | **0.465** | Education level is a key driver of earning power. Higher degrees or more schooling typically lead to better jobs and higher pay, so the model counts education as a strong factor. |
+| **RELP** (relationship to householder) | **0.343** | Whether a person is a spouse, child, or other relative can affect income expectations (e.g., a spouse may be the primary earner). This relationship context helps the model gauge likely earnings. |
+| **SEX** (sex) | **0.224** | Gender can be associated with earnings gaps in many labor markets. The model captures these patterns, giving gender a moderate influence on the prediction. |
+| **POBP** (place of birth) | **0.172** | Origin or birthplace can correlate with regional economic differences or access to opportunities, so it has a small but noticeable effect. |
+| **COW** (class of worker) | **0.137** | The employment type (private, government, self‑employed, etc.) slightly shifts income expectations, as some sectors pay higher wages. |
+| **MAR** (marital status) | **0.102** | Married or single status can influence household income and labor participation, thus providing a modest contribution to the model. |
+| **RAC1P** (race) | **0.053** | Racial group has the weakest influence among the features, but the model still picks up on broader socioeconomic patterns that affect earnings. |
+
+**Takeaway**  
+The model bases its income prediction mainly on how many hours the person works, what job they have, their age, and their education. Features that capture household context (relationship, marital status), gender, place of birth, employment type, and race add smaller adjustments. Understanding these priorities helps explain why the model classified this individual’s income as above or below the median.
+
+# EPR Explainer: 0.8967, Verifier: 0.6170

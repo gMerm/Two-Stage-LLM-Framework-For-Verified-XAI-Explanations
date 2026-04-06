@@ -1,0 +1,22 @@
+<think>We need to explain each feature that influenced the model's prediction for this individual, providing context why it matters for income prediction. Use only quantitative data: the list of features with mean absolute SHAP values. Provide natural language explanation for each, maybe ordering by importance. Explain higher mean SHAP indicates stronger impact. Provide actionable insights. Keep concise. Provide both technical and non-technical contexts. Avoid unnecessary technical language. We must base explanation on given data only. So for each feature, state its importance ranking and significance: e.g., "WKHP has the highest mean absolute SHAP value of ~0.904, indicating that usual hours worked per week is the most influential factor in predicting whether income is above or below median." Then provide context: "Working more hours tends to correlate with higher income." etc. For OCCP, etc. We should explain the importance of each feature in context: why education, occupation, age, etc. We must not invent data about values for this individual. Just explain feature importance. Provide for technical and non-technical audiences: maybe a brief summary then deeper explanation. Should not include any system prompts. Let's comply.</think>
+**How the model decided whether this person’s income is above or below the median**
+
+The model looks at ten different characteristics of a person. For each characteristic it estimates how much that characteristic shifts the prediction away from the average (“mean absolute SHAP value”). A higher number means that the characteristic matters more for the decision.
+
+| Rank | Feature | Mean Abs SHAP | Why it matters for income |
+|------|---------|---------------|---------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.904** | Working more hours is usually linked to higher pay. Because the model relies heavily on this feature, the number of hours a person works is the strongest signal for whether they earn above or below the median. |
+| 2 | **OCCP** (occupation code) | **0.630** | Different jobs pay very differently. Knowing the occupation gives the model a strong clue about expected earnings, so it carries the second‑most influence. |
+| 3 | **AGEP** (age) | **0.517** | Age reflects experience, career stage, and possibly seniority. Older workers often have higher incomes, so age is an important predictor. |
+| 4 | **SCHL** (education level) | **0.465** | Educational attainment strongly correlates with earning potential. Higher degrees usually open doors to better‑paid positions. |
+| 5 | **RELP** (relationship to householder) | **0.343** | A person’s household role (spouse, child, roommate, etc.) can influence their job choices and available opportunities, affecting income. |
+| 6 | **SEX** (gender) | **0.224** | Gender can reflect systemic wage gaps and differences in occupational choices, so it still contributes meaningfully to the model’s prediction. |
+| 7 | **POBP** (place of birth) | **0.172** | Birthplace may indicate regional economic conditions or cultural factors that influence career prospects and income. |
+| 8 | **COW** (class of worker) | **0.137** | Whether a person works in the private sector, government, or is self‑employed affects typical earnings ranges and stability. |
+| 9 | **MAR** (marital status) | **0.102** | Marital status can affect household income dynamics and career decisions, giving the model some additional context. |
+|10 | **RAC1P** (race) | **0.053** | Race can be a proxy for social and economic disparities that influence earnings, though it has the smallest impact in this model. |
+
+**Key takeaway:**  
+The model bases its prediction primarily on *how many hours a person works*, *what job they have*, and *their age and education*. These three features together explain most of the variation in whether a person earns above or below the median income in the dataset. The remaining features provide smaller, but still useful, pieces of information that help refine the prediction.
+
+# EPR Explainer: 0.8800, Verifier: 0.5391

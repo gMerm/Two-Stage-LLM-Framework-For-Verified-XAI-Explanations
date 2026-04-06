@@ -1,0 +1,56 @@
+<think>We need to explain how each word of the top 20 token attributions influenced the model's sentiment prediction. Provide both positive and negative contributors, describe how each token impacted the final prediction. Use quantitative data: attribution values. The prediction is 0.013442830182611942 (positive score close to 0? Actually it's probably probability of positive? They labeled negative but score close to zero indicates negative. Attributions sum to approximate the difference from baseline. Provide explanation in natural language, concise, actionable insights. Avoid technical details beyond what is given. Use "positive" and "negative" attribution values. Provide interpretation of each token.
+
+We must avoid making assumptions beyond the data. So we will describe that tokens with positive attribution push the prediction toward positive sentiment, and negative push toward negative. Mention magnitude indicates strength.
+
+We should mention that the overall prediction is negative due to cumulative negative contributions outweighing positive contributions.
+
+We need to show how each token influenced prediction. For each token, note the attribution and its direction.
+
+Let's craft an explanation.
+
+We'll start with general: the model predicts negative sentiment; the top 20 tokens show a mix. Then list each token, its attribution, and its effect: positive attribution indicates push toward positive, negative pushes toward negative.
+
+Provide succinct sentences for each token.
+
+We should mention that the largest negative contributions are "this" (-0.0055), "cinematic" (-0.0047), "van" (-0.0044), "at" (-0.0029), "all" (-0.0033), "costs" (-0.0029), "avoid" (-0.0013), "road" (-0.0018), "if" (-0.0126). Largest positives: "you" (0.0126), "american" (0.0051), "wilder" (0.00298), "pie" (0.0029), "enjoy" (0.0045), "trip" (0.00316), "films" (0.00217), "van" negative but we can mention.
+
+Let's produce.
+
+</think>
+**How the model reached a “negative” sentiment**
+
+The Integrated Gradients scores tell us which words nudged the model toward a positive or a negative verdict.  
+* Positive attribution → pushes the prediction toward “positive”.  
+* Negative attribution → pushes the prediction toward “negative”.  
+The bigger the absolute value, the stronger the influence.
+
+Below is a quick walk‑through of the 20 tokens that mattered most in this review.
+
+| Token | Attribution | Effect on the prediction |
+|-------|-------------|---------------------------|
+| **if** | –0.0126 | Strong negative cue – the word “if” pulls the score toward the negative side. |
+| **you** | +0.0126 | Strong positive cue – “you” nudges the model toward a positive view. |
+| **enjoy** | +0.0045 | Mild positive cue – suggests a favorable feeling. |
+| **films** | +0.0022 | Small positive cue – indicates the subject is a film. |
+| **like** | –0.0021 | Slight negative cue – “like” in this context hints at a comparison that is not favorable. |
+| **american** | +0.0051 | Moderate positive cue – the brand “American Pie” is viewed positively. |
+| **pie** | +0.0029 | Small positive cue – part of the well‑known title. |
+| **,** | –0.0004 | Negligible negative cue – punctuation has a tiny effect. |
+| **road** | –0.0018 | Small negative cue – “road” as part of “Road Trip” is mildly negative. |
+| **trip** | +0.0032 | Small positive cue – the word “trip” adds a slightly positive feel. |
+| **&** | +0.0011 | Negligible positive cue – the ampersand adds a tiny positive touch. |
+| **van** | –0.0044 | Moderate negative cue – “Van” in “Van Wilder” drags the sentiment downward. |
+| **wilder** | +0.0030 | Small positive cue – the character name adds a slight positive lift. |
+| **avoid** | –0.0013 | Small negative cue – urges the reader to steer clear. |
+| **this** | –0.0055 | Strong negative cue – “this” in the sentence signals a strong negative judgement. |
+| **cinematic** | –0.0047 | Strong negative cue – the word “cinematic” is used sarcastically, lowering the score. |
+| **refuse** | –0.0000 | Negligible negative cue – the word “refuse” has almost no effect. |
+| **at** | –0.0029 | Small negative cue – the preposition “at” in the phrase “at all costs” is slightly negative. |
+| **all** | –0.0033 | Small negative cue – “all” emphasizes the negative warning. |
+| **costs** | –0.0029 | Small negative cue – “costs” completes the negative warning. |
+
+**Takeaway**
+
+The overall prediction of ~0.013 (near the zero line) is dominated by the cumulative negative contributions of words such as *this*, *cinematic*, *van*, and the warning “avoid … at all costs.” These outweigh the relatively few positive tokens (*you*, *american*, *pie*). The model, therefore, classifies the review as negative, which matches the sentiment label.
+
+# EPR Explainer: 0.8125, Verifier: 0.4620

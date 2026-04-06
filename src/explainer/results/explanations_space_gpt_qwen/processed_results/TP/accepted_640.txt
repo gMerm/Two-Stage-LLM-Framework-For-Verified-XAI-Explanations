@@ -1,0 +1,25 @@
+<think>We need to explain each feature, their mean SHAP value, and why it matters for income prediction. Should be concise, accessible. Provide for both technical and non-technical. Provide context.
+
+Need to avoid assumptions beyond data. Use given list. Provide ranking by importance.
+
+Let's produce.
+
+</think>
+**How each feature helped the model decide if this person earns above or below the median income**
+
+| Rank | Feature | Mean absolute SHAP value | Why it matters for income prediction |
+|------|---------|--------------------------|--------------------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.904** | The model sees that people who work more hours each week are much more likely to earn above the median. This is a strong, direct signal of higher earnings. |
+| 2 | **OCCP** (occupation code) | **0.630** | Certain occupations pay far more than others. The model uses the job type to gauge expected income; it’s a key source of variation. |
+| 3 | **AGEP** (age) | **0.517** | Age captures career stage and experience. Mid‑career individuals often earn more than younger or older peers, so age is a good proxy for earning potential. |
+| 4 | **SCHL** (educational attainment) | **0.465** | Education level is strongly linked to job opportunities and salaries. The higher the degree, the higher the predicted income. |
+| 5 | **RELP** (relationship to householder) | **0.343** | Whether a person is a spouse, child, or roommate can reflect household resources and responsibilities, subtly influencing earnings. |
+| 6 | **SEX** (sex) | **0.224** | Gender can correlate with wage gaps in certain roles or industries; the model accounts for this effect, though it’s less influential than work hours or occupation. |
+| 7 | **POBP** (place of birth) | **0.172** | Origin (state or region) can affect access to education or job markets, providing a moderate income cue. |
+| 8 | **COW** (class of worker) | **0.137** | Employment type (private, government, self‑employed, etc.) influences salary structures; the model uses it as a secondary signal. |
+| 9 | **MAR** (marital status) | **0.102** | Being married or single can affect household income or spending patterns, offering a small hint to the model. |
+|10 | **RAC1P** (race) | **0.053** | Race is a very weak predictor in this model, but the algorithm still captures a small correlation with income that exists in the data. |
+
+**Bottom line:** The strongest signals are how many hours a person works, what they do for a living, and their age. These factors drive most of the model’s decision about whether the individual’s income is above the median. All other features provide smaller, supplementary pieces of information that fine‑tune the prediction.
+
+# EPR Explainer: 0.7452, Verifier: 0.4737

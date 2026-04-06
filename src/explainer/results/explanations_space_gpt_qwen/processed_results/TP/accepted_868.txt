@@ -1,0 +1,78 @@
+<think>We need to explain how each word of top_20_token_attributions influenced the model's sentiment prediction. Provide natural language explanation, highlight positive/negative contributions and how they collectively shape final prediction. Should be concise, actionable insights. No invented details beyond data. Provide for both technical and non-technical audiences.
+
+We have 20 tokens with attribution values (positive or negative). The predicted sentiment is negative (0.013). Lower than threshold? It's negative. The tokens and attributions given.
+
+We should explain each token's impact: if negative attributions push toward negative, positive push toward positive. Provide magnitude relative.
+
+Let's sort or keep same order. Provide short description.
+
+Also mention that "if" has negative contribution, meaning the conditional phrase weakens positive. "you" positive contribution. etc.
+
+Also maybe mention cumulative effect: sum of top 20 attributions? Let's calculate quickly approximate sum: add them.
+
+Let's compute approximate sum: 
+
+-0.012637555599212646 
++0.012596114538609982 = -0.000041441060602664
++0.0045203231275081635 = 0.004478882066905499
++0.002174487803131342 = 0.006653369870036841
+-0.002075477968901396 = 0.004577891901135445
++0.005100315436720848 = 0.009678207337856294
++0.0028989785350859165 = 0.012577185872942211
+-0.0003934605047106743 = 0.012183725368231537
+-0.0018063271418213844 = 0.010377398226410152
++0.0031642871908843517 = 0.013541685417294504
++0.0011230998206883669 = 0.01466478523798287
+-0.0044164941646158695 = 0.010248291073367001
++0.002977431984618306 = 0.013225723058 - Wait adding: 0.010248291073367001 + 0.002977431984618306 = 0.013225723057985307
+-0.0012793546775355935 = 0.011946368380449713
+-0.00553693575784564 = 0.006409432622604073
+-0.004700512625277042 = 0.001708919997327031
+-7.555005140602589e-06 = 0.0017013649921864287
+-0.0029249039944261312 = -0.0012235380022397023
+-0.0032766032963991165 = -0.004500141298638819
+-0.0028788314666599035 = -0.007378972765298722
+
+Sum ~ -0.00738. So overall negative effect. That matches prediction negative.
+
+We can explain that overall the negative tokens outweigh positives leading to negative prediction.
+
+Now produce final answer.</think>
+**How each highlighted word nudged the model’s sentiment judgment**
+
+| Token | Attribution | Effect on sentiment | Why it matters |
+|-------|-------------|---------------------|----------------|
+| **if** | –0.0126 | Pushes the prediction **toward negative** | The conditional “if” signals uncertainty or a warning, which the model associates with a negative tone. |
+| **you** | +0.0126 | Pushes the prediction **toward positive** | A direct address (“you”) can signal a friendly or engaging style, slightly counteracting the negativity. |
+| **enjoy** | +0.0045 | Slightly positive | The word “enjoy” hints at a pleasant experience, nudging the model toward a positive read. |
+| **films** | +0.0022 | Slightly positive | “Films” is neutral but the context of “enjoy” makes it feel more positive. |
+| **like** | –0.0021 | Slightly negative | “Like” in this sentence introduces a comparison to other movies that the reviewer dislikes, pulling the sentiment downward. |
+| **american** | +0.0051 | Positive | Mentioning a specific movie title can suggest familiarity; here it slightly supports a positive sentiment. |
+| **pie** | +0.0029 | Positive | Completes the title “American Pie”; the title itself is neutral but the model interprets it positively in this context. |
+| **,** | –0.0004 | Very small negative | The comma marks a pause before the critic’s harsh verdict; the tiny negative push reflects that break. |
+| **road** | –0.0018 | Negative | Part of “Road Trip”; the word itself leans toward the reviewer’s negative framing. |
+| **trip** | +0.0032 | Positive | The noun “trip” can be neutral but here it’s associated with a movie the reviewer dislikes, so the overall effect is modestly positive. |
+| **&** | +0.0011 | Positive | The ampersand connects two movie titles; the model treats it as a mild positive cue. |
+| **van** | –0.0044 | Negative | Part of “Van Wilder”; this title is viewed negatively in the sentence, pulling the sentiment down. |
+| **wilder** | +0.0030 | Positive | Completes “Van Wilder”; the word itself is neutral, so it slightly offsets the negative impact of “van.” |
+| **avoid** | –0.0013 | Negative | A strong warning that signals the reviewer’s dislike. |
+| **this** | –0.0055 | Negative | Emphasizes the specific film being critiqued, strengthening the negative stance. |
+| **cinematic** | –0.0047 | Negative | The adjective “cinematic” is negated by the surrounding context, so it contributes to a negative view. |
+| **refuse** | –0.0000 | Neutral | Essentially no influence; the model treats it as negligible. |
+| **at** | –0.0029 | Negative | Preposition that links to “all costs”; the phrase reinforces the critic’s harsh verdict. |
+| **all** | –0.0033 | Negative | Intensifies the warning (“all costs”), reinforcing negativity. |
+| **costs** | –0.0029 | Negative | Final word of the warning; keeps the sentiment firmly negative. |
+
+**Collective influence**
+
+- The **sum of these 20 attributions is about –0.0074**, meaning the negative tokens outweigh the positive ones by roughly 7 × 10⁻³.
+- This net negative push aligns with the model’s final prediction of a **very low probability for positive sentiment (≈ 0.013)** and the label “Negative.”
+- Tokens that signal warnings or harsh judgments (“avoid,” “this,” “cinematic,” “all,” “costs”) dominate the attribution landscape, while occasional positive cues (“you,” “enjoy,” “american,” “pie”) provide only small counterbalancing effects.
+
+**Take‑away for reviewers or editors**
+
+- **Avoid or temper negative triggers** (e.g., “avoid,” “this,” “cinematic,” “all costs”) if you want a more neutral or positive perception.
+- **Emphasize positive signals** (“enjoy,” “you”) to counterbalance negativity, but note that in this particular review the negatives still win.
+- The model is highly sensitive to short warning phrases and strongly negative adjectives, so framing a review around them will almost always push the prediction toward a negative sentiment.
+
+# EPR Explainer: 0.7248, Verifier: 0.5551

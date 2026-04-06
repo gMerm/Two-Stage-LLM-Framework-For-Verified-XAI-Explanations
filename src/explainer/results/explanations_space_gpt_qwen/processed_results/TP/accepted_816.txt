@@ -1,0 +1,84 @@
+<think>We need to generate explanations: global and local.
+
+Guidelines: Only use provided data. No assumptions. Must give global ranking, direction. However global feature importance provided but direction not given. We need to infer direction based on importance? Could mention "higher values generally increase price" for some features? But we cannot say direction without data. The guidance says: "Describe the direction of their influence on predicted price (positive or negative)." But we have no direction in global_explanations. Should we say "Insufficient evidence to conclude direction" or base on general domain knowledge? Must base solely on provided data. The direction for global is not given. So we must say insufficient evidence.
+
+For local, we have contribution values and direction. Provide explanation.
+
+Also need to report relative importance weight.
+
+Also note local_interpretability confidence and number of features used.
+
+Need to avoid technical jargon. Provide concise.
+
+We must also not reveal internal system. All good.
+
+Let's produce output.
+
+Structure: Global explanation section, then each local instance explanation.
+
+Make sure to reference values exactly as provided.
+
+Let's compose.</think>
+**Global Feature Influence (LIME, top 9)**  
+
+| Rank | Feature | Importance Score | Direction of Influence* | Why it matters for price |
+|------|---------|------------------|-------------------------|--------------------------|
+| 1 | carat | 124.44 | *Insufficient evidence to conclude* | Larger diamonds command higher prices. |
+| 2 | color | 102.26 | *Insufficient evidence to conclude* | Color grading affects perceived value. |
+| 3 | clarity | 75.55 | *Insufficient evidence to conclude* | Clarity influences desirability and price. |
+| 4 | cut | 53.20 | *Insufficient evidence to conclude* | Cut quality impacts sparkle and market value. |
+| 5 | y | 32.99 | *Insufficient evidence to conclude* | Depth dimension; larger y can raise price. |
+| 6 | x | 10.05 | *Insufficient evidence to conclude* | Width dimension; contributes to overall size. |
+| 7 | table | 9.62 | *Insufficient evidence to conclude* | Table proportion influences cut quality. |
+| 8 | depth | 6.41 | *Insufficient evidence to conclude* | Percentage depth affects cut perception. |
+| 9 | z | 0.13 | *Insufficient evidence to conclude* | Height dimension; less influential than other features. |
+
+\*The XAI output lists importance scores but does not provide explicit direction (positive/negative). Therefore we cannot state a direction without further data.
+
+---
+
+### Local Explanation – Instance #676  
+
+| Feature | Observed Range | Contribution (USD) | Direction | Weight (fraction of total effect) |
+|---------|----------------|--------------------|-----------|-----------------------------------|
+| clarity | `<= 2.0` | +2075.04 | positive | 0.4234 |
+| y | `<= 6.54` **and** `> 5.71` | ‑817.87 | negative | 0.1669 |
+| color | `<= 4.0` **and** `> 3.0` | ‑723.16 | negative | 0.1475 |
+| x | `<= 6.55` **and** `> 5.7` | +537.18 | positive | 0.1096 |
+| z | `<= 4.04` **and** `> 3.53` | +262.97 | positive | 0.0537 |
+| carat | `<= 1.05` **and** `> 0.7` | ‑185.91 | negative | 0.0379 |
+| cut | `<= 2.0` | ‑109.84 | negative | 0.0224 |
+| table | `<= 57.0` **and** `> 56.0` | +102.95 | positive | 0.0210 |
+| depth | `<= 61.8` **and** `> 61.0` | ‑86.28 | negative | 0.0176 |
+
+**Interpretation**  
+The model over‑predicted the price by $429.51.  
+- **Largest positive contributor:** *clarity* (+$2,075). A very clear diamond boosts price.  
+- **Largest negative contributor:** *y* (‑$817). A shorter vertical dimension pulls the prediction down.  
+- **Other drivers:** color and carat reduce price, while x, z, and table increase it.  
+The overall confidence of this local explanation is **0.0723**, indicating modest reliability, and all 9 features were used.
+
+---
+
+### Local Explanation – Instance #737  
+
+| Feature | Observed Range | Contribution (USD) | Direction | Weight (fraction of total effect) |
+|---------|----------------|--------------------|-----------|-----------------------------------|
+| carat | `<= 0.7` **and** `> 0.4` | ‑2897.62 | negative | 0.4874 |
+| clarity | `> 5.0` | +902.91 | positive | 0.1519 |
+| y | `<= 5.71` **and** `> 4.72` | ‑884.52 | negative | 0.1488 |
+| table | `<= 57.0` **and** `> 56.0` | ‑485.01 | negative | 0.0816 |
+| x | `<= 5.7` **and** `> 4.71` | +324.50 | positive | 0.0546 |
+| cut | `<= 2.0` | ‑311.06 | negative | 0.0523 |
+| color | `<= 3.0` **and** `> 1.0` | +85.92 | positive | 0.0145 |
+| depth | `<= 62.5` **and** `> 61.8` | ‑30.62 | negative | 0.0052 |
+| z | `<= 3.53` **and** `> 2.91` | +22.67 | positive | 0.0038 |
+
+**Interpretation**  
+The prediction was slightly low by $63.38.  
+- **Largest negative contributor:** *carat* (‑$2,897). A smaller diamond reduces price.  
+- **Largest positive contributor:** *clarity* (+$903). Even modest clarity improves the estimate.  
+- **Other drivers:** y, table, cut lower the price, whereas x, color, depth, and z slightly raise it.  
+The confidence for this explanation is **0.1169**, suggesting moderate reliability, and all 9 features were included.
+
+# EPR Explainer: 0.4753, Verifier: 0.6044

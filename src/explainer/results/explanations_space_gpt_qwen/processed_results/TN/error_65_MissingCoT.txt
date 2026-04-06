@@ -1,0 +1,28 @@
+<think>We need to explain each feature that influenced the model's prediction for this individual, based on mean absolute SHAP values. We have 10 features, list with mean_abs_shap. Provide context for why each matters for income prediction. Keep concise, avoid technical language beyond necessary. Provide actionable insights. Use step-by-step reasoning in <think> tags.</think>
+We should structure explanation: feature name, mean SHAP value (maybe as importance rank), explain contribution. Use simple language. Provide context like "working hours" etc. Also mention ranking: WKHP highest, then OCCP, etc. Mention that higher mean absolute SHAP indicates stronger influence on predictions. Provide actionable insights: focusing on these features. Provide non-technical audience explanation as well. We must not mention any other data. Provide explanation for each. Use bullet list or table. Probably bullet list: Feature: Explanation. Also mention that the values are mean absolute SHAP values, meaning they represent average contribution across many predictions. Use the numeric value for context (e.g., 0.90 for WKHP). Should mention that WKHP is most influential. Provide simple explanation: The number of hours worked per week heavily affects income. OCCP next: occupation type. AGEP: age. SCHL: education. RELP: relationship to householder, etc. Provide context for each. Ensure not to invent. Let's craft final answer.**How the model decided this person’s income level**
+
+Below is a plain‑language summary of why each of the ten available features mattered for the prediction.  
+The number shown next to each feature is the *mean absolute SHAP value* – the larger it is, the stronger that feature was on average in driving the model’s prediction across many people.
+
+| Rank | Feature | Mean SHAP | Why it matters for income prediction |
+|------|---------|-----------|--------------------------------------|
+| 1 | **WKHP** (usual hours worked per week) | **0.904** | Working more hours usually means a higher pay check, so the model gives this feature the biggest influence. |
+| 2 | **OCCP** (occupation code) | **0.630** | Different jobs pay very differently. The occupation a person holds tells the model a lot about expected earnings. |
+| 3 | **AGEP** (age) | **0.517** | Age can reflect experience and career stage; older workers often have higher incomes, but very young or very old ages can signal lower earnings. |
+| 4 | **SCHL** (educational attainment) | **0.465** | Higher education levels are strongly linked to better paying jobs, so the model uses schooling as a key income indicator. |
+| 5 | **RELP** (relationship to householder) | **0.343** | Being a spouse, child, or other relation can hint at employment status and earning potential (e.g., married couples may combine incomes). |
+| 6 | **SEX** (sex) | **0.224** | The model finds a modest difference in average earnings between males and females, so gender plays a secondary role. |
+| 7 | **POBP** (place of birth) | **0.172** | Birthplace can be a proxy for region or community, which sometimes correlates with job opportunities and pay. |
+| 8 | **COW** (class of worker) | **0.137** | Whether someone works in the private sector, government, or is self‑employed influences expected income levels. |
+| 9 | **MAR** (marital status) | **0.102** | Marital status can affect household income dynamics; the model sees a small effect here. |
+| 10 | **RAC1P** (race) | **0.053** | The model detects a very small influence of race on earnings in this data set. |
+
+**Key take‑away**
+
+- The most powerful signal for predicting whether a person earns above or below the median is *how many hours they work per week*, followed closely by the type of job they hold.
+- Education, age, and occupation are also important, but to a lesser extent.
+- Other factors such as gender, birthplace, marital status, and race have relatively minor effects in this model.
+
+These insights help explain why the model gave the prediction it did for this individual and highlight which aspects of a person’s profile carry the most weight in determining their income bracket.
+
+# EPR Explainer: 0.9372, Verifier: 0.4546

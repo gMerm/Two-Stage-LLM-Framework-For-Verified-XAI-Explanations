@@ -1,0 +1,46 @@
+<think>We need to provide explanation: top 15 features, describe importance scores, direction of influence, context, interactions. Use only provided data. No speculation beyond. The data gives importance scores but not direction (positive/negative). We can infer direction: e.g., higher alcohol correlated with high quality likely positive. But do we have explicit direction? Not provided. We must be cautious: "clarify their direction of influence when applicable." We can say "higher values of these features contribute to classification as high quality" if standard wine understanding. But we must not invent. However, the dataset context says high alcohol generally correlates with high quality. That is given context. So we can say direction: higher alcohol -> high quality. For sulphates, same. But for volatile acidity, higher acidity generally lower quality. We can rely on domain knowledge but it's part of dataset context? It's not explicitly stated but "wine dataset contains ... acidities, residual sugar, etc." Not explicit direction. But we can still say general wine knowledge. The instructions: "Base your explanation ONLY on the provided quantitative data. Do not invent details or make assumptions beyond what is given." So domain knowledge might be considered beyond. So we should not state direction for features unless given. The XAI output does not provide direction. So we should say "direction not specified" or "Insufficient evidence to conclude direction" for each feature. But we could still mention typical relationships? That would be assumption. So better to say Insufficient evidence to conclude direction. The instructions say: If a conclusion cannot be supported, say that.
+
+Thus we will list top 15, importance scores, rank. Provide context: e.g., alcohol highest importance; explain its role in wine quality. Provide interaction context: citric acid & pH, etc.
+
+We must not mention domain knowledge beyond what is given. But we can describe interactions: e.g., "citric acid & pH" is an interaction feature. We can say it adds additional predictive power beyond individual features. Provide relative importance. And note that interactions between total sulfur dioxide & sulphates also important.
+
+Let's produce concise explanation.</think>
+**Global Feature Importance (top 15) – Explainable Boosting Machine**
+
+| Rank | Feature | Importance Score | Notes |
+|------|---------|------------------|-------|
+| 1 | **alcohol** | **0.781** | Largest single‑feature contribution to predicting high‑vs‑low quality. |
+| 2 | **sulphates** | 0.613 | Strongest second‑ranked feature. |
+| 3 | **total sulfur dioxide** | 0.375 | Important predictor of quality. |
+| 4 | **volatile acidity** | 0.314 | Adds predictive value. |
+| 5 | **citric acid** | 0.254 | Moderate influence. |
+| 6 | **density** | 0.215 | Contributes to the model. |
+| 7 | **citric acid & pH** | 0.165 | Interaction between citric acid and pH improves prediction. |
+| 8 | **chlorides** | 0.165 | Provides additional signal. |
+| 9 | **residual sugar** | 0.118 | Minor but non‑negligible effect. |
+|10 | **residual sugar & chlorides** | 0.083 | Interaction that slightly boosts performance. |
+|11 | **total sulfur dioxide & sulphates** | 0.080 | Interaction enhances predictive power. |
+|12 | **pH & sulphates** | 0.074 | Interaction contributes modestly. |
+|13 | **total sulfur dioxide & density** | 0.070 | Interaction term. |
+|14 | **free sulfur dioxide** | 0.070 | Small individual effect. |
+|15 | **free sulfur dioxide & pH** | 0.066 | Interaction with pH. |
+
+### How these features drive the classification
+
+- **Alcohol** is the single most influential variable. The model assigns it the highest importance score, indicating that variations in alcohol content strongly discriminate between high‑quality (≥ 7) and low‑quality (< 7) wines.
+- **Sulphates** and **total sulfur dioxide** follow as the next strongest predictors. Their high scores reflect substantial contributions to distinguishing quality classes.
+- **Volatile acidity**, **citric acid**, **density**, **chlorides**, and **residual sugar** each have moderate importance, meaning they help refine the decision boundary when alcohol and sulphates are considered.
+
+### Interactions
+
+The EBM explicitly models pairwise interactions. The listed interaction terms (e.g., *citric acid & pH*, *total sulfur dioxide & sulphates*) each add extra predictive power beyond the sum of their individual effects. For example, the combined influence of citric acid and pH (importance = 0.165) indicates that particular combinations of these two chemistry metrics provide a clearer signal for quality than either alone.
+
+### Summary
+
+- **Top three single features**: alcohol, sulphates, total sulfur dioxide.
+- **Key interactions**: citric acid & pH, total sulfur dioxide & sulphates, residual sugar & chlorides.
+- **Relative importance**: alcohol dominates, with all other features contributing progressively smaller but still meaningful amounts.
+
+These rankings show that the model relies heavily on alcohol content and sulphate-related variables, with several additional physicochemical attributes and their interactions fine‑tuning the classification of wine quality.
+
+# EPR Explainer: 0.9108, Verifier: 0.6527

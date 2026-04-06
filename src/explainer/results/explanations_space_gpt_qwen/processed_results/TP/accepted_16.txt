@@ -1,0 +1,76 @@
+<think>We need to provide explanation of global and local, using data. Be concise. Use only data. No speculation. Provide context for global features importance ranking and directions. For local, include values, contributions, direction, weight, and maybe error context. Use "Insufficient evidence to conclude" if not supported. But all data given.
+
+We'll present global: list features, rank, importance score, direction? But direction not given globally. LIME gives importance magnitude but not direction. So we can't say direction. Provide that we cannot determine direction globally. Only magnitude.
+
+For local: provide for each instance: actual vs predicted, error, contributions, direction, weight. Also mention confidence.
+
+Let's write.</think>
+**Global Feature Importance (LIME)**  
+| Rank | Feature | Importance Score | Interpretation |
+|------|---------|------------------|----------------|
+| 1 | `carat` | 124.44 | Largest influence on price. |
+| 2 | `color` | 102.26 | Strong influence, second highest. |
+| 3 | `clarity` | 75.55 | Third most influential. |
+| 4 | `cut` | 53.20 | Important, but less than size and quality. |
+| 5 | `y` | 32.99 | Dimensional feature with moderate impact. |
+| 6 | `x` | 10.05 | Smaller but still relevant. |
+| 7 | `table` | 9.62 | Minor influence. |
+| 8 | `depth` | 6.41 | Least but non‑zero effect. |
+| 9 | `z` | 0.13 | Minimal effect. |
+
+*Note:* LIME provides magnitude but not direction for each feature at the global level. The table therefore lists only relative strength, not whether a higher value increases or decreases price.
+
+---
+
+### Local Explanations  
+
+#### Instance #676  
+- **Actual price:** \$3,172.00  
+- **Predicted price:** \$3,601.51  
+- **Prediction error:** +\$429.51 (over‑prediction)  
+
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| `clarity` | ≤ 2.0 | +2075.04 | Positive | 0.423 |
+| `y` | > 5.71 & ≤ 6.54 | –817.87 | Negative | 0.167 |
+| `color` | > 3.0 & ≤ 4.0 | –723.16 | Negative | 0.148 |
+| `x` | > 5.70 & ≤ 6.55 | +537.18 | Positive | 0.110 |
+| `z` | > 3.53 & ≤ 4.04 | +262.97 | Positive | 0.054 |
+| `carat` | > 0.70 & ≤ 1.05 | –185.91 | Negative | 0.038 |
+| `cut` | ≤ 2.0 | –109.84 | Negative | 0.022 |
+| `table` | > 56.0 & ≤ 57.0 | +102.95 | Positive | 0.021 |
+| `depth` | > 61.0 & ≤ 61.8 | –86.28 | Negative | 0.018 |
+
+**Interpretation**  
+- The large positive contribution from `clarity` drove the prediction upward, while `y`, `color`, `carat`, `cut`, and `depth` pulled it down.  
+- The model’s confidence for this explanation is modest (0.072), suggesting the local linear surrogate is only a rough approximation of the underlying tree ensemble.
+
+---
+
+#### Instance #737  
+- **Actual price:** \$1,981.00  
+- **Predicted price:** \$1,917.62  
+- **Prediction error:** –\$63.38 (under‑prediction)  
+
+| Feature | Observed range | Contribution | Direction | Weight |
+|---------|----------------|--------------|-----------|--------|
+| `carat` | > 0.40 & ≤ 0.70 | –2897.62 | Negative | 0.487 |
+| `clarity` | > 5.0 | +902.91 | Positive | 0.152 |
+| `y` | > 4.72 & ≤ 5.71 | –884.52 | Negative | 0.149 |
+| `table` | > 56.0 & ≤ 57.0 | –485.01 | Negative | 0.082 |
+| `x` | > 4.71 & ≤ 5.70 | +324.50 | Positive | 0.055 |
+| `cut` | ≤ 2.0 | –311.06 | Negative | 0.052 |
+| `color` | > 1.0 & ≤ 3.0 | +85.92 | Positive | 0.014 |
+| `depth` | > 61.8 & ≤ 62.5 | –30.62 | Negative | 0.005 |
+| `z` | > 2.91 & ≤ 3.53 | +22.67 | Positive | 0.004 |
+
+**Interpretation**  
+- `carat` contributes the largest negative effect, pulling the predicted price far below the actual value; the high positive contribution of `clarity` partially offsets this.  
+- The small overall confidence (0.117) indicates this explanation is a fairly simple linear approximation and may not capture all nuances of the tree model.
+
+--- 
+
+**Key Takeaway**  
+The global ranking confirms that diamond size (`carat`) and quality attributes (`color`, `clarity`) dominate price prediction. In individual cases, the same attributes can have opposite effects depending on their specific values, underscoring the importance of a local, instance‑level explanation.
+
+# EPR Explainer: 0.4931, Verifier: 0.6090

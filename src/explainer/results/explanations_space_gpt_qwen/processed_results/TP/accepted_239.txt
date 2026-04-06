@@ -1,0 +1,21 @@
+<think>We need to convert Grad-CAM++ activation heatmap data into natural language explanation. We have data: sample_idx 2, true_label ship, predicted ship, confidence 92.44, correct. Activations: max 1.0, mean 0.4472, coverage 31.25%. Regions: middle-center: coverage 29.6875, max 1.0, mean 0.72625. Middle-left: coverage 1.5625, max 0.63918, mean 0.63918.
+
+We need to describe which spatial regions most strongly influenced classification, activation patterns (max, mean, coverage), identify most important regions, assess if model's focus aligns with predicted class.
+
+We must only use provided data. No extra. Also need concise, non-technical if possible. We have "textual_explanation" in XAI output already, but we need to produce new explanation. But we can use that as a reference.
+
+We should output something similar but ensure to include details: the majority of activation in middle-center region, mean 0.726, coverage 29.7%. That is highest activation. Also middle-left has smaller coverage and lower activation. Overall coverage 31.25% of image. Max activation 1.0. Mean activation 0.447 across image. So the model focused on central area of ship.
+
+We also should mention that high activation aligns with ship features likely. No other details needed.
+
+Let's produce concise explanation.</think>
+**Image #2 – Ship**
+
+- **Model’s decision:** The network confidently predicts *ship* (92 % confidence) and this matches the ground‑truth label.
+- **Overall activation:** The heatmap’s strongest activation is 1.0, with an average activation of 0.45 across the image. About 31 % of the pixels receive meaningful activation.
+- **Key regions:**  
+  - **Middle‑center (≈30 % of the image):** Highest activity, with a mean activation of 0.73 and a peak of 1.0.  
+  - **Middle‑left (≈1.6 % of the image):** Smaller, but still active, with a mean and peak of 0.64.
+- **Interpretation:** The model’s focus is concentrated in the central part of the picture, where the ship’s body and mast are likely located. This focus aligns well with what one would expect for correctly identifying a ship.
+
+# EPR Explainer: 0.9253, Verifier: 0.4250

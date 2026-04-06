@@ -1,0 +1,32 @@
+<think>We need to explain each feature that influenced the model's prediction for this individual. Provide context on why it matters for income prediction. Use natural language, concise, actionable insights. Use the mean absolute SHAP values to indicate importance. The list order is given; we should explain features in that order. For each, mention its mean SHAP value (rounded maybe) and explain why it's relevant. The dataset context and explanation guidelines. Should not make assumptions beyond data. Provide concise explanation, technical for some audience. Should mention that higher mean SHAP indicates stronger overall impact.
+
+We need to convert to natural language explanation: maybe like "WKHP (usual hours worked per week) has the largest impact, with mean absolute SHAP of 0.90, indicating that how many hours an individual works strongly influences their predicted income. The model considers that more hours generally correlate with higher income."
+
+Also need context for others: OCCP (occupation code), etc.
+
+We should avoid too technical details. Provide actionable insights: e.g., for this individual, the hours worked contributed most to their income prediction, etc. Also mention the relative ranking: WKHP > OCCP > ... etc.
+
+Let's produce a paragraph for each feature. Use bullet list or headings. Ensure to mention the mean SHAP values.
+
+Also keep language accessible. Provide reasoning: e.g., education level influences earning potential. Relationship to householder might reflect dependent responsibilities. Sex may reflect gender wage gap. Place of birth maybe indicates immigrant status. Class of worker indicates employment type.
+
+Ok produce final.</think>
+**Key factors that shaped the model’s prediction for this individual**
+
+| Feature | Mean absolute SHAP | Why it matters for income prediction |
+|---------|--------------------|--------------------------------------|
+| **WKHP (usual hours worked per week)** | **0.90** | The number of hours worked is the strongest influence on the model. Working more hours usually leads to higher pay, so the model gives this feature the biggest weight when deciding if a person earns above or below the median. |
+| **OCCP (occupation code)** | **0.63** | The type of job plays a big role. Occupations that require higher skill or responsibility (e.g., managers, technicians) are linked to higher wages, so the model relies heavily on occupation to assess income. |
+| **AGEP (age)** | **0.52** | Age reflects career experience. Mid‑career individuals (often 30‑50 years old) typically earn more than very young or older workers, so age is an important signal for income level. |
+| **SCHL (educational attainment)** | **0.46** | Education is a strong predictor of earning power. Higher degrees generally correlate with higher wages, so the model values schooling when estimating income. |
+| **RELP (relationship to householder)** | **0.34** | Whether the person is a spouse, child, or other relative can indicate household responsibilities and economic roles. For example, a spouse may be the primary earner, affecting the overall income estimate. |
+| **SEX (sex)** | **0.22** | Gender can influence pay due to workplace disparities. The model considers sex as it helps capture typical wage differences between males and females. |
+| **POBP (place of birth)** | **0.17** | Place of birth may reflect immigrant status or regional experience, both of which can affect job opportunities and earnings. |
+| **COW (class of worker)** | **0.14** | Whether the person works in the private sector, government, or is self‑employed changes income expectations. Different employment types have different typical salary ranges. |
+| **MAR (marital status)** | **0.10** | Marital status can influence income through shared responsibilities or dual‑earning households. |
+| **RAC1P (race)** | **0.05** | Race is included because systemic factors can affect employment opportunities and wages. Although its overall impact is the smallest here, it still contributes to the model’s assessment. |
+
+**Takeaway**  
+For this particular individual, the most decisive factor in predicting whether their income is above the median is how many hours they work per week, followed by their occupation, age, and education level. Features like relationship status, gender, place of birth, and others provide additional, but smaller, pieces of information that the model uses to fine‑tune its prediction.
+
+# EPR Explainer: 0.9648, Verifier: 0.5188

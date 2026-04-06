@@ -1,0 +1,45 @@
+<think>We need to explain every feature that influenced the model's prediction for this individual, with context on why it matters for income prediction. Use mean_abs_shap to rank importance. Provide concise natural language explanations for technical and non-technical audiences. We should mention the ordering, highlight top contributors. Use only data. Let's think step by step.
+
+We have list of features in XAI output: WKHP, OCCP, AGEP, SCHL, RELP, SEX, POBP, COW, MAR, RAC1P. And corresponding mean_abs_shap values.
+
+We should explain each feature and its role. For each, explain why it matters for income prediction.
+
+We must not invent details; we base explanation solely on quantitative data. But we can explain general reason: e.g., hours worked per week often correlate with income; occupation type often correlates; age; education; relationship; sex; place of birth; class of worker; marital status; race.
+
+We must mention ranking: top 3 most important: WKHP (0.904), OCCP (0.629), AGEP (0.516). Then next: SCHL (0.464), RELP (0.342), SEX (0.224), POBP (0.172), COW (0.137), MAR (0.102), RAC1P (0.053).
+
+We can say that WKHP has highest average contribution meaning it's most predictive. OCCP second, etc.
+
+Provide actionable insights: If the model predicted high income, maybe due to many hours, occupation type. If low, maybe fewer hours.
+
+But we are not given the individual's specific SHAP contributions; only mean. The instructions: "Explain every feature that influenced the model's prediction for this individual. For every feature provide context on why it matters for income prediction." So we should explain each feature generically. Use the mean_abs_shap values as evidence of importance.
+
+Let's produce output: bullet list or table? We need natural language explanation. Let's produce a paragraph per feature.
+
+Let's produce concise explanation: mention ranking, significance.
+
+Let's include: high mean indicates feature tends to influence predictions strongly. Lower values less.
+
+Also include note: The list is sorted by mean_abs_shap descending. Provide that context.
+
+Now produce final answer.</think>
+**Key features that shaped the model’s income prediction**
+
+| Rank | Feature | Mean | Why it matters for income |
+|------|---------|------|---------------------------|
+| 1 | **WKHP** (usual hours worked per week) | 0.904 | The amount of time a person spends working is the strongest driver of earnings in the model. More hours usually mean more pay, so the model heavily weighs this variable when deciding if someone’s income is above or below the median. |
+| 2 | **OCCP** (occupation code) | 0.630 | Different jobs carry very different pay scales. The model learns which occupations are typically high‑ or low‑earning, and this knowledge gives OCCP a large influence on the prediction. |
+| 3 | **AGEP** (age) | 0.517 | Age reflects career stage and experience. Older workers often have more experience and higher wages, so age is a significant predictor of whether income is above the median. |
+| 4 | **SCHL** (educational attainment) | 0.465 | Education level is closely linked to earning potential; higher degrees often lead to better jobs and higher pay. Thus, SCHL strongly informs the model. |
+| 5 | **RELP** (relationship to householder) | 0.343 | Whether a person is a spouse, child, or roommate can hint at their likely role in the household and possibly their job status. This relationship information provides useful context for the model. |
+| 6 | **SEX** (sex) | 0.224 | Gender can correlate with differences in pay due to industry, role, or historical disparities. The model captures these patterns, giving SEX a moderate influence. |
+| 7 | **POBP** (place of birth) | 0.172 | Birthplace can be a proxy for cultural background, language, or regional education, all of which may affect earning opportunities. The model considers this factor to a lesser extent. |
+| 8 | **COW** (class of worker) | 0.137 | Whether someone works privately, in government, or self‑employed affects salary structures. The model weighs this variable, but its influence is weaker than the top five. |
+| 9 | **MAR** (marital status) | 0.102 | Marital status can indirectly reflect financial responsibilities or partnership dynamics that influence income. Its impact on the model is modest. |
+| 10 | **RAC1P** (race) | 0.053 | Race is the least influential feature in the model’s predictions, though it can still capture systemic disparities in income that the model learns from the data. |
+
+**Take‑away**
+
+The model relies most on *hours worked*, *occupation*, and *age* to decide whether someone earns above the median. These variables explain a large part of the variation in predicted income. Features such as education, relationship status, and sex also contribute, but to a lesser degree. Less influential factors include place of birth, class of worker, marital status, and race. Understanding this hierarchy helps interpret why the model made a particular prediction for this individual.
+
+# EPR Explainer: 0.9006, Verifier: 0.5852

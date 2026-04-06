@@ -1,0 +1,43 @@
+<think>We need to explain every feature with context on why it matters for income prediction. Use provided mean absolute SHAP values to indicate importance. Provide explanation in natural language, for both technical and non-technical. Should be concise.
+
+List features with SHAP values. Provide explanation: WKHP highest importance due to hours worked. OCCP next. Then AGE, SCHL, RELP, SEX, POBP, COW, MAR, RAC1P lowest. Provide context: each contributes to prediction of above median income.
+
+We should not add assumptions beyond given. So only talk about the given dataset context.
+
+We might say: higher mean SHAP means stronger effect. Provide ranking.
+
+We can explain each feature's relevance: e.g., more hours increases income. Occupation type influences earnings. Age correlates with experience. Education level matters. Relationship to householder indicates possible shared income. Sex may reflect gender wage gap. Place of birth may capture socio-economic factors. Class of worker indicates employment type. Marital status may influence financial resources. Race may reflect systemic disparities.
+
+Also note that the SHAP values are mean absolute, so they don't indicate direction.
+
+We should avoid heavy technical jargon. Provide actionable insights: features with high values should be prioritized.
+
+Ok produce explanation.</think>
+**How the model decided the income level for this person**
+
+The model looks at ten pieces of information about a person.  
+For each piece it calculates a *SHAP value* – a number that tells us how much that feature pushed the prediction toward “above the median income” or “below the median income.”  
+The list below shows the average absolute size of those SHAP values (so we can see which features matter most overall) and a short explanation of why each feature is useful for predicting income.
+
+| Rank | Feature | Mean absolute SHAP | Why it matters for income prediction |
+|------|---------|-------------------|-------------------------------------|
+| 1 | **WKHP** – Usual hours worked per week | **0.90** | Working more hours is usually associated with higher earnings. The model treats this feature as the strongest signal for whether someone earns above the median. |
+| 2 | **OCCP** – Occupation code | **0.63** | Different occupations pay very different wages. Knowing the type of job tells the model what typical pay range to expect. |
+| 3 | **AGEP** – Age | **0.52** | Age reflects career stage and experience. Older workers often have higher pay, while very young workers may earn less. |
+| 4 | **SCHL** – Education level | **0.46** | Higher education typically leads to better-paying jobs. The model uses this to gauge potential earning power. |
+| 5 | **RELP** – Relationship to householder | **0.34** | Being a spouse, partner, or primary household member can indicate shared income or household responsibilities that affect an individual’s earnings. |
+| 6 | **SEX** – Sex | **0.22** | Gender can influence earnings due to the gender wage gap. The model considers this to adjust predictions accordingly. |
+| 7 | **POBP** – Place of birth | **0.17** | Birthplace may be a proxy for early life opportunities, access to education, and migration patterns that affect income. |
+| 8 | **COW** – Class of worker (employment type) | **0.14** | Whether someone works for a private company, government, or is self‑employed impacts salary structures and stability. |
+| 9 | **MAR** – Marital status | **0.10** | Married individuals may have different financial resources or obligations that influence their earnings. |
+|10 | **RAC1P** – Race | **0.05** | Race can be associated with systemic inequalities that affect income levels. This feature has the smallest average influence in the model. |
+
+### Take‑away
+
+- The model relies most on **working hours**, **occupation**, **age**, and **education** to decide if a person earns above or below the median.  
+- Features like **relationship to householder**, **sex**, and **place of birth** also play a role but are less influential.  
+- **Race** and **marital status** have the smallest effect on the model’s predictions in this dataset.  
+
+These insights can help explain why the model gave a particular prediction for this individual and guide which data points are most important to collect or improve when building or auditing income prediction models.
+
+# EPR Explainer: 0.8882, Verifier: 0.4471

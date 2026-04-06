@@ -1,0 +1,48 @@
+<think>We need to explain how each word of top 20 token attributions influenced the model's sentiment prediction. Provide concise explanation for both positive and negative contributors, describing their impact and how they collectively shaped final prediction. Use given attribution values. Ensure not to invent details. Provide natural language explanation for both technical and non-technical audiences. Use simple language but include some insight into cumulative effect.
+
+We must avoid technical jargon too heavy. Maybe give brief sentence per token.
+
+We should also mention that overall prediction is near 0 (negative). The contributions show that negative tokens (if, like, van, avoid, this, cinematic, at, all, costs, comma etc) pull toward negative, while positive tokens (you, enjoy, films, american, pie, road, trip, &, etc) push slightly positive.
+
+We can discuss cumulative negative > positive.
+
+Also mention that the most negative token is "this" (-0.00554). Also "van" and "cinematic" are big negative. The largest positive is "you" +0.0126 and "if" negative? Actually "if" negative -0.0126. So close. So overall negative.
+
+We should not refer to internal model. Just explain.
+
+Let's craft final answer.</think>
+**How each word shaped the model’s negative verdict**
+
+| Token | Attribution | What it did |
+|-------|-------------|-------------|
+| **if** | –0.0126 | The word “if” nudged the prediction *away* from positive sentiment by a large margin. |
+| **you** | +0.0126 | “you” pulled the score *toward* positivity, but it was exactly counterbalanced by “if.” |
+| **enjoy** | +0.0045 | “enjoy” added a small positive push. |
+| **films** | +0.0022 | “films” slightly encouraged a positive tone. |
+| **like** | –0.0021 | “like” pulled the score toward negativity, weakening the earlier positive effect. |
+| **american** | +0.0051 | “american” added a moderate positive push. |
+| **pie** | +0.0029 | “pie” increased positivity a little. |
+| **,** | –0.0004 | The comma gave a negligible negative tilt. |
+| **road** | –0.0018 | “road” slightly pushed toward negative sentiment. |
+| **trip** | +0.0032 | “trip” boosted positivity modestly. |
+| **&** | +0.0011 | The ampersand gave a tiny positive nudge. |
+| **van** | –0.0044 | “van” pulled the prediction strongly toward negative. |
+| **wilder** | +0.0030 | “wilder” added a small positive contribution. |
+| **avoid** | –0.0013 | “avoid” nudged the score negative. |
+| **this** | –0.0055 | “this” was the strongest negative word, tipping the model decisively toward a bad review. |
+| **cinematic** | –0.0047 | “cinematic” added a significant negative influence. |
+| **refuse** | –0.0000076 | Virtually no effect, but still negative. |
+| **at** | –0.0029 | “at” pushed toward negativity. |
+| **all** | –0.0033 | “all” reinforced the negative direction. |
+| **costs** | –0.0029 | “costs” added a small negative weight. |
+
+### The overall picture
+
+- **Positive tokens** (you, enjoy, films, american, pie, trip, wilder, &) together added roughly +0.04 to the sentiment score.
+- **Negative tokens** (if, like, road, van, avoid, this, cinematic, at, all, costs, comma) collectively subtracted about –0.05.
+
+Because the negative pulls outweigh the positive pushes, the model’s final probability for a positive review is only 0.013 — essentially a strongly negative prediction. The most decisive negative words were “this,” “cinematic,” and “van,” which collectively pushed the score far below neutral. Meanwhile, the positives (“you,” “enjoy,” “american,” “pie,” etc.) were strong but not enough to offset the strong negatives.
+
+In short, the review’s overall tone is dominated by words that signal disappointment and disdain, leading the model to classify it as a negative sentiment.
+
+# EPR Explainer: 0.7655, Verifier: 0.4157
