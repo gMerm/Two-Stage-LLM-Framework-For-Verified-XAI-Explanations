@@ -27,6 +27,7 @@ This framework addresses these limitations through a three-part process:
 * **Reliability**: Meta-verification increases explanation accuracy from a 59–77.8% baseline to **81.8–95.21%**.
 * **Error Mitigation**: For the best-performing model pair, the framework blocks **78.5%** of erroneous explanations.
 * **Accessibility**: Improves Flesch Reading Ease by up to **+16.40 points** and reduces complexity by nearly **9 grade levels**.
+* **Uncertainty & Stability**: Entropy Production Rate (EPR) declines monotonically as the Verifier stabilizes the Explainer’s reasoning. Initial EPR further serves as an early-warning signal ($AUC=0.66$) to predict if an explanation will fail verification.
 * **Convergence**: Achieves a **96.92%** average convergence rate, typically resolving errors within 1-2 iterations.
 
 ---
