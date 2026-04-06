@@ -1,0 +1,2 @@
+# Two-Stage-LLM-Framework-For-Verified-XAI-Explanations
+This repository contains the official implementation of the paper: "A Two-Stage LLM Framework for Accessible and Verified XAI Explanations," accepted for publication at the World Congress of Computational Intelligence (WCCI) 2026.
