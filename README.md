@@ -2,7 +2,7 @@
 
 ![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg) [![Ollama](https://img.shields.io/badge/Ollama-000000?logo=ollama&logoColor=white)](https://ollama.com) ![XAI](https://img.shields.io/badge/XAI-Explainable%20AI-blueviolet)
 
-This repository provides the official implementation of a Two-Stage LLM Meta-Verification Framework designed to transform technical eXplainable AI (XAI) outputs into accessible, faithful, and reliable natural-language explanations. By employing an independent verification-and-repair cycle, the framework systematically detects and corrects hallucinations, omissions, and reasoning failures before they reach the end user.
+This repository provides the implementation of a Two-Stage LLM Meta-Verification Framework designed to transform technical eXplainable AI (XAI) outputs into accessible, faithful, and reliable natural language explanations. By employing an independent verification-and-repair cycle, the framework systematically detects and corrects hallucinations, omissions, and reasoning failures before they reach the end user.
 
 <div align="center">
   <picture>
