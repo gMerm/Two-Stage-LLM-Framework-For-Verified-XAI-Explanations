@@ -120,7 +120,7 @@ for i, pc in enumerate(parts['bodies']):
     pc.set_alpha(0.65)
 
 ax.set_ylabel('Verifier EPR', fontsize=28)
-ax.grid(axis='y', alpha=0.3, linestyle='--', linewidth=0.5)
+# ax.grid(axis='y', alpha=0.3, linestyle='--', linewidth=0.5)
 
 # Add box around plot
 ax.spines['top'].set_visible(True)

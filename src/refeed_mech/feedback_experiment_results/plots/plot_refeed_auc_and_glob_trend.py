@@ -75,7 +75,7 @@ ax.set_xlabel('False Positive Rate', fontsize=28)
 ax.set_ylabel('True Positive Rate', fontsize=28)
 ax.legend(loc='lower right', fontsize=26, frameon=True,
           fancybox=True, shadow=True)
-ax.grid(alpha=0.25, linestyle=':', linewidth=0.8)
+ax.grid(alpha=0.6, linestyle='--', linewidth=0.8)
 
 # Add box around plot
 ax.spines['top'].set_visible(False)
@@ -176,7 +176,7 @@ ax.set_ylabel("Median EPR", fontsize=28)
 ax.set_xlim(1, 6)
 ax.set_xticks(range(1, 7))
 
-ax.grid(alpha=0.25, linestyle=':', linewidth=0.8)
+ax.grid(alpha=0.6, linestyle='--', linewidth=0.8)
 ax.legend(fontsize=28, loc='upper right', frameon=True, fancybox=True, shadow=True)
 
 # Add box around plot
